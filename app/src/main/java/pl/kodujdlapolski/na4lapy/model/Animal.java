@@ -188,4 +188,29 @@ public class Animal extends BaseEntity {
     public void setFavourite(Boolean favourite) {
         this.favourite = favourite;
     }
+
+    @Override
+    public String toString() {
+        return "Animal{" +
+                "shelter=" + shelter +
+                ", homelessnessnessDuration=" + homelessnessnessDuration +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", species=" + species +
+                ", gender=" + gender +
+                ", size=" + size +
+                ", race='" + race + '\'' +
+                ", activity=" + activity +
+                ", training=" + training +
+                ", sterilization=" + sterilization +
+                ", chip=" + chip +
+                ", vaccination=" + vaccination +
+                ", attitudeTowardsPeople=" + attitudeTowardsPeople +
+                ", attitudeTowardsChildren=" + attitudeTowardsChildren +
+                ", attitudeTowardsDogs=" + attitudeTowardsDogs +
+                ", attitudeTowardsCats=" + attitudeTowardsCats +
+                ", photos=" + photos +
+                ", favourite=" + favourite +
+                '}';
+    }
 }

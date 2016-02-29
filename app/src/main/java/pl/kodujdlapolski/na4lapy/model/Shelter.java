@@ -83,4 +83,19 @@ public class Shelter extends BaseEntity {
     public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
     }
+
+    @Override
+    public String toString() {
+        return "Shelter{" +
+                "name='" + name + '\'' +
+                ", street='" + street + '\'' +
+                ", buildingNumber='" + buildingNumber + '\'' +
+                ", city='" + city + '\'' +
+                ", postalCode='" + postalCode + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", website='" + website + '\'' +
+                ", accountNumber='" + accountNumber + '\'' +
+                '}';
+    }
 }
