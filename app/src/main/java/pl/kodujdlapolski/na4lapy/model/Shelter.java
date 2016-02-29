@@ -7,6 +7,10 @@ public class Shelter extends BaseEntity {
     private String buildingNumber;
     private String city;
     private String postalCode;
+    private String email;
+    private String phoneNumber;
+    private String website;
+    private String accountNumber;
 
     public String getName() {
         return name;
@@ -46,5 +50,37 @@ public class Shelter extends BaseEntity {
 
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
     }
 }

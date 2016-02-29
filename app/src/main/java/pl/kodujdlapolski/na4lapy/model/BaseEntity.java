@@ -1,6 +1,6 @@
 package pl.kodujdlapolski.na4lapy.model;
 
-public class BaseEntity {
+public abstract class BaseEntity {
 
     private Long primaryKey;
 
