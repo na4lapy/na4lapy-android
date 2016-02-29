@@ -1,6 +1,9 @@
 package pl.kodujdlapolski.na4lapy.model;
 
 public class BaseEntity {
+
+    private Long primaryKey;
+
     private Long id;
 
     public Long getId() {
@@ -9,5 +12,13 @@ public class BaseEntity {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getPrimaryKey() {
+        return primaryKey;
+    }
+
+    public void setPrimaryKey(Long primaryKey) {
+        this.primaryKey = primaryKey;
     }
 }

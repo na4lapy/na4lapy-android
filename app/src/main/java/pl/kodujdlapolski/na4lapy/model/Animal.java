@@ -35,6 +35,8 @@ public class Animal extends BaseEntity {
 
     private List<Photo> photos;
 
+    private Boolean favourite;
+
     public Shelter getShelter() {
         return shelter;
     }
@@ -177,5 +179,13 @@ public class Animal extends BaseEntity {
 
     public void setPhotos(List<Photo> photos) {
         this.photos = photos;
+    }
+
+    public Boolean getFavourite() {
+        return favourite;
+    }
+
+    public void setFavourite(Boolean favourite) {
+        this.favourite = favourite;
     }
 }
