@@ -12,8 +12,8 @@ public class DatabaseModule {
 
     @Singleton
     @Provides
-    public DatabaseService provideDatabaseService(DatabaseHelper databaseHelper) {
-        return new DatabaseServiceImpl(databaseHelper);
+    public DatabaseRepository provideDatabaseRepository(DatabaseHelper databaseHelper) {
+        return new DatabaseRepositoryImpl(databaseHelper);
     }
 
     @Singleton

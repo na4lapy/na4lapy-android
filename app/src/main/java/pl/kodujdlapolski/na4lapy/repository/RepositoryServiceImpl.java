@@ -10,17 +10,17 @@ import javax.inject.Inject;
 
 import pl.kodujdlapolski.na4lapy.model.Animal;
 import pl.kodujdlapolski.na4lapy.model.Shelter;
-import pl.kodujdlapolski.na4lapy.repository.database.DatabaseService;
+import pl.kodujdlapolski.na4lapy.repository.database.DatabaseRepository;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
 public class RepositoryServiceImpl implements RepositoryService {
 
-    private DatabaseService mDatabaseService;
+    private DatabaseRepository mDatabaseRepository;
 
     @Inject
-    public RepositoryServiceImpl(DatabaseService databaseService) {
-        mDatabaseService = checkNotNull(databaseService, "DatabaseService cannot be null");
+    public RepositoryServiceImpl(DatabaseRepository databaseRepository) {
+        mDatabaseRepository = checkNotNull(databaseRepository, "DatabaseRepository cannot be null");
     }
 
     @Override
@@ -29,7 +29,7 @@ public class RepositoryServiceImpl implements RepositoryService {
         checkNotNull(callback, "callback cannot be null");
         Animal animal = null;
         try {
-            animal = mDatabaseService.findOneById(id, Animal.class);
+            animal = mDatabaseRepository.findOneById(id, Animal.class);
         } catch (SQLException e) {
             Log.w(getClass().getSimpleName(), e);
         }
@@ -42,7 +42,7 @@ public class RepositoryServiceImpl implements RepositoryService {
         checkNotNull(callback, "callback cannot be null");
         List<Animal> animals = null;
         try {
-            animals = mDatabaseService.findAllByForeignId(shelterId, Animal.class, Shelter.class);
+            animals = mDatabaseRepository.findAllByForeignId(shelterId, Animal.class, Shelter.class);
         } catch (SQLException e) {
             Log.w(getClass().getSimpleName(), e);
         }
@@ -55,7 +55,7 @@ public class RepositoryServiceImpl implements RepositoryService {
         checkNotNull(callback, "callback cannot be null");
         Shelter shelter = null;
         try {
-            shelter = mDatabaseService.findOneById(id, Shelter.class);
+            shelter = mDatabaseRepository.findOneById(id, Shelter.class);
         } catch (SQLException e) {
             Log.w(getClass().getSimpleName(), e);
         }
@@ -67,7 +67,7 @@ public class RepositoryServiceImpl implements RepositoryService {
         checkNotNull(callback, "callback cannot be null");
         List<Shelter> shelters = null;
         try {
-            shelters = mDatabaseService.findAll(Shelter.class);
+            shelters = mDatabaseRepository.findAll(Shelter.class);
         } catch (SQLException e) {
             Log.w(getClass().getSimpleName(), e);
         }

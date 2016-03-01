@@ -14,12 +14,12 @@ import javax.inject.Inject;
 
 import pl.kodujdlapolski.na4lapy.model.BaseEntity;
 
-public class DatabaseServiceImpl implements DatabaseService {
+public class DatabaseRepositoryImpl implements DatabaseRepository {
 
     private DatabaseHelper mDatabaseHelper;
 
     @Inject
-    public DatabaseServiceImpl(DatabaseHelper databaseHelper) {
+    public DatabaseRepositoryImpl(DatabaseHelper databaseHelper) {
         mDatabaseHelper = databaseHelper;
     }
 
