@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/browser"
+            android:icon="@drawable/ic_search_24dp"
+            android:title="@string/browsing" />
+        <item
+            android:id="@+id/favourities"
+            android:icon="@drawable/ic_favorite_24dp"
+            android:title="@string/favouritiesList" />
+        <item
+            android:id="@+id/preferences"
+            android:icon="@drawable/ic_receipt_24dp"
+            android:title="@string/lookupPreferences" />
+        <item
+            android:id="@+id/aboutShelter"
+            android:icon="@drawable/ic_account_balance_24dp"
+            android:title="@string/aboutShelter" />
+        <item
+            android:id="@+id/settings"
+            android:icon="@drawable/ic_settings_24dp"
+            android:title="@string/accountSettings" />
+        <item
+            android:id="@+id/aboutApplication"
+            android:icon="@drawable/ic_info_24dp"
+            android:title="@string/aboutApplication" />
+
+    </group>
+</menu>

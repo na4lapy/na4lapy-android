@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Na4Lapy</string>
+    <string name="browsing">Przeglądaj</string>
+    <string name="favouritiesList">Lista ulubionych</string>
+    <string name="lookupPreferences">Preferencje</string>
+    <string name="accountSettings">Ustawienia</string>
+    <string name="aboutShelter">O schronisku</string>
+    <string name="aboutApplication">O aplikacji</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
 </resources>
