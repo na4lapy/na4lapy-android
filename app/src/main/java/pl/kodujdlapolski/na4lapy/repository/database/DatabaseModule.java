@@ -18,7 +18,7 @@ public class DatabaseModule {
 
     @Singleton
     @Provides
-    public DatabaseHelper provideDatabaseHeler(Application application) {
+    public DatabaseHelper provideDatabaseHelper(Application application) {
         return new DatabaseHelper(application);
     }
 }

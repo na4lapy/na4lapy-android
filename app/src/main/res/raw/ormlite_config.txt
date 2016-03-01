@@ -1,5 +1,5 @@
 #
-# generated on 2016/03/01 06:28:26
+# generated on 2016/03/01 10:25:01
 #
 # --table-start--
 dataClass=pl.kodujdlapolski.na4lapy.model.Animal
@@ -8,7 +8,6 @@ tableName=animals
 # --field-start--
 fieldName=shelter
 foreign=true
-readOnly=true
 # --field-end--
 # --field-start--
 fieldName=homelessnessDuration

@@ -11,6 +11,7 @@ import java.sql.SQLException;
 
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Animal;
+import pl.kodujdlapolski.na4lapy.model.Photo;
 import pl.kodujdlapolski.na4lapy.model.Shelter;
 
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
@@ -27,6 +28,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         try {
             TableUtils.createTable(connectionSource, Shelter.class);
             TableUtils.createTable(connectionSource, Animal.class);
+            TableUtils.createTable(connectionSource, Photo.class);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -37,6 +39,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         try {
             TableUtils.dropTable(connectionSource, Shelter.class, true);
             TableUtils.dropTable(connectionSource, Animal.class, true);
+            TableUtils.dropTable(connectionSource, Photo.class, true);
             onCreate(db, connectionSource);
         } catch (SQLException e) {
             throw new RuntimeException(e);

@@ -95,7 +95,8 @@ public class Shelter extends BaseEntity {
     @Override
     public String toString() {
         return "Shelter{" +
-                "name='" + name + '\'' +
+                "id=" + getId() +
+                ", name='" + name + '\'' +
                 ", street='" + street + '\'' +
                 ", buildingNumber='" + buildingNumber + '\'' +
                 ", city='" + city + '\'' +

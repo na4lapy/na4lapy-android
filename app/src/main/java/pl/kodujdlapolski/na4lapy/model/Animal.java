@@ -15,7 +15,7 @@ import pl.kodujdlapolski.na4lapy.model.type.Training;
 @DatabaseTable(tableName = "animals")
 public class Animal extends BaseEntity {
 
-    @DatabaseField(foreign = true, readOnly = true)
+    @DatabaseField(foreign = true)
     private Shelter shelter;
 
     @DatabaseField private Integer homelessnessDuration;
@@ -203,7 +203,8 @@ public class Animal extends BaseEntity {
     @Override
     public String toString() {
         return "Animal{" +
-                "shelter=" + shelter +
+                "id=" + getId() +
+                ", shelter=" + shelter +
                 ", homelessnessDuration=" + homelessnessDuration +
                 ", name='" + name + '\'' +
                 ", age=" + age +
