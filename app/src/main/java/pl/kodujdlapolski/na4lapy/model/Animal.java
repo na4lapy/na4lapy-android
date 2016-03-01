@@ -17,32 +17,34 @@ public class Animal extends BaseEntity {
 
     @DatabaseField(foreign = true, readOnly = true)
     private Shelter shelter;
-    private Integer homelessnessnessDuration;
 
-    private String name;
-    private Integer age;
+    @DatabaseField private Integer homelessnessnessDuration;
 
-    private Species species;
-    private Gender gender;
-    private Size size;
-    private String race;
-    private ActivityAnimal activity;
-    private Training training;
+    @DatabaseField private String name;
+    @DatabaseField private Integer age;
 
-    private Boolean sterilization;
-    private Boolean chip;
-    private Boolean vaccination;
+    @DatabaseField private Species species;
+    @DatabaseField private Gender gender;
+    @DatabaseField private Size size;
+    @DatabaseField private String race;
+    @DatabaseField private ActivityAnimal activity;
+    @DatabaseField private Training training;
 
-    private Attitude attitudeTowardsPeople;
-    private Attitude attitudeTowardsChildren;
-    private Attitude attitudeTowardsDogs;
-    private Attitude attitudeTowardsCats;
+    @DatabaseField private Boolean sterilization;
+    @DatabaseField private Boolean chip;
+    @DatabaseField private Boolean vaccination;
 
-    private List<Photo> photos;
+    @DatabaseField private Attitude attitudeTowardsPeople;
+    @DatabaseField private Attitude attitudeTowardsChildren;
+    @DatabaseField private Attitude attitudeTowardsDogs;
+    @DatabaseField private Attitude attitudeTowardsCats;
 
-    private Boolean favourite;
+    @DatabaseField private List<Photo> photos;
+
+    @DatabaseField private Boolean favourite;
 
     public Animal() {
+        // needed by ormlite
     }
 
     public Shelter getShelter() {
