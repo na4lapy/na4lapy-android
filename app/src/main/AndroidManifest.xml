@@ -12,9 +12,19 @@
         <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.about_app.AboutAppActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.about_app.WebViewActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.about_shelter.AboutShelterActivity"
+            android:launchMode="singleTop" />
     </application>
 
 </manifest>
