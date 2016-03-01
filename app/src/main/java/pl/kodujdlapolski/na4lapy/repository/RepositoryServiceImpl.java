@@ -37,12 +37,12 @@ public class RepositoryServiceImpl implements RepositoryService {
     }
 
     @Override
-    public void getAnimalsByShelter(@NonNull Shelter shelter, @NonNull LoadAnimalsCallback callback) {
-        checkNotNull(shelter, "shelter cannot be null");
+    public void getAnimalsByShelterId(@NonNull Long shelterId, @NonNull LoadAnimalsCallback callback) {
+        checkNotNull(shelterId, "shelterId cannot be null");
         checkNotNull(callback, "callback cannot be null");
         List<Animal> animals = null;
         try {
-            animals = mDatabaseService.findAll(Animal.class);
+            animals = mDatabaseService.findAllByForeignId(shelterId, Animal.class, Shelter.class);
         } catch (SQLException e) {
             Log.w(getClass().getSimpleName(), e);
         }
