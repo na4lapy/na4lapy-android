@@ -1,6 +1,7 @@
 package pl.kodujdlapolski.na4lapy.repository;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.util.List;
 
@@ -9,16 +10,16 @@ import pl.kodujdlapolski.na4lapy.model.Shelter;
 
 public interface RepositoryService {
     interface GetAnimalCallback {
-        void onAnimalLoaded(Animal animal);
+        void onAnimalLoaded(@Nullable Animal animal);
     }
     interface LoadAnimalsCallback {
-        void onAnimalsLoaded(List<Animal> animals);
+        void onAnimalsLoaded(@Nullable List<Animal> animals);
     }
     interface GetShelterCallback {
-        void onShelterLoaded(Shelter shelter);
+        void onShelterLoaded(@Nullable Shelter shelter);
     }
     interface LoadSheltersCallback {
-        void onSheltersLoaded(List<Shelter> shelters);
+        void onSheltersLoaded(@Nullable List<Shelter> shelters);
     }
 
     void getAnimal(@NonNull Long id, @NonNull GetAnimalCallback callback);

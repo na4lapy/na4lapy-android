@@ -4,25 +4,14 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import pl.kodujdlapolski.na4lapy.repository.database.DatabaseService;
 
 @Module
 public class RepositoryModule {
 
     @Singleton
     @Provides
-    public RepositoryService provideRepositoryService(AnimalRepository animalRepository, ShelterRepository shelterRepository) {
-        return new RepositoryServiceImpl(animalRepository, shelterRepository);
-    }
-
-    @Singleton
-    @Provides
-    public AnimalRepository provideAnimalRepository() {
-        return new AnimalRepositoryImpl();
-    }
-
-    @Singleton
-    @Provides
-    public ShelterRepository provideShelterRepository() {
-        return new ShelterRepositoryImpl();
+    public RepositoryService provideRepositoryService(DatabaseService databaseService) {
+        return new RepositoryServiceImpl(databaseService);
     }
 }
