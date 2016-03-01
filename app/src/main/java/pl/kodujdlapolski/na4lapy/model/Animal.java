@@ -1,9 +1,9 @@
 package pl.kodujdlapolski.na4lapy.model;
 
+import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
-
-import java.util.List;
 
 import pl.kodujdlapolski.na4lapy.model.type.ActivityAnimal;
 import pl.kodujdlapolski.na4lapy.model.type.Attitude;
@@ -18,7 +18,7 @@ public class Animal extends BaseEntity {
     @DatabaseField(foreign = true, readOnly = true)
     private Shelter shelter;
 
-    @DatabaseField private Integer homelessnessnessDuration;
+    @DatabaseField private Integer homelessnessDuration;
 
     @DatabaseField private String name;
     @DatabaseField private Integer age;
@@ -39,7 +39,8 @@ public class Animal extends BaseEntity {
     @DatabaseField private Attitude attitudeTowardsDogs;
     @DatabaseField private Attitude attitudeTowardsCats;
 
-    @DatabaseField private List<Photo> photos;
+    @ForeignCollectionField(eager = false)
+    private ForeignCollection<Photo> photos;
 
     @DatabaseField private Boolean favourite;
 
@@ -55,12 +56,12 @@ public class Animal extends BaseEntity {
         this.shelter = shelter;
     }
 
-    public Integer getHomelessnessnessDuration() {
-        return homelessnessnessDuration;
+    public Integer getHomelessnessDuration() {
+        return homelessnessDuration;
     }
 
-    public void setHomelessnessnessDuration(Integer homelessnessnessDuration) {
-        this.homelessnessnessDuration = homelessnessnessDuration;
+    public void setHomelessnessDuration(Integer homelessnessDuration) {
+        this.homelessnessDuration = homelessnessDuration;
     }
 
     public String getName() {
@@ -183,11 +184,11 @@ public class Animal extends BaseEntity {
         this.attitudeTowardsCats = attitudeTowardsCats;
     }
 
-    public List<Photo> getPhotos() {
+    public ForeignCollection<Photo> getPhotos() {
         return photos;
     }
 
-    public void setPhotos(List<Photo> photos) {
+    public void setPhotos(ForeignCollection<Photo> photos) {
         this.photos = photos;
     }
 
@@ -203,7 +204,7 @@ public class Animal extends BaseEntity {
     public String toString() {
         return "Animal{" +
                 "shelter=" + shelter +
-                ", homelessnessnessDuration=" + homelessnessnessDuration +
+                ", homelessnessDuration=" + homelessnessDuration +
                 ", name='" + name + '\'' +
                 ", age=" + age +
                 ", species=" + species +
