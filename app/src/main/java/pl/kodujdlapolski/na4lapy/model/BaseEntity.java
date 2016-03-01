@@ -1,9 +1,10 @@
 package pl.kodujdlapolski.na4lapy.model;
 
+import com.j256.ormlite.field.DatabaseField;
+
 public abstract class BaseEntity {
 
-    private Long primaryKey;
-
+    @DatabaseField(id = true)
     private Long id;
 
     public Long getId() {
@@ -12,13 +13,5 @@ public abstract class BaseEntity {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getPrimaryKey() {
-        return primaryKey;
-    }
-
-    public void setPrimaryKey(Long primaryKey) {
-        this.primaryKey = primaryKey;
     }
 }

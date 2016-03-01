@@ -1,5 +1,8 @@
 package pl.kodujdlapolski.na4lapy.model;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
 import java.util.List;
 
 import pl.kodujdlapolski.na4lapy.model.type.ActivityAnimal;
@@ -9,8 +12,10 @@ import pl.kodujdlapolski.na4lapy.model.type.Size;
 import pl.kodujdlapolski.na4lapy.model.type.Species;
 import pl.kodujdlapolski.na4lapy.model.type.Training;
 
+@DatabaseTable(tableName = "animals")
 public class Animal extends BaseEntity {
 
+    @DatabaseField(foreign = true, readOnly = true)
     private Shelter shelter;
     private Integer homelessnessnessDuration;
 
@@ -36,6 +41,9 @@ public class Animal extends BaseEntity {
     private List<Photo> photos;
 
     private Boolean favourite;
+
+    public Animal() {
+    }
 
     public Shelter getShelter() {
         return shelter;

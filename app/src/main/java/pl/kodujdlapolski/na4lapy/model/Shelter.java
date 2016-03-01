@@ -1,5 +1,8 @@
 package pl.kodujdlapolski.na4lapy.model;
 
+import com.j256.ormlite.table.DatabaseTable;
+
+@DatabaseTable(tableName = "shelters")
 public class Shelter extends BaseEntity {
 
     private String name;
@@ -11,6 +14,9 @@ public class Shelter extends BaseEntity {
     private String phoneNumber;
     private String website;
     private String accountNumber;
+
+    public Shelter() {
+    }
 
     public String getName() {
         return name;
