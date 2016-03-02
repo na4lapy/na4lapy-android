@@ -1,5 +1,5 @@
 #
-# generated on 2016/03/01 10:25:01
+# generated on 2016/03/02 11:13:33
 #
 # --table-start--
 dataClass=pl.kodujdlapolski.na4lapy.model.Animal
@@ -63,6 +63,7 @@ foreignCollection=true
 # --field-end--
 # --field-start--
 fieldName=favourite
+columnName=favourite
 # --field-end--
 # --field-start--
 fieldName=id

@@ -15,6 +15,8 @@ import pl.kodujdlapolski.na4lapy.model.type.Training;
 @DatabaseTable(tableName = "animals")
 public class Animal extends BaseEntity {
 
+    public final static String COLUMN_NAME_FAVOURITE = "favourite";
+
     @DatabaseField(foreign = true)
     private Shelter shelter;
 
@@ -42,7 +44,8 @@ public class Animal extends BaseEntity {
     @ForeignCollectionField(eager = false)
     private ForeignCollection<Photo> photos;
 
-    @DatabaseField private Boolean favourite;
+    @DatabaseField(columnName = Animal.COLUMN_NAME_FAVOURITE)
+    private Boolean favourite;
 
     public Animal() {
         // needed by ormlite
@@ -190,6 +193,10 @@ public class Animal extends BaseEntity {
 
     public void setPhotos(ForeignCollection<Photo> photos) {
         this.photos = photos;
+    }
+
+    public Boolean isFavourite() {
+        return favourite != null && favourite;
     }
 
     public Boolean getFavourite() {

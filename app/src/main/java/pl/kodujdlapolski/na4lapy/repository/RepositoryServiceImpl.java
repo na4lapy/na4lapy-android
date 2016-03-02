@@ -3,8 +3,11 @@ package pl.kodujdlapolski.na4lapy.repository;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.google.common.collect.Maps;
+
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -43,6 +46,20 @@ public class RepositoryServiceImpl implements RepositoryService {
         List<Animal> animals = null;
         try {
             animals = mDatabaseRepository.findAllByForeignId(shelterId, Animal.class, Shelter.class);
+        } catch (SQLException e) {
+            Log.w(getClass().getSimpleName(), e);
+        }
+        callback.onAnimalsLoaded(animals);
+    }
+
+    @Override
+    public void getAnimalsByFavourite(@NonNull LoadAnimalsCallback callback) {
+        checkNotNull(callback, "callback cannot be null");
+        List<Animal> animals = null;
+        Map<String, Object> favouriteField = Maps.newHashMap();
+        favouriteField.put(Animal.COLUMN_NAME_FAVOURITE, true);
+        try {
+            animals = mDatabaseRepository.findAllByFields(favouriteField, Animal.class);
         } catch (SQLException e) {
             Log.w(getClass().getSimpleName(), e);
         }

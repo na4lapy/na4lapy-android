@@ -24,6 +24,7 @@ public interface RepositoryService {
 
     void getAnimal(@NonNull Long id, @NonNull GetAnimalCallback callback);
     void getAnimalsByShelterId(@NonNull Long shelterId, @NonNull LoadAnimalsCallback callback);
+    void getAnimalsByFavourite(@NonNull LoadAnimalsCallback callback);
 
     void getShelter(@NonNull Long id, @NonNull GetShelterCallback callback);
     void getShelters(@NonNull LoadSheltersCallback callback);

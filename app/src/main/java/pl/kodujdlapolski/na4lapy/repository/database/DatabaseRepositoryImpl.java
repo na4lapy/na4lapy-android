@@ -8,6 +8,7 @@ import com.j256.ormlite.support.ConnectionSource;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Callable;
 
 import javax.inject.Inject;
@@ -51,6 +52,15 @@ public class DatabaseRepositoryImpl implements DatabaseRepository {
         foreignQb.where().eq(BaseEntity.COLUMN_NAME_ID, id);
         QueryBuilder<T1, Long> sourceQb = sourceDao.queryBuilder();
         List<T1> list = sourceQb.join(foreignQb).query();
+        connectionSource.close();
+        return list;
+    }
+
+    @Override
+    public <T> List<T> findAllByFields(Map<String, Object> fieldValues, Class clazz) throws SQLException {
+        ConnectionSource connectionSource = new AndroidConnectionSource(mDatabaseHelper);
+        Dao<T, Long> dao = getDao(clazz, connectionSource);
+        List<T> list = dao.queryForFieldValues(fieldValues);
         connectionSource.close();
         return list;
     }
