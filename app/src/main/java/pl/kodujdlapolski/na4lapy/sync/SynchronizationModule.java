@@ -1,5 +1,7 @@
 package pl.kodujdlapolski.na4lapy.sync;
 
+import android.app.Application;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -12,7 +14,8 @@ public class SynchronizationModule {
 
     @Singleton
     @Provides
-    public SynchronizationService provideSynchronizationService(ApiService apiService, DatabaseRepository databaseRepository) {
-        return new SynchronizationServiceImpl(apiService, databaseRepository);
+    public SynchronizationService provideSynchronizationService
+            (ApiService apiService, DatabaseRepository databaseRepository, Application application) {
+        return new SynchronizationServiceImpl(apiService, databaseRepository ,application);
     }
 }
