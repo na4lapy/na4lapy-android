@@ -95,7 +95,7 @@ public class DatabaseRepositoryImpl implements DatabaseRepository {
         return count[0];
     }
 
-    private <T> Dao<T, Long> getDao(Class clazz, ConnectionSource connectionSource) throws SQLException {
+    public <T> Dao<T, Long> getDao(Class clazz, ConnectionSource connectionSource) throws SQLException {
         return DaoManager.createDao(connectionSource, clazz);
     }
 }
