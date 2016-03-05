@@ -20,7 +20,7 @@ public class Animal extends BaseEntity {
     @DatabaseField(foreign = true)
     private Shelter shelter;
 
-    @DatabaseField private Integer homelessnessDuration;
+    @DatabaseField private Long admittanceDate;
 
     @DatabaseField private String name;
     @DatabaseField private Integer age;
@@ -59,12 +59,12 @@ public class Animal extends BaseEntity {
         this.shelter = shelter;
     }
 
-    public Integer getHomelessnessDuration() {
-        return homelessnessDuration;
+    public Long getAdmittanceDate() {
+        return admittanceDate;
     }
 
-    public void setHomelessnessDuration(Integer homelessnessDuration) {
-        this.homelessnessDuration = homelessnessDuration;
+    public void setAdmittanceDate(Long admittanceDate) {
+        this.admittanceDate = admittanceDate;
     }
 
     public String getName() {
@@ -212,7 +212,7 @@ public class Animal extends BaseEntity {
         return "Animal{" +
                 "id=" + getId() +
                 ", shelter=" + shelter +
-                ", homelessnessDuration=" + homelessnessDuration +
+                ", admittanceDate=" + admittanceDate +
                 ", name='" + name + '\'' +
                 ", age=" + age +
                 ", species=" + species +
