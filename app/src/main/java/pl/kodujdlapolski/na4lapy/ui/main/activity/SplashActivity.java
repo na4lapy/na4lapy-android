@@ -1,5 +1,7 @@
-package pl.kodujdlapolski.na4lapy.activities;
+package pl.kodujdlapolski.na4lapy.ui.main.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -11,24 +13,26 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import pl.kodujdlapolski.na4lapy.R;
+import pl.kodujdlapolski.na4lapy.ui.preferences.PreferencesActivity;
 
-public class MainActivity extends AppCompatActivity
+public class SplashActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    DrawerLayout drawerLayout;
-    Toolbar toolbar;
-    ActionBarDrawerToggle drawerToggle;
+    private DrawerLayout drawerLayout;
+    private Toolbar toolbar;
+    private ActionBarDrawerToggle drawerToggle;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_splash);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-        toolbar.hideOverflowMenu();
+      //  toolbar.hideOverflowMenu();
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerToggle = new ActionBarDrawerToggle(
@@ -75,6 +79,8 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
+        Intent intent;
+        Context context = getApplicationContext();
         int id = item.getItemId();
 
         if (id == R.id.browser) {
@@ -82,15 +88,13 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.favourities) {
 
         } else if (id == R.id.preferences) {
-
+            intent = new Intent(context, PreferencesActivity.class);
+            startActivity(intent);
         } else if (id == R.id.aboutShelter) {
 
         } else if (id == R.id.settings) {
 
-        } else if (id == R.id.aboutApplication) {
-
         }
-
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Na4Lapy</string>
+    <string name="app_name">Na 4 Łapy</string>
     <string name="browsing">Przeglądaj</string>
     <string name="favouritiesList">Lista ulubionych</string>
     <string name="lookupPreferences">Preferencje</string>
@@ -9,5 +9,16 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="whatKindOfAnimalDoYouSeek">Jakiego zwierzaka szukasz?</string>
+    <string name="type">Typ</string>
+    <string name="sex">Płeć</string>
+    <string name="age">Wiek</string>
+    <string name="size">Rozmiar</string>
+    <string name="activity">Aktywność</string>
+    <string name="from">od</string>
+    <string name="to">do</string>
+    <string name="save">Zapisz</string>
+
 
 </resources>

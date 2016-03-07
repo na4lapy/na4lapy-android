@@ -4,7 +4,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/browser"
-            android:icon="@drawable/ic_search_24dp"
+            android:icon="@drawable/ic_filter_none_24dp"
             android:title="@string/browsing" />
         <item
             android:id="@+id/favourities"
@@ -22,10 +22,5 @@
             android:id="@+id/settings"
             android:icon="@drawable/ic_settings_24dp"
             android:title="@string/accountSettings" />
-        <item
-            android:id="@+id/aboutApplication"
-            android:icon="@drawable/ic_info_24dp"
-            android:title="@string/aboutApplication" />
-
     </group>
 </menu>

@@ -1,6 +1,9 @@
 package pl.kodujdlapolski.na4lapy.model;
 
-import java.util.List;
+import com.j256.ormlite.dao.ForeignCollection;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.field.ForeignCollectionField;
+import com.j256.ormlite.table.DatabaseTable;
 
 import pl.kodujdlapolski.na4lapy.model.type.ActivityAnimal;
 import pl.kodujdlapolski.na4lapy.model.type.Attitude;
@@ -9,33 +12,44 @@ import pl.kodujdlapolski.na4lapy.model.type.Size;
 import pl.kodujdlapolski.na4lapy.model.type.Species;
 import pl.kodujdlapolski.na4lapy.model.type.Training;
 
+@DatabaseTable(tableName = "animals")
 public class Animal extends BaseEntity {
 
+    public final static String COLUMN_NAME_FAVOURITE = "favourite";
+
+    @DatabaseField(foreign = true)
     private Shelter shelter;
-    private Integer homelessnessnessDuration;
 
-    private String name;
-    private Integer age;
+    @DatabaseField private Integer homelessnessDuration;
 
-    private Species species;
-    private Gender gender;
-    private Size size;
-    private String race;
-    private ActivityAnimal activity;
-    private Training training;
+    @DatabaseField private String name;
+    @DatabaseField private Integer age;
 
-    private Boolean sterilization;
-    private Boolean chip;
-    private Boolean vaccination;
+    @DatabaseField private Species species;
+    @DatabaseField private Gender gender;
+    @DatabaseField private Size size;
+    @DatabaseField private String race;
+    @DatabaseField private ActivityAnimal activity;
+    @DatabaseField private Training training;
 
-    private Attitude attitudeTowardsPeople;
-    private Attitude attitudeTowardsChildren;
-    private Attitude attitudeTowardsDogs;
-    private Attitude attitudeTowardsCats;
+    @DatabaseField private Boolean sterilization;
+    @DatabaseField private Boolean chip;
+    @DatabaseField private Boolean vaccination;
 
-    private List<Photo> photos;
+    @DatabaseField private Attitude attitudeTowardsPeople;
+    @DatabaseField private Attitude attitudeTowardsChildren;
+    @DatabaseField private Attitude attitudeTowardsDogs;
+    @DatabaseField private Attitude attitudeTowardsCats;
 
+    @ForeignCollectionField(eager = false)
+    private ForeignCollection<Photo> photos;
+
+    @DatabaseField(columnName = Animal.COLUMN_NAME_FAVOURITE)
     private Boolean favourite;
+
+    public Animal() {
+        // needed by ormlite
+    }
 
     public Shelter getShelter() {
         return shelter;
@@ -45,12 +59,12 @@ public class Animal extends BaseEntity {
         this.shelter = shelter;
     }
 
-    public Integer getHomelessnessnessDuration() {
-        return homelessnessnessDuration;
+    public Integer getHomelessnessDuration() {
+        return homelessnessDuration;
     }
 
-    public void setHomelessnessnessDuration(Integer homelessnessnessDuration) {
-        this.homelessnessnessDuration = homelessnessnessDuration;
+    public void setHomelessnessDuration(Integer homelessnessDuration) {
+        this.homelessnessDuration = homelessnessDuration;
     }
 
     public String getName() {
@@ -173,12 +187,16 @@ public class Animal extends BaseEntity {
         this.attitudeTowardsCats = attitudeTowardsCats;
     }
 
-    public List<Photo> getPhotos() {
+    public ForeignCollection<Photo> getPhotos() {
         return photos;
     }
 
-    public void setPhotos(List<Photo> photos) {
+    public void setPhotos(ForeignCollection<Photo> photos) {
         this.photos = photos;
+    }
+
+    public Boolean isFavourite() {
+        return favourite != null && favourite;
     }
 
     public Boolean getFavourite() {
@@ -187,5 +205,31 @@ public class Animal extends BaseEntity {
 
     public void setFavourite(Boolean favourite) {
         this.favourite = favourite;
+    }
+
+    @Override
+    public String toString() {
+        return "Animal{" +
+                "id=" + getId() +
+                ", shelter=" + shelter +
+                ", homelessnessDuration=" + homelessnessDuration +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", species=" + species +
+                ", gender=" + gender +
+                ", size=" + size +
+                ", race='" + race + '\'' +
+                ", activity=" + activity +
+                ", training=" + training +
+                ", sterilization=" + sterilization +
+                ", chip=" + chip +
+                ", vaccination=" + vaccination +
+                ", attitudeTowardsPeople=" + attitudeTowardsPeople +
+                ", attitudeTowardsChildren=" + attitudeTowardsChildren +
+                ", attitudeTowardsDogs=" + attitudeTowardsDogs +
+                ", attitudeTowardsCats=" + attitudeTowardsCats +
+                ", photos=" + photos +
+                ", favourite=" + favourite +
+                '}';
     }
 }
