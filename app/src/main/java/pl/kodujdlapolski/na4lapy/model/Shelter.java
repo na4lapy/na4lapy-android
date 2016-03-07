@@ -1,16 +1,24 @@
 package pl.kodujdlapolski.na4lapy.model;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
+@DatabaseTable(tableName = "shelters")
 public class Shelter extends BaseEntity {
 
-    private String name;
-    private String street;
-    private String buildingNumber;
-    private String city;
-    private String postalCode;
-    private String email;
-    private String phoneNumber;
-    private String website;
-    private String accountNumber;
+    @DatabaseField private String name;
+    @DatabaseField private String street;
+    @DatabaseField private String buildingNumber;
+    @DatabaseField private String city;
+    @DatabaseField private String postalCode;
+    @DatabaseField private String email;
+    @DatabaseField private String phoneNumber;
+    @DatabaseField private String website;
+    @DatabaseField private String accountNumber;
+
+    public Shelter() {
+        // needed by ormlite
+    }
 
     public String getName() {
         return name;
@@ -87,7 +95,8 @@ public class Shelter extends BaseEntity {
     @Override
     public String toString() {
         return "Shelter{" +
-                "name='" + name + '\'' +
+                "id=" + getId() +
+                ", name='" + name + '\'' +
                 ", street='" + street + '\'' +
                 ", buildingNumber='" + buildingNumber + '\'' +
                 ", city='" + city + '\'' +

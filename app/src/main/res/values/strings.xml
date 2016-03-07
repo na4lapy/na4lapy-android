@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">Na4Lapy</string>
     <string name="privacy_policy_text">Polityka Prywatności</string>
     <string name="regulations_text">Regulamin</string>
     <string name="open_source_libs_text">Licencje typu open source</string>
@@ -13,4 +12,5 @@
     <string name="shelter_www_label">Strona WWW:</string>
     <string name="shelter_account_label">Numer konta bankowego:</string>
     <string name="shelter_address_template">%1$s %2$s\n%3$s %4$s</string>
+    <string name="app_name">Na 4 Łapy</string>
 </resources>

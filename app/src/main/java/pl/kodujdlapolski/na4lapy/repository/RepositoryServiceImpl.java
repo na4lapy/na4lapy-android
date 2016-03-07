@@ -1,48 +1,93 @@
 package pl.kodujdlapolski.na4lapy.repository;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
+
+import com.google.common.collect.Maps;
+
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
+import pl.kodujdlapolski.na4lapy.model.Animal;
 import pl.kodujdlapolski.na4lapy.model.Shelter;
+import pl.kodujdlapolski.na4lapy.repository.database.DatabaseRepository;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
 public class RepositoryServiceImpl implements RepositoryService {
 
-    private AnimalRepository mAnimalRepository;
-    private ShelterRepository mShelterRepository;
+    private DatabaseRepository mDatabaseRepository;
 
     @Inject
-    public RepositoryServiceImpl(AnimalRepository animalRepository, ShelterRepository shelterRepository) {
-        mAnimalRepository = checkNotNull(animalRepository, "AnimalRepository cannot be null");
-        mShelterRepository = checkNotNull(shelterRepository, "ShelterRepository cannot be null");
+    public RepositoryServiceImpl(DatabaseRepository databaseRepository) {
+        mDatabaseRepository = checkNotNull(databaseRepository, "DatabaseRepository cannot be null");
     }
 
     @Override
     public void getAnimal(@NonNull Long id, @NonNull GetAnimalCallback callback) {
         checkNotNull(id, "id cannot be null");
         checkNotNull(callback, "callback cannot be null");
-        callback.onAnimalLoaded(mAnimalRepository.findOne(id));
+        Animal animal = null;
+        try {
+            animal = mDatabaseRepository.findOneById(id, Animal.class);
+        } catch (SQLException e) {
+            Log.w(getClass().getSimpleName(), e);
+        }
+        callback.onAnimalLoaded(animal);
     }
 
     @Override
-    public void getAnimalsByShelter(@NonNull Shelter shelter, @NonNull LoadAnimalsCallback callback) {
-        checkNotNull(shelter, "shelter cannot be null");
+    public void getAnimalsByShelterId(@NonNull Long shelterId, @NonNull LoadAnimalsCallback callback) {
+        checkNotNull(shelterId, "shelterId cannot be null");
         checkNotNull(callback, "callback cannot be null");
-        callback.onAnimalsLoaded(mAnimalRepository.findAllByShelter(shelter));
+        List<Animal> animals = null;
+        try {
+            animals = mDatabaseRepository.findAllByForeignId(shelterId, Animal.class, Shelter.class);
+        } catch (SQLException e) {
+            Log.w(getClass().getSimpleName(), e);
+        }
+        callback.onAnimalsLoaded(animals);
+    }
+
+    @Override
+    public void getAnimalsByFavourite(@NonNull LoadAnimalsCallback callback) {
+        checkNotNull(callback, "callback cannot be null");
+        List<Animal> animals = null;
+        Map<String, Object> favouriteField = Maps.newHashMap();
+        favouriteField.put(Animal.COLUMN_NAME_FAVOURITE, true);
+        try {
+            animals = mDatabaseRepository.findAllByFields(favouriteField, Animal.class);
+        } catch (SQLException e) {
+            Log.w(getClass().getSimpleName(), e);
+        }
+        callback.onAnimalsLoaded(animals);
     }
 
     @Override
     public void getShelter(@NonNull Long id, @NonNull GetShelterCallback callback) {
         checkNotNull(id, "id cannot be null");
         checkNotNull(callback, "callback cannot be null");
-        callback.onShelterLoaded(mShelterRepository.findOne(id));
+        Shelter shelter = null;
+        try {
+            shelter = mDatabaseRepository.findOneById(id, Shelter.class);
+        } catch (SQLException e) {
+            Log.w(getClass().getSimpleName(), e);
+        }
+        callback.onShelterLoaded(shelter);
     }
 
     @Override
     public void getShelters(@NonNull LoadSheltersCallback callback) {
         checkNotNull(callback, "callback cannot be null");
-        callback.onSheltersLoaded(mShelterRepository.findAll());
+        List<Shelter> shelters = null;
+        try {
+            shelters = mDatabaseRepository.findAll(Shelter.class);
+        } catch (SQLException e) {
+            Log.w(getClass().getSimpleName(), e);
+        }
+        callback.onSheltersLoaded(shelters);
     }
 }

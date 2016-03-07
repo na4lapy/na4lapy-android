@@ -1,4 +1,4 @@
-package pl.kodujdlapolski.na4lapy.repository;
+package pl.kodujdlapolski.na4lapy.api;
 
 import com.google.common.collect.Lists;
 
@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Random;
 
 import pl.kodujdlapolski.na4lapy.model.Animal;
-import pl.kodujdlapolski.na4lapy.model.Photo;
 import pl.kodujdlapolski.na4lapy.model.Shelter;
 import pl.kodujdlapolski.na4lapy.model.type.ActivityAnimal;
 import pl.kodujdlapolski.na4lapy.model.type.Attitude;
@@ -16,54 +15,45 @@ import pl.kodujdlapolski.na4lapy.model.type.Size;
 import pl.kodujdlapolski.na4lapy.model.type.Species;
 import pl.kodujdlapolski.na4lapy.model.type.Training;
 
-public class FakeAnimalRepositoryImpl implements AnimalRepository {
+public class FakeApiServiceImpl implements ApiService {
 
     private Random random;
     private Shelter shelter;
 
-    public FakeAnimalRepositoryImpl() {
+    public FakeApiServiceImpl() {
         random = new Random(System.currentTimeMillis());
         shelter = new Shelter();
         shelter.setId(1L);
+        shelter.setName("Promyk");
+        shelter.setStreet("ul. Przyrodników");
+        shelter.setBuildingNumber("14");
+        shelter.setCity("Gdańsk - Kokoszki");
+        shelter.setPostalCode("80-298");
+        shelter.setEmail("p.swiniarski@schroniskopromyk.pl");
+        shelter.setPhoneNumber("58 522-37-27");
+        shelter.setWebsite("http://schroniskopromyk.pl/");
+        shelter.setAccountNumber("18124012681111001038597629");
     }
 
     @Override
-    public Animal findOne(Long id) {
-        return generateAnimal();
-    }
-
-    @Override
-    public List<Animal> findAll() {
+    public List<Animal> getAllAnimals() {
         List<Animal> animals = new ArrayList<>();
         for (int i=0; i<20; i++) {
-            animals.add(generateAnimal());
+            animals.add(generateAnimal((long)i));
         }
         return animals;
     }
 
     @Override
-    public List<Animal> findAllByShelter(Shelter shelter) {
-        List<Animal> animals = new ArrayList<>();
-        for (int i=0; i<20; i++) {
-            animals.add(generateAnimal());
-        }
-        return animals;
+    public List<Shelter> getAllShelters() {
+        return Lists.newArrayList(shelter);
     }
 
-    @Override
-    public Animal save(Animal animal) {
-        animal.setId(999L);
-        return animal;
-    }
-
-    @Override
-    public void delete(Animal animal) {
-    }
-
-    private Animal generateAnimal() {
+    private Animal generateAnimal(Long id) {
         Animal animal = new Animal();
+        animal.setId(id);
         animal.setShelter(shelter);
-        animal.setHomelessnessnessDuration(random.nextInt(10));
+        animal.setAdmittanceDate(1457214300000L - (long)(random.nextFloat() * 63072000000L));
         animal.setName("Animal_" + random.nextInt(9999));
         animal.setAge(random.nextInt(21));
         animal.setSpecies(Species.values()[random.nextInt(Species.values().length)]);
@@ -80,9 +70,6 @@ public class FakeAnimalRepositoryImpl implements AnimalRepository {
         animal.setAttitudeTowardsDogs(Attitude.values()[random.nextInt(Attitude.values().length)]);
         animal.setAttitudeTowardsCats(Attitude.values()[random.nextInt(Attitude.values().length)]);
         animal.setFavourite(random.nextBoolean());
-        Photo photo = new Photo();
-        photo.setUrl("http://schroniskopromyk.pl/wp-content/uploads/2015/05/Mero-str.jpg");
-        animal.setPhotos(Lists.newArrayList(photo));
         return animal;
     }
 }
