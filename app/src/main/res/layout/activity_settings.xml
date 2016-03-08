@@ -3,11 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="pl.kodujdlapolski.na4lapy.ui.about_app.AboutAppActivity">
+    tools:context=".ui.settings.SettingsActivity">
 
     <fragment
         android:id="@+id/about_app_fragment"
-        android:name="pl.kodujdlapolski.na4lapy.ui.about_app.AboutAppFragment"
+        android:name="pl.kodujdlapolski.na4lapy.ui.settings.SettingsFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
@@ -16,6 +16,6 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        tools:layout="@layout/fragment_about_app"/>
+        tools:layout="@layout/fragment_settings"/>
 
 </RelativeLayout>

@@ -5,15 +5,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
 import pl.kodujdlapolski.na4lapy.Na4LapyApp;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Shelter;
 import pl.kodujdlapolski.na4lapy.repository.RepositoryService;
-import pl.kodujdlapolski.na4lapy.ui.about_app.AboutAppActivity;
+import pl.kodujdlapolski.na4lapy.ui.settings.SettingsActivity;
 import pl.kodujdlapolski.na4lapy.ui.about_shelter.AboutShelterActivity;
 
 public class SplashActivity extends AppCompatActivity {
@@ -29,7 +27,7 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     public void aboutTestAction(View view) {
-        startActivity(new Intent(this, AboutAppActivity.class));
+        startActivity(new Intent(this, SettingsActivity.class));
     }
 
     public void aboutShelterAction(View view) {

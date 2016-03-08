@@ -4,7 +4,7 @@
     <string name="open_source_libs_text">Licencje typu open source</string>
     <string name="about_text"> Aplikacja mobilna dla Gdańskiego schroniska Promyk to rozwiązanie pozwalające na przeglądanie zdjęć i opisów zwierząt znajdujących się obecnie pod ich opieką.\n\nUżytkownik może w prosty sposób dodawać psy i koty do listy ulubionych oraz przekazywać datki na zwierzęta w formie elektronicznych mikropłatności.</string>
     <string name="version">Wersja: %1$s</string>
-    <string name="about_page_title">O aplikacji</string>
+    <string name="settings_page_title">Ustawienia</string>
     <string name="about_shelter_page_title">O schronisku - %1$s </string>
     <string name="shelter_address_label">Adres:</string>
     <string name="shelter_email_label">Adres e-mail:</string>
@@ -17,4 +17,6 @@
     <string name="error_data_cannot_be_loaded">Nie można załadować danych</string>
     <string name="try_again">Spróbuj ponownie</string>
     <string name="content_desc_error_image">Obraz informujący o błędzie</string>
+    <string name="login">Zaloguj się</string>
+    <string name="logout">Wyloguj się</string>
 </resources>

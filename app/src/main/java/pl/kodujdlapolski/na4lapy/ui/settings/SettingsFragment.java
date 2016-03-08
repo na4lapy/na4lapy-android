@@ -1,4 +1,4 @@
-package pl.kodujdlapolski.na4lapy.ui.about_app;
+package pl.kodujdlapolski.na4lapy.ui.settings;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -19,9 +19,12 @@ import pl.kodujdlapolski.na4lapy.presenter.WebPageTypes;
 /**
  * Created by Natalia on 2016-03-01.
  */
-public class AboutAppFragment extends Fragment {
+public class SettingsFragment extends Fragment {
     @Bind(R.id.version_name)
     TextView versionName;
+
+    @Bind(R.id.logInLogout)
+    TextView logInLogoutText;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -31,7 +34,7 @@ public class AboutAppFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_about_app, container, false);
+        View view = inflater.inflate(R.layout.fragment_settings, container, false);
         ButterKnife.bind(this, view);
         return view;
     }
@@ -47,6 +50,8 @@ public class AboutAppFragment extends Fragment {
         } catch (PackageManager.NameNotFoundException e) {
             versionName.setVisibility(View.GONE);
         }
+        // todo set proper name depending on if user is logged in or not
+        logInLogoutText.setText(getString(R.string.login));
     }
 
     @SuppressWarnings("unused")
@@ -65,6 +70,12 @@ public class AboutAppFragment extends Fragment {
     @OnClick(R.id.openSourceLibs)
     void onOpenSourceClick() {
         runWebViewActivity(WebPageTypes.OPEN_SOURCE);
+    }
+
+    @SuppressWarnings("unused")
+    @OnClick(R.id.logInLogout)
+    void onLoginLogoutClick() {
+        // todo run login activity when it is available
     }
 
     void runWebViewActivity(WebPageTypes type) {

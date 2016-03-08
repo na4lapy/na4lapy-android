@@ -17,10 +17,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.about_app.AboutAppActivity"
+            android:name=".ui.settings.SettingsActivity"
             android:launchMode="singleTop" />
         <activity
-            android:name=".ui.about_app.WebViewActivity"
+            android:name=".ui.settings.WebViewActivity"
             android:launchMode="singleTop" />
         <activity
             android:name=".ui.about_shelter.AboutShelterActivity"

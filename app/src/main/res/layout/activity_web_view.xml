@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="pl.kodujdlapolski.na4lapy.ui.about_app.WebViewActivity">
+    tools:context="pl.kodujdlapolski.na4lapy.ui.settings.WebViewActivity">
 
     <WebView
         android:id="@+id/webView"

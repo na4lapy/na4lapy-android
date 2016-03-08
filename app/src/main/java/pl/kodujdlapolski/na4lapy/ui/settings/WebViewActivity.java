@@ -1,4 +1,4 @@
-package pl.kodujdlapolski.na4lapy.ui.about_app;
+package pl.kodujdlapolski.na4lapy.ui.settings;
 
 import android.os.Bundle;
 import android.webkit.WebView;
