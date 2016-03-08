@@ -1,7 +1,5 @@
 package pl.kodujdlapolski.na4lapy.api;
 
-import android.util.Log;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -21,20 +19,26 @@ public class ApiServiceImpl implements ApiService {
     }
 
     @Override
-    public List<Animal> getAllAnimals() {
-        //TODO
-        return null;
+    public Shelter getShelter() throws IOException {
+        Call<Shelter> call = mApi.getShelter();
+        return call.execute().body();
     }
 
     @Override
-    public List<Shelter> getAllShelters() {
-        Call<List<Shelter>> sheltersCall = mApi.listShelters();
-        List<Shelter> shelters = null;
-        try {
-            shelters = sheltersCall.execute().body();
-        } catch (IOException e) {
-            Log.w(getClass().getSimpleName(), e);
-        }
-        return shelters;
+    public List<Animal> getAnimalList() throws IOException {
+        Call<List<Animal>> call = mApi.getAnimalList();
+        return call.execute().body();
+    }
+
+    @Override
+    public List<Animal> getAnimalList(int page, int size) throws IOException {
+        Call<List<Animal>> call = mApi.getAnimalList(page, size);
+        return call.execute().body();
+    }
+
+    @Override
+    public Animal getAnimal(Long id) throws IOException {
+        Call<Animal> call = mApi.getAnimal(id);
+        return call.execute().body();
     }
 }

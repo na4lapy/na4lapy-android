@@ -1,7 +1,6 @@
 package pl.kodujdlapolski.na4lapy.api;
 
-import com.google.common.collect.Lists;
-
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -22,6 +21,7 @@ public class FakeApiServiceImpl implements ApiService {
 
     public FakeApiServiceImpl() {
         random = new Random(System.currentTimeMillis());
+
         shelter = new Shelter();
         shelter.setId(1L);
         shelter.setName("Promyk");
@@ -36,24 +36,38 @@ public class FakeApiServiceImpl implements ApiService {
     }
 
     @Override
-    public List<Animal> getAllAnimals() {
+    public Shelter getShelter() throws IOException {
+        return shelter;
+    }
+
+    @Override
+    public List<Animal> getAnimalList() throws IOException {
         List<Animal> animals = new ArrayList<>();
-        for (int i=0; i<20; i++) {
-            animals.add(generateAnimal((long)i));
+        for (int i = 0; i < 30; i++) {
+            animals.add(generateAnimal((long) i));
         }
         return animals;
     }
 
     @Override
-    public List<Shelter> getAllShelters() {
-        return Lists.newArrayList(shelter);
+    public List<Animal> getAnimalList(int page, int size) throws IOException {
+        List<Animal> animals = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            animals.add(generateAnimal((long) i));
+        }
+        return animals;
+    }
+
+    @Override
+    public Animal getAnimal(Long id) throws IOException {
+        return generateAnimal(id);
     }
 
     private Animal generateAnimal(Long id) {
         Animal animal = new Animal();
         animal.setId(id);
         animal.setShelter(shelter);
-        animal.setAdmittanceDate(1457214300000L - (long)(random.nextFloat() * 63072000000L));
+        animal.setAdmittanceDate(1457214300000L - (long) (random.nextFloat() * 63072000000L));
         animal.setName("Animal_" + random.nextInt(9999));
         animal.setAge(random.nextInt(21));
         animal.setSpecies(Species.values()[random.nextInt(Species.values().length)]);
