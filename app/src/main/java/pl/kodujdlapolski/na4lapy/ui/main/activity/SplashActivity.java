@@ -33,13 +33,11 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     public void aboutShelterAction(View view) {
-        repositoryService.getShelters(new RepositoryService.LoadSheltersCallback() {
-            @Override
-            public void onSheltersLoaded(List<Shelter> shelters) {
-                //  Intent i = new Intent(SplashActivity.this, AboutShelterActivity.class);
-                //  i.putExtra(AboutShelterActivity.EXTRA_SHELTER_ID, shelters.get(0).getId());
-                //  startActivity(i);
-            }
-        });
+        Intent i = new Intent(SplashActivity.this, AboutShelterActivity.class);
+        Shelter shelter = new Shelter();
+        shelter.setId(1L);
+        i.putExtra(AboutShelterActivity.EXTRA_SHELTER_ID, shelter.getId());
+        startActivity(i);
+
     }
 }
