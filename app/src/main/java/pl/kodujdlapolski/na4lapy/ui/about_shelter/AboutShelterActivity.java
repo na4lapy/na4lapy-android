@@ -17,6 +17,7 @@ public class AboutShelterActivity extends AbstractSingleActivity {
     private ShareActionProvider mShareActionProvider;
     private Intent mShareIntent;
     AboutShelterFragment aboutShelterFragment;
+    MenuItem shareMenuItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +49,8 @@ public class AboutShelterActivity extends AbstractSingleActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.about_shelter_menu, menu);
-        MenuItem item = menu.findItem(R.id.menu_item_share);
-        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
+        shareMenuItem = menu.findItem(R.id.menu_item_share);
+        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareMenuItem);
         if (mShareIntent != null) {
             mShareActionProvider.setShareIntent(mShareIntent);
         }
@@ -57,6 +58,9 @@ public class AboutShelterActivity extends AbstractSingleActivity {
     }
 
     public void setShareIntent(Intent shareIntent) {
+        if (shareMenuItem != null) {
+            shareMenuItem.setVisible(true);
+        }
         mShareIntent = shareIntent;
         if (mShareActionProvider != null) {
             mShareActionProvider.setShareIntent(shareIntent);

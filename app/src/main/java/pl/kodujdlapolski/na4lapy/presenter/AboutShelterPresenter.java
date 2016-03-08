@@ -31,6 +31,7 @@ public class AboutShelterPresenter implements SynchronizationReceiver.Synchroniz
     private AboutShelterActivity aboutShelterActivity;
     private final Long shelterId;
     private Shelter shelter;
+    private boolean isAfterSynchronization = false;
 
     public AboutShelterPresenter(AboutShelterFragment aboutShelterFragment) {
         this.aboutShelterFragment = aboutShelterFragment;
@@ -43,6 +44,7 @@ public class AboutShelterPresenter implements SynchronizationReceiver.Synchroniz
 
     public void startDownloadingData() {
         aboutShelterFragment.showProgressHideContent(true);
+        isAfterSynchronization = false;
         getData();
         synchronizationService.synchronize();
     }
@@ -50,6 +52,7 @@ public class AboutShelterPresenter implements SynchronizationReceiver.Synchroniz
     @Override
     public void onSynchronizationSuccess() {
         if (aboutShelterFragment != null && aboutShelterFragment.isAdded()) {
+            isAfterSynchronization = true;
             getData();
         }
     }
@@ -73,11 +76,15 @@ public class AboutShelterPresenter implements SynchronizationReceiver.Synchroniz
 
     private void onShelterAvailable() {
         if (shelter != null) {
+            ((AboutShelterActivity) aboutShelterFragment.getActivity()).setShareIntent(getShareIntent());
             aboutShelterFragment.populateView(shelter);
             aboutShelterFragment.showProgressHideContent(false);
-            ((AboutShelterActivity) aboutShelterFragment.getActivity()).setShareIntent(getShareIntent());
         } else {
-            aboutShelterFragment.showProgressHideContent(true);
+            if (isAfterSynchronization) {
+                aboutShelterFragment.showError();
+            } else {
+                aboutShelterFragment.showProgressHideContent(true);
+            }
         }
     }
 

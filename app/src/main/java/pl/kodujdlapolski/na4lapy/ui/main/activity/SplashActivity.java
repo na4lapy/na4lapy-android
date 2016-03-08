@@ -34,7 +34,7 @@ public class SplashActivity extends AppCompatActivity {
         Intent i = new Intent(SplashActivity.this, AboutShelterActivity.class);
         Shelter shelter = new Shelter();
         shelter.setId(1L);
-        i.putExtra(AboutShelterActivity.EXTRA_SHELTER_ID, shelter.getId());
+        i.putExtra(AboutShelterActivity.EXTRA_SHELTER_ID, 1l);
         startActivity(i);
 
     }

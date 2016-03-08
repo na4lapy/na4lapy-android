@@ -1,6 +1,7 @@
 package pl.kodujdlapolski.na4lapy.ui.settings;
 
 import android.os.Bundle;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 import butterknife.Bind;
@@ -31,6 +32,9 @@ public class WebViewActivity extends AbstractSingleActivity {
             else
                 finish();
         }
+        WebSettings webSettings = webView.getSettings();
+        // used for tests
+        webSettings.setJavaScriptEnabled(true);
     }
 
     private void openUrlAndSetPageName(WebPageTypes webPageTypes) {
