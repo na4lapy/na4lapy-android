@@ -1,5 +1,6 @@
 package pl.kodujdlapolski.na4lapy.repository;
 
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -27,67 +28,117 @@ public class RepositoryServiceImpl implements RepositoryService {
     }
 
     @Override
-    public void getAnimal(@NonNull Long id, @NonNull GetAnimalCallback callback) {
+    public void getAnimal(@NonNull Long id, @NonNull final GetAnimalCallback callback) {
         checkNotNull(id, "id cannot be null");
         checkNotNull(callback, "callback cannot be null");
-        Animal animal = null;
-        try {
-            animal = mDatabaseRepository.findOneById(id, Animal.class);
-        } catch (SQLException e) {
-            Log.w(getClass().getSimpleName(), e);
-        }
-        callback.onAnimalLoaded(animal);
+
+        new AsyncTask<Long, Void, Animal>() {
+            @Override
+            protected Animal doInBackground(Long... params) {
+                try {
+                    return mDatabaseRepository.findOneById(params[0], Animal.class);
+                } catch (SQLException e) {
+                    Log.w(getClass().getSimpleName(), e);
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Animal result) {
+                callback.onAnimalLoaded(result);
+            }
+        }.execute(id);
     }
 
     @Override
-    public void getAnimalsByShelterId(@NonNull Long shelterId, @NonNull LoadAnimalsCallback callback) {
+    public void getAnimalsByShelterId(@NonNull Long shelterId, @NonNull final LoadAnimalsCallback callback) {
         checkNotNull(shelterId, "shelterId cannot be null");
         checkNotNull(callback, "callback cannot be null");
-        List<Animal> animals = null;
-        try {
-            animals = mDatabaseRepository.findAllByForeignId(shelterId, Animal.class, Shelter.class);
-        } catch (SQLException e) {
-            Log.w(getClass().getSimpleName(), e);
-        }
-        callback.onAnimalsLoaded(animals);
+
+        new AsyncTask<Long, Void, List<Animal>>() {
+            @Override
+            protected List<Animal> doInBackground(Long... params) {
+                try {
+                    return mDatabaseRepository.findAllByForeignId(params[0], Animal.class, Shelter.class);
+                } catch (SQLException e) {
+                    Log.w(getClass().getSimpleName(), e);
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(List<Animal> result) {
+                callback.onAnimalsLoaded(result);
+            }
+        }.execute(shelterId);
     }
 
     @Override
-    public void getAnimalsByFavourite(@NonNull LoadAnimalsCallback callback) {
+    public void getAnimalsByFavourite(@NonNull final LoadAnimalsCallback callback) {
         checkNotNull(callback, "callback cannot be null");
-        List<Animal> animals = null;
-        Map<String, Object> favouriteField = Maps.newHashMap();
-        favouriteField.put(Animal.COLUMN_NAME_FAVOURITE, true);
-        try {
-            animals = mDatabaseRepository.findAllByFields(favouriteField, Animal.class);
-        } catch (SQLException e) {
-            Log.w(getClass().getSimpleName(), e);
-        }
-        callback.onAnimalsLoaded(animals);
+
+        new AsyncTask<Void, Void, List<Animal>>() {
+            @Override
+            protected List<Animal> doInBackground(Void... params) {
+                Map<String, Object> favouriteField = Maps.newHashMap();
+                favouriteField.put(Animal.COLUMN_NAME_FAVOURITE, true);
+                try {
+                    return mDatabaseRepository.findAllByFields(favouriteField, Animal.class);
+                } catch (SQLException e) {
+                    Log.w(getClass().getSimpleName(), e);
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(List<Animal> result) {
+                callback.onAnimalsLoaded(result);
+            }
+        }.execute();
     }
 
     @Override
-    public void getShelter(@NonNull Long id, @NonNull GetShelterCallback callback) {
+    public void getShelter(@NonNull Long id, @NonNull final GetShelterCallback callback) {
         checkNotNull(id, "id cannot be null");
         checkNotNull(callback, "callback cannot be null");
-        Shelter shelter = null;
-        try {
-            shelter = mDatabaseRepository.findOneById(id, Shelter.class);
-        } catch (SQLException e) {
-            Log.w(getClass().getSimpleName(), e);
-        }
-        callback.onShelterLoaded(shelter);
+
+        new AsyncTask<Long, Void, Shelter>() {
+            @Override
+            protected Shelter doInBackground(Long... params) {
+                try {
+                    return mDatabaseRepository.findOneById(params[0], Shelter.class);
+                } catch (SQLException e) {
+                    Log.w(getClass().getSimpleName(), e);
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Shelter result) {
+                callback.onShelterLoaded(result);
+            }
+        }.execute(id);
     }
 
     @Override
-    public void getShelters(@NonNull LoadSheltersCallback callback) {
+    public void getShelters(@NonNull final LoadSheltersCallback callback) {
         checkNotNull(callback, "callback cannot be null");
-        List<Shelter> shelters = null;
-        try {
-            shelters = mDatabaseRepository.findAll(Shelter.class);
-        } catch (SQLException e) {
-            Log.w(getClass().getSimpleName(), e);
-        }
-        callback.onSheltersLoaded(shelters);
+
+        new AsyncTask<Void, Void, List<Shelter>>() {
+            @Override
+            protected List<Shelter> doInBackground(Void... params) {
+                try {
+                    return mDatabaseRepository.findAll(Shelter.class);
+                } catch (SQLException e) {
+                    Log.w(getClass().getSimpleName(), e);
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(List<Shelter> result) {
+                callback.onSheltersLoaded(result);
+            }
+        }.execute();
     }
 }
