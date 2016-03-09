@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import pl.kodujdlapolski.na4lapy.api.model.PagedAnimalListDto;
 import pl.kodujdlapolski.na4lapy.model.Animal;
 import pl.kodujdlapolski.na4lapy.model.Shelter;
 import retrofit2.Call;
@@ -32,8 +33,9 @@ public class ApiServiceImpl implements ApiService {
 
     @Override
     public List<Animal> getAnimalList(int page, int size) throws IOException {
-        Call<List<Animal>> call = mApi.getAnimalList(page, size);
-        return call.execute().body();
+        Call<PagedAnimalListDto> call = mApi.getAnimalList(page, size);
+        PagedAnimalListDto dto = call.execute().body();
+        return dto.getData();
     }
 
     @Override

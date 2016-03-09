@@ -2,6 +2,7 @@ package pl.kodujdlapolski.na4lapy.api;
 
 import java.util.List;
 
+import pl.kodujdlapolski.na4lapy.api.model.PagedAnimalListDto;
 import pl.kodujdlapolski.na4lapy.model.Animal;
 import pl.kodujdlapolski.na4lapy.model.Shelter;
 import retrofit2.Call;
@@ -18,7 +19,7 @@ public interface Api {
     Call<List<Animal>> getAnimalList();
 
     @GET("animals")
-    Call<List<Animal>> getAnimalList(@Query("page") int page, @Query("size") int size);
+    Call<PagedAnimalListDto> getAnimalList(@Query("page") int page, @Query("size") int size);
 
     @GET("animals/{id}")
     Call<Animal> getAnimal(@Path("id") Long id);
