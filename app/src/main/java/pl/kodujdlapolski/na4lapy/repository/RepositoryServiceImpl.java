@@ -51,6 +51,27 @@ public class RepositoryServiceImpl implements RepositoryService {
     }
 
     @Override
+    public void getAnimals(@NonNull final LoadAnimalsCallback callback) {
+        checkNotNull(callback, "callback cannot be null");
+        new AsyncTask<Void, Void, List<Animal>>() {
+            @Override
+            protected List<Animal> doInBackground(Void... params) {
+                try {
+                    return mDatabaseRepository.findAll(Animal.class);
+                } catch (SQLException e) {
+                    Log.w(getClass().getSimpleName(), e);
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(List<Animal> result) {
+                callback.onAnimalsLoaded(result);
+            }
+        }.execute();
+    }
+
+    @Override
     public void getAnimalsByShelterId(@NonNull Long shelterId, @NonNull final LoadAnimalsCallback callback) {
         checkNotNull(shelterId, "shelterId cannot be null");
         checkNotNull(callback, "callback cannot be null");
