@@ -1,4 +1,4 @@
-package pl.kodujdlapolski.na4lapy.ui;
+package pl.kodujdlapolski.na4lapy.model;
 
 /**
  * Created by Gosia on 2016-03-05.
