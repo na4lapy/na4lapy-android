@@ -1,13 +1,18 @@
 package pl.kodujdlapolski.na4lapy.ui.preferences;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.NumberPicker;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
@@ -20,6 +25,10 @@ public class PreferencesFragment extends Fragment {
 
     private ScrollView view;
     private Context context;
+    private EditText ageMinPreference;
+    private EditText ageMaxPreference;
+    private NumberPicker ageNumberPicker;
+    int age;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -27,12 +36,32 @@ public class PreferencesFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         view = (ScrollView) inflater.inflate(R.layout.fragment_preferences, container, false);
         context = getContext();
+
+        ageMinPreference = (EditText) view.findViewById(R.id.age_min);
+        ageMaxPreference = (EditText) view.findViewById(R.id.age_max);
+
         setUserPreferencesToView();
+
+        ageMinPreference.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                displayAgePickerDialog(1, inflater);
+                ageMinPreference.setText(String.valueOf(age));
+            }
+        });
+
+        ageMaxPreference.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                displayAgePickerDialog(2, inflater);
+                ageMaxPreference.setText(String.valueOf(age));
+            }
+        });
 
         ImageButton saveButton = (ImageButton) view.findViewById(R.id.save_preferences);
         saveButton.setOnClickListener(new View.OnClickListener() {
@@ -42,7 +71,53 @@ public class PreferencesFragment extends Fragment {
                 Toast.makeText(context, "Ustawienia zostały zapisane", Toast.LENGTH_SHORT).show();
             }
         });
-         return view;
+
+        return view;
+    }
+
+    private void displayAgePickerDialog(final int variable, LayoutInflater inflater) {
+
+        //TODO poprawic wczytywanie widoku do dialogu
+    //    LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v1 = inflater.inflate(R.layout.dialog_age_picker_preference, null);
+
+        ageNumberPicker = (NumberPicker) v1.findViewById(R.id.numberPicker);
+        ageNumberPicker.setMinValue(0);
+        ageNumberPicker.setMinValue(20);
+        ageNumberPicker.setWrapSelectorWheel(false);
+        switch (variable) {
+            case 1:
+                ageNumberPicker.setValue(Integer.valueOf(ageMinPreference.getText().toString()));
+                break;
+            case 2:
+                ageNumberPicker.setValue(Integer.valueOf(ageMaxPreference.getText().toString()));
+                break;
+            default:
+                break;
+        }
+
+        //TODO poprawic wczytywanie widoku do dialogu
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(PreferencesFragment.this.context);
+        dialogBuilder.setView(v1);
+
+        dialogBuilder.setTitle(R.string.age);
+        dialogBuilder.setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                age = ageNumberPicker.getValue();
+                dialog.dismiss();
+            }
+        });
+        dialogBuilder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.dismiss();
+            }
+        });
+
+        Dialog agePickerDialog = dialogBuilder.create();
+        agePickerDialog.show();
+
+   //     agePickerDialog.setContentView(R.layout.dialog_age_picker_preference);
+   //     agePickerDialog.setCanceledOnTouchOutside(false);
     }
 
     private void setUserPreferencesToView () {
@@ -63,11 +138,9 @@ public class PreferencesFragment extends Fragment {
         ToggleImageButton genderManPreference = (ToggleImageButton) view.findViewById(R.id.gender_man);
         genderManPreference.setChecked(userPreferences.isGenderMan());
 
-        EditText ageMinPreference = (EditText) view.findViewById(R.id.age_min);
-        ageMinPreference.setText(userPreferences.getAgeMin().toString());
+        ageMinPreference.setText(String.valueOf(userPreferences.getAgeMin()));
 
-        EditText ageMaxPreference = (EditText) view.findViewById(R.id.age_max);
-        ageMaxPreference.setText(userPreferences.getAgeMax().toString());
+        ageMaxPreference.setText(String.valueOf(userPreferences.getAgeMax()));
 
         ToggleImageButton sizeSmallPreference = (ToggleImageButton) view.findViewById(R.id.size_small);
         sizeSmallPreference.setChecked(userPreferences.isSizeSmall());

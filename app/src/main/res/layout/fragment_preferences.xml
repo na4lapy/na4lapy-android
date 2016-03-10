@@ -129,10 +129,7 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="@dimen/activity_horizontal_margin"
                     android:paddingRight="@dimen/activity_horizontal_margin"
-                    android:layout_gravity="center_vertical"
-                    android:numeric="decimal"
-                    android:minWidth="@dimen/preferences_edit_text_width"
-                    android:maxLength="2"
+                    android:editable="false"
                     android:id="@+id/age_min"/>
 
                 <TextView
@@ -148,11 +145,7 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="@dimen/activity_horizontal_margin"
                     android:paddingRight="@dimen/activity_horizontal_margin"
-                    android:layout_gravity="center_vertical"
-                    android:numeric="decimal"
-                    android:minWidth="@dimen/preferences_edit_text_width"
-                    android:maxLength="2"
-                    android:inputType="numberSigned"
+                    android:editable="false"
                     android:id="@+id/age_max"/>
 
             </LinearLayout>

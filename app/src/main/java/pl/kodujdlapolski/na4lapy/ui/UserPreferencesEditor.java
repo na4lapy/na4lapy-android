@@ -25,8 +25,14 @@ public class UserPreferencesEditor {
         editor.putBoolean("Other type", ((ToggleImageButton) view.findViewById(R.id.type_other)).isChecked());
         editor.putBoolean("Woman gender", ((ToggleImageButton) view.findViewById(R.id.gender_woman)).isChecked());
         editor.putBoolean("Man gender", ((ToggleImageButton) view.findViewById(R.id.gender_man)).isChecked());
-        editor.putInt("Age minimum", Integer.parseInt(((EditText) view.findViewById(R.id.age_min)).getText().toString()));
-        editor.putInt("Age maximum", Integer.parseInt(((EditText) view.findViewById(R.id.age_max)).getText().toString()));
+
+        EditText ageMinPicker = (EditText) view.findViewById(R.id.age_min);
+        Integer ageMin = Integer.valueOf(ageMinPicker.getText().toString());
+        editor.putInt("Age minimum", ageMin);
+        EditText ageMaxPicker = (EditText) view.findViewById(R.id.age_max);
+        Integer ageMax = Integer.valueOf(ageMaxPicker.getText().toString());
+        editor.putInt("Age maximum", ageMax);
+
         editor.putBoolean("Small size", ((ToggleImageButton) view.findViewById(R.id.size_small)).isChecked());
         editor.putBoolean("Medium size", ((ToggleImageButton) view.findViewById(R.id.size_medium)).isChecked());
         editor.putBoolean("Large size", ((ToggleImageButton) view.findViewById(R.id.size_large)).isChecked());
@@ -45,7 +51,7 @@ public class UserPreferencesEditor {
                 sharedPreferences.getBoolean("Woman gender", true),
                 sharedPreferences.getBoolean("Man gender", true),
                 sharedPreferences.getInt("Age minimum", 0),
-                sharedPreferences.getInt("Age maximum", 20),
+                sharedPreferences.getInt("Age maximum", 16),
                 sharedPreferences.getBoolean("Small size", true),
                 sharedPreferences.getBoolean("Medium size", true),
                 sharedPreferences.getBoolean("Large size", true),
