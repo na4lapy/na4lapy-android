@@ -5,6 +5,8 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.util.Collection;
+
 import pl.kodujdlapolski.na4lapy.model.type.ActivityAnimal;
 import pl.kodujdlapolski.na4lapy.model.type.Attitude;
 import pl.kodujdlapolski.na4lapy.model.type.Gender;
@@ -23,7 +25,7 @@ public class Animal extends BaseEntity {
     @DatabaseField private Long admittanceDate;
 
     @DatabaseField private String name;
-    @DatabaseField private Integer age;
+    @DatabaseField private Long birthDate;
 
     @DatabaseField private Species species;
     @DatabaseField private Gender gender;
@@ -42,7 +44,7 @@ public class Animal extends BaseEntity {
     @DatabaseField private Attitude attitudeTowardsCats;
 
     @ForeignCollectionField(eager = false)
-    private ForeignCollection<Photo> photos;
+    private Collection<Photo> photos;
 
     @DatabaseField(columnName = Animal.COLUMN_NAME_FAVOURITE)
     private Boolean favourite;
@@ -75,12 +77,12 @@ public class Animal extends BaseEntity {
         this.name = name;
     }
 
-    public Integer getAge() {
-        return age;
+    public Long getBirthDate() {
+        return birthDate;
     }
 
-    public void setAge(Integer age) {
-        this.age = age;
+    public void setBirthDate(Long birthDate) {
+        this.birthDate = birthDate;
     }
 
     public Species getSpecies() {
@@ -187,7 +189,7 @@ public class Animal extends BaseEntity {
         this.attitudeTowardsCats = attitudeTowardsCats;
     }
 
-    public ForeignCollection<Photo> getPhotos() {
+    public Collection<Photo> getPhotos() {
         return photos;
     }
 
@@ -214,7 +216,7 @@ public class Animal extends BaseEntity {
                 ", shelter=" + shelter +
                 ", admittanceDate=" + admittanceDate +
                 ", name='" + name + '\'' +
-                ", age=" + age +
+                ", birthDate=" + birthDate +
                 ", species=" + species +
                 ", gender=" + gender +
                 ", size=" + size +

@@ -6,9 +6,13 @@ import android.os.AsyncTask;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import pl.kodujdlapolski.na4lapy.api.ApiService;
+import pl.kodujdlapolski.na4lapy.model.Animal;
+import pl.kodujdlapolski.na4lapy.model.Shelter;
 import pl.kodujdlapolski.na4lapy.repository.database.DatabaseRepository;
 
 public class SynchronizationServiceImpl implements SynchronizationService {
@@ -30,8 +34,10 @@ public class SynchronizationServiceImpl implements SynchronizationService {
             @Override
             protected Boolean doInBackground(Void... params) {
                 try {
-                    mDatabaseRepository.saveAll(mApiService.getAllShelters());
-                    mDatabaseRepository.saveAll(mApiService.getAllAnimals());
+                    Shelter shelter = mApiService.getShelter();
+                    mDatabaseRepository.save(shelter);
+                    List<Animal> animalList = mApiService.getAnimalList();
+                    mDatabaseRepository.saveAll(animalList);
                 } catch (Exception e) {
                     Log.w(getClass().getSimpleName(), e);
                     return false;

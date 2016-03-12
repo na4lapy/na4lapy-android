@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="pl">
     <string name="privacy_policy_text">Polityka Prywatności</string>
     <string name="regulations_text">Regulamin</string>
     <string name="open_source_libs_text">Licencje typu open source</string>
