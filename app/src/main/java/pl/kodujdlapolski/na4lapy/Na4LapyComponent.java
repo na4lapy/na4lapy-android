@@ -5,6 +5,7 @@ import javax.inject.Singleton;
 import dagger.Component;
 import pl.kodujdlapolski.na4lapy.api.ApiModule;
 import pl.kodujdlapolski.na4lapy.preferences.PreferencesModule;
+import pl.kodujdlapolski.na4lapy.presenter.PreferencesPresenter;
 import pl.kodujdlapolski.na4lapy.repository.RepositoryModule;
 import pl.kodujdlapolski.na4lapy.repository.database.DatabaseModule;
 import pl.kodujdlapolski.na4lapy.sync.SynchronizationModule;
@@ -21,4 +22,6 @@ import pl.kodujdlapolski.na4lapy.user.UserModule;
         UserModule.class
 })
 public interface Na4LapyComponent {
+
+        void inject(PreferencesPresenter presenter);
 }

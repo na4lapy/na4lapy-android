@@ -30,6 +30,14 @@ android {
     testOptions {
         unitTests.returnDefaultValues = true
     }
+
+    lintOptions {
+        disable 'InvalidPackage'
+    }
+
+    packagingOptions {
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+    }
 }
 
 dependencies {
@@ -50,4 +58,5 @@ dependencies {
     compile 'com.android.support:design:23.2.0'
     compile 'com.j256.ormlite:ormlite-android:4.48'
     compile 'com.android.support:support-v4:23.2.0'
+    compile 'com.jakewharton:butterknife:7.0.1'
 }

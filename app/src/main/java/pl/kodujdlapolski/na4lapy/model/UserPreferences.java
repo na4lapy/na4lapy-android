@@ -18,9 +18,9 @@ public class UserPreferences {
     private boolean activityLow;
     private boolean activityHigh;
 
-    public UserPreferences(Boolean typeDog, Boolean typeCat, Boolean typeOther, Boolean genderWoman,
-                           Boolean genderMan, Integer ageMin, Integer ageMax, Boolean sizeSmall,
-                           Boolean sizeMedium, Boolean sizeLarge, Boolean activityLow, Boolean activityHigh) {
+    public UserPreferences(boolean typeDog, boolean typeCat, boolean typeOther, boolean genderWoman,
+                           boolean genderMan, int ageMin, int ageMax, boolean sizeSmall,
+                           boolean sizeMedium, boolean sizeLarge, boolean activityLow, boolean activityHigh) {
 
         this.typeDog = typeDog;
         this.typeCat = typeCat;
