@@ -80,52 +80,45 @@ public class PreferencesFragment extends Fragment implements PreferencesContract
 
     @OnClick(R.id.age_min)
     void displayMinAgePickerDialog() {
-        displayAgePickerDialog(1);
+        displayAgePickerDialog(true);
     }
 
     @OnClick(R.id.age_max)
     void displayMaxAgePickerDialog() {
-        displayAgePickerDialog(2);
+        displayAgePickerDialog(false);
     }
 
 
 
-    private void displayAgePickerDialog(final int minOrMaxAgePicker) {
-        LayoutInflater infl = (LayoutInflater)
-                getActivity().getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    private void displayAgePickerDialog(final boolean isMinAgePicker) {
 
-        View v1 = infl.inflate(R.layout.dialog_age_picker_preference, null);
+        View v1 = inflater.inflate(R.layout.dialog_age_picker_preference, null);
         ageNumberPicker = (NumberPicker) v1.findViewById(R.id.numberPicker);
 
+        ageNumberPicker.setMinValue(0);
+        ageNumberPicker.setMaxValue(20);
+        ageNumberPicker.setWrapSelectorWheel(false);
 
-
-        switch (minOrMaxAgePicker) {
-            case 1:
-                ageNumberPicker.setValue(Integer.valueOf(ageMinPreference.getText().toString()));
-                break;
-            case 2:
-                ageNumberPicker.setValue(Integer.valueOf(ageMaxPreference.getText().toString()));
-                break;
-            default:
-                break;
+        if(isMinAgePicker) {
+            ageNumberPicker.setValue(Integer.valueOf(ageMinPreference.getText().toString()));
         }
+        else {
+            ageNumberPicker.setValue(Integer.valueOf(ageMaxPreference.getText().toString()));
+        }
+
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
         dialogBuilder.setView(v1);
 
         dialogBuilder.setTitle(R.string.age);
-        dialogBuilder.setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
+        dialogBuilder.setPositiveButton(R.string.choose, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
 
-                switch (minOrMaxAgePicker) {
-                    case 1:
-                        ageMinPreference.setText(ageNumberPicker.getValue());
-                        break;
-                    case 2:
-                        ageMaxPreference.setText(ageNumberPicker.getValue());
-                        break;
-                    default:
-                        break;
+                if(isMinAgePicker) {
+                    ageMinPreference.setText(String.valueOf(ageNumberPicker.getValue()));
+                }
+                else {
+                    ageMaxPreference.setText(String.valueOf(ageNumberPicker.getValue()));
                 }
 
                 dialog.dismiss();
@@ -139,13 +132,6 @@ public class PreferencesFragment extends Fragment implements PreferencesContract
 
         Dialog agePickerDialog = dialogBuilder.create();
         agePickerDialog.show();
-
-        ageNumberPicker.setMinValue(0);
-        ageNumberPicker.setMinValue(20);
-        ageNumberPicker.setWrapSelectorWheel(false);
-
-    //    agePickerDialog.setContentView(R.layout.dialog_age_picker_preference);
-   //     agePickerDialog.setCanceledOnTouchOutside(false);
     }
 
 
