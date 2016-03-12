@@ -6,9 +6,10 @@ import android.view.View;
 import android.widget.EditText;
 
 import pl.kodujdlapolski.na4lapy.R;
+import pl.kodujdlapolski.na4lapy.model.UserPreferences;
 
 /**
- * Created by Kath on 2016-03-06.
+ * Created by Gosia on 2016-03-06.
  */
 public class UserPreferencesEditor {
 
