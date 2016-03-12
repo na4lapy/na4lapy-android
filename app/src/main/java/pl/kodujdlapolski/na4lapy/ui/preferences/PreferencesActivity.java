@@ -1,4 +1,4 @@
-package pl.kodujdlapolski.na4lapy.ui.main.activity;
+package pl.kodujdlapolski.na4lapy.ui.preferences;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,26 +13,22 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import pl.kodujdlapolski.na4lapy.R;
-import pl.kodujdlapolski.na4lapy.ui.preferences.PreferencesActivity;
+import pl.kodujdlapolski.na4lapy.ui.main.activity.SplashActivity;
 
-public class SplashActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class PreferencesActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
     private ActionBarDrawerToggle drawerToggle;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
-
+        setContentView(R.layout.activity_preferences);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-      //  toolbar.hideOverflowMenu();
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerToggle = new ActionBarDrawerToggle(
@@ -42,6 +38,7 @@ public class SplashActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
     }
 
     @Override
@@ -75,7 +72,6 @@ public class SplashActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
@@ -84,12 +80,12 @@ public class SplashActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.browser) {
-
+            intent = new Intent(context, SplashActivity.class);
+            startActivity(intent);
         } else if (id == R.id.favourities) {
 
         } else if (id == R.id.preferences) {
-            intent = new Intent(context, PreferencesActivity.class);
-            startActivity(intent);
+
         } else if (id == R.id.aboutShelter) {
 
         } else if (id == R.id.settings) {
