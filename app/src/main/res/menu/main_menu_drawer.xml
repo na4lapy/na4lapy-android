@@ -23,4 +23,5 @@
             android:icon="@drawable/ic_settings_24dp"
             android:title="@string/accountSettings" />
     </group>
+
 </menu>

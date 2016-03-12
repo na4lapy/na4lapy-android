@@ -25,5 +25,4 @@
         android:layout_height="wrap_content"
         android:text="Imię użytkownika"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
 </LinearLayout>
