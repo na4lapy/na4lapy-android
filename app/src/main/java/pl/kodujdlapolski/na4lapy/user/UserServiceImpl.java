@@ -1,9 +1,13 @@
 package pl.kodujdlapolski.na4lapy.user;
 
+import android.support.annotation.NonNull;
+
 import javax.inject.Inject;
 
 import pl.kodujdlapolski.na4lapy.model.UserPreferences;
 import pl.kodujdlapolski.na4lapy.preferences.PreferencesService;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class UserServiceImpl implements UserService {
 
@@ -15,13 +19,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void saveCurrentUserPreferences(UserPreferences userPreferences) {
-        mPreferencesService.setUserPreferences(userPreferences);
+    public void saveCurrentUserPreferences(@NonNull UserPreferences userPreferences) {
+        UserPreferences newUserPreferences = checkNotNull(userPreferences, "UserPreferences cannot be null");
+        mPreferencesService.setUserPreferences(newUserPreferences);
     }
 
     @Override
+    @NonNull
     public UserPreferences loadCurrentUserPreferences() {
-        return mPreferencesService.getUserPreferences();
+        UserPreferences userPreferences = mPreferencesService.getUserPreferences();
+        return userPreferences != null ? userPreferences : new UserPreferences();
     }
 
     @Override

@@ -1,6 +1,7 @@
 package pl.kodujdlapolski.na4lapy.preferences;
 
 import android.content.SharedPreferences;
+import android.support.annotation.Nullable;
 
 import com.google.gson.Gson;
 
@@ -24,6 +25,7 @@ public class PreferencesServiceImpl implements PreferencesService {
     }
 
     @Override
+    @Nullable
     public UserPreferences getUserPreferences() {
         String json = mSharedPreferences.getString(KEY_USER_PREFERENCES, null);
         return mGson.fromJson(json, UserPreferences.class);
