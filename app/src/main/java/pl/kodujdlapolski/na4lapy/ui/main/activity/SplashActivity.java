@@ -11,6 +11,7 @@ import pl.kodujdlapolski.na4lapy.Na4LapyApp;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Shelter;
 import pl.kodujdlapolski.na4lapy.repository.RepositoryService;
+import pl.kodujdlapolski.na4lapy.ui.animals_list.AnimalsListActivity;
 import pl.kodujdlapolski.na4lapy.ui.settings.SettingsActivity;
 import pl.kodujdlapolski.na4lapy.ui.about_shelter.AboutShelterActivity;
 
@@ -28,6 +29,13 @@ public class SplashActivity extends AppCompatActivity {
 
     public void aboutTestAction(View view) {
         startActivity(new Intent(this, SettingsActivity.class));
+    }
+
+
+    public void listTestAction(View view) {
+        Intent i = new Intent(SplashActivity.this, AnimalsListActivity.class);
+        i.putExtra(AnimalsListActivity.EXTRA_IS_FAV_LIST, true);
+        startActivity(i);
     }
 
     public void aboutShelterAction(View view) {

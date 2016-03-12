@@ -9,6 +9,7 @@ import pl.kodujdlapolski.na4lapy.preferences.PreferencesModule;
 import pl.kodujdlapolski.na4lapy.repository.RepositoryModule;
 import pl.kodujdlapolski.na4lapy.repository.database.DatabaseModule;
 import pl.kodujdlapolski.na4lapy.sync.SynchronizationModule;
+import pl.kodujdlapolski.na4lapy.ui.animals_list.AnimalsListPresenter;
 import pl.kodujdlapolski.na4lapy.ui.main.activity.SplashActivity;
 import pl.kodujdlapolski.na4lapy.user.UserModule;
 
@@ -25,4 +26,5 @@ import pl.kodujdlapolski.na4lapy.user.UserModule;
 public interface Na4LapyComponent {
     void inject(AboutShelterPresenter presenter);
     void inject(SplashActivity mainActivity);
+    void inject(AnimalsListPresenter animalsListPresenter);
 }

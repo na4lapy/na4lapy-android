@@ -6,6 +6,7 @@ import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.util.Collection;
+import java.io.Serializable;
 
 import pl.kodujdlapolski.na4lapy.model.type.ActivityAnimal;
 import pl.kodujdlapolski.na4lapy.model.type.Attitude;
@@ -15,7 +16,7 @@ import pl.kodujdlapolski.na4lapy.model.type.Species;
 import pl.kodujdlapolski.na4lapy.model.type.Training;
 
 @DatabaseTable(tableName = "animals")
-public class Animal extends BaseEntity {
+public class Animal extends BaseEntity implements Serializable {
 
     public final static String COLUMN_NAME_FAVOURITE = "favourite";
 

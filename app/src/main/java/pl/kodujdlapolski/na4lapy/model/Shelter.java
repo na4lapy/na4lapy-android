@@ -3,8 +3,10 @@ package pl.kodujdlapolski.na4lapy.model;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.io.Serializable;
+
 @DatabaseTable(tableName = "shelters")
-public class Shelter extends BaseEntity {
+public class Shelter extends BaseEntity implements Serializable {
 
     @DatabaseField private String name;
     @DatabaseField private String street;
