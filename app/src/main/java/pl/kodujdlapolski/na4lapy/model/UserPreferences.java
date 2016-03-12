@@ -5,18 +5,18 @@ package pl.kodujdlapolski.na4lapy.model;
  */
 public class UserPreferences {
 
-    private Boolean typeDog;
-    private Boolean typeCat;
-    private Boolean typeOther;
-    private Boolean genderWoman;
-    private Boolean genderMan;
-    private Integer ageMin;
-    private Integer ageMax;
-    private Boolean sizeSmall;
-    private Boolean sizeMedium;
-    private Boolean sizeLarge;
-    private Boolean activityLow;
-    private Boolean activityHigh;
+    private boolean typeDog;
+    private boolean typeCat;
+    private boolean typeOther;
+    private boolean genderWoman;
+    private boolean genderMan;
+    private int ageMin;
+    private int ageMax;
+    private boolean sizeSmall;
+    private boolean sizeMedium;
+    private boolean sizeLarge;
+    private boolean activityLow;
+    private boolean activityHigh;
 
     public UserPreferences(Boolean typeDog, Boolean typeCat, Boolean typeOther, Boolean genderWoman,
                            Boolean genderMan, Integer ageMin, Integer ageMax, Boolean sizeSmall,
@@ -36,99 +36,115 @@ public class UserPreferences {
         this.activityHigh = activityHigh;
     }
 
-    public Boolean isTypeDog() {
+    public UserPreferences() {
+
+        this.typeDog = true;
+        this.typeCat = true;
+        this.typeOther = true;
+        this.genderWoman = true;
+        this.genderMan = true;
+        this.ageMin = 0;
+        this.ageMax = 20;
+        this.sizeSmall = true;
+        this.sizeMedium = true;
+        this.sizeLarge = true;
+        this.activityLow = true;
+        this.activityHigh = true;
+    }
+
+    public boolean isTypeDog() {
         return typeDog;
     }
 
-    public void setTypeDog(Boolean argument) {
+    public void setTypeDog(boolean argument) {
         this.typeDog = argument;
     }
 
-    public Boolean isTypeCat() {
+    public boolean isTypeCat() {
         return typeCat;
     }
 
-    public void setTypeCat(Boolean argument) {
+    public void setTypeCat(boolean argument) {
         this.typeCat = argument;
     }
 
-    public Boolean isTypeOther() {
+    public boolean isTypeOther() {
         return typeOther;
     }
 
-    public void setTypeOther(Boolean argument) {
+    public void setTypeOther(boolean argument) {
         this.typeOther = argument;
     }
 
-    public Boolean isGenderWoman() {
+    public boolean isGenderWoman() {
         return genderWoman;
     }
 
-    public void setGenderWoman(Boolean argument) {
+    public void setGenderWoman(boolean argument) {
         this.genderWoman = argument;
     }
 
-    public Boolean isGenderMan() {
+    public boolean isGenderMan() {
         return genderMan;
     }
 
-    public void setGenderMan(Boolean argument) {
+    public void setGenderMan(boolean argument) {
         this.genderMan = argument;
     }
 
-    public Integer getAgeMin() {
+    public int getAgeMin() {
         return ageMin;
     }
 
-    public void setAgeMin(Integer ageMin) {
+    public void setAgeMin(int ageMin) {
         this.ageMin = ageMin;
     }
 
-    public Integer getAgeMax() {
+    public int getAgeMax() {
         return ageMax;
     }
 
-    public void setAgeMax(Integer ageMax) {
+    public void setAgeMax(int ageMax) {
         this.ageMax = ageMax;
     }
 
-    public Boolean isSizeSmall() {
+    public boolean isSizeSmall() {
         return sizeSmall;
     }
 
-    public void setSizeSmall(Boolean argument) {
+    public void setSizeSmall(boolean argument) {
         this.sizeSmall = argument;
     }
 
-    public Boolean isSizeMedium() {
+    public boolean isSizeMedium() {
         return sizeMedium;
     }
 
-    public void setSizeMedium(Boolean argument) {
+    public void setSizeMedium(boolean argument) {
         this.sizeMedium = argument;
     }
 
-    public Boolean isActivityLow() {
+    public boolean isActivityLow() {
         return activityLow;
     }
 
-    public void setActivityLow(Boolean argument) {
+    public void setActivityLow(boolean argument) {
         this.activityLow = argument;
     }
 
-    public Boolean isSizeLarge() {
+    public boolean isSizeLarge() {
         return sizeLarge;
     }
 
-    public void setSizeLarge(Boolean argument) {
+    public void setSizeLarge(boolean argument) {
         this.sizeLarge = argument;
     }
 
-    public Boolean isActivityHigh() {
+    public boolean isActivityHigh() {
         return activityHigh;
     }
 
-    public void setActivityHigh(Boolean argument) {
+    public void setActivityHigh(boolean argument) {
         this.activityHigh = argument;
     }
 }
