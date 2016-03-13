@@ -53,7 +53,7 @@ public class ToggleImageButton extends ImageButton implements Checkable {
         if (isChecked()) {
             //   but.setBackgroundColor(Color.GREEN); // it is possible to 1) change backgrounds or to 2) change color filter
             //   setColorFilter(Color.parseColor("#FF5722")); // our color accent from colors.xml
-            setColorFilter(Color.parseColor(colorAccent));
+            this.setColorFilter(Color.parseColor(colorAccent));
         }
         else {
             //but.setBackgroundColor(Color.TRANSPARENT);
@@ -80,8 +80,8 @@ public class ToggleImageButton extends ImageButton implements Checkable {
         this.onCheckedChangeListener = onCheckedChangeListener;
     }
 
-    public static interface OnCheckedChangeListener {
-        public void onCheckedChanged(ToggleImageButton buttonView, boolean isChecked);
+    public interface OnCheckedChangeListener {
+        void onCheckedChanged(ToggleImageButton buttonView, boolean isChecked);
     }
 
     public String getColorAccent() {

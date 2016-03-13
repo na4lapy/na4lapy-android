@@ -113,14 +113,11 @@ public class PreferencesFragment extends Fragment implements PreferencesContract
         dialogBuilder.setTitle(R.string.age);
         dialogBuilder.setPositiveButton(R.string.choose, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-
-                if(isMinAgePicker) {
+                if (isMinAgePicker) {
                     ageMinPreference.setText(String.valueOf(ageNumberPicker.getValue()));
-                }
-                else {
+                } else {
                     ageMaxPreference.setText(String.valueOf(ageNumberPicker.getValue()));
                 }
-
                 dialog.dismiss();
             }
         });
@@ -132,6 +129,8 @@ public class PreferencesFragment extends Fragment implements PreferencesContract
 
         Dialog agePickerDialog = dialogBuilder.create();
         agePickerDialog.show();
+
+    //    agePickerDialog.getWindow().setBackgroundDrawableResource(R.color.colorPrimaryLight);     //sets color for whole dialog window
     }
 
 
