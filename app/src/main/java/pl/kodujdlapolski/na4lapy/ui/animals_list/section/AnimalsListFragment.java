@@ -28,10 +28,8 @@ public class AnimalsListFragment extends Fragment {
 
     @Bind(R.id.animals_recycle)
     RecyclerView recycler;
-        private RecyclerView.LayoutManager layoutManager;
+    private RecyclerView.LayoutManager layoutManager;
     private AnimalsRecyclerListAdapter adapter;
-
-    Handler handler;
 
     public AnimalsListFragment() {
     }
@@ -69,7 +67,6 @@ public class AnimalsListFragment extends Fragment {
         recycler.setLayoutManager(layoutManager);
         adapter = new AnimalsRecyclerListAdapter(animals);
         recycler.setAdapter(adapter);
-
     }
 
     @Override
@@ -85,5 +82,4 @@ public class AnimalsListFragment extends Fragment {
             adapter.notifyDataSetChanged();
         }
     }
-
 }

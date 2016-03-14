@@ -35,4 +35,6 @@
         <item quantity="few">%d miesiące</item>
         <item quantity="other">%d miesięcy</item>
     </plurals>
+    <string name="fav_animals_list_activity">Ulubione</string>
+    <string name="animals_list_activity">Dostepne zwierzęta</string>
 </resources>
