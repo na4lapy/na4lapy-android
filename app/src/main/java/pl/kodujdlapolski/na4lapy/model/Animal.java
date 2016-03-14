@@ -210,6 +210,11 @@ public class Animal extends BaseEntity implements Serializable {
         this.favourite = favourite;
     }
 
+    // todo add match lvl
+    public float getMatchLevel() {
+        return 1.5f;
+    }
+
     @Override
     public String toString() {
         return "Animal{" +

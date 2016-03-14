@@ -69,7 +69,7 @@ public class FakeApiServiceImpl implements ApiService {
         animal.setShelter(shelter);
         animal.setAdmittanceDate(1457214300000L - (long) (random.nextFloat() * 63072000000L));
         animal.setName("Animal_" + random.nextInt(9999));
-        animal.setBirthDate(random.nextLong());
+        animal.setBirthDate(1457214300000L - (long) (random.nextFloat() * 63072000000L));
         animal.setSpecies(Species.values()[random.nextInt(Species.values().length)]);
         animal.setGender(Gender.values()[random.nextInt(Gender.values().length)]);
         animal.setSize(Size.values()[random.nextInt(Gender.values().length)]);

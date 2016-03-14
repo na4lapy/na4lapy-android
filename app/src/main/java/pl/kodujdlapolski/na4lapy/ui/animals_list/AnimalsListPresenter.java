@@ -116,11 +116,12 @@ public class AnimalsListPresenter implements SynchronizationReceiver.Synchroniza
     public static ArrayList<Animal> getAnimalsByType(ArrayList<Animal> animals, PageTypes type) {
         ArrayList<Animal> result = new ArrayList<>();
         if (type.specie == null) {
-            return animals;
-        }
-        for (Animal a : animals) {
-            if (a.getSpecies().equals(type.specie)) {
-                result.add(a);
+            result.addAll(animals);
+        } else {
+            for (Animal a : animals) {
+                if (a.getSpecies().equals(type.specie)) {
+                    result.add(a);
+                }
             }
         }
         return result;

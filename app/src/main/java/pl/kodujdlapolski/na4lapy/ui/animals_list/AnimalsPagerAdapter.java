@@ -4,8 +4,11 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import pl.kodujdlapolski.na4lapy.model.Animal;
 import pl.kodujdlapolski.na4lapy.ui.animals_list.section.AnimalsListFragment;
@@ -17,6 +20,7 @@ public class AnimalsPagerAdapter extends FragmentPagerAdapter {
 
     private Context ctx;
     private ArrayList<Animal> animals;
+    private HashMap<AnimalsListPresenter.PageTypes, AnimalsListFragment> fragments = new HashMap<>();
 
     public AnimalsPagerAdapter(Context ctx, ArrayList<Animal> animals, FragmentManager fm) {
         super(fm);
@@ -26,8 +30,9 @@ public class AnimalsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
+        AnimalsListPresenter.PageTypes type = AnimalsListPresenter.PageTypes.values()[position];
         return AnimalsListFragment.newInstance(AnimalsListPresenter.getAnimalsByType(animals,
-                AnimalsListPresenter.PageTypes.values()[position]));
+                type), type);
     }
 
     @Override
@@ -42,11 +47,17 @@ public class AnimalsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public void notifyDataSetChanged() {
-        // todo wywala sie
-        for (int i = 0; i < getCount(); i++) {
-            ((AnimalsListFragment) getItem(i)).updateList(AnimalsListPresenter.getAnimalsByType(animals,
-                    AnimalsListPresenter.PageTypes.values()[i]));
+        for (Map.Entry<AnimalsListPresenter.PageTypes, AnimalsListFragment> set : fragments.entrySet()) {
+            set.getValue().updateList(AnimalsListPresenter.getAnimalsByType(animals, set.getKey()));
         }
         super.notifyDataSetChanged();
+    }
+
+    @Override
+    public Object instantiateItem(ViewGroup container, int position) {
+        Fragment createdFragment = (Fragment) super.instantiateItem(container, position);
+        // save the appropriate reference depending on position
+        fragments.put(AnimalsListPresenter.PageTypes.values()[position], (AnimalsListFragment) createdFragment);
+        return createdFragment;
     }
 }

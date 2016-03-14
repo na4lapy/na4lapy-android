@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:layout_height="?android:attr/listPreferredItemHeightLarge"
     android:background="?android:attr/selectableItemBackground"
     android:clickable="true"
     android:gravity="center_vertical"
@@ -11,8 +11,8 @@
     android:paddingRight="@dimen/activity_vertical_margin">
 
     <ImageView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:background="@color/colorAccent" />
 
     <LinearLayout
@@ -24,11 +24,11 @@
 
         <TextView
             android:id="@+id/view_holder_animal_name"
-            style="@style/TextAppearance.AppCompat.Subhead"
+            style="@style/TextAppearance.AppCompat.Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:singleLine="true"
-            tools:text="Borys" />
+            tools:text="Reksio" />
 
         <TextView
             android:id="@+id/view_holder_animal_age"
@@ -39,39 +39,29 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1" />
 
-    <LinearLayout
+
+    <RatingBar
+        android:id="@+id/match_level_rating_bar"
+        style="?android:attr/ratingBarStyleSmall"
+        android:rating="2.0"
+        android:theme="@style/RatingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:layout_marginEnd="8dp"
 
-        android:gravity="center">
+        android:numStars="3"
+        android:stepSize="0.5" />
 
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginRight="@dimen/activity_vertical_margin"
-            android:background="@color/colorAccent" />
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginRight="@dimen/activity_vertical_margin"
-            android:background="@color/colorAccent" />
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginRight="@dimen/activity_vertical_margin"
-            android:background="@color/colorAccent" />
-    </LinearLayout>
     <ImageButton
+        android:id="@+id/add_to_fav_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?android:attr/selectableItemBackground"
-
-        android:src="@android:drawable/btn_star"/>
+        android:src="@android:drawable/btn_star_big_on" />
 
 </LinearLayout>
