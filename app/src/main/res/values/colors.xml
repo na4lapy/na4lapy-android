@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#009688</color>
-    <color name="colorPrimaryDark">#00796B</color>
-    <color name="colorAccent">#FF5722</color>
-    <color name="colorPrimaryLight">#B2DFDB</color>
-    <color name="divider">@android:color/darker_gray</color>
+<color name="colorPrimary">#0097A7</color>
+<color name="colorPrimaryDark">#455A65</color>
+<color name="colorAccent">#FF5252</color>
+<color name="colorPrimaryLight">#80CBC4</color>
+<color name="divider">#EEEEEE</color>
 </resources>
+
+<!--> pierwsza paleta barw <-->
+<!--resources>
+<color name="colorPrimary">#009688</color>
+<color name="colorPrimaryDark">#00796B</color>
+<color name="colorAccent">#FF5722</color>
+<color name="colorPrimaryLight">#B2DFDB</color>
+<color name="divider">@android:color/darker_gray</color>
+</resources-->
