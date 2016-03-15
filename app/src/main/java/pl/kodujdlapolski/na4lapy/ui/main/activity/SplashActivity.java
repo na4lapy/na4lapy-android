@@ -35,8 +35,17 @@ public class SplashActivity extends AppCompatActivity {
     public void listTestAction(View view) {
         Intent i = new Intent(SplashActivity.this, AnimalsListActivity.class);
         i.putExtra(AnimalsListActivity.EXTRA_IS_FAV_LIST, true);
+        i.putExtra(AnimalsListActivity.EXTRA_IS_SINGLE_ELEMENT_BROWSE, false);
         startActivity(i);
     }
+
+    public void browseTestAction(View view) {
+        Intent i = new Intent(SplashActivity.this, AnimalsListActivity.class);
+        i.putExtra(AnimalsListActivity.EXTRA_IS_FAV_LIST, false);
+        i.putExtra(AnimalsListActivity.EXTRA_IS_SINGLE_ELEMENT_BROWSE, true);
+        startActivity(i);
+    }
+
 
     public void aboutShelterAction(View view) {
         Intent i = new Intent(SplashActivity.this, AboutShelterActivity.class);
