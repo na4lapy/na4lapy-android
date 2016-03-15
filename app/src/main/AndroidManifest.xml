@@ -25,6 +25,19 @@
             android:label="@string/lookupPreferences"
             android:theme="@style/AppTheme">
         </activity>
+        <activity
+            android:name=".ui.settings.SettingsActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.settings.WebViewActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.about_shelter.AboutShelterActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.animals_list.AnimalsListActivity"
+            android:label="@string/title_activity_animals_list"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

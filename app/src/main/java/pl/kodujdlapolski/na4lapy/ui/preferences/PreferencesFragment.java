@@ -72,9 +72,7 @@ public class PreferencesFragment extends Fragment implements PreferencesContract
         this.inflater = inflater;
         ButterKnife.bind(this, view);
         presenter = new PreferencesPresenter(getActivity(), this);
-
         context = getContext();
-
         return view;
     }
 
@@ -87,8 +85,6 @@ public class PreferencesFragment extends Fragment implements PreferencesContract
     void displayMaxAgePickerDialog() {
         displayAgePickerDialog(false);
     }
-
-
 
     private void displayAgePickerDialog(final boolean isMinAgePicker) {
 
@@ -105,7 +101,6 @@ public class PreferencesFragment extends Fragment implements PreferencesContract
         else {
             ageNumberPicker.setValue(Integer.valueOf(ageMaxPreference.getText().toString()));
         }
-
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
         dialogBuilder.setView(v1);
@@ -132,7 +127,6 @@ public class PreferencesFragment extends Fragment implements PreferencesContract
 
     //    agePickerDialog.getWindow().setBackgroundDrawableResource(R.color.colorPrimaryLight);     //sets color for whole dialog window
     }
-
 
     @Override
     public void showUserPreferences(UserPreferences userPreferences) {

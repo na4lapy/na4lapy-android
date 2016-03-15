@@ -1,4 +1,17 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="pl">
+    <string name="privacy_policy_text">Polityka Prywatności</string>
+    <string name="regulations_text">Regulamin</string>
+    <string name="open_source_libs_text">Licencje typu open source</string>
+    <string name="about_text"> Aplikacja mobilna dla Gdańskiego schroniska Promyk to rozwiązanie pozwalające na przeglądanie zdjęć i opisów zwierząt znajdujących się obecnie pod ich opieką.\n\nUżytkownik może w prosty sposób dodawać psy i koty do listy ulubionych oraz przekazywać datki na zwierzęta w formie elektronicznych mikropłatności.</string>
+    <string name="version">Wersja: %1$s</string>
+    <string name="settings_page_title">Ustawienia</string>
+    <string name="about_shelter_page_title">O schronisku - %1$s </string>
+    <string name="shelter_address_label">Adres:</string>
+    <string name="shelter_email_label">Adres e-mail:</string>
+    <string name="shelter_phone_label">Numer telefonu:</string>
+    <string name="shelter_www_label">Strona WWW:</string>
+    <string name="shelter_account_label">Numer konta bankowego:</string>
+    <string name="shelter_address_template">%1$s %2$s\n%3$s %4$s</string>
     <string name="app_name">Na 4 Łapy</string>
     <string name="browsing">Przeglądaj</string>
     <string name="favouritiesList">Lista ulubionych</string>
@@ -6,10 +19,8 @@
     <string name="accountSettings">Ustawienia</string>
     <string name="aboutShelter">O schronisku</string>
     <string name="aboutApplication">O aplikacji</string>
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
     <string name="whatKindOfAnimalDoYouSeek">Jakiego zwierzaka szukasz?</string>
     <string name="type">Typ</string>
     <string name="sex">Płeć</string>
@@ -21,5 +32,26 @@
     <string name="save">Zapisz</string>
     <string name="choose">Wybierz</string>
     <string name="cancel">Anuluj</string>
-    
+    <string name="share">podziel się</string>
+    <string name="error_data_cannot_be_loaded">Nie można załadować danych</string>
+    <string name="try_again">Spróbuj ponownie</string>
+    <string name="content_desc_error_image">Obraz informujący o błędzie</string>
+    <string name="login">Zaloguj się</string>
+    <string name="logout">Wyloguj się</string>
+    <string name="title_activity_animals_list">AnimalsListActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="list_section_all">Wszystkie</string>
+    <string name="list_section_dogs">Psy</string>
+    <string name="list_section_cats">Koty</string>
+    <string name="list_section_other">Inne</string>
+    <plurals name="animal_age_years">
+        <item quantity="one">%d rok</item>
+        <item quantity="few">%d lata</item>
+        <item quantity="other">%d lat</item>
+    </plurals>
+    <plurals name="animal_age_months">
+        <item quantity="one">%d miesiąc</item>
+        <item quantity="few">%d miesiące</item>
+        <item quantity="other">%d miesięcy</item>
+    </plurals>
 </resources>

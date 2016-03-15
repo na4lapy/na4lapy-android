@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:openDrawer="start"
-    tools:context=".ui.main.activity.SplashActivity">
+    tools:context=".ui.preferences.PreferencesActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,13 +25,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
-                app:navigationIcon="@drawable/ic_dehaze_24dp"
                 android:theme="@style/AppTheme.AppBarOverlay"
+                app:navigationIcon="@drawable/ic_dehaze_24dp"
                 app:popupTheme="@style/AppTheme.PopupOverlay" />
 
         </android.support.design.widget.AppBarLayout>
 
-        <!-- page content here -->
+        <FrameLayout
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 

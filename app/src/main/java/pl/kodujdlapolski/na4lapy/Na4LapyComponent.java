@@ -3,12 +3,15 @@ package pl.kodujdlapolski.na4lapy;
 import javax.inject.Singleton;
 
 import dagger.Component;
+import pl.kodujdlapolski.na4lapy.presenter.AboutShelterPresenter;
 import pl.kodujdlapolski.na4lapy.api.ApiModule;
 import pl.kodujdlapolski.na4lapy.preferences.PreferencesModule;
 import pl.kodujdlapolski.na4lapy.presenter.PreferencesPresenter;
 import pl.kodujdlapolski.na4lapy.repository.RepositoryModule;
 import pl.kodujdlapolski.na4lapy.repository.database.DatabaseModule;
 import pl.kodujdlapolski.na4lapy.sync.SynchronizationModule;
+import pl.kodujdlapolski.na4lapy.ui.animals_list.AnimalsListPresenter;
+import pl.kodujdlapolski.na4lapy.ui.main.activity.SplashActivity;
 import pl.kodujdlapolski.na4lapy.user.UserModule;
 
 @Singleton
@@ -23,5 +26,9 @@ import pl.kodujdlapolski.na4lapy.user.UserModule;
 })
 public interface Na4LapyComponent {
 
-        void inject(PreferencesPresenter presenter);
+    void inject(AboutShelterPresenter presenter);
+    void inject(SplashActivity mainActivity);
+    void inject(AnimalsListPresenter animalsListPresenter);
+    void inject(PreferencesPresenter presenter);
+
 }
