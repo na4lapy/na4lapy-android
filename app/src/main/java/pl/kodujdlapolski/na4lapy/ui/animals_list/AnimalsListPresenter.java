@@ -1,6 +1,7 @@
 package pl.kodujdlapolski.na4lapy.ui.animals_list;
 
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.LocalBroadcastManager;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import pl.kodujdlapolski.na4lapy.sync.receiver.SynchronizationReceiver;
  * Created by Natalia on 2016-03-09.
  */
 public class AnimalsListPresenter implements SynchronizationReceiver.SynchronizationReceiverCallback {
+
     public enum PageTypes {
         ALL(R.string.list_section_all, null),
         DOGS(R.string.list_section_dogs, Species.DOG),
@@ -43,20 +45,31 @@ public class AnimalsListPresenter implements SynchronizationReceiver.Synchroniza
     private boolean isAfterSynchronization = false;
     private List<Animal> animals;
     private boolean isFavList;
+    private boolean isSingleBrowse;
+    private FragmentPagerAdapter adapter;
 
     RepositoryService.LoadAnimalsCallback loadAnimalsCallback = new RepositoryService.LoadAnimalsCallback() {
         @Override
         public void onAnimalsLoaded(@Nullable List<Animal> animals) {
-            AnimalsListPresenter.this.animals = animals;
-            onAnimalsAvailable();
+            onAnimalsAvailable(animals);
         }
     };
 
-    public AnimalsListPresenter(AnimalsListActivity animalsListActivity, boolean isFavList) {
+    public AnimalsListPresenter(AnimalsListActivity animalsListActivity, boolean isFavList, boolean isSingleBrowse) {
         this.animalsListActivity = animalsListActivity;
         this.isFavList = isFavList;
+        this.isSingleBrowse = isSingleBrowse;
         ((Na4LapyApp) animalsListActivity.getApplication()).getComponent().inject(this);
         synchronizationReceiver = new SynchronizationReceiver(this);
+
+        animals = new ArrayList<>();
+        if (isSingleBrowse) {
+            animalsListActivity.removeTabs();
+        }
+        adapter = isSingleBrowse ?
+                new AnimalsSingleBrowsePagerAdapter(animals, animalsListActivity.getSupportFragmentManager())
+                : new AnimalsPagerAdapter(animalsListActivity, animals, animalsListActivity.getSupportFragmentManager());
+
         startDownloadingData();
     }
 
@@ -77,7 +90,7 @@ public class AnimalsListPresenter implements SynchronizationReceiver.Synchroniza
 
     @Override
     public void onSynchronizationFail() {
-        if (animals == null && animalsListActivity.isAlive()) {
+        if (animals.isEmpty() && animalsListActivity.isAlive()) {
             animalsListActivity.showError();
         }
     }
@@ -91,9 +104,10 @@ public class AnimalsListPresenter implements SynchronizationReceiver.Synchroniza
         LocalBroadcastManager.getInstance(animalsListActivity).unregisterReceiver(synchronizationReceiver);
     }
 
-    private void onAnimalsAvailable() {
-        if (animals != null) {
-            animalsListActivity.updateAnimals(animals);
+    private void onAnimalsAvailable(List<Animal> animalsFromServer) {
+        if (animalsFromServer != null) {
+            animals.addAll(animalsFromServer);
+            adapter.notifyDataSetChanged();
             animalsListActivity.showProgressHideContent(false);
         } else {
             if (isAfterSynchronization) {
@@ -108,12 +122,15 @@ public class AnimalsListPresenter implements SynchronizationReceiver.Synchroniza
         if (isFavList) {
             repositoryService.getAnimalsByFavourite(loadAnimalsCallback);
         } else {
-            // todo get all animals
-//            repositoryService.getAnimalsByShelterId(loadAnimalsCallback);
+            repositoryService.getAnimals(loadAnimalsCallback);
         }
     }
 
-    public static ArrayList<Animal> getAnimalsByType(ArrayList<Animal> animals, PageTypes type) {
+    public FragmentPagerAdapter getAdapter() {
+        return adapter;
+    }
+
+    public static List<Animal> getAnimalsByType(List<Animal> animals, PageTypes type) {
         ArrayList<Animal> result = new ArrayList<>();
         if (type.specie == null) {
             result.addAll(animals);

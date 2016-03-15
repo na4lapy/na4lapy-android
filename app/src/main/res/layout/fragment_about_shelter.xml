@@ -11,36 +11,7 @@
         android:layout_centerInParent="true"
         android:visibility="gone" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:id="@+id/error_container"
-        android:visibility="gone"
-        tools:visibility="visible">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/content_desc_error_image"
-            tools:src="@android:drawable/alert_dark_frame" />
-
-        <TextView
-            style="@style/TextAppearance.AppCompat.Medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_horizontal_margin"
-            android:text="@string/error_data_cannot_be_loaded" />
-
-        <Button
-            style="?attr/borderlessButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/try_again_btn"
-            android:text="@string/try_again" />
-    </LinearLayout>
+    <include layout="@layout/error_template" />
 
     <ScrollView
         android:id="@+id/about_shelter_content"

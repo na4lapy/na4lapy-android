@@ -6,8 +6,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import pl.kodujdlapolski.na4lapy.model.Animal;
@@ -19,10 +19,10 @@ import pl.kodujdlapolski.na4lapy.ui.animals_list.section.AnimalsListFragment;
 public class AnimalsPagerAdapter extends FragmentPagerAdapter {
 
     private Context ctx;
-    private ArrayList<Animal> animals;
+    private List<Animal> animals;
     private HashMap<AnimalsListPresenter.PageTypes, AnimalsListFragment> fragments = new HashMap<>();
 
-    public AnimalsPagerAdapter(Context ctx, ArrayList<Animal> animals, FragmentManager fm) {
+    public AnimalsPagerAdapter(Context ctx, List<Animal> animals, FragmentManager fm) {
         super(fm);
         this.ctx = ctx;
         this.animals = animals;

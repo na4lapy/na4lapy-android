@@ -38,10 +38,13 @@ public class DrawerActivityHandler {
 
         if (id == R.id.browser && !(clazz.equals(SplashActivity.class))) {
             intent = new Intent(context, SplashActivity.class);
+            intent.putExtra(AnimalsListActivity.EXTRA_IS_FAV_LIST, false);
+            intent.putExtra(AnimalsListActivity.EXTRA_IS_SINGLE_ELEMENT_BROWSE, true);
         }
         else if (id == R.id.favourities && !(clazz.equals(AnimalsListActivity.class))) {
             intent = new Intent(context, AnimalsListActivity.class);
             intent.putExtra(AnimalsListActivity.EXTRA_IS_FAV_LIST, true);
+            intent.putExtra(AnimalsListActivity.EXTRA_IS_SINGLE_ELEMENT_BROWSE, false);
         }
         else if (id == R.id.preferences && !(clazz.equals(PreferencesActivity.class))) {
             intent = new Intent(context, PreferencesActivity.class);
@@ -51,6 +54,7 @@ public class DrawerActivityHandler {
             Shelter shelter = new Shelter();
             shelter.setId(1L);
             intent.putExtra(AboutShelterActivity.EXTRA_SHELTER_ID, 1l);
+
         }
         else if (id == R.id.settings && !(clazz.equals(SettingsActivity.class))) {
             intent = new Intent(context, SettingsActivity.class);

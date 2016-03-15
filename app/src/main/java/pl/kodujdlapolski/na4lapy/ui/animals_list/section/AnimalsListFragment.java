@@ -1,17 +1,15 @@
 package pl.kodujdlapolski.na4lapy.ui.animals_list.section;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.StateSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -28,18 +26,16 @@ public class AnimalsListFragment extends Fragment {
 
     @Bind(R.id.animals_recycle)
     RecyclerView recycler;
-        private RecyclerView.LayoutManager layoutManager;
+    private RecyclerView.LayoutManager layoutManager;
     private AnimalsRecyclerListAdapter adapter;
-
-    Handler handler;
 
     public AnimalsListFragment() {
     }
 
-    public static AnimalsListFragment newInstance(ArrayList<Animal> animals, AnimalsListPresenter.PageTypes type) {
+    public static AnimalsListFragment newInstance(List<Animal> animals, AnimalsListPresenter.PageTypes type) {
         AnimalsListFragment fragment = new AnimalsListFragment();
         Bundle args = new Bundle();
-        args.putSerializable(ARG_ANIMALS_LIST, animals);
+        args.putSerializable(ARG_ANIMALS_LIST, (ArrayList<Animal>) animals);
         fragment.setArguments(args);
         return fragment;
     }
@@ -69,7 +65,6 @@ public class AnimalsListFragment extends Fragment {
         recycler.setLayoutManager(layoutManager);
         adapter = new AnimalsRecyclerListAdapter(animals);
         recycler.setAdapter(adapter);
-
     }
 
     @Override
@@ -78,12 +73,11 @@ public class AnimalsListFragment extends Fragment {
         super.onSaveInstanceState(outState);
     }
 
-    public void updateList(final ArrayList<Animal> animalsByType) {
+    public void updateList(final List<Animal> animalsByType) {
         if (animals != null) {
             animals.clear();
             animals.addAll(animalsByType);
             adapter.notifyDataSetChanged();
         }
     }
-
 }

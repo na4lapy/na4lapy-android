@@ -16,10 +16,6 @@ public class PreferencesActivity extends AbstractDrawerActivity {
         FrameLayout drawerActivityContent = (FrameLayout)findViewById(R.id.content);
         View preferencesActivityView = getLayoutInflater().inflate(R.layout.activity_preferences, null);
         drawerActivityContent.addView(preferencesActivityView);
-
-   //     setContentView(R.layout.activity_preferences);
-    //    super.setDrawer();
-
     }
 
 }
