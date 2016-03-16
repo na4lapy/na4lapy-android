@@ -3,6 +3,7 @@ package pl.kodujdlapolski.na4lapy.ui.animals_list;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -13,8 +14,10 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import pl.kodujdlapolski.na4lapy.R;
+import pl.kodujdlapolski.na4lapy.ui.AbstractDrawerActivity;
+import pl.kodujdlapolski.na4lapy.ui.DrawerActivityHandler;
 
-public class AnimalsListActivity extends AppCompatActivity {
+public class AnimalsListActivity extends AbstractDrawerActivity {
 
     private boolean isFavList = false;
     private boolean isSingleBrowse = false;
@@ -41,10 +44,14 @@ public class AnimalsListActivity extends AppCompatActivity {
     public static final String EXTRA_IS_SINGLE_ELEMENT_BROWSE = "extraIsSingleElementBrowse";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onCreate(Bundle savedInstanceState) {
+        callSuperOnCreate(savedInstanceState);
         setContentView(R.layout.activity_animals_list);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        handler = new DrawerActivityHandler(this);
+        handler.setDrawer();
+
         ButterKnife.bind(this);
 
         isFavList = getIntent().getBooleanExtra(EXTRA_IS_FAV_LIST, false);
@@ -60,6 +67,7 @@ public class AnimalsListActivity extends AppCompatActivity {
         }
         animalsListPresenter = new AnimalsListPresenter(this, isFavList, isSingleBrowse);
     }
+
 
     @Override
     public void onPostCreate(Bundle savedInstanceState) {

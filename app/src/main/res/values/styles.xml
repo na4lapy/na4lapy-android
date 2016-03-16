@@ -9,8 +9,6 @@
     </style>
 
     <style name="AppTheme.WithActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -25,8 +23,8 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat"/>
 
     <style name="RatingBar" parent="Theme.AppCompat">
-        <item name="colorControlNormal">@color/divider</item>
-        <item name="colorControlActivated">@color/colorPrimaryDark</item>
+        <item name="colorControlNormal">@color/colorPrimaryLight</item>
+        <item name="colorControlActivated">@color/colorAccent</item>
     </style>
 
 </resources>

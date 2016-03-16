@@ -12,6 +12,8 @@ import android.view.MenuItem;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Shelter;
 import pl.kodujdlapolski.na4lapy.ui.about_shelter.AboutShelterActivity;
+import pl.kodujdlapolski.na4lapy.ui.animals_list.AnimalsBrowseActivity;
+import pl.kodujdlapolski.na4lapy.ui.animals_list.AnimalsFavListActivity;
 import pl.kodujdlapolski.na4lapy.ui.animals_list.AnimalsListActivity;
 import pl.kodujdlapolski.na4lapy.ui.main.activity.SplashActivity;
 import pl.kodujdlapolski.na4lapy.ui.preferences.PreferencesActivity;
@@ -36,15 +38,15 @@ public class DrawerActivityHandler {
         int id = item.getItemId();
         Class<?> clazz = activity.getClass();
 
-        if (id == R.id.browser && !(clazz.equals(SplashActivity.class))) {
-            intent = new Intent(context, SplashActivity.class);
-            intent.putExtra(AnimalsListActivity.EXTRA_IS_FAV_LIST, false);
-            intent.putExtra(AnimalsListActivity.EXTRA_IS_SINGLE_ELEMENT_BROWSE, true);
+        if (id == R.id.browser && !(clazz.equals(AnimalsBrowseActivity.class))) {
+            intent = new Intent(context, AnimalsBrowseActivity.class);
+            intent.putExtra(AnimalsBrowseActivity.EXTRA_IS_FAV_LIST, false);
+            intent.putExtra(AnimalsBrowseActivity.EXTRA_IS_SINGLE_ELEMENT_BROWSE, true);
         }
-        else if (id == R.id.favourities && !(clazz.equals(AnimalsListActivity.class))) {
-            intent = new Intent(context, AnimalsListActivity.class);
-            intent.putExtra(AnimalsListActivity.EXTRA_IS_FAV_LIST, true);
-            intent.putExtra(AnimalsListActivity.EXTRA_IS_SINGLE_ELEMENT_BROWSE, false);
+        else if (id == R.id.favourities && !(clazz.equals(AnimalsFavListActivity.class))) {
+            intent = new Intent(context, AnimalsFavListActivity.class);
+            intent.putExtra(AnimalsFavListActivity.EXTRA_IS_FAV_LIST, true);
+            intent.putExtra(AnimalsFavListActivity.EXTRA_IS_SINGLE_ELEMENT_BROWSE, false);
         }
         else if (id == R.id.preferences && !(clazz.equals(PreferencesActivity.class))) {
             intent = new Intent(context, PreferencesActivity.class);
@@ -71,10 +73,10 @@ public class DrawerActivityHandler {
         if (id == R.id.action_settings) {
             return true;
         }
-        return activity.getParent().onOptionsItemSelected(item);
+        return false;
     }
 
-    protected void setDrawer() {
+    public void setDrawer() {
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         activity.setSupportActionBar(toolbar);
         if (activity.getSupportActionBar()!=null) {

@@ -17,7 +17,7 @@ public abstract class AbstractDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     protected DrawerLayout drawerLayout;
-    private DrawerActivityHandler handler;
+    protected DrawerActivityHandler handler;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,7 @@ public abstract class AbstractDrawerActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return handler.onOptionsItemSelected(item);
+        return handler.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -53,4 +53,7 @@ public abstract class AbstractDrawerActivity extends AppCompatActivity
         }
     }
 
+    public void callSuperOnCreate(Bundle saved) {
+        super.onCreate(saved);
+    }
 }

@@ -23,21 +23,28 @@
         <activity
             android:name=".ui.preferences.PreferencesActivity"
             android:label="@string/lookupPreferences"
-            android:theme="@style/AppTheme">
-        </activity>
+            android:theme="@style/AppTheme"/>
         <activity
             android:name=".ui.settings.SettingsActivity"
-            android:launchMode="singleTop" />
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme.WithActionBar" />
         <activity
             android:name=".ui.settings.WebViewActivity"
-            android:launchMode="singleTop" />
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme.WithActionBar" />
         <activity
             android:name=".ui.about_shelter.AboutShelterActivity"
-            android:launchMode="singleTop" />
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme.WithActionBar" />
         <activity
             android:name=".ui.animals_list.AnimalsListActivity"
-            android:label="@string/title_activity_animals_list"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.animals_list.AnimalsBrowseActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.animals_list.AnimalsFavListActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
