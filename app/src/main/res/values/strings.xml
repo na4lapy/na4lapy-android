@@ -32,6 +32,7 @@
     <string name="save">Zapisz</string>
     <string name="choose">Wybierz</string>
     <string name="cancel">Anuluj</string>
+    <string name="save_preferences_message">Ustawienia zostały zapisane</string>
     <string name="share">podziel się</string>
     <string name="error_data_cannot_be_loaded">Nie można załadować danych</string>
     <string name="try_again">Spróbuj ponownie</string>

@@ -31,6 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|left"
+                style="@style/TextAppearance.AppCompat.Medium"
                 android:text="@string/type" />
 
             <LinearLayout
@@ -43,36 +44,31 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:paddingLeft="@dimen/activity_horizontal_margin"
-                    android:paddingRight="@dimen/activity_horizontal_margin"
                     android:background="@android:color/transparent"
-                    android:src="@drawable/type_dog"
+                    android:src="@drawable/ic_dog"
                     android:id="@+id/type_dog"/>
 
                 <pl.kodujdlapolski.na4lapy.ui.ToggleImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:paddingLeft="@dimen/activity_horizontal_margin"
-                    android:paddingRight="@dimen/activity_horizontal_margin"
                     android:background="@android:color/transparent"
-                    android:src="@drawable/type_cat"
+                    android:src="@drawable/ic_cat"
                     android:id="@+id/type_cat"/>
 
                 <pl.kodujdlapolski.na4lapy.ui.ToggleImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:paddingLeft="@dimen/activity_horizontal_margin"
-                    android:paddingRight="@dimen/activity_horizontal_margin"
                     android:background="@android:color/transparent"
-                    android:src="@drawable/type_other"
+                    android:src="@drawable/ic_other"
                     android:id="@+id/type_other"/>
             </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                style="@style/TextAppearance.AppCompat.Medium"
                 android:text="@string/sex"
                 android:layout_gravity="center_vertical|left"/>
 
@@ -85,20 +81,16 @@
                 <pl.kodujdlapolski.na4lapy.ui.ToggleImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="@dimen/activity_horizontal_margin"
-                    android:paddingRight="@dimen/activity_horizontal_margin"
                     android:background="@android:color/transparent"
-                    android:src="@drawable/sex_woman"
+                    android:src="@drawable/ic_woman"
                     android:layout_gravity="center_vertical"
                     android:id="@+id/gender_woman"/>
 
                 <pl.kodujdlapolski.na4lapy.ui.ToggleImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="@dimen/activity_horizontal_margin"
-                    android:paddingRight="@dimen/activity_horizontal_margin"
                     android:background="@android:color/transparent"
-                    android:src="@drawable/sex_man"
+                    android:src="@drawable/ic_man"
                     android:layout_gravity="center_vertical"
                     android:id="@+id/gender_man"/>
 
@@ -107,6 +99,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                style="@style/TextAppearance.AppCompat.Medium"
                 android:text="@string/age"
                 android:layout_gravity="center_vertical|left"/>
 
@@ -154,6 +147,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|left"
+                style="@style/TextAppearance.AppCompat.Medium"
                 android:text="@string/size" />
 
             <LinearLayout
@@ -166,30 +160,24 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:paddingLeft="@dimen/activity_horizontal_margin"
-                    android:paddingRight="@dimen/activity_horizontal_margin"
                     android:background="@android:color/transparent"
-                    android:src="@drawable/size_small"
+                    android:src="@drawable/ic_size_small"
                     android:id="@+id/size_small"/>
 
                 <pl.kodujdlapolski.na4lapy.ui.ToggleImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:paddingLeft="@dimen/activity_horizontal_margin"
-                    android:paddingRight="@dimen/activity_horizontal_margin"
                     android:background="@android:color/transparent"
-                    android:src="@drawable/size_medium"
+                    android:src="@drawable/ic_size_medium"
                     android:id="@+id/size_medium"/>
 
                 <pl.kodujdlapolski.na4lapy.ui.ToggleImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:paddingLeft="@dimen/activity_horizontal_margin"
-                    android:paddingRight="@dimen/activity_horizontal_margin"
                     android:background="@android:color/transparent"
-                    android:src="@drawable/size_large"
+                    android:src="@drawable/ic_size_large"
                     android:id="@+id/size_large"/>
 
             </LinearLayout>
@@ -198,6 +186,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|left"
+                style="@style/TextAppearance.AppCompat.Medium"
                 android:text="@string/activity" />
 
             <LinearLayout
@@ -210,20 +199,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:paddingLeft="@dimen/activity_horizontal_margin"
-                    android:paddingRight="@dimen/activity_horizontal_margin"
                     android:background="@android:color/transparent"
-                    android:src="@drawable/activity_low"
+                    android:src="@drawable/ic_activity_low"
                     android:id="@+id/activity_low"/>
 
                 <pl.kodujdlapolski.na4lapy.ui.ToggleImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:paddingLeft="@dimen/activity_horizontal_margin"
-                    android:paddingRight="@dimen/activity_horizontal_margin"
                     android:background="@android:color/transparent"
-                    android:src="@drawable/activity_high"
+                    android:src="@drawable/ic_activity_high"
                     android:id="@+id/activity_high"/>
 
             </LinearLayout>

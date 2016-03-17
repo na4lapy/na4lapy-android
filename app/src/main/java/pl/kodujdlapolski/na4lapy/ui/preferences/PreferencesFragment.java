@@ -73,6 +73,7 @@ public class PreferencesFragment extends Fragment implements PreferencesContract
         ButterKnife.bind(this, view);
         presenter = new PreferencesPresenter(getActivity(), this);
         context = getContext();
+
         return view;
     }
 
@@ -163,7 +164,7 @@ public class PreferencesFragment extends Fragment implements PreferencesContract
         this.userPreferences.setActivityHigh(activityHighPreference.isChecked());
 
         presenter.savePreferences(userPreferences);
-        Toast.makeText(context, "Ustawienia zostały zapisane", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, R.string.save_preferences_message, Toast.LENGTH_SHORT).show();
     }
 
 }
