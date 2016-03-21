@@ -119,6 +119,25 @@ public class RepositoryServiceImpl implements RepositoryService {
     }
 
     @Override
+    public void setFavourite(@NonNull Long id, final boolean favourite) {
+        checkNotNull(id, "id cannot be null");
+
+        new AsyncTask<Long, Void, Integer>() {
+            @Override
+            protected Integer doInBackground(Long... params) {
+                try {
+                    Animal animal = mDatabaseRepository.findOneById(params[0], Animal.class);
+                    animal.setFavourite(favourite);
+                    return mDatabaseRepository.save(animal);
+                } catch (SQLException e) {
+                    Log.w(getClass().getSimpleName(), e);
+                }
+                return null;
+            }
+        }.execute(id);
+    }
+
+    @Override
     public void getShelter(@NonNull Long id, @NonNull final GetShelterCallback callback) {
         checkNotNull(id, "id cannot be null");
         checkNotNull(callback, "callback cannot be null");
