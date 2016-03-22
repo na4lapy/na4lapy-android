@@ -1,10 +1,12 @@
 package pl.kodujdlapolski.na4lapy.ui.animals_list.section;
 
+import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -16,11 +18,13 @@ import butterknife.ButterKnife;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Animal;
 import pl.kodujdlapolski.na4lapy.model.AnimalUtils;
+import pl.kodujdlapolski.na4lapy.model.type.ActivityAnimal;
+import pl.kodujdlapolski.na4lapy.model.type.Gender;
 
 /**
  * Created by Natalia on 2016-02-27.
  */
-public class AnimalViewHolder extends RecyclerView.ViewHolder {
+public abstract class AnimalViewHolder extends RecyclerView.ViewHolder {
 
     String[] picturesSample = new String[]{"http://schroniskopromyk.pl/wp-content/uploads/2016/03/Bodek-1-150x150.jpg",
             "http://schroniskopromyk.pl/wp-content/uploads/2016/03/Mundi-1-150x150.jpg",
@@ -32,12 +36,10 @@ public class AnimalViewHolder extends RecyclerView.ViewHolder {
     TextView name;
     @Bind(R.id.view_holder_animal_age)
     TextView age;
-    @Bind(R.id.add_to_fav_btn)
-    ImageButton addToFavBtn;
-    @Bind(R.id.match_level_rating_bar)
-    RatingBar matchLevelRatingBar;
+    @Bind(R.id.matching_lvl_image)
+    ImageView matchLevelImage;
     @Bind(R.id.profile_pic_on_list)
-    ImageView profilePic;
+    ImageButton profilePic;
 
     public AnimalViewHolder(View itemView) {
         super(itemView);
@@ -45,25 +47,34 @@ public class AnimalViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void init(Animal animal) {
-        //  Photo pic = animal.getPhotos().iterator().next(); // todo remove comment when pictures are available
+//          Photo pic = animal.getPhotos().iterator().next(); // todo remove comment when pictures are available
         Picasso.with(itemView.getContext())
                 .load(picturesSample[new Random().nextInt(picturesSample.length)])
                 .into(profilePic);
 
         name.setText(animal.getName());
         age.setText(AnimalUtils.getAnimalAgeFormatted(itemView.getContext(), animal));
-        addToFavBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // todo on animal remove
-            }
-        });
-        matchLevelRatingBar.setRating(animal.getMatchLevel());
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // todo on animal click
-            }
-        });
+
+
+        switch (animal.getMatchLevel()) {
+            case 0:
+                matchLevelImage.setImageResource(R.drawable.vector_drawable_procent_0);
+                break;
+            case 1:
+                matchLevelImage.setImageResource(R.drawable.vector_drawable_procent_20);
+                break;
+            case 2:
+                matchLevelImage.setImageResource(R.drawable.vector_drawable_procent_40);
+                break;
+            case 3:
+                matchLevelImage.setImageResource(R.drawable.vector_drawable_procent_60);
+                break;
+            case 4:
+                matchLevelImage.setImageResource(R.drawable.vector_drawable_procent_80);
+                break;
+            case 5:
+                matchLevelImage.setImageResource(R.drawable.vector_drawable_procent_100);
+                break;
+        }
     }
 }

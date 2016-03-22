@@ -45,7 +45,7 @@ public class SingleAnimalBrowseFragment extends Fragment {
         if (animal == null && savedInstanceState != null && savedInstanceState.getSerializable(ARG_ANIMAL) instanceof Animal) {
             animal = (Animal) savedInstanceState.getSerializable(ARG_ANIMAL);
         }
-        AnimalViewHolder vh = new AnimalViewHolder(getView());
+        AnimalSingleBrowseViewHolder vh = new AnimalSingleBrowseViewHolder(getView());
         vh.init(animal);
     }
 

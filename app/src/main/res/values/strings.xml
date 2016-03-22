@@ -45,16 +45,8 @@
     <string name="list_section_dogs">Psy</string>
     <string name="list_section_cats">Koty</string>
     <string name="list_section_other">Inne</string>
-    <plurals name="animal_age_years">
-        <item quantity="one">%d rok</item>
-        <item quantity="few">%d lata</item>
-        <item quantity="other">%d lat</item>
-    </plurals>
-    <plurals name="animal_age_months">
-        <item quantity="one">%d miesiąc</item>
-        <item quantity="few">%d miesiące</item>
-        <item quantity="other">%d miesięcy</item>
-    </plurals>
+    <string name="months">, %1$sm</string>
+    <string name="years">, %1$sl</string>
     <string name="fav_animals_list_activity">Ulubione</string>
     <string name="animals_list_activity">Dostepne zwierzęta</string>
 </resources>

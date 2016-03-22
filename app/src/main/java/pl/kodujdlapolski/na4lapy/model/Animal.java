@@ -7,6 +7,7 @@ import com.j256.ormlite.table.DatabaseTable;
 
 import java.util.Collection;
 import java.io.Serializable;
+import java.util.Random;
 
 import pl.kodujdlapolski.na4lapy.model.type.ActivityAnimal;
 import pl.kodujdlapolski.na4lapy.model.type.Attitude;
@@ -211,8 +212,9 @@ public class Animal extends BaseEntity implements Serializable {
     }
 
     // todo add match lvl
-    public float getMatchLevel() {
-        return 1.5f;
+    public int getMatchLevel() {
+       Random random = new Random();
+       return  random.nextInt(6);
     }
 
     @Override

@@ -12,7 +12,7 @@ import pl.kodujdlapolski.na4lapy.model.Animal;
 /**
  * Created by Natalia on 2016-02-27.
  */
-public class AnimalsRecyclerListAdapter extends RecyclerView.Adapter<AnimalViewHolder> {
+public class AnimalsRecyclerListAdapter extends RecyclerView.Adapter<AnimalListViewHolder> {
     private ArrayList<Animal> animals;
 
     public AnimalsRecyclerListAdapter(ArrayList<Animal> animals) {
@@ -20,14 +20,14 @@ public class AnimalsRecyclerListAdapter extends RecyclerView.Adapter<AnimalViewH
     }
 
     @Override
-    public AnimalViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new AnimalViewHolder(
+    public AnimalListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new AnimalListViewHolder(
                 LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.view_holder_animal_on_recycler, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(AnimalViewHolder holder, int position) {
+    public void onBindViewHolder(AnimalListViewHolder holder, int position) {
         holder.init(animals.get(position));
     }
 

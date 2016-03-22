@@ -23,10 +23,10 @@ public class AnimalUtils {
         int oneYearInDays = 365;
         if (days < oneYearInDays) {
             int months = days / 30;
-            return ctx.getResources().getQuantityString(R.plurals.animal_age_months, months, months);
+            return String.format(ctx.getString(R.string.months), months);
         } else {
             int years = days / oneYearInDays;
-            return ctx.getResources().getQuantityString(R.plurals.animal_age_years, years, years);
+            return String.format(ctx.getString(R.string.years), years);
         }
     }
 
