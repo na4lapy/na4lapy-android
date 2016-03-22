@@ -1,8 +1,6 @@
 package pl.kodujdlapolski.na4lapy.repository;
 
-import android.os.AsyncTask;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.google.common.collect.Maps;
 
@@ -15,6 +13,10 @@ import javax.inject.Inject;
 import pl.kodujdlapolski.na4lapy.model.Animal;
 import pl.kodujdlapolski.na4lapy.model.Shelter;
 import pl.kodujdlapolski.na4lapy.repository.database.DatabaseRepository;
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -28,157 +30,126 @@ public class RepositoryServiceImpl implements RepositoryService {
     }
 
     @Override
-    public void getAnimal(@NonNull Long id, @NonNull final GetAnimalCallback callback) {
+    public Observable<Animal> getAnimal(@NonNull Long id) {
         checkNotNull(id, "id cannot be null");
-        checkNotNull(callback, "callback cannot be null");
-
-        new AsyncTask<Long, Void, Animal>() {
+        return Observable.create(new Observable.OnSubscribe<Animal>() {
             @Override
-            protected Animal doInBackground(Long... params) {
+            public void call(Subscriber<? super Animal> subscriber) {
                 try {
-                    return mDatabaseRepository.findOneById(params[0], Animal.class);
+                    Animal animal = mDatabaseRepository.findOneById(id, Animal.class);
+                    subscriber.onNext(animal);
+                    subscriber.onCompleted();
                 } catch (SQLException e) {
-                    Log.w(getClass().getSimpleName(), e);
+                    subscriber.onError(e);
                 }
-                return null;
             }
-
-            @Override
-            protected void onPostExecute(Animal result) {
-                callback.onAnimalLoaded(result);
-            }
-        }.execute(id);
+        })
+        .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread());
     }
 
     @Override
-    public void getAnimals(@NonNull final LoadAnimalsCallback callback) {
-        checkNotNull(callback, "callback cannot be null");
-        new AsyncTask<Void, Void, List<Animal>>() {
+    public Observable<List<Animal>> getAnimals() {
+        return Observable.create(new Observable.OnSubscribe<List<Animal>>() {
             @Override
-            protected List<Animal> doInBackground(Void... params) {
+            public void call(Subscriber<? super List<Animal>> subscriber) {
                 try {
-                    return mDatabaseRepository.findAll(Animal.class);
+                    List<Animal> animals = mDatabaseRepository.findAll(Animal.class);
+                    subscriber.onNext(animals);
+                    subscriber.onCompleted();
                 } catch (SQLException e) {
-                    Log.w(getClass().getSimpleName(), e);
+                    subscriber.onError(e);
                 }
-                return null;
             }
-
-            @Override
-            protected void onPostExecute(List<Animal> result) {
-                callback.onAnimalsLoaded(result);
-            }
-        }.execute();
+        })
+        .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread());
     }
 
     @Override
-    public void getAnimalsByShelterId(@NonNull Long shelterId, @NonNull final LoadAnimalsCallback callback) {
+    public Observable<List<Animal>> getAnimalsByShelterId(@NonNull Long shelterId) {
         checkNotNull(shelterId, "shelterId cannot be null");
-        checkNotNull(callback, "callback cannot be null");
-
-        new AsyncTask<Long, Void, List<Animal>>() {
+        return Observable.create(new Observable.OnSubscribe<List<Animal>>() {
             @Override
-            protected List<Animal> doInBackground(Long... params) {
+            public void call(Subscriber<? super List<Animal>> subscriber) {
                 try {
-                    return mDatabaseRepository.findAllByForeignId(params[0], Animal.class, Shelter.class);
+                    List<Animal> animals = mDatabaseRepository.findAllByForeignId(shelterId, Animal.class, Shelter.class);
+                    subscriber.onNext(animals);
+                    subscriber.onCompleted();
                 } catch (SQLException e) {
-                    Log.w(getClass().getSimpleName(), e);
+                    subscriber.onError(e);
                 }
-                return null;
             }
-
-            @Override
-            protected void onPostExecute(List<Animal> result) {
-                callback.onAnimalsLoaded(result);
-            }
-        }.execute(shelterId);
+        });
     }
 
     @Override
-    public void getAnimalsByFavourite(@NonNull final LoadAnimalsCallback callback) {
-        checkNotNull(callback, "callback cannot be null");
-
-        new AsyncTask<Void, Void, List<Animal>>() {
+    public Observable<List<Animal>> getAnimalsByFavourite() {
+        return Observable.create(new Observable.OnSubscribe<List<Animal>>() {
             @Override
-            protected List<Animal> doInBackground(Void... params) {
-                Map<String, Object> favouriteField = Maps.newHashMap();
-                favouriteField.put(Animal.COLUMN_NAME_FAVOURITE, true);
+            public void call(Subscriber<? super List<Animal>> subscriber) {
                 try {
-                    return mDatabaseRepository.findAllByFields(favouriteField, Animal.class);
+                    Map<String, Object> favouriteField = Maps.newHashMap();
+                    favouriteField.put(Animal.COLUMN_NAME_FAVOURITE, true);
+                    List<Animal> animals = mDatabaseRepository.findAllByFields(favouriteField, Animal.class);
+                    subscriber.onNext(animals);
+                    subscriber.onCompleted();
                 } catch (SQLException e) {
-                    Log.w(getClass().getSimpleName(), e);
+                    subscriber.onError(e);
                 }
-                return null;
             }
-
-            @Override
-            protected void onPostExecute(List<Animal> result) {
-                callback.onAnimalsLoaded(result);
-            }
-        }.execute();
+        });
     }
 
     @Override
-    public void setFavourite(@NonNull Long id, final boolean favourite) {
+    public Observable<Boolean> setFavourite(@NonNull Long id, final boolean favourite) {
         checkNotNull(id, "id cannot be null");
-
-        new AsyncTask<Long, Void, Integer>() {
+        return Observable.create(new Observable.OnSubscribe<Boolean>() {
             @Override
-            protected Integer doInBackground(Long... params) {
+            public void call(Subscriber<? super Boolean> subscriber) {
                 try {
-                    Animal animal = mDatabaseRepository.findOneById(params[0], Animal.class);
+                    Animal animal = mDatabaseRepository.findOneById(id, Animal.class);
                     animal.setFavourite(favourite);
-                    return mDatabaseRepository.save(animal);
+                    mDatabaseRepository.save(animal);
+                    subscriber.onNext(true);
+                    subscriber.onCompleted();
                 } catch (SQLException e) {
-                    Log.w(getClass().getSimpleName(), e);
+                    subscriber.onError(e);
                 }
-                return null;
             }
-        }.execute(id);
+        });
     }
 
     @Override
-    public void getShelter(@NonNull Long id, @NonNull final GetShelterCallback callback) {
+    public Observable<Shelter> getShelter(@NonNull Long id) {
         checkNotNull(id, "id cannot be null");
-        checkNotNull(callback, "callback cannot be null");
-
-        new AsyncTask<Long, Void, Shelter>() {
+        return Observable.create(new Observable.OnSubscribe<Shelter>() {
             @Override
-            protected Shelter doInBackground(Long... params) {
+            public void call(Subscriber<? super Shelter> subscriber) {
                 try {
-                    return mDatabaseRepository.findOneById(params[0], Shelter.class);
+                    Shelter shelter = mDatabaseRepository.findOneById(id, Shelter.class);
+                    subscriber.onNext(shelter);
+                    subscriber.onCompleted();
                 } catch (SQLException e) {
-                    Log.w(getClass().getSimpleName(), e);
+                    subscriber.onError(e);
                 }
-                return null;
             }
-
-            @Override
-            protected void onPostExecute(Shelter result) {
-                callback.onShelterLoaded(result);
-            }
-        }.execute(id);
+        })
+        .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread());
     }
 
     @Override
-    public void getShelters(@NonNull final LoadSheltersCallback callback) {
-        checkNotNull(callback, "callback cannot be null");
-
-        new AsyncTask<Void, Void, List<Shelter>>() {
+    public Observable<List<Shelter>> getShelters() {
+        return Observable.create(new Observable.OnSubscribe<List<Shelter>>() {
             @Override
-            protected List<Shelter> doInBackground(Void... params) {
+            public void call(Subscriber<? super List<Shelter>> subscriber) {
                 try {
-                    return mDatabaseRepository.findAll(Shelter.class);
+                    List<Shelter> shelters = mDatabaseRepository.findAll(Shelter.class);
+                    subscriber.onNext(shelters);
+                    subscriber.onCompleted();
                 } catch (SQLException e) {
-                    Log.w(getClass().getSimpleName(), e);
+                    subscriber.onError(e);
                 }
-                return null;
             }
-
-            @Override
-            protected void onPostExecute(List<Shelter> result) {
-                callback.onSheltersLoaded(result);
-            }
-        }.execute();
+        })
+        .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread());
     }
 }

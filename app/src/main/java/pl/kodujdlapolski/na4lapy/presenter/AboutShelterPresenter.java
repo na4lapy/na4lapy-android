@@ -1,7 +1,6 @@
 package pl.kodujdlapolski.na4lapy.presenter;
 
 import android.content.Intent;
-import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
 
 import javax.inject.Inject;
@@ -97,12 +96,9 @@ public class AboutShelterPresenter implements SynchronizationReceiver.Synchroniz
     }
 
     private void getData() {
-        repositoryService.getShelter(shelterId, new RepositoryService.GetShelterCallback() {
-            @Override
-            public void onShelterLoaded(@Nullable Shelter shelterFromDb) {
-                shelter = shelterFromDb;
-                onShelterAvailable();
-            }
+        repositoryService.getShelter(shelterId).subscribe(s -> {
+            shelter = s;
+            onShelterAvailable();
         });
     }
 }

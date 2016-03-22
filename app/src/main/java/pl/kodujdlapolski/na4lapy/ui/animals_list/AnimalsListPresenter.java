@@ -1,6 +1,5 @@
 package pl.kodujdlapolski.na4lapy.ui.animals_list;
 
-import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.LocalBroadcastManager;
 
@@ -47,13 +46,6 @@ public class AnimalsListPresenter implements SynchronizationReceiver.Synchroniza
     private boolean isFavList;
     private boolean isSingleBrowse;
     private FragmentPagerAdapter adapter;
-
-    RepositoryService.LoadAnimalsCallback loadAnimalsCallback = new RepositoryService.LoadAnimalsCallback() {
-        @Override
-        public void onAnimalsLoaded(@Nullable List<Animal> animals) {
-            onAnimalsAvailable(animals);
-        }
-    };
 
     public AnimalsListPresenter(AnimalsListActivity animalsListActivity, boolean isFavList, boolean isSingleBrowse) {
         this.animalsListActivity = animalsListActivity;
@@ -120,9 +112,9 @@ public class AnimalsListPresenter implements SynchronizationReceiver.Synchroniza
 
     private void getData() {
         if (isFavList) {
-            repositoryService.getAnimalsByFavourite(loadAnimalsCallback);
+            repositoryService.getAnimalsByFavourite().subscribe(this::onAnimalsAvailable);
         } else {
-            repositoryService.getAnimals(loadAnimalsCallback);
+            repositoryService.getAnimals().subscribe(this::onAnimalsAvailable);
         }
     }
 
