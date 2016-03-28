@@ -53,4 +53,10 @@
     <string name="years">, %1$sl</string>
     <string name="fav_animals_list_activity">Ulubione</string>
     <string name="animals_list_activity">Dostepne zwierzęta</string>
+
+    <string name="content_desc_main_image">zdjęcie główne</string>
+    <string name="content_desc_matching_lvl">stopień dopasowania z preferencjami</string>
+    <string name="content_desc_animal_size">rozmiar zwierzęcia</string>
+    <string name="content_desc_animal_gender">płeć zwierzęcia</string>
+    <string name="content_desc_animal_activity">aktywność zwierzęcia</string>
 </resources>

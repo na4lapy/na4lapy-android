@@ -10,10 +10,11 @@
     android:paddingLeft="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_vertical_margin">
 
-    <ImageButton
+    <ImageView
         android:id="@+id/profile_pic_on_list"
         android:layout_width="60dp"
         android:layout_height="60dp"
+        android:contentDescription="@string/content_desc_main_image"
         tools:background="@color/colorAccent" />
 
     <LinearLayout

@@ -39,7 +39,7 @@ public abstract class AnimalViewHolder extends RecyclerView.ViewHolder {
     @Bind(R.id.matching_lvl_image)
     ImageView matchLevelImage;
     @Bind(R.id.profile_pic_on_list)
-    ImageButton profilePic;
+    ImageView profilePic;
 
     public AnimalViewHolder(View itemView) {
         super(itemView);
