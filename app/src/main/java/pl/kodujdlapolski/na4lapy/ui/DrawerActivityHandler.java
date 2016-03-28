@@ -41,7 +41,7 @@ public class DrawerActivityHandler {
             intent = new Intent(context, AnimalsBrowseActivity.class);
             intent.putExtra(AnimalsBrowseActivity.EXTRA_IS_FAV_LIST, false);
             intent.putExtra(AnimalsBrowseActivity.EXTRA_IS_SINGLE_ELEMENT_BROWSE, true);
-        } else if (id == R.id.favourities && !(clazz.equals(AnimalsFavListActivity.class))) {
+        } else if (id == R.id.favourites && !(clazz.equals(AnimalsFavListActivity.class))) {
             intent = new Intent(context, AnimalsFavListActivity.class);
             intent.putExtra(AnimalsFavListActivity.EXTRA_IS_FAV_LIST, true);
             intent.putExtra(AnimalsFavListActivity.EXTRA_IS_SINGLE_ELEMENT_BROWSE, false);
