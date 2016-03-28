@@ -1,6 +1,7 @@
 package pl.kodujdlapolski.na4lapy.ui;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -18,6 +19,7 @@ public abstract class AbstractDrawerActivity extends AppCompatActivity
 
     protected DrawerLayout drawerLayout;
     protected DrawerActivityHandler handler;
+    private final Handler drawerCloseDelay = new Handler();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,7 +32,11 @@ public abstract class AbstractDrawerActivity extends AppCompatActivity
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        return handler.onNavigationItemSelected(item);
+        drawerLayout.closeDrawer(GravityCompat.START);
+        drawerCloseDelay.removeCallbacksAndMessages(null);
+        // so the nav drawer closes smoothly
+        drawerCloseDelay.postDelayed(() -> handler.onNavigationItemSelected(item), 250);
+        return true;
     }
 
     @Override
@@ -55,5 +61,11 @@ public abstract class AbstractDrawerActivity extends AppCompatActivity
 
     public void callSuperOnCreate(Bundle saved) {
         super.onCreate(saved);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        handler.onResume();
     }
 }

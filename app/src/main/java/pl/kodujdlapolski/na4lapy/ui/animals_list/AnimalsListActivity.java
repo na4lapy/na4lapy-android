@@ -120,6 +120,12 @@ public class AnimalsListActivity extends AbstractDrawerActivity {
         super.onSaveInstanceState(outState);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        handler.onResume();
+    }
+
     public void removeTabs() {
         tabs.setVisibility(View.GONE);
     }
