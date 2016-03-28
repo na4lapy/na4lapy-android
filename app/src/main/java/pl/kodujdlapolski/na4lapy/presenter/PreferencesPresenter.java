@@ -27,7 +27,7 @@ public class PreferencesPresenter implements PreferencesContract.UserActionListe
         userService.saveCurrentUserPreferences(userPreferences);
     }
 
-    private UserPreferences loadPreferences() {
+    protected UserPreferences loadPreferences() {
         return userService.loadCurrentUserPreferences();
     }
 

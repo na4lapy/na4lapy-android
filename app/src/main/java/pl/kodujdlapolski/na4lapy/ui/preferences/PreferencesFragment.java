@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -22,8 +23,12 @@ import pl.kodujdlapolski.na4lapy.model.UserPreferences;
 import pl.kodujdlapolski.na4lapy.presenter.PreferencesContract;
 import pl.kodujdlapolski.na4lapy.presenter.PreferencesPresenter;
 import pl.kodujdlapolski.na4lapy.ui.ToggleImageButton;
+import pl.kodujdlapolski.na4lapy.ui.animals_list.AnimalsBrowseActivity;
 
 public class PreferencesFragment extends Fragment implements PreferencesContract.View {
+
+    private static final short MIN_AGE = 0;
+    private static final short MAX_AGE = 20;
 
     private ScrollView view;
     private Context context;
@@ -31,6 +36,7 @@ public class PreferencesFragment extends Fragment implements PreferencesContract
 
     PreferencesPresenter presenter;
     UserPreferences userPreferences;
+    NumberPicker ageNumberPicker;
 
     @Bind(R.id.type_dog)
     ToggleImageButton typeDogPreference;
@@ -56,9 +62,6 @@ public class PreferencesFragment extends Fragment implements PreferencesContract
     ToggleImageButton activityLowPreference;
     @Bind(R.id.activity_high)
     ToggleImageButton activityHighPreference;
-
-    NumberPicker ageNumberPicker;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -89,31 +92,39 @@ public class PreferencesFragment extends Fragment implements PreferencesContract
 
     private void displayAgePickerDialog(final boolean isMinAgePicker) {
 
-        View v1 = inflater.inflate(R.layout.dialog_age_picker_preference, null);
-        ageNumberPicker = (NumberPicker) v1.findViewById(R.id.numberPicker);
+        View dialogView = inflater.inflate(R.layout.dialog_age_picker_preference, null);
 
-        ageNumberPicker.setMinValue(0);
-        ageNumberPicker.setMaxValue(20);
+        ageNumberPicker = (NumberPicker) dialogView.findViewById(R.id.numberPicker);
+        setAgeNumberPickerValues(isMinAgePicker);
+
+        Dialog agePickerDialog = buildAgePickerDialog(isMinAgePicker, dialogView);
+        agePickerDialog.show();
+    //    agePickerDialog.getWindow().setBackgroundDrawableResource(R.color.colorPrimaryLight);     //sets color for whole dialog window
+    }
+
+    private void setAgeNumberPickerValues(boolean isMinAgePicker) {
+        ageNumberPicker.setMinValue(MIN_AGE);
+        ageNumberPicker.setMaxValue(MAX_AGE);
         ageNumberPicker.setWrapSelectorWheel(false);
+        ageNumberPicker.setValue(getValueFromPreferences(isMinAgePicker));
+    }
 
+    private int getValueFromPreferences(boolean isMinAgePicker) {
         if(isMinAgePicker) {
-            ageNumberPicker.setValue(Integer.valueOf(ageMinPreference.getText().toString()));
+            return Integer.parseInt(ageMinPreference.getText().toString());
         }
         else {
-            ageNumberPicker.setValue(Integer.valueOf(ageMaxPreference.getText().toString()));
+            return Integer.parseInt(ageMaxPreference.getText().toString());
         }
+    }
 
+    private AlertDialog buildAgePickerDialog(final boolean isMinAgePicker, final View dialogView) {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
-        dialogBuilder.setView(v1);
-
-        dialogBuilder.setTitle(R.string.age);
+        dialogBuilder.setView(dialogView);
+        dialogBuilder.setTitle(createDialogTitle(isMinAgePicker));
         dialogBuilder.setPositiveButton(R.string.choose, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                if (isMinAgePicker) {
-                    ageMinPreference.setText(String.valueOf(ageNumberPicker.getValue()));
-                } else {
-                    ageMaxPreference.setText(String.valueOf(ageNumberPicker.getValue()));
-                }
+                setProperAgeValue(isMinAgePicker);
                 dialog.dismiss();
             }
         });
@@ -122,11 +133,50 @@ public class PreferencesFragment extends Fragment implements PreferencesContract
                 dialog.dismiss();
             }
         });
+        return dialogBuilder.create();
+    }
 
-        Dialog agePickerDialog = dialogBuilder.create();
-        agePickerDialog.show();
+    private String createDialogTitle(boolean isMinAgePicker) {
+        if(isMinAgePicker) {
+            return getString(R.string.dialog_age_picker_title_minimal);
+        }
+        else {
+            return getString(R.string.dialog_age_picker_title_maximal);
+        }
+    }
 
-    //    agePickerDialog.getWindow().setBackgroundDrawableResource(R.color.colorPrimaryLight);     //sets color for whole dialog window
+    private void setProperAgeValue(boolean isMinAgePicker) {
+        int minAge = Integer.parseInt(((EditText)view.findViewById(R.id.age_min)).getText().toString());
+        int maxAge = Integer.parseInt(((EditText)view.findViewById(R.id.age_max)).getText().toString());
+        int currentAge = ageNumberPicker.getValue();
+
+        if (isMinAgePicker) {
+            setMinAgeValue(currentAge, maxAge);
+        } else {
+            setMaxAgeValue(currentAge, minAge);
+        }
+    }
+
+    private void setMinAgeValue(int currentAge, int maxAge) {
+        if (currentAge>maxAge) {
+            Toast.makeText(context, getString(R.string.tooMuch), Toast.LENGTH_SHORT).show();
+            ageMaxPreference.setText(String.valueOf(currentAge));
+            ageMinPreference.setText(String.valueOf(maxAge));
+        }
+        else {
+            ageMinPreference.setText(String.valueOf(ageNumberPicker.getValue()));
+        }
+    }
+
+    private void setMaxAgeValue(int currentAge, int minAge) {
+        if (currentAge<minAge) {
+            Toast.makeText(context, getString(R.string.tooLittle), Toast.LENGTH_SHORT).show();
+            ageMinPreference.setText(String.valueOf(currentAge));
+            ageMaxPreference.setText(String.valueOf(minAge));
+        }
+        else {
+            ageMaxPreference.setText(String.valueOf(ageNumberPicker.getValue()));
+        }
     }
 
     @Override
@@ -147,6 +197,7 @@ public class PreferencesFragment extends Fragment implements PreferencesContract
         activityHighPreference.setChecked(this.userPreferences.isActivityHigh());
     }
 
+
     @OnClick(R.id.save_preferences)
     void save() {
 
@@ -165,6 +216,11 @@ public class PreferencesFragment extends Fragment implements PreferencesContract
 
         presenter.savePreferences(userPreferences);
         Toast.makeText(context, R.string.save_preferences_message, Toast.LENGTH_SHORT).show();
+        getActivity().startActivity(new Intent(context, AnimalsBrowseActivity.class));
+    }
+
+    public PreferencesPresenter getPresenter() {
+        return presenter;
     }
 
 }
