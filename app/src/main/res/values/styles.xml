@@ -27,4 +27,10 @@
         <item name="colorControlActivated">@color/colorAccent</item>
     </style>
 
+    <style name="Divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/divider</item>
+    </style>
+
 </resources>

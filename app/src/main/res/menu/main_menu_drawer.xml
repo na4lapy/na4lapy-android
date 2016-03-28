@@ -7,7 +7,7 @@
             android:icon="@drawable/ic_filter_none_24dp"
             android:title="@string/browsing" />
         <item
-            android:id="@+id/favourities"
+            android:id="@+id/favourites"
             android:icon="@drawable/ic_favorite_24dp"
             android:title="@string/favouritiesList" />
         <item
@@ -16,7 +16,7 @@
             android:title="@string/lookupPreferences" />
         <item
             android:id="@+id/aboutShelter"
-            android:icon="@drawable/ic_account_balance_24dp"
+            android:icon="@drawable/ic_shelter_24dp"
             android:title="@string/aboutShelter" />
         <item
             android:id="@+id/settings"

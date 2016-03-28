@@ -13,16 +13,16 @@
 
     <fragment
         android:id="@+id/preferences_app_fragment"
-            android:name="pl.kodujdlapolski.na4lapy.ui.preferences.PreferencesFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            tools:layout="@layout/fragment_preferences"
-            android:theme="@style/AppTheme"/>
+        android:name="pl.kodujdlapolski.na4lapy.ui.preferences.PreferencesFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        tools:layout="@layout/fragment_preferences"
+        android:theme="@style/AppTheme"/>
 
 </LinearLayout>

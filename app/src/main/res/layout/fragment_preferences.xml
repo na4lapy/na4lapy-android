@@ -6,7 +6,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -14,6 +14,7 @@
         android:paddingTop="@dimen/activity_vertical_margin">
 
         <TextView
+            android:id="@+id/whatAreYouLookingFor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|center_horizontal"
@@ -27,18 +28,22 @@
             android:paddingBottom="@dimen/activity_vertical_margin"
             android:paddingTop="@dimen/activity_vertical_margin">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|left"
-                style="@style/TextAppearance.AppCompat.Medium"
-                android:text="@string/type" />
+            <View style="@style/Divider"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:paddingLeft="@dimen/preferences_image_margin">
+                android:layout_marginTop="@dimen/appbar_padding_top"
+                android:layout_marginBottom="@dimen/appbar_padding_top">
+
+                <TextView
+                    android:id="@+id/typeText"
+                    android:layout_width="@dimen/preferences_image_margin"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|start"
+                    style="@style/TextAppearance.AppCompat.Medium"
+                    android:text="@string/type" />
 
                 <pl.kodujdlapolski.na4lapy.ui.ToggleImageButton
                     android:layout_width="wrap_content"
@@ -65,18 +70,25 @@
                     android:id="@+id/type_other"/>
             </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/TextAppearance.AppCompat.Medium"
-                android:text="@string/sex"
-                android:layout_gravity="center_vertical|left"/>
+            <View style="@style/Divider"/>
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:paddingLeft="@dimen/preferences_image_margin">
+                android:layout_marginTop="@dimen/appbar_padding_top"
+                android:layout_marginBottom="@dimen/appbar_padding_top">
+
+                <TextView
+                    android:id="@+id/genderText"
+                    android:layout_width="@dimen/preferences_image_margin"
+                    android:layout_height="wrap_content"
+                    style="@style/TextAppearance.AppCompat.Medium"
+                    android:text="@string/sex"
+                    android:layout_gravity="center_vertical|start"
+                    />
 
                 <pl.kodujdlapolski.na4lapy.ui.ToggleImageButton
                     android:layout_width="wrap_content"
@@ -96,18 +108,22 @@
 
             </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/TextAppearance.AppCompat.Medium"
-                android:text="@string/age"
-                android:layout_gravity="center_vertical|left"/>
+            <View style="@style/Divider"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:paddingLeft="@dimen/preferences_image_margin">
+                android:layout_marginTop="@dimen/appbar_padding_top"
+                android:layout_marginBottom="@dimen/appbar_padding_top">
+
+                <TextView
+                    android:layout_width="@dimen/preferences_image_margin"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ageText"
+                    style="@style/TextAppearance.AppCompat.Medium"
+                    android:text="@string/age"
+                    android:layout_gravity="center_vertical|start"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -119,10 +135,12 @@
 
                 <EditText
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="60dp"
+                    style="@style/TextAppearance.AppCompat.Medium"
                     android:paddingLeft="@dimen/activity_horizontal_margin"
                     android:paddingRight="@dimen/activity_horizontal_margin"
-                    android:editable="false"
+                    android:inputType="none"
+                    android:focusable="false"
                     android:id="@+id/age_min"/>
 
                 <TextView
@@ -135,26 +153,32 @@
 
                 <EditText
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="60dp"
+                    style="@style/TextAppearance.AppCompat.Medium"
                     android:paddingLeft="@dimen/activity_horizontal_margin"
                     android:paddingRight="@dimen/activity_horizontal_margin"
-                    android:editable="false"
+                    android:inputType="none"
+                    android:focusable="false"
                     android:id="@+id/age_max"/>
 
             </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|left"
-                style="@style/TextAppearance.AppCompat.Medium"
-                android:text="@string/size" />
+            <View style="@style/Divider"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:paddingLeft="@dimen/preferences_image_margin">
+                android:layout_marginTop="@dimen/appbar_padding_top"
+                android:layout_marginBottom="@dimen/appbar_padding_top">
+
+                <TextView
+                    android:layout_width="@dimen/preferences_image_margin"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/sizeText"
+                    android:layout_gravity="center_vertical|start"
+                    style="@style/TextAppearance.AppCompat.Medium"
+                    android:text="@string/size" />
 
                 <pl.kodujdlapolski.na4lapy.ui.ToggleImageButton
                     android:layout_width="wrap_content"
@@ -182,18 +206,22 @@
 
             </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|left"
-                style="@style/TextAppearance.AppCompat.Medium"
-                android:text="@string/activity" />
+            <View style="@style/Divider"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:paddingLeft="@dimen/preferences_image_margin">
+                android:layout_marginTop="@dimen/appbar_padding_top"
+                android:layout_marginBottom="@dimen/appbar_padding_top">
+
+                <TextView
+                    android:layout_width="@dimen/preferences_image_margin_wide"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/activityText"
+                    android:layout_gravity="center_vertical|start"
+                    style="@style/TextAppearance.AppCompat.Medium"
+                    android:text="@string/activity" />
 
                 <pl.kodujdlapolski.na4lapy.ui.ToggleImageButton
                     android:layout_width="wrap_content"
@@ -213,14 +241,18 @@
 
             </LinearLayout>
 
+            <View style="@style/Divider"/>
+
         </LinearLayout>
 
-        <ImageButton
+        <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:background="@color/colorPrimary"
             android:text="@string/save"
-            android:src="@drawable/ic_save_24dp"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
             android:id="@+id/save_preferences"/>
 
     </LinearLayout>

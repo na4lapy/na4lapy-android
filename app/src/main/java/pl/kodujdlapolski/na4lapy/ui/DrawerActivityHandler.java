@@ -14,8 +14,6 @@ import pl.kodujdlapolski.na4lapy.model.Shelter;
 import pl.kodujdlapolski.na4lapy.ui.about_shelter.AboutShelterActivity;
 import pl.kodujdlapolski.na4lapy.ui.animals_list.AnimalsBrowseActivity;
 import pl.kodujdlapolski.na4lapy.ui.animals_list.AnimalsFavListActivity;
-import pl.kodujdlapolski.na4lapy.ui.animals_list.AnimalsListActivity;
-import pl.kodujdlapolski.na4lapy.ui.main.activity.SplashActivity;
 import pl.kodujdlapolski.na4lapy.ui.preferences.PreferencesActivity;
 import pl.kodujdlapolski.na4lapy.ui.settings.SettingsActivity;
 
@@ -43,7 +41,7 @@ public class DrawerActivityHandler {
             intent.putExtra(AnimalsBrowseActivity.EXTRA_IS_FAV_LIST, false);
             intent.putExtra(AnimalsBrowseActivity.EXTRA_IS_SINGLE_ELEMENT_BROWSE, true);
         }
-        else if (id == R.id.favourities && !(clazz.equals(AnimalsFavListActivity.class))) {
+        else if (id == R.id.favourites && !(clazz.equals(AnimalsFavListActivity.class))) {
             intent = new Intent(context, AnimalsFavListActivity.class);
             intent.putExtra(AnimalsFavListActivity.EXTRA_IS_FAV_LIST, true);
             intent.putExtra(AnimalsFavListActivity.EXTRA_IS_SINGLE_ELEMENT_BROWSE, false);

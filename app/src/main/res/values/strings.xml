@@ -29,10 +29,14 @@
     <string name="activity">Aktywność</string>
     <string name="from">od</string>
     <string name="to">do</string>
+    <string name="dialog_age_picker_title_minimal">Minimalny wiek zwierzęcia</string>
+    <string name="dialog_age_picker_title_maximal">Maksymalny wiek zwierzęcia</string>
     <string name="save">Zapisz</string>
     <string name="choose">Wybierz</string>
     <string name="cancel">Anuluj</string>
-    <string name="save_preferences_message">Ustawienia zostały zapisane</string>
+    <string name="tooLittle">Podano za małą liczbę</string>
+    <string name="tooMuch">Podano za dużą liczbę</string>
+    <string name="save_preferences_message">Preferencje zostały zapisane</string>
     <string name="share">podziel się</string>
     <string name="error_data_cannot_be_loaded">Nie można załadować danych</string>
     <string name="try_again">Spróbuj ponownie</string>
