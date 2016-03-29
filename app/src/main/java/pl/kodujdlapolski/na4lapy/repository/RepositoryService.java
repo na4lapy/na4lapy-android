@@ -15,7 +15,7 @@ public interface RepositoryService {
     Observable<List<Animal>> getAnimalsByShelterId(@NonNull Long shelterId);
     Observable<List<Animal>> getAnimalsByFavourite();
 
-    Observable<Boolean> setFavourite(@NonNull Long id, boolean favourite);
+    Observable<Long> setFavourite(@NonNull Long id, boolean favourite);
 
     Observable<Shelter> getShelter(@NonNull Long id);
     Observable<List<Shelter>> getShelters();

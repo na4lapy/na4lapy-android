@@ -9,6 +9,8 @@ import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Animal;
 import pl.kodujdlapolski.na4lapy.model.type.ActivityAnimal;
 import pl.kodujdlapolski.na4lapy.model.type.Gender;
+import pl.kodujdlapolski.na4lapy.ui.animals_list.AnimalsListPresenter;
+import pl.kodujdlapolski.na4lapy.ui.animals_list.OnClickedAction;
 
 /**
  * Created by Natalia on 2016-03-22.
@@ -30,20 +32,14 @@ public class AnimalSingleBrowseViewHolder extends AnimalViewHolder {
     }
 
     @Override
-    public void init(Animal animal) {
-        super.init(animal);
+    public void init(Animal animal, OnClickedAction onClickedAction) {
+        super.init(animal, onClickedAction);
         addToFavFab.setImageResource(animal.isFavourite() ? R.drawable.ic_favorite_white : R.drawable.ic_favorite_border_white);
-        addToFavFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // todo on animal or add
-            }
+        addToFavFab.setOnClickListener(v -> {
+          onClickedAction.favourite(animal);
         });
-        profilePic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // todo on animal click
-            }
+        profilePic.setOnClickListener(v -> {
+            onClickedAction.details(animal);
         });
 
         switch (animal.getSize()) {

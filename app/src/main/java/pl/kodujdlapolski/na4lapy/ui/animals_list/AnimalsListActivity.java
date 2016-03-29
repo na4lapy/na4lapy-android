@@ -129,4 +129,8 @@ public class AnimalsListActivity extends AbstractDrawerActivity {
     public void removeTabs() {
         tabs.setVisibility(View.GONE);
     }
+
+    public int getViewPagerId(){
+        return mViewPager.getId();
+    }
 }

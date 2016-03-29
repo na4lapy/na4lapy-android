@@ -16,23 +16,25 @@ import pl.kodujdlapolski.na4lapy.ui.animals_list.section.AnimalsListFragment;
 /**
  * Created by Natalia on 2016-03-09.
  */
-public class AnimalsPagerAdapter extends FragmentPagerAdapter {
+public class AnimalsPagerAdapter extends FragmentPagerAdapter implements AnimalsListPresenter.UpdateSingleElement {
 
     private Context ctx;
     private List<Animal> animals;
     private HashMap<AnimalsListPresenter.PageTypes, AnimalsListFragment> fragments = new HashMap<>();
+    private AnimalsListPresenter presenter;
 
-    public AnimalsPagerAdapter(Context ctx, List<Animal> animals, FragmentManager fm) {
+    public AnimalsPagerAdapter(Context ctx, List<Animal> animals, FragmentManager fm, AnimalsListPresenter presenter) {
         super(fm);
         this.ctx = ctx;
         this.animals = animals;
+        this.presenter = presenter;
     }
 
     @Override
     public Fragment getItem(int position) {
         AnimalsListPresenter.PageTypes type = AnimalsListPresenter.PageTypes.values()[position];
         return AnimalsListFragment.newInstance(AnimalsListPresenter.getAnimalsByType(animals,
-                type), type);
+                type),presenter );
     }
 
     @Override
@@ -51,6 +53,17 @@ public class AnimalsPagerAdapter extends FragmentPagerAdapter {
             set.getValue().updateList(AnimalsListPresenter.getAnimalsByType(animals, set.getKey()));
         }
         super.notifyDataSetChanged();
+    }
+
+    public void notifyItemChanged(Animal animal){
+        for (Map.Entry<AnimalsListPresenter.PageTypes, AnimalsListFragment> set : fragments.entrySet()) {
+            set.getValue().updateElement(animal);
+        }
+    }
+    public  void notifyItemRemoved(Animal animal){
+        for (Map.Entry<AnimalsListPresenter.PageTypes, AnimalsListFragment> set : fragments.entrySet()) {
+            set.getValue().removeElement(animal);
+        }
     }
 
     @Override

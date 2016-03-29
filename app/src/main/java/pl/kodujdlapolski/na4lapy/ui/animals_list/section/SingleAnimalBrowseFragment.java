@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Animal;
+import pl.kodujdlapolski.na4lapy.ui.animals_list.AnimalsListPresenter;
 
 /**
  * Created by Natalia on 2016-03-15.
@@ -16,14 +17,17 @@ public class SingleAnimalBrowseFragment extends Fragment {
 
     private static final String ARG_ANIMAL = "argAnimal";
     private Animal animal;
+    private AnimalsListPresenter presenter;
+    private AnimalSingleBrowseViewHolder viewHolder;
 
     public SingleAnimalBrowseFragment() {
     }
 
-    public static SingleAnimalBrowseFragment newInstance(Animal animal) {
+    public static SingleAnimalBrowseFragment newInstance(Animal animal, AnimalsListPresenter presenter) {
         SingleAnimalBrowseFragment fragment = new SingleAnimalBrowseFragment();
         Bundle args = new Bundle();
         args.putSerializable(ARG_ANIMAL, animal);
+        args.putParcelable(AnimalsListPresenter.ARG_PRESENTER, presenter);
         fragment.setArguments(args);
         return fragment;
     }
@@ -37,6 +41,14 @@ public class SingleAnimalBrowseFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        initAnimal(savedInstanceState);
+        presenter = AnimalsListPresenter.init(getArguments(), savedInstanceState);
+
+        viewHolder = new AnimalSingleBrowseViewHolder(getView());
+        viewHolder.init(animal, presenter);
+    }
+
+    private void initAnimal(Bundle savedInstanceState) {
         if (getArguments() != null && animal == null) {
             if (getArguments().getSerializable(ARG_ANIMAL) instanceof Animal) {
                 animal = (Animal) (getArguments().getSerializable(ARG_ANIMAL));
@@ -45,13 +57,17 @@ public class SingleAnimalBrowseFragment extends Fragment {
         if (animal == null && savedInstanceState != null && savedInstanceState.getSerializable(ARG_ANIMAL) instanceof Animal) {
             animal = (Animal) savedInstanceState.getSerializable(ARG_ANIMAL);
         }
-        AnimalSingleBrowseViewHolder vh = new AnimalSingleBrowseViewHolder(getView());
-        vh.init(animal);
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         outState.putSerializable(ARG_ANIMAL, animal);
+        outState.putParcelable(AnimalsListPresenter.ARG_PRESENTER, presenter);
         super.onSaveInstanceState(outState);
+    }
+
+    public void update(Animal changedAnimal) {
+        animal = changedAnimal;
+        viewHolder.init(animal, presenter);
     }
 }

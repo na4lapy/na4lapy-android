@@ -100,16 +100,16 @@ public class RepositoryServiceImpl implements RepositoryService {
     }
 
     @Override
-    public Observable<Boolean> setFavourite(@NonNull Long id, final boolean favourite) {
+    public Observable<Long> setFavourite(@NonNull Long id, final boolean favourite) {
         checkNotNull(id, "id cannot be null");
-        return Observable.create(new Observable.OnSubscribe<Boolean>() {
+        return Observable.create(new Observable.OnSubscribe<Long>() {
             @Override
-            public void call(Subscriber<? super Boolean> subscriber) {
+            public void call(Subscriber<? super Long> subscriber) {
                 try {
                     Animal animal = mDatabaseRepository.findOneById(id, Animal.class);
                     animal.setFavourite(favourite);
                     mDatabaseRepository.save(animal);
-                    subscriber.onNext(true);
+                    subscriber.onNext(animal.getId());
                     subscriber.onCompleted();
                 } catch (SQLException e) {
                     subscriber.onError(e);

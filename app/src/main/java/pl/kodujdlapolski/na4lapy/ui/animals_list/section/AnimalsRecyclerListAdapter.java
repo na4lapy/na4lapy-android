@@ -8,15 +8,18 @@ import java.util.ArrayList;
 
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Animal;
+import pl.kodujdlapolski.na4lapy.ui.animals_list.OnClickedAction;
 
 /**
  * Created by Natalia on 2016-02-27.
  */
 public class AnimalsRecyclerListAdapter extends RecyclerView.Adapter<AnimalListViewHolder> {
     private ArrayList<Animal> animals;
+    private OnClickedAction onClickedAction;
 
-    public AnimalsRecyclerListAdapter(ArrayList<Animal> animals) {
+    public AnimalsRecyclerListAdapter(ArrayList<Animal> animals, OnClickedAction onClickedAction) {
         this.animals = animals;
+        this.onClickedAction = onClickedAction;
     }
 
     @Override
@@ -28,7 +31,7 @@ public class AnimalsRecyclerListAdapter extends RecyclerView.Adapter<AnimalListV
 
     @Override
     public void onBindViewHolder(AnimalListViewHolder holder, int position) {
-        holder.init(animals.get(position));
+        holder.init(animals.get(position), onClickedAction);
     }
 
     @Override

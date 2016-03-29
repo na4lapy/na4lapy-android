@@ -1,11 +1,7 @@
 package pl.kodujdlapolski.na4lapy.ui.animals_list.section;
 
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,8 +14,8 @@ import butterknife.ButterKnife;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Animal;
 import pl.kodujdlapolski.na4lapy.model.AnimalUtils;
-import pl.kodujdlapolski.na4lapy.model.type.ActivityAnimal;
-import pl.kodujdlapolski.na4lapy.model.type.Gender;
+import pl.kodujdlapolski.na4lapy.ui.animals_list.AnimalsListPresenter;
+import pl.kodujdlapolski.na4lapy.ui.animals_list.OnClickedAction;
 
 /**
  * Created by Natalia on 2016-02-27.
@@ -46,7 +42,7 @@ public abstract class AnimalViewHolder extends RecyclerView.ViewHolder {
         ButterKnife.bind(this, itemView);
     }
 
-    public void init(Animal animal) {
+    public void init(Animal animal, OnClickedAction onClickedAction) {
 //          Photo pic = animal.getPhotos().iterator().next(); // todo remove comment when pictures are available
         Picasso.with(itemView.getContext())
                 .load(picturesSample[new Random().nextInt(picturesSample.length)])
@@ -54,7 +50,6 @@ public abstract class AnimalViewHolder extends RecyclerView.ViewHolder {
 
         name.setText(animal.getName());
         age.setText(AnimalUtils.getAnimalAgeFormatted(itemView.getContext(), animal));
-
 
         switch (animal.getMatchLevel()) {
             case 0:

@@ -1,6 +1,7 @@
 package pl.kodujdlapolski.na4lapy.ui.animals_list.section;
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -28,14 +29,16 @@ public class AnimalsListFragment extends Fragment {
     RecyclerView recycler;
     private RecyclerView.LayoutManager layoutManager;
     private AnimalsRecyclerListAdapter adapter;
+    private AnimalsListPresenter presenter;
 
     public AnimalsListFragment() {
     }
 
-    public static AnimalsListFragment newInstance(List<Animal> animals, AnimalsListPresenter.PageTypes type) {
+    public static AnimalsListFragment newInstance(List<Animal> animals, AnimalsListPresenter presenter) {
         AnimalsListFragment fragment = new AnimalsListFragment();
         Bundle args = new Bundle();
         args.putSerializable(ARG_ANIMALS_LIST, (ArrayList<Animal>) animals);
+        args.putParcelable(AnimalsListPresenter.ARG_PRESENTER, presenter);
         fragment.setArguments(args);
         return fragment;
     }
@@ -51,6 +54,18 @@ public class AnimalsListFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        initAnimals(savedInstanceState);
+        presenter = AnimalsListPresenter.init(getArguments(), savedInstanceState);
+
+        recycler.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(getActivity());
+        recycler.setLayoutManager(layoutManager);
+        recycler.setItemAnimator(null);
+        adapter = new AnimalsRecyclerListAdapter(animals, presenter);
+        recycler.setAdapter(adapter);
+    }
+
+    private void initAnimals(Bundle savedInstanceState) {
         if (getArguments() != null && (animals == null || animals.isEmpty())) {
             if (getArguments().getSerializable(ARG_ANIMALS_LIST) instanceof ArrayList<?>) {
                 animals = (ArrayList<Animal>) (getArguments().getSerializable(ARG_ANIMALS_LIST));
@@ -59,17 +74,12 @@ public class AnimalsListFragment extends Fragment {
         if (animals == null && savedInstanceState != null && savedInstanceState.getSerializable(ARG_ANIMALS_LIST) instanceof ArrayList<?>) {
             animals = (ArrayList<Animal>) savedInstanceState.getSerializable(ARG_ANIMALS_LIST);
         }
-
-        recycler.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(getActivity());
-        recycler.setLayoutManager(layoutManager);
-        adapter = new AnimalsRecyclerListAdapter(animals);
-        recycler.setAdapter(adapter);
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         outState.putSerializable(ARG_ANIMALS_LIST, animals);
+        outState.putParcelable(AnimalsListPresenter.ARG_PRESENTER, presenter);
         super.onSaveInstanceState(outState);
     }
 
@@ -78,6 +88,37 @@ public class AnimalsListFragment extends Fragment {
             animals.clear();
             animals.addAll(animalsByType);
             adapter.notifyDataSetChanged();
+        }
+    }
+
+    public void updateElement(final Animal changedAnimal) {
+        if (animals != null) {
+            int index = AnimalsListPresenter.getIndexOfAnimalOnList(animals, changedAnimal);
+            if (index != -1) {
+                animals.set(index, changedAnimal);
+                adapter.notifyItemChanged(index);
+            }
+        }
+    }
+
+    public void removeElement(Animal animalToRemove) {
+        if (animals != null) {
+            int index = AnimalsListPresenter.getIndexOfAnimalOnList(animals, animalToRemove);
+            if (index != -1) {
+                animals.remove(index);
+                adapter.notifyItemRemoved(index);
+                showUndoSnack(animalToRemove);
+            }
+        }
+    }
+
+    private void showUndoSnack(Animal animalToUndo) {
+        if (getView() != null) {
+            Snackbar.make(getView(), String.format(getString(R.string.removed_from_fav_undo_mess), animalToUndo.getName()), Snackbar.LENGTH_LONG)
+                    .setAction(R.string.removed_from_fav_undo_option, v -> {
+                        presenter.handleUndoAnimal(animalToUndo);
+                    })
+                    .show();
         }
     }
 }

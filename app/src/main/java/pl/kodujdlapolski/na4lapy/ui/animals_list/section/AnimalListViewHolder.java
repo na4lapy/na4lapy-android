@@ -1,12 +1,13 @@
 package pl.kodujdlapolski.na4lapy.ui.animals_list.section;
 
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageButton;
 
 import butterknife.Bind;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Animal;
+import pl.kodujdlapolski.na4lapy.ui.animals_list.AnimalsListPresenter;
+import pl.kodujdlapolski.na4lapy.ui.animals_list.OnClickedAction;
 
 /**
  * Created by Natalia on 2016-03-22.
@@ -21,21 +22,15 @@ public class AnimalListViewHolder extends AnimalViewHolder {
     }
 
     @Override
-    public void init(Animal animal) {
-        super.init(animal);
+    public void init(Animal animal, OnClickedAction onClickedAction) {
+        super.init(animal, onClickedAction);
 
         addToFavBtn.setImageResource(animal.isFavourite() ? R.drawable.ic_favorite_accent : R.drawable.ic_favorite_border_accent);
-        addToFavBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // todo on animal or add
-            }
+        addToFavBtn.setOnClickListener(v -> {
+            onClickedAction.favourite(animal);
         });
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // todo on row clicked
-            }
+        itemView.setOnClickListener(v -> {
+            onClickedAction.details(animal);
         });
     }
 }
