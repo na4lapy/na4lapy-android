@@ -22,8 +22,7 @@ import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.UserPreferences;
 import pl.kodujdlapolski.na4lapy.presenter.PreferencesContract;
 import pl.kodujdlapolski.na4lapy.presenter.PreferencesPresenter;
-import pl.kodujdlapolski.na4lapy.ui.ToggleImageButton;
-import pl.kodujdlapolski.na4lapy.ui.animals_list.AnimalsBrowseActivity;
+import pl.kodujdlapolski.na4lapy.ui.browse.single.SingleBrowseActivity;
 
 public class PreferencesFragment extends Fragment implements PreferencesContract.View {
 
@@ -216,7 +215,7 @@ public class PreferencesFragment extends Fragment implements PreferencesContract
 
         presenter.savePreferences(userPreferences);
         Toast.makeText(context, R.string.save_preferences_message, Toast.LENGTH_SHORT).show();
-        getActivity().startActivity(new Intent(context, AnimalsBrowseActivity.class));
+        getActivity().startActivity(new Intent(context, SingleBrowseActivity.class));
     }
 
     public PreferencesPresenter getPresenter() {

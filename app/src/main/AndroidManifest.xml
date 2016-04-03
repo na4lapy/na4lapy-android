@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.main.activity.SplashActivity"
+            android:name=".ui.splash.SplashActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,13 +38,13 @@
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.WithActionBar" />
         <activity
-            android:name=".ui.animals_list.AnimalsListActivity"
+            android:name=".ui.browse.AbstractBrowseActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ui.animals_list.AnimalsBrowseActivity"
+            android:name=".ui.browse.single.SingleBrowseActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ui.animals_list.AnimalsFavListActivity"
+            android:name=".ui.browse.list.ListBrowseActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.details.DetailsActivity"

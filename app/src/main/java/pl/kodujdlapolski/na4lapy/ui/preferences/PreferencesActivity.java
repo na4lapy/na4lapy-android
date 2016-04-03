@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import pl.kodujdlapolski.na4lapy.R;
-import pl.kodujdlapolski.na4lapy.ui.AbstractDrawerActivity;
+import pl.kodujdlapolski.na4lapy.ui.drawer.AbstractDrawerActivity;
 
 public class PreferencesActivity extends AbstractDrawerActivity {
 

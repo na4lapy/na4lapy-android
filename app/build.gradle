@@ -15,6 +15,21 @@ android {
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    sourceSets {
+        main {
+            res.srcDirs =
+                    [       'src/main/res/layouts/about_shelter',
+                            'src/main/res/layouts/browse',
+                            'src/main/res/layouts/details',
+                            'src/main/res/layouts/drawer',
+                            'src/main/res/layouts/preferences',
+                            'src/main/res/layouts',
+                            'src/main/res/layouts/settings',
+                            'src/main/res/layouts/splash',
+                            'src/main/res'
+                    ]
+        }
+    }
     productFlavors {
         mock {
             applicationIdSuffix = ".mock"

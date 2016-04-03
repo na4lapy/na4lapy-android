@@ -1,22 +1,27 @@
 package pl.kodujdlapolski.na4lapy;
 
 import android.content.Intent;
+import android.support.design.internal.NavigationMenuItemView;
 import android.support.test.rule.ActivityTestRule;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import pl.kodujdlapolski.na4lapy.ui.main.activity.SplashActivity;
+import pl.kodujdlapolski.na4lapy.ui.preferences.PreferencesActivity;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.isChecked;
+import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
 import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withParent;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.CoreMatchers.allOf;
+import static org.hamcrest.CoreMatchers.endsWith;
 
 /**
  * Created by Gosia on 2016-03-27.
@@ -24,7 +29,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 public class DrawerActivityTest {
 
     @Rule
-    public ActivityTestRule<SplashActivity> activityRule = new ActivityTestRule<>(SplashActivity.class, false, false);
+    public ActivityTestRule<PreferencesActivity> activityRule = new ActivityTestRule<>(PreferencesActivity.class, false, false);
 
     @Before
     public void openDrawerMenu() {
@@ -45,7 +50,7 @@ public class DrawerActivityTest {
     public void areCategoriesTitlesDisplayed() {
         onView(withText(R.string.browsing)).check(matches(isDisplayed()));
         onView(withText(R.string.favouritiesList)).check(matches(isDisplayed()));
-        onView(withText(R.string.lookupPreferences)).check(matches(isDisplayed()));
+        onView(allOf(withText(R.string.lookupPreferences), withParent(withClassName(endsWith("NavigationMenuItemView"))))).check(matches(isDisplayed()));
         onView(withText(R.string.aboutShelter)).check(matches(isDisplayed()));
         onView(withText(R.string.accountSettings)).check(matches(isDisplayed()));
     }
@@ -64,7 +69,7 @@ public class DrawerActivityTest {
 
     @Test
     public void doesClickOnPreferencesDirectsToPreferencesActivity() {
-        onView(withText(R.string.lookupPreferences)).perform(click());
+        onView(allOf(withText(R.string.lookupPreferences), withParent(withClassName(endsWith("NavigationMenuItemView"))))).perform(click());
         onView(withId(R.id.preferences_layout)).check(matches(isDisplayed()));
     }
 
