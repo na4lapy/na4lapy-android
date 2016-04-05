@@ -16,6 +16,7 @@ public class ToggleImageButton extends ImageButton implements Checkable {
 
     private OnCheckedChangeListener onCheckedChangeListener;
     private String colorAccent = String.format("#%06X", (0xFFFFFF & getResources().getColor(R.color.colorAccent)));
+    private String colorPrimaryLight = String.format("#%06X", (0xFFFFFF & getResources().getColor(R.color.colorPrimaryLight)));
 
     public ToggleImageButton(Context context) {
         super(context);
@@ -57,7 +58,7 @@ public class ToggleImageButton extends ImageButton implements Checkable {
         }
         else {
             //but.setBackgroundColor(Color.TRANSPARENT);
-            this.clearColorFilter();
+            this.setColorFilter(Color.parseColor(colorPrimaryLight));   //above API21 can be changed to clearColorFilter();
         }
     }
 
