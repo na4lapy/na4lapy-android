@@ -1,4 +1,4 @@
-package pl.kodujdlapolski.na4lapy.presenter;
+package pl.kodujdlapolski.na4lapy.presenter.details;
 
 import java.util.List;
 

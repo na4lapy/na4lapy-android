@@ -7,7 +7,7 @@ import android.webkit.WebView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import pl.kodujdlapolski.na4lapy.R;
-import pl.kodujdlapolski.na4lapy.presenter.WebPageTypes;
+import pl.kodujdlapolski.na4lapy.presenter.settings.WebPageTypes;
 import pl.kodujdlapolski.na4lapy.ui.AbstractSingleActivity;
 
 public class WebViewActivity extends AbstractSingleActivity {

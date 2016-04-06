@@ -1,4 +1,4 @@
-package pl.kodujdlapolski.na4lapy.presenter;
+package pl.kodujdlapolski.na4lapy.presenter.about_shelter;
 
 import android.content.Intent;
 import android.support.v4.content.LocalBroadcastManager;

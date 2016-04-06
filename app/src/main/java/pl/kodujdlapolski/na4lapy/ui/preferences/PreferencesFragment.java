@@ -20,10 +20,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.UserPreferences;
-import pl.kodujdlapolski.na4lapy.presenter.PreferencesContract;
-import pl.kodujdlapolski.na4lapy.presenter.PreferencesPresenter;
+import pl.kodujdlapolski.na4lapy.presenter.preferences.PreferencesContract;
+import pl.kodujdlapolski.na4lapy.presenter.preferences.PreferencesPresenter;
 import pl.kodujdlapolski.na4lapy.ui.details.AnimalGalleryActivity;
-import pl.kodujdlapolski.na4lapy.ui.browse.single.SingleBrowseActivity;
 
 public class PreferencesFragment extends Fragment implements PreferencesContract.View {
 

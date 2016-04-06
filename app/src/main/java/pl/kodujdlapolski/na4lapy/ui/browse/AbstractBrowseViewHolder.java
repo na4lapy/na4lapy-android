@@ -13,7 +13,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Animal;
-import pl.kodujdlapolski.na4lapy.model.AnimalUtils;
+import pl.kodujdlapolski.na4lapy.utils.AnimalUtils;
 
 /**
  * Created by Natalia on 2016-02-27.

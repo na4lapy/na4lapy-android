@@ -1,4 +1,4 @@
-package pl.kodujdlapolski.na4lapy.presenter;
+package pl.kodujdlapolski.na4lapy.presenter.settings;
 
 import pl.kodujdlapolski.na4lapy.R;
 

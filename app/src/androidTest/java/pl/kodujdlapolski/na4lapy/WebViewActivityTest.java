@@ -15,7 +15,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import pl.kodujdlapolski.na4lapy.presenter.WebPageTypes;
+import pl.kodujdlapolski.na4lapy.presenter.settings.WebPageTypes;
 import pl.kodujdlapolski.na4lapy.ui.settings.WebViewActivity;
 
 import static android.support.test.espresso.web.sugar.Web.onWebView;

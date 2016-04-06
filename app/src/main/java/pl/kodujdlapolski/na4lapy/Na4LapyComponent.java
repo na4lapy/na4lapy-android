@@ -3,10 +3,10 @@ package pl.kodujdlapolski.na4lapy;
 import javax.inject.Singleton;
 
 import dagger.Component;
-import pl.kodujdlapolski.na4lapy.presenter.AboutShelterPresenter;
+import pl.kodujdlapolski.na4lapy.presenter.about_shelter.AboutShelterPresenter;
 import pl.kodujdlapolski.na4lapy.api.ApiModule;
 import pl.kodujdlapolski.na4lapy.preferences.PreferencesModule;
-import pl.kodujdlapolski.na4lapy.presenter.PreferencesPresenter;
+import pl.kodujdlapolski.na4lapy.presenter.preferences.PreferencesPresenter;
 import pl.kodujdlapolski.na4lapy.repository.RepositoryModule;
 import pl.kodujdlapolski.na4lapy.repository.database.DatabaseModule;
 import pl.kodujdlapolski.na4lapy.sync.SynchronizationModule;

@@ -14,7 +14,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import pl.kodujdlapolski.na4lapy.R;
-import pl.kodujdlapolski.na4lapy.presenter.WebPageTypes;
+import pl.kodujdlapolski.na4lapy.presenter.settings.WebPageTypes;
 
 /**
  * Created by Natalia on 2016-03-01.

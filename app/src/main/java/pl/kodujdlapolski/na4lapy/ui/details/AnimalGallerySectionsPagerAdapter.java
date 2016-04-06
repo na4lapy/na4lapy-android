@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import java.util.List;
 
 import pl.kodujdlapolski.na4lapy.model.Photo;
-import pl.kodujdlapolski.na4lapy.presenter.AnimalGalleryPresenter;
+import pl.kodujdlapolski.na4lapy.presenter.details.AnimalGalleryPresenter;
 import pl.kodujdlapolski.na4lapy.ui.AbstractSingleActivity;
 
 /**

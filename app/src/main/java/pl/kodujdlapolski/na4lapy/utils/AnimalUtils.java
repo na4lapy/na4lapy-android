@@ -1,4 +1,4 @@
-package pl.kodujdlapolski.na4lapy.model;
+package pl.kodujdlapolski.na4lapy.utils;
 
 import android.content.Context;
 
@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import pl.kodujdlapolski.na4lapy.R;
+import pl.kodujdlapolski.na4lapy.model.Animal;
 
 /**
  * Created by Natalia on 2016-03-13.

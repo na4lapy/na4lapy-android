@@ -11,7 +11,7 @@ import com.squareup.picasso.Picasso;
 
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Photo;
-import pl.kodujdlapolski.na4lapy.presenter.AnimalGalleryPresenter;
+import pl.kodujdlapolski.na4lapy.presenter.details.AnimalGalleryPresenter;
 
 /**
  * Created by Gosia on 2016-03-30.

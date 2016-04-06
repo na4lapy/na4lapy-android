@@ -18,7 +18,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Shelter;
-import pl.kodujdlapolski.na4lapy.presenter.AboutShelterPresenter;
+import pl.kodujdlapolski.na4lapy.presenter.about_shelter.AboutShelterPresenter;
 
 /**
  * Created by Natalia on 2016-03-01.

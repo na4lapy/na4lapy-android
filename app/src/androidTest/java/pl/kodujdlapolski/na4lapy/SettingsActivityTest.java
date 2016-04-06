@@ -6,13 +6,12 @@ import android.support.test.espresso.intent.Intents;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.SmallTest;
-import android.view.View;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import pl.kodujdlapolski.na4lapy.presenter.WebPageTypes;
+import pl.kodujdlapolski.na4lapy.presenter.settings.WebPageTypes;
 import pl.kodujdlapolski.na4lapy.ui.settings.SettingsActivity;
 import pl.kodujdlapolski.na4lapy.ui.settings.WebViewActivity;
 
