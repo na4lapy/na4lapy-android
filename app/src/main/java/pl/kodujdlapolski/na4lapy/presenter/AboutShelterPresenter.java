@@ -12,9 +12,13 @@ import pl.kodujdlapolski.na4lapy.sync.SynchronizationService;
 import pl.kodujdlapolski.na4lapy.sync.receiver.SynchronizationReceiver;
 import pl.kodujdlapolski.na4lapy.ui.about_shelter.AboutShelterActivity;
 import pl.kodujdlapolski.na4lapy.ui.about_shelter.AboutShelterFragment;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by Natalia on 2016-03-01.
+ *
+ * Modified by Marek Wojtuszkiewicz on 2016-04-06
  */
 public class AboutShelterPresenter implements SynchronizationReceiver.SynchronizationReceiverCallback {
 
@@ -96,9 +100,11 @@ public class AboutShelterPresenter implements SynchronizationReceiver.Synchroniz
     }
 
     private void getData() {
-        repositoryService.getShelter(shelterId).subscribe(s -> {
-            shelter = s;
-            onShelterAvailable();
-        });
+        repositoryService.getShelter(shelterId)
+                .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(s -> {
+                    shelter = s;
+                    onShelterAvailable();
+                });
     }
 }

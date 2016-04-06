@@ -22,9 +22,13 @@ import pl.kodujdlapolski.na4lapy.sync.receiver.SynchronizationReceiver;
 import pl.kodujdlapolski.na4lapy.ui.browse.list.ListBrowsePagerAdapter;
 import pl.kodujdlapolski.na4lapy.ui.browse.single.SingleBrowsePagerAdapter;
 import pl.kodujdlapolski.na4lapy.ui.details.DetailsActivity;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by Natalia on 2016-03-09.
+ *
+ * Modified by Marek Wojtuszkiewicz on 2016-04-06
  */
 
 public class BrowsePresenter implements SynchronizationReceiver.SynchronizationReceiverCallback, OnBrowseElementClickedAction {
@@ -135,9 +139,13 @@ public class BrowsePresenter implements SynchronizationReceiver.SynchronizationR
 
     private void getData() {
         if (isFavList) {
-            repositoryService.getAnimalsByFavourite().subscribe(this::onAnimalsAvailable);
+            repositoryService.getAnimalsByFavourite()
+                    .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(this::onAnimalsAvailable);
         } else {
-            repositoryService.getAnimals().subscribe(this::onAnimalsAvailable);
+            repositoryService.getAnimals()
+                    .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(this::onAnimalsAvailable);
         }
     }
 
@@ -160,7 +168,9 @@ public class BrowsePresenter implements SynchronizationReceiver.SynchronizationR
     }
 
     private void onFavChanged(Long changedAnimalId) {
-        repositoryService.getAnimal(changedAnimalId).subscribe(this::onChangedAnimalAvailable);
+        repositoryService.getAnimal(changedAnimalId)
+                .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::onChangedAnimalAvailable);
     }
 
     private void onChangedAnimalAvailable(Animal changedAnimal) {
@@ -181,7 +191,9 @@ public class BrowsePresenter implements SynchronizationReceiver.SynchronizationR
 
     @Override
     public void favourite(Animal animal) {
-        repositoryService.setFavourite(animal.getId(), !animal.getFavourite()).subscribe(this::onFavChanged);
+        repositoryService.setFavourite(animal.getId(), !animal.getFavourite())
+                .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::onFavChanged);
     }
 
     @Override
@@ -229,6 +241,8 @@ public class BrowsePresenter implements SynchronizationReceiver.SynchronizationR
     }
 
     public void handleUndoAnimal(Animal animalToUndo) {
-        repositoryService.setFavourite(animalToUndo.getId(), !animalToUndo.getFavourite()).subscribe(this::onFavChanged);
+        repositoryService.setFavourite(animalToUndo.getId(), !animalToUndo.getFavourite())
+                .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::onFavChanged);
     }
 }

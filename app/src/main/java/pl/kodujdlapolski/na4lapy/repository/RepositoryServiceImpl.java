@@ -15,8 +15,6 @@ import pl.kodujdlapolski.na4lapy.model.Shelter;
 import pl.kodujdlapolski.na4lapy.repository.database.DatabaseRepository;
 import rx.Observable;
 import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -43,8 +41,7 @@ public class RepositoryServiceImpl implements RepositoryService {
                     subscriber.onError(e);
                 }
             }
-        })
-        .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread());
+        });
     }
 
     @Override
@@ -60,8 +57,7 @@ public class RepositoryServiceImpl implements RepositoryService {
                     subscriber.onError(e);
                 }
             }
-        })
-        .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread());
+        });
     }
 
     @Override
@@ -100,7 +96,7 @@ public class RepositoryServiceImpl implements RepositoryService {
     }
 
     @Override
-    public Observable<Long> setFavourite(@NonNull Long id, final boolean favourite) {
+    public Observable<Long> setFavourite(@NonNull Long id, boolean favourite) {
         checkNotNull(id, "id cannot be null");
         return Observable.create(new Observable.OnSubscribe<Long>() {
             @Override
@@ -132,8 +128,7 @@ public class RepositoryServiceImpl implements RepositoryService {
                     subscriber.onError(e);
                 }
             }
-        })
-        .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread());
+        });
     }
 
     @Override
@@ -149,7 +144,6 @@ public class RepositoryServiceImpl implements RepositoryService {
                     subscriber.onError(e);
                 }
             }
-        })
-        .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread());
+        });
     }
 }
