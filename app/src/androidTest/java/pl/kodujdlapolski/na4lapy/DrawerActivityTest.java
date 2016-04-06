@@ -9,9 +9,8 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import pl.kodujdlapolski.na4lapy.ui.about_shelter.AboutShelterActivity;
-import pl.kodujdlapolski.na4lapy.ui.animals_list.AnimalsBrowseActivity;
-import pl.kodujdlapolski.na4lapy.ui.animals_list.AnimalsFavListActivity;
-import pl.kodujdlapolski.na4lapy.ui.main.activity.SplashActivity;
+import pl.kodujdlapolski.na4lapy.ui.browse.list.ListBrowseActivity;
+import pl.kodujdlapolski.na4lapy.ui.browse.single.SingleBrowseActivity;
 import pl.kodujdlapolski.na4lapy.ui.preferences.PreferencesActivity;
 import pl.kodujdlapolski.na4lapy.ui.settings.SettingsActivity;
 
@@ -23,10 +22,15 @@ import static android.support.test.espresso.intent.matcher.ComponentNameMatchers
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasExtra;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.isChecked;
+import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
 import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withParent;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static android.support.test.espresso.matcher.ViewMatchers.isChecked;
+import static org.hamcrest.CoreMatchers.allOf;
+import static org.hamcrest.CoreMatchers.endsWith;
+
 
 /**
  * Created by Gosia on 2016-03-27.
@@ -34,12 +38,14 @@ import static android.support.test.espresso.matcher.ViewMatchers.isChecked;
 public class DrawerActivityTest {
 
     @Rule
-    public ActivityTestRule<SplashActivity> activityRule = new ActivityTestRule<>(SplashActivity.class, false, false);
+    public ActivityTestRule<PreferencesActivity> activityRule = new ActivityTestRule<>(PreferencesActivity.class, false, false);
+
+    @Rule
+    public ActivityTestRule<SingleBrowseActivity> activityRuleBrowse = new ActivityTestRule<>(SingleBrowseActivity.class, false, false);
 
     @Before
     public void openDrawerMenu() {
         activityRule.launchActivity(new Intent());
-        onView(withText(R.string.browsing)).perform(click());
         onView(withContentDescription(activityRule.getActivity().getString(R.string.navigation_drawer_open)))
                 .perform(click());
         onView(withId(R.id.nav_view)).check(matches(isDisplayed()));
@@ -56,21 +62,17 @@ public class DrawerActivityTest {
     public void areCategoriesTitlesDisplayed() {
         onView(withText(R.string.browsing)).check(matches(isDisplayed()));
         onView(withText(R.string.favouritiesList)).check(matches(isDisplayed()));
-        onView(withText(R.string.lookupPreferences)).check(matches(isDisplayed()));
+        onView(allOf(withText(R.string.lookupPreferences), withParent(withClassName(endsWith("NavigationMenuItemView"))))).check(matches(isDisplayed()));
         onView(withText(R.string.aboutShelter)).check(matches(isDisplayed()));
         onView(withText(R.string.accountSettings)).check(matches(isDisplayed()));
     }
 
     @Test
     public void doesClickOnBrowseDirectsToBrowsingActivity() {
-        onView(withText(R.string.lookupPreferences)).perform(click());
-        onView(withContentDescription(activityRule.getActivity().getString(R.string.navigation_drawer_open)))
-                .perform(click());
-
         isProperActivityDisplayed(
                 R.string.browsing,
-                AnimalsBrowseActivity.class,
-                AnimalsBrowseActivity.EXTRA_IS_SINGLE_ELEMENT_BROWSE,
+                SingleBrowseActivity.class,
+                SingleBrowseActivity.EXTRA_IS_SINGLE_ELEMENT_BROWSE,
                 true);
     }
 
@@ -78,13 +80,16 @@ public class DrawerActivityTest {
     public void doesClickOnFavouritesDirectsToFavouritesListActivity() {
         isProperActivityDisplayed(
                 R.string.favouritiesList,
-                AnimalsFavListActivity.class,
-                AnimalsFavListActivity.EXTRA_IS_FAV_LIST,
+                ListBrowseActivity.class,
+                ListBrowseActivity.EXTRA_IS_FAV_LIST,
                 true);
     }
 
     @Test
     public void doesClickOnPreferencesDirectsToPreferencesActivity() {
+        activityRuleBrowse.launchActivity(new Intent());
+        onView(withContentDescription(activityRuleBrowse.getActivity().getString(R.string.navigation_drawer_open)))
+                .perform(click());
         isProperActivityDisplayed(
                 R.string.lookupPreferences,
                 PreferencesActivity.class);

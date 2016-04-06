@@ -13,7 +13,7 @@ import org.junit.Test;
 
 import pl.kodujdlapolski.na4lapy.model.UserPreferences;
 import pl.kodujdlapolski.na4lapy.presenter.PreferencesPresenter;
-import pl.kodujdlapolski.na4lapy.ui.ToggleImageButton;
+import pl.kodujdlapolski.na4lapy.ui.preferences.ToggleImageButton;
 import pl.kodujdlapolski.na4lapy.ui.preferences.PreferencesActivity;
 import pl.kodujdlapolski.na4lapy.ui.preferences.PreferencesFragment;
 

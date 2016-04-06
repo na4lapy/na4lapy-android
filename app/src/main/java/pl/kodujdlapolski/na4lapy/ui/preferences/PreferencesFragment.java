@@ -22,10 +22,8 @@ import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.UserPreferences;
 import pl.kodujdlapolski.na4lapy.presenter.PreferencesContract;
 import pl.kodujdlapolski.na4lapy.presenter.PreferencesPresenter;
-import pl.kodujdlapolski.na4lapy.ui.ToggleImageButton;
-import pl.kodujdlapolski.na4lapy.ui.animals_list.AnimalsBrowseActivity;
-import pl.kodujdlapolski.na4lapy.ui.animals_list.AnimalsListActivity;
 import pl.kodujdlapolski.na4lapy.ui.details.AnimalGalleryActivity;
+import pl.kodujdlapolski.na4lapy.ui.browse.single.SingleBrowseActivity;
 
 public class PreferencesFragment extends Fragment implements PreferencesContract.View {
 
@@ -218,20 +216,14 @@ public class PreferencesFragment extends Fragment implements PreferencesContract
 
         presenter.savePreferences(userPreferences);
         Toast.makeText(context, R.string.save_preferences_message, Toast.LENGTH_SHORT).show();
-    //    backToBrowsing();
+
+    //    getActivity().startActivity(new Intent(context, SingleBrowseActivity.class));
     // tymczasowo:
         startActivity(new Intent(this.getContext(), AnimalGalleryActivity.class));
     }
 
     public PreferencesPresenter getPresenter() {
         return presenter;
-    }
-
-    private void backToBrowsing() {
-        Intent i = new Intent(this.getContext(), AnimalsBrowseActivity.class);
-        i.putExtra(AnimalsListActivity.EXTRA_IS_FAV_LIST, false);
-        i.putExtra(AnimalsListActivity.EXTRA_IS_SINGLE_ELEMENT_BROWSE, true);
-        startActivity(i);
     }
 
 }
