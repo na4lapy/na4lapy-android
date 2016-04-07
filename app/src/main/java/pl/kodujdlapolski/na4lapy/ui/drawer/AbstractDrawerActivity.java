@@ -12,7 +12,7 @@ import android.view.MenuItem;
 import pl.kodujdlapolski.na4lapy.R;
 
 /**
- * Created by Gosia on 2016-03-12.
+ * Created by Malgorzata Syska on 2016-03-12.
  */
 public abstract class AbstractDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

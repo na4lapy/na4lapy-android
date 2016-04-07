@@ -32,7 +32,7 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 
 /**
- * Created by Gosia on 2016-03-20.
+ * Created by Malgorzata Syska on 2016-03-20.
  */
 public class PreferencesActivityTest {
 

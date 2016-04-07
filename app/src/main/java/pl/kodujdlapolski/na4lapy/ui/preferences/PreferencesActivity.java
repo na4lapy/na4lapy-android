@@ -7,6 +7,9 @@ import android.widget.FrameLayout;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.ui.drawer.AbstractDrawerActivity;
 
+/**
+ * Created by Malgorzata Syska on 2016-03-12.
+ */
 public class PreferencesActivity extends AbstractDrawerActivity {
 
     @Override

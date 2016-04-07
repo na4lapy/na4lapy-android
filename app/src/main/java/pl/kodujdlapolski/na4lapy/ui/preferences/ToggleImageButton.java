@@ -10,12 +10,12 @@ import android.widget.ImageButton;
 import pl.kodujdlapolski.na4lapy.R;
 
 /**
- * Created by Gosia on 2016-03-05.
+ * Created by Malgorzata Syska on 2016-03-05.
  */
 public class ToggleImageButton extends ImageButton implements Checkable {
 
     private OnCheckedChangeListener onCheckedChangeListener;
-    private String colorAccent = String.format("#%06X", (0xFFFFFF & getResources().getColor(R.color.colorAccent)));
+    private String colorPrimary = String.format("#%06X", (0xFFFFFF & getResources().getColor(R.color.colorPrimary)));
     private String colorPrimaryLight = String.format("#%06X", (0xFFFFFF & getResources().getColor(R.color.colorPrimaryLight)));
 
     public ToggleImageButton(Context context) {
@@ -54,7 +54,7 @@ public class ToggleImageButton extends ImageButton implements Checkable {
         if (isChecked()) {
             //   but.setBackgroundColor(Color.GREEN); // it is possible to 1) change backgrounds or to 2) change color filter
             //   setColorFilter(Color.parseColor("#FF5722")); // our color accent from colors.xml
-            this.setColorFilter(Color.parseColor(colorAccent));
+            this.setColorFilter(Color.parseColor(colorPrimary));
         }
         else {
             //but.setBackgroundColor(Color.TRANSPARENT);
@@ -85,15 +85,15 @@ public class ToggleImageButton extends ImageButton implements Checkable {
         void onCheckedChanged(ToggleImageButton buttonView, boolean isChecked);
     }
 
-    public String getColorAccent() {
-        return colorAccent;
+    public String getColorPrimary() {
+        return colorPrimary;
     }
 
-    public void setColorAccent(String colorAccent) {
-        this.colorAccent = colorAccent;
+    public void setColorPrimary(String colorPrimary) {
+        this.colorPrimary = colorPrimary;
     }
 
-    public void setColorAccent(int color) {
-        this.colorAccent = String.format("#%06X", (0xFFFFFF & getResources().getColor(color)));
+    public void setColorPrimary(int color) {
+        this.colorPrimary = String.format("#%06X", (0xFFFFFF & getResources().getColor(color)));
     }
 }

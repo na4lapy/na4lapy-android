@@ -33,7 +33,7 @@ import static org.hamcrest.CoreMatchers.endsWith;
 
 
 /**
- * Created by Gosia on 2016-03-27.
+ * Created by Malgorzata Syska on 2016-03-27.
  */
 public class DrawerActivityTest {
 

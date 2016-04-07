@@ -9,7 +9,7 @@ import pl.kodujdlapolski.na4lapy.model.UserPreferences;
 import pl.kodujdlapolski.na4lapy.user.UserService;
 
 /**
- * Created by Gosia on 2016-03-12.
+ * Created by Malgorzata Syska on 2016-03-12.
  */
 public class PreferencesPresenter implements PreferencesContract.UserActionListener {
 

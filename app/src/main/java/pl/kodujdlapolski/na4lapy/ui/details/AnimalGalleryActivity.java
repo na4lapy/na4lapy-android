@@ -13,6 +13,9 @@ import pl.kodujdlapolski.na4lapy.model.Photo;
 import pl.kodujdlapolski.na4lapy.presenter.details.AnimalGalleryPresenter;
 import pl.kodujdlapolski.na4lapy.ui.AbstractSingleActivity;
 
+/**
+ * Created by Malgorzata Syska on 2016-03-28.
+ */
 public class AnimalGalleryActivity extends AbstractSingleActivity {
 
     public static final String EXTRA_GALLERY = "EXTRA_GALLERY";

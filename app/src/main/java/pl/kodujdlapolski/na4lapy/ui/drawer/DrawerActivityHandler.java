@@ -17,7 +17,7 @@ import pl.kodujdlapolski.na4lapy.ui.preferences.PreferencesActivity;
 import pl.kodujdlapolski.na4lapy.ui.settings.SettingsActivity;
 
 /**
- * Created by Gosia on 2016-03-14.
+ * Created by Malgorzata Syska on 2016-03-14.
  */
 public class DrawerActivityHandler {
 

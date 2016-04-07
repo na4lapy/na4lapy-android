@@ -14,7 +14,7 @@ import pl.kodujdlapolski.na4lapy.model.Photo;
 import pl.kodujdlapolski.na4lapy.presenter.details.AnimalGalleryPresenter;
 
 /**
- * Created by Gosia on 2016-03-30.
+ * Created by Malgorzata Syska on 2016-03-29.
  */
 public class AnimalGalleryPlaceholderFragment extends Fragment {
 

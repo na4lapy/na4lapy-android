@@ -24,6 +24,9 @@ import pl.kodujdlapolski.na4lapy.presenter.preferences.PreferencesContract;
 import pl.kodujdlapolski.na4lapy.presenter.preferences.PreferencesPresenter;
 import pl.kodujdlapolski.na4lapy.ui.details.AnimalGalleryActivity;
 
+/**
+ * Created by Malgorzata Syska on 2016-03-12.
+ */
 public class PreferencesFragment extends Fragment implements PreferencesContract.View {
 
     private static final short MIN_AGE = 0;

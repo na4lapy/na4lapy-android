@@ -11,7 +11,7 @@ import pl.kodujdlapolski.na4lapy.presenter.details.AnimalGalleryPresenter;
 import pl.kodujdlapolski.na4lapy.ui.AbstractSingleActivity;
 
 /**
- * Created by Gosia on 2016-03-30.
+ * Created by Malgorzata Syska on 2016-03-30.
  */
 public class AnimalGallerySectionsPagerAdapter extends FragmentPagerAdapter {
 

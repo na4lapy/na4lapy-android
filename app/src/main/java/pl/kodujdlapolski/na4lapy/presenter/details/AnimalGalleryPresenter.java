@@ -7,7 +7,7 @@ import pl.kodujdlapolski.na4lapy.ui.details.AnimalGalleryActivity;
 import pl.kodujdlapolski.na4lapy.ui.details.AnimalGallerySectionsPagerAdapter;
 
 /**
- * Created by Gosia on 2016-03-30.
+ * Created by Malgorzata Syska on 2016-03-30.
  */
 public class AnimalGalleryPresenter {
 
