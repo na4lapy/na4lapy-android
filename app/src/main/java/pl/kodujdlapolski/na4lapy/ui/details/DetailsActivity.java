@@ -25,7 +25,7 @@ import jp.wasabeef.picasso.transformations.ColorFilterTransformation;
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Animal;
-import pl.kodujdlapolski.na4lapy.model.AnimalUtils;
+import pl.kodujdlapolski.na4lapy.utils.AnimalUtils;
 
 public class DetailsActivity extends AppCompatActivity {
 
