@@ -37,6 +37,9 @@ fieldName=activity
 fieldName=training
 # --field-end--
 # --field-start--
+fieldName=description
+# --field-end--
+# --field-start--
 fieldName=sterilization
 # --field-end--
 # --field-start--

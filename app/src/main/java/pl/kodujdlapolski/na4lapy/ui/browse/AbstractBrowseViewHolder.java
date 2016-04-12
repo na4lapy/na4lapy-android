@@ -48,26 +48,6 @@ public abstract class AbstractBrowseViewHolder extends RecyclerView.ViewHolder {
 
         name.setText(animal.getName());
         age.setText(AnimalUtils.getAnimalAgeFormatted(itemView.getContext(), animal));
-
-        switch (animal.getMatchLevel()) {
-            case 0:
-                matchLevelImage.setImageResource(R.drawable.vector_drawable_procent_0);
-                break;
-            case 1:
-                matchLevelImage.setImageResource(R.drawable.vector_drawable_procent_20);
-                break;
-            case 2:
-                matchLevelImage.setImageResource(R.drawable.vector_drawable_procent_40);
-                break;
-            case 3:
-                matchLevelImage.setImageResource(R.drawable.vector_drawable_procent_60);
-                break;
-            case 4:
-                matchLevelImage.setImageResource(R.drawable.vector_drawable_procent_80);
-                break;
-            case 5:
-                matchLevelImage.setImageResource(R.drawable.vector_drawable_procent_100);
-                break;
-        }
+        matchLevelImage.setImageResource(AnimalUtils.getMatchingLvlImage(animal));
     }
 }
