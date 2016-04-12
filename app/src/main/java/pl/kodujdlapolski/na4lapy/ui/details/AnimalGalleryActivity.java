@@ -1,7 +1,6 @@
 package pl.kodujdlapolski.na4lapy.ui.details;
 
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +28,7 @@ public class AnimalGalleryActivity extends AbstractSingleActivity {
     private AnimalGalleryPresenter presenter;
 
     @Bind(R.id.gallery_container)
-    ViewPager mViewPager;
+    GalleryViewPager mViewPager;
 
     @Override
     @SuppressWarnings("unchecked")
@@ -46,13 +45,13 @@ public class AnimalGalleryActivity extends AbstractSingleActivity {
  // tymczasowo
         gallery = new ArrayList<>();
         Photo photo = new Photo();
-        photo.setUrl("http://schroniskopromyk.pl/wp-content/uploads/2016/03/Bodek-1-150x150.jpg");
+        photo.setUrl("http://cdn23.se.smcloud.net/t/photos/t/389279/labrador-retriever-pies_23597760.jpg");
         gallery.add(photo);
         photo = new Photo();
-        photo.setUrl("http://schroniskopromyk.pl/wp-content/uploads/2016/03/Bobo-1-150x150.jpg");
+        photo.setUrl("http://www.dobrylekarz.info/files/images/pies-sennik-sen-tlumaczenie-interpretacja-snu-pies.jpg");
         gallery.add(photo);
         photo = new Photo();
-        photo.setUrl("http://schroniskopromyk.pl/wp-content/uploads/2016/03/Fado-5-150x150.jpg");
+        photo.setUrl("http://bi.gazeta.pl/im/48/ec/f7/z16247880Q,Pies-byl-pierwszym-zwierzeciem-idomowionym-przez-c.jpg");
         gallery.add(photo);
         photo = new Photo();
         photo.setUrl("http://schroniskopromyk.pl/wp-content/uploads/2016/02/Morus-5-150x150.jpg");
@@ -65,10 +64,10 @@ public class AnimalGalleryActivity extends AbstractSingleActivity {
         presenter = new AnimalGalleryPresenter(this, gallery);
         mAnimalGallerySectionsPagerAdapter = presenter.getAdapter();
 
-        mViewPager = (ViewPager) findViewById(R.id.gallery_container);
+        mViewPager = (GalleryViewPager) findViewById(R.id.gallery_container);
         mViewPager.setAdapter(mAnimalGallerySectionsPagerAdapter);
         mViewPager.setCurrentItem(selectedPicNumber);
-
+        mViewPager.setActivity(this);
     }
 
 

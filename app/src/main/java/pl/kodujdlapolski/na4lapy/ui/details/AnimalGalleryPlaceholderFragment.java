@@ -12,6 +12,7 @@ import com.squareup.picasso.Picasso;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Photo;
 import pl.kodujdlapolski.na4lapy.presenter.details.AnimalGalleryPresenter;
+import uk.co.senab.photoview.PhotoView;
 
 /**
  * Created by Malgorzata Syska on 2016-03-29.
@@ -54,7 +55,7 @@ public class AnimalGalleryPlaceholderFragment extends Fragment {
             animalPic = (Photo) savedInstanceState.getSerializable(ARG_PIC_NUMBER);
         }
 
-        ImageView imageView = (ImageView) getView().findViewById(R.id.animal_pic_in_gallery);
+        PhotoView imageView = (PhotoView) getView().findViewById(R.id.animal_pic_in_gallery);
         if (imageView != null) {
             setPicture(imageView);
         }

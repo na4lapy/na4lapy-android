@@ -8,7 +8,7 @@
     android:fitsSystemWindows="true"
     tools:context="pl.kodujdlapolski.na4lapy.ui.details.AnimalGalleryActivity">
 
-    <android.support.v4.view.ViewPager
+    <pl.kodujdlapolski.na4lapy.ui.details.GalleryViewPager
         android:id="@+id/gallery_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

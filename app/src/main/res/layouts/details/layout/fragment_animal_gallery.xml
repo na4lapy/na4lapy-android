@@ -1,4 +1,4 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -6,15 +6,16 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@android:color/black"
     tools:context="pl.kodujdlapolski.na4lapy.ui.details.AnimalGalleryPlaceholderFragment">
 
-    <ImageView
+    <uk.co.senab.photoview.PhotoView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical|center_horizontal"
         android:adjustViewBounds="true"
         android:background="@null"
-        android:scaleType="fitXY"
+        android:scaleType="fitCenter"
         android:id="@+id/animal_pic_in_gallery"/>
 
-</ScrollView>
+</RelativeLayout>

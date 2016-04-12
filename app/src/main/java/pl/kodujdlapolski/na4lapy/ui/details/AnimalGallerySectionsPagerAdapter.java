@@ -8,7 +8,6 @@ import java.util.List;
 
 import pl.kodujdlapolski.na4lapy.model.Photo;
 import pl.kodujdlapolski.na4lapy.presenter.details.AnimalGalleryPresenter;
-import pl.kodujdlapolski.na4lapy.ui.AbstractSingleActivity;
 
 /**
  * Created by Malgorzata Syska on 2016-03-30.
@@ -17,10 +16,10 @@ public class AnimalGallerySectionsPagerAdapter extends FragmentPagerAdapter {
 
     private List<Photo> gallery;
     private AnimalGalleryPresenter presenter;
-    private AbstractSingleActivity activity;
+    private AnimalGalleryActivity activity;
 
     public AnimalGallerySectionsPagerAdapter(FragmentManager fm, List<Photo> gallery,
-                                             AnimalGalleryPresenter presenter, AbstractSingleActivity activity) {
+                                             AnimalGalleryPresenter presenter, AnimalGalleryActivity activity) {
         super(fm);
         this.gallery = gallery;
         this.presenter = presenter;
