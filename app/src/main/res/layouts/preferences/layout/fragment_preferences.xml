@@ -49,7 +49,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:background="@android:color/transparent"
+                    android:background="?android:attr/selectableItemBackground"
                     android:src="@drawable/ic_dog"
                     android:id="@+id/type_dog"/>
 
@@ -57,7 +57,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:background="@android:color/transparent"
+                    android:background="?android:attr/selectableItemBackground"
                     android:src="@drawable/ic_cat"
                     android:id="@+id/type_cat"/>
 
@@ -65,7 +65,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:background="@android:color/transparent"
+                    android:background="?android:attr/selectableItemBackground"
                     android:src="@drawable/ic_other"
                     android:id="@+id/type_other"/>
             </LinearLayout>
@@ -93,7 +93,7 @@
                 <pl.kodujdlapolski.na4lapy.ui.preferences.ToggleImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
+                    android:background="?android:attr/selectableItemBackground"
                     android:src="@drawable/ic_woman"
                     android:layout_gravity="center_vertical"
                     android:id="@+id/gender_woman"/>
@@ -101,7 +101,7 @@
                 <pl.kodujdlapolski.na4lapy.ui.preferences.ToggleImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
+                    android:background="?android:attr/selectableItemBackground"
                     android:src="@drawable/ic_man"
                     android:layout_gravity="center_vertical"
                     android:id="@+id/gender_man"/>
@@ -141,6 +141,7 @@
                     android:paddingRight="@dimen/activity_horizontal_margin"
                     android:inputType="none"
                     android:focusable="false"
+                    android:background="?android:attr/selectableItemBackground"
                     android:id="@+id/age_min"/>
 
                 <TextView
@@ -159,6 +160,7 @@
                     android:paddingRight="@dimen/activity_horizontal_margin"
                     android:inputType="none"
                     android:focusable="false"
+                    android:background="?android:attr/selectableItemBackground"
                     android:id="@+id/age_max"/>
 
             </LinearLayout>
@@ -184,7 +186,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:background="@android:color/transparent"
+                    android:background="?android:attr/selectableItemBackground"
                     android:src="@drawable/ic_size_small"
                     android:id="@+id/size_small"/>
 
@@ -192,7 +194,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:background="@android:color/transparent"
+                    android:background="?android:attr/selectableItemBackground"
                     android:src="@drawable/ic_size_medium"
                     android:id="@+id/size_medium"/>
 
@@ -200,7 +202,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:background="@android:color/transparent"
+                    android:background="?android:attr/selectableItemBackground"
                     android:src="@drawable/ic_size_large"
                     android:id="@+id/size_large"/>
 
@@ -227,7 +229,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:background="@android:color/transparent"
+                    android:background="?android:attr/selectableItemBackground"
                     android:src="@drawable/ic_activity_low"
                     android:id="@+id/activity_low"/>
 
@@ -235,7 +237,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:background="@android:color/transparent"
+                    android:background="?android:attr/selectableItemBackground"
                     android:src="@drawable/ic_activity_high"
                     android:id="@+id/activity_high"/>
 
@@ -249,10 +251,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:background="@color/colorPrimary"
             android:text="@string/save"
-            android:textColor="@android:color/white"
             android:textStyle="bold"
+            android:textColor="@android:color/white"
             android:id="@+id/save_preferences"/>
 
     </LinearLayout>

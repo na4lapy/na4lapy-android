@@ -52,13 +52,11 @@ public class ToggleImageButton extends ImageButton implements Checkable {
         }
 
         if (isChecked()) {
-            //   but.setBackgroundColor(Color.GREEN); // it is possible to 1) change backgrounds or to 2) change color filter
             //   setColorFilter(Color.parseColor("#FF5722")); // our color accent from colors.xml
             this.setColorFilter(Color.parseColor(colorPrimary));
         }
         else {
-            //but.setBackgroundColor(Color.TRANSPARENT);
-            this.setColorFilter(Color.parseColor(colorPrimaryLight));   //above API21 can be changed to clearColorFilter();
+            this.setColorFilter(Color.TRANSPARENT);   //above API21 can be changed to clearColorFilter();
         }
     }
 
