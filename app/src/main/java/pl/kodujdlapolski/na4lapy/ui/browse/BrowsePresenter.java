@@ -198,7 +198,9 @@ public class BrowsePresenter implements SynchronizationReceiver.SynchronizationR
 
     @Override
     public void details(Animal animal) {
-        abstractBrowseActivity.startActivity(new Intent(abstractBrowseActivity, DetailsActivity.class));
+        Intent i = new Intent(abstractBrowseActivity, DetailsActivity.class);
+        i.putExtra(DetailsActivity.EXTRA_ANIMAL, animal);
+        abstractBrowseActivity.startActivity(i);
     }
 
     @Override

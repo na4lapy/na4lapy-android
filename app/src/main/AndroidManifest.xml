@@ -48,11 +48,11 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.details.DetailsActivity"
-            android:label="@string/title_activity_details"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.details.AnimalGalleryActivity"
             android:theme="@style/AppTheme.WithActionBar"></activity>
+      
     </application>
 
 </manifest>

@@ -35,6 +35,8 @@ public class Animal extends BaseEntity implements Serializable {
     @DatabaseField private String race;
     @DatabaseField private ActivityAnimal activity;
     @DatabaseField private Training training;
+    @DatabaseField private String description;
+
 
     @DatabaseField private Boolean sterilization;
     @DatabaseField private Boolean chip;
@@ -215,6 +217,14 @@ public class Animal extends BaseEntity implements Serializable {
     public int getMatchLevel() {
        Random random = new Random();
        return  random.nextInt(6);
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override

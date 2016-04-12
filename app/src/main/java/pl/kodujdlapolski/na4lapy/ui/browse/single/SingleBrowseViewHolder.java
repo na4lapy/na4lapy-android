@@ -7,8 +7,7 @@ import android.widget.ImageView;
 import butterknife.Bind;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Animal;
-import pl.kodujdlapolski.na4lapy.model.type.ActivityAnimal;
-import pl.kodujdlapolski.na4lapy.model.type.Gender;
+import pl.kodujdlapolski.na4lapy.utils.AnimalUtils;
 import pl.kodujdlapolski.na4lapy.ui.browse.AbstractBrowseViewHolder;
 import pl.kodujdlapolski.na4lapy.ui.browse.OnBrowseElementClickedAction;
 
@@ -34,7 +33,7 @@ public class SingleBrowseViewHolder extends AbstractBrowseViewHolder {
     @Override
     public void init(Animal animal, OnBrowseElementClickedAction onBrowseElementClickedAction) {
         super.init(animal, onBrowseElementClickedAction);
-        addToFavFab.setImageResource(animal.isFavourite() ? R.drawable.ic_favorite_white : R.drawable.ic_favorite_border_white);
+        addToFavFab.setImageResource(AnimalUtils.getAddToFavFabImage(animal));
         addToFavFab.setOnClickListener(v -> {
           onBrowseElementClickedAction.favourite(animal);
         });
@@ -42,18 +41,8 @@ public class SingleBrowseViewHolder extends AbstractBrowseViewHolder {
             onBrowseElementClickedAction.details(animal);
         });
 
-        switch (animal.getSize()) {
-            case SMALL:
-                sizeImage.setImageResource(R.drawable.vector_drawable_przegladanie_maly);
-                break;
-            case MEDIUM:
-                sizeImage.setImageResource(R.drawable.vector_drawable_przegladanie_sredni);
-                break;
-            case LARGE:
-                sizeImage.setImageResource(R.drawable.vector_drawable_przegladanie_duzy);
-                break;
-        }
-        activityImage.setImageResource(animal.getActivity() == ActivityAnimal.HIGH ? R.drawable.vector_drawable_przegladanie_aktywny : R.drawable.vector_drawable_przegladanie_domator);
-        genderImage.setImageResource(animal.getGender() == Gender.FEMALE ? R.drawable.vector_drawable_przegladanie_suczka : R.drawable.vector_drawable_przegladanie_samiec);
+        sizeImage.setImageResource(AnimalUtils.getSizeImage(animal));
+        activityImage.setImageResource(AnimalUtils.getActivityImage(animal));
+        genderImage.setImageResource(AnimalUtils.getGenderImage(animal));
     }
 }
