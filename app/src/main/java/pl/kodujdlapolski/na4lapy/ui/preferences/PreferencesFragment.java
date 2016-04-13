@@ -22,8 +22,8 @@ import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.UserPreferences;
 import pl.kodujdlapolski.na4lapy.presenter.preferences.PreferencesContract;
 import pl.kodujdlapolski.na4lapy.presenter.preferences.PreferencesPresenter;
+import pl.kodujdlapolski.na4lapy.ui.browse.AbstractBrowseActivity;
 import pl.kodujdlapolski.na4lapy.ui.browse.single.SingleBrowseActivity;
-import pl.kodujdlapolski.na4lapy.ui.details.AnimalGalleryActivity;
 
 /**
  * Created by Malgorzata Syska on 2016-03-12.
@@ -220,11 +220,17 @@ public class PreferencesFragment extends Fragment implements PreferencesContract
         presenter.savePreferences(userPreferences);
         Toast.makeText(context, R.string.save_preferences_message, Toast.LENGTH_SHORT).show();
 
-        getActivity().startActivity(new Intent(context, SingleBrowseActivity.class));
+        goToBrowse();
     }
 
     public PreferencesPresenter getPresenter() {
         return presenter;
     }
 
+    private void goToBrowse() {
+        Intent i = new Intent(context, SingleBrowseActivity.class);
+        i.putExtra(AbstractBrowseActivity.EXTRA_IS_FAV_LIST, false);
+        i.putExtra(AbstractBrowseActivity.EXTRA_IS_SINGLE_ELEMENT_BROWSE, true);
+        startActivity(i);
+    }
 }

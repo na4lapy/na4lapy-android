@@ -41,25 +41,6 @@ public class AnimalGalleryActivity extends AbstractSingleActivity {
         gallery = (ArrayList<Photo>) getIntent().getExtras().getSerializable(EXTRA_GALLERY);
         selectedPicNumber = getIntent().getExtras().getInt(EXTRA_SELECTED_PIC);
         setTitle(getIntent().getExtras().getString(EXTRA_ANIMAL_NAME));
-//todo po przygotowaniu odpowiedniej aktywnosci (karty zwierzaka) - zastapic tymczasowy kod - docelowym (powyzej)
- // tymczasowo
-//        gallery = new ArrayList<>();
-//        Photo photo = new Photo();
-//        photo.setUrl("http://schroniskopromyk.pl/wp-content/uploads/2016/03/Bodek-1-150x150.jpg");
-//        gallery.add(photo);
-//        photo = new Photo();
-//        photo.setUrl("http://schroniskopromyk.pl/wp-content/uploads/2016/03/Bobo-1-150x150.jpg");
-//        gallery.add(photo);
-//        photo = new Photo();
-//        photo.setUrl("http://schroniskopromyk.pl/wp-content/uploads/2016/03/Fado-5-150x150.jpg");
-//        gallery.add(photo);
-//        photo = new Photo();
-//        photo.setUrl("http://schroniskopromyk.pl/wp-content/uploads/2016/02/Morus-5-150x150.jpg");
-//        gallery.add(photo);
-// //tymczasowo
-//        selectedPicNumber = 1;
-// //tymczasowo
-//        setTitle("Bodek");
 
         presenter = new AnimalGalleryPresenter(this, gallery);
         mAnimalGallerySectionsPagerAdapter = presenter.getAdapter();
