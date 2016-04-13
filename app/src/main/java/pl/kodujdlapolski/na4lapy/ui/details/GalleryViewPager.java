@@ -47,6 +47,8 @@ public class GalleryViewPager extends ViewPager {
     private boolean canSwipe() {
         //todo poprawic dzialanie
         PhotoView photoView = (PhotoView) activity.findViewById(R.id.animal_pic_in_gallery);
+        System.out.println("SKALA: " + photoView.getScale());
+
         if (photoView == null) {
             return true;
         }

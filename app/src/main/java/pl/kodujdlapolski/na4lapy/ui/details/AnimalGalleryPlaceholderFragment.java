@@ -64,7 +64,7 @@ public class AnimalGalleryPlaceholderFragment extends Fragment {
     private void setPicture(ImageView imageView) {
         String selectedPicUrl = animalPic.getUrl();
         if (selectedPicUrl == null) {
-            imageView.setImageDrawable(getResources().getDrawable(R.drawable.pic_404dog));
+            imageView.setImageDrawable(getResources().getDrawable(R.drawable.vector_drawable_error_dog));
             return;
         }
         Picasso.with(getContext()).load(selectedPicUrl).into(imageView);

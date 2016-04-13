@@ -2,6 +2,7 @@ package pl.kodujdlapolski.na4lapy.ui.splash;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
@@ -17,6 +18,15 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         ((Na4LapyApp) getApplication()).getComponent().inject(this);
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                findViewById(R.id.goToBrowse).performClick();
+            }
+        }, 100);
+
     }
 
     public void goToBrowse(View view) {
