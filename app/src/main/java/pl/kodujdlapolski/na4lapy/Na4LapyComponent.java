@@ -11,6 +11,7 @@ import pl.kodujdlapolski.na4lapy.repository.RepositoryModule;
 import pl.kodujdlapolski.na4lapy.repository.database.DatabaseModule;
 import pl.kodujdlapolski.na4lapy.sync.SynchronizationModule;
 import pl.kodujdlapolski.na4lapy.ui.browse.BrowsePresenter;
+import pl.kodujdlapolski.na4lapy.ui.details.DetailsActivity;
 import pl.kodujdlapolski.na4lapy.ui.splash.SplashActivity;
 import pl.kodujdlapolski.na4lapy.user.UserModule;
 
@@ -30,5 +31,6 @@ public interface Na4LapyComponent {
     void inject(SplashActivity mainActivity);
     void inject(BrowsePresenter browsePresenter);
     void inject(PreferencesPresenter presenter);
+    void inject(DetailsActivity detailsActivity);
 
 }
