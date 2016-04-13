@@ -16,15 +16,25 @@ import pl.kodujdlapolski.na4lapy.model.Animal;
 import pl.kodujdlapolski.na4lapy.utils.AnimalUtils;
 
 /**
- * Created by Natalia on 2016-02-27.
+ * Created by Natalia Wróblewska on 2016-02-27.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
  */
 public abstract class AbstractBrowseViewHolder extends RecyclerView.ViewHolder {
 
-    String[] picturesSample = new String[]{"http://schroniskopromyk.pl/wp-content/uploads/2016/03/Bodek-1-150x150.jpg",
-            "http://schroniskopromyk.pl/wp-content/uploads/2016/03/Mundi-1-150x150.jpg",
-            "http://schroniskopromyk.pl/wp-content/uploads/2016/03/Bobo-1-150x150.jpg",
-            "http://schroniskopromyk.pl/wp-content/uploads/2016/03/Fado-5-150x150.jpg",
-            "http://schroniskopromyk.pl/wp-content/uploads/2016/02/Morus-5-150x150.jpg"};
+    String[] picturesSample = new String[]{"http://2.bp.blogspot.com/-uI_rgOFxmT0/Vw6lkKwdTDI/AAAAAAAABLw/T0d2NW0Uc-MsYe1y6u6zvdUdCJxFv4uwACK4B/s1600/pies1_5.jpg",
+            "http://4.bp.blogspot.com/-zjCctidFhyA/Vw6lkEpvejI/AAAAAAAABLA/7Y375FdJBSgnNhHQLqj922KoJtRVQBDqACK4B/s1600/pies2_1.jpg"};
 
     @Bind(R.id.view_holder_animal_name)
     TextView name;
@@ -43,7 +53,7 @@ public abstract class AbstractBrowseViewHolder extends RecyclerView.ViewHolder {
     public void init(Animal animal, OnBrowseElementClickedAction onBrowseElementClickedAction) {
 //          Photo pic = animal.getPhotos().iterator().next(); // todo remove comment when pictures are available
         Picasso.with(itemView.getContext())
-                .load(picturesSample[new Random().nextInt(picturesSample.length)])
+                .load(picturesSample[animal.getId() %2 == 0 ? 0 : 1 ])
                 .into(profilePic);
 
         name.setText(animal.getName());

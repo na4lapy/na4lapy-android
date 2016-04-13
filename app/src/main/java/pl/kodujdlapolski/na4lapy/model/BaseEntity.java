@@ -2,7 +2,9 @@ package pl.kodujdlapolski.na4lapy.model;
 
 import com.j256.ormlite.field.DatabaseField;
 
-public abstract class BaseEntity {
+import java.io.Serializable;
+
+public abstract class BaseEntity implements Serializable{
 
     public final static String COLUMN_NAME_ID = "id";
 
