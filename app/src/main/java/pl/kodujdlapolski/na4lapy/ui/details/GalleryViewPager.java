@@ -6,9 +6,6 @@ import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
-import pl.kodujdlapolski.na4lapy.R;
-import uk.co.senab.photoview.PhotoView;
-
 /**
  * Created by Malgorzata Syska on 2016-04-12.
  */
@@ -45,17 +42,8 @@ public class GalleryViewPager extends ViewPager {
     }
 
     private boolean canSwipe() {
-        //todo poprawic dzialanie
-        PhotoView photoView = (PhotoView) activity.findViewById(R.id.animal_pic_in_gallery);
-        System.out.println("SKALA: " + photoView.getScale());
-
-        if (photoView == null) {
-            return true;
-        }
-        if (photoView.getScale()<= 1.0) {
-            return true;
-        }
-        return false;
+        //todo napisac sprawdzenie zooma
+        return true;
     }
 
 

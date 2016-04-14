@@ -10,7 +10,7 @@
     android:id="@+id/animal_gallery_fragment"
     tools:context="pl.kodujdlapolski.na4lapy.ui.details.AnimalGalleryPlaceholderFragment">
 
-    <uk.co.senab.photoview.PhotoView
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical|center_horizontal"

@@ -38,18 +38,18 @@ public class UserPreferences {
 
     public UserPreferences() {
 
-        this.typeDog = true;
-        this.typeCat = true;
-        this.typeOther = true;
-        this.genderWoman = true;
-        this.genderMan = true;
+        this.typeDog = false;
+        this.typeCat = false;
+        this.typeOther = false;
+        this.genderWoman = false;
+        this.genderMan = false;
         this.ageMin = 0;
         this.ageMax = 20;
-        this.sizeSmall = true;
-        this.sizeMedium = true;
-        this.sizeLarge = true;
-        this.activityLow = true;
-        this.activityHigh = true;
+        this.sizeSmall = false;
+        this.sizeMedium = false;
+        this.sizeLarge = false;
+        this.activityLow = false;
+        this.activityHigh = false;
     }
 
     public boolean isTypeDog() {

@@ -15,8 +15,7 @@ import pl.kodujdlapolski.na4lapy.R;
 public class ToggleImageButton extends ImageButton implements Checkable {
 
     private OnCheckedChangeListener onCheckedChangeListener;
-    private String colorPrimary = String.format("#%06X", (0xFFFFFF & getResources().getColor(R.color.colorPrimary)));
-    private String colorPrimaryLight = String.format("#%06X", (0xFFFFFF & getResources().getColor(R.color.colorPrimaryLight)));
+    private String colorActivated = String.format("#%06X", (0xFFFFFF & getResources().getColor(R.color.colorPrimary)));
 
     public ToggleImageButton(Context context) {
         super(context);
@@ -53,7 +52,7 @@ public class ToggleImageButton extends ImageButton implements Checkable {
 
         if (isChecked()) {
             //   setColorFilter(Color.parseColor("#FF5722")); // our color accent from colors.xml
-            this.setColorFilter(Color.parseColor(colorPrimary));
+            this.setColorFilter(Color.parseColor(colorActivated));
         }
         else {
             this.setColorFilter(Color.TRANSPARENT);   //above API21 can be changed to clearColorFilter();
@@ -84,14 +83,14 @@ public class ToggleImageButton extends ImageButton implements Checkable {
     }
 
     public String getColorPrimary() {
-        return colorPrimary;
+        return colorActivated;
     }
 
-    public void setColorPrimary(String colorPrimary) {
-        this.colorPrimary = colorPrimary;
+    public void setColorActivated(String colorActivated) {
+        this.colorActivated= colorActivated;
     }
 
-    public void setColorPrimary(int color) {
-        this.colorPrimary = String.format("#%06X", (0xFFFFFF & getResources().getColor(color)));
+    public void setColorActivated(int color) {
+        this.colorActivated = String.format("#%06X", (0xFFFFFF & getResources().getColor(color)));
     }
 }
