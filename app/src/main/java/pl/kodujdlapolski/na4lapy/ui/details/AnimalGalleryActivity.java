@@ -19,7 +19,6 @@ public class AnimalGalleryActivity extends AbstractSingleActivity {
 
     public static final String EXTRA_GALLERY = "EXTRA_GALLERY";
     public static final String EXTRA_SELECTED_PIC = "EXTRA_SELECTED_PIC";
-    public static final String EXTRA_ANIMAL_NAME = "EXTRA_ANIMAL_NAME";
 
     private List<Photo> gallery;
     private Integer selectedPicNumber;
@@ -40,7 +39,6 @@ public class AnimalGalleryActivity extends AbstractSingleActivity {
 
         gallery = (ArrayList<Photo>) getIntent().getExtras().getSerializable(EXTRA_GALLERY);
         selectedPicNumber = getIntent().getExtras().getInt(EXTRA_SELECTED_PIC);
-        setTitle(getIntent().getExtras().getString(EXTRA_ANIMAL_NAME));
 
         presenter = new AnimalGalleryPresenter(this, gallery);
         mAnimalGallerySectionsPagerAdapter = presenter.getAdapter();

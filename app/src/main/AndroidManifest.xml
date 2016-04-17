@@ -51,7 +51,7 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.details.AnimalGalleryActivity"
-            android:theme="@style/AppTheme.WithActionBar"></activity>
+            android:theme="@style/AppTheme.HalfTransparent"></activity>
       
     </application>
 
