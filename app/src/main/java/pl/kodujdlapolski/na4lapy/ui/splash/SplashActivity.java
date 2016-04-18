@@ -15,6 +15,7 @@ public class SplashActivity extends AppCompatActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         ((Na4LapyApp) getApplication()).getComponent().inject(this);
