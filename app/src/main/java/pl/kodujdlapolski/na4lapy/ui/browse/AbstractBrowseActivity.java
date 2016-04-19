@@ -87,7 +87,7 @@ public class AbstractBrowseActivity extends AbstractDrawerActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        browsePresenter.onActivityStart();
+        browsePresenter.onActivityStart(this);
     }
 
     @Override
@@ -131,5 +131,9 @@ public class AbstractBrowseActivity extends AbstractDrawerActivity {
 
     public int getViewPagerId(){
         return viewPager.getId();
+    }
+
+    public BrowsePresenter getPresenter() {
+        return browsePresenter;
     }
 }

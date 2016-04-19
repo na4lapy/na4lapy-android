@@ -1,9 +1,6 @@
 package pl.kodujdlapolski.na4lapy.ui.browse;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.LocalBroadcastManager;
 
@@ -30,20 +27,19 @@ import rx.schedulers.Schedulers;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
+ * <p>
  * Modified by Marek Wojtuszkiewicz on 2016-04-06
  */
 
 public class BrowsePresenter implements SynchronizationReceiver.SynchronizationReceiverCallback, OnBrowseElementClickedAction {
-
 
     public enum PageTypes {
         ALL(R.string.list_section_all, null),
@@ -65,7 +61,6 @@ public class BrowsePresenter implements SynchronizationReceiver.SynchronizationR
         void notifyItemRemoved(Animal animal);
     }
 
-    public static final String ARG_PRESENTER = "argAction";
     private AbstractBrowseActivity abstractBrowseActivity;
     @Inject
     SynchronizationService synchronizationService;
@@ -75,13 +70,11 @@ public class BrowsePresenter implements SynchronizationReceiver.SynchronizationR
     private boolean isAfterSynchronization = false;
     private List<Animal> animals;
     private boolean isFavList;
-    private boolean isSingleBrowse;
     private FragmentPagerAdapter adapter;
 
     public BrowsePresenter(AbstractBrowseActivity abstractBrowseActivity, boolean isFavList, boolean isSingleBrowse) {
         this.abstractBrowseActivity = abstractBrowseActivity;
         this.isFavList = isFavList;
-        this.isSingleBrowse = isSingleBrowse;
         ((Na4LapyApp) abstractBrowseActivity.getApplication()).getComponent().inject(this);
         synchronizationReceiver = new SynchronizationReceiver(this);
 
@@ -90,16 +83,10 @@ public class BrowsePresenter implements SynchronizationReceiver.SynchronizationR
             abstractBrowseActivity.removeTabs();
         }
         adapter = isSingleBrowse ?
-                new SingleBrowsePagerAdapter(animals, abstractBrowseActivity.getSupportFragmentManager(), this, abstractBrowseActivity.getViewPagerId())
+                new SingleBrowsePagerAdapter(animals, abstractBrowseActivity.getSupportFragmentManager(), abstractBrowseActivity.getViewPagerId())
                 : new ListBrowsePagerAdapter(abstractBrowseActivity, animals, abstractBrowseActivity.getSupportFragmentManager(), this);
 
         startDownloadingData();
-    }
-
-    /**
-     * as this is used only for methods invocations in fragments and for  repositoryService
-     */
-    public BrowsePresenter(Parcel in) {
     }
 
     public void startDownloadingData() {
@@ -124,13 +111,15 @@ public class BrowsePresenter implements SynchronizationReceiver.SynchronizationR
         }
     }
 
-    public void onActivityStart() {
-        LocalBroadcastManager.getInstance(abstractBrowseActivity)
+    public void onActivityStart(AbstractBrowseActivity abstractBrowseActivity) {
+        this.abstractBrowseActivity = abstractBrowseActivity;
+        LocalBroadcastManager.getInstance(this.abstractBrowseActivity)
                 .registerReceiver(synchronizationReceiver, SynchronizationReceiver.getIntentFilter());
     }
 
     public void onActivityStop() {
         LocalBroadcastManager.getInstance(abstractBrowseActivity).unregisterReceiver(synchronizationReceiver);
+        abstractBrowseActivity = null;
     }
 
     private void onAnimalsAvailable(List<Animal> animalsFromServer) {
@@ -178,6 +167,21 @@ public class BrowsePresenter implements SynchronizationReceiver.SynchronizationR
         return result;
     }
 
+    public static int getIndexOfAnimalOnList(List<Animal> animals, Animal toFind) {
+        int indexOfChangedAnimal = -1;
+        for (int i = 0; i < animals.size(); i++) {
+            if (animals.get(i).getId().equals(toFind.getId()))
+                indexOfChangedAnimal = i;
+        }
+        return indexOfChangedAnimal;
+    }
+
+    public void handleUndoAnimal(Animal animalToUndo) {
+        repositoryService.setFavourite(animalToUndo.getId(), !animalToUndo.getFavourite())
+                .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::onFavChanged);
+    }
+
     private void onFavChanged(Long changedAnimalId) {
         repositoryService.getAnimal(changedAnimalId)
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
@@ -212,50 +216,5 @@ public class BrowsePresenter implements SynchronizationReceiver.SynchronizationR
         Intent i = new Intent(abstractBrowseActivity, DetailsActivity.class);
         i.putExtra(DetailsActivity.EXTRA_ANIMAL, animal);
         abstractBrowseActivity.startActivity(i);
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-    }
-
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-        public BrowsePresenter createFromParcel(Parcel in) {
-            return new BrowsePresenter(in);
-        }
-
-        public BrowsePresenter[] newArray(int size) {
-            return new BrowsePresenter[size];
-        }
-    };
-
-    public static BrowsePresenter init(Bundle arguments, Bundle savedInstanceState) {
-        BrowsePresenter presenter = null;
-        if (arguments != null) {
-            presenter = arguments.getParcelable(ARG_PRESENTER);
-        }
-        if (presenter == null && savedInstanceState != null) {
-            presenter = savedInstanceState.getParcelable(ARG_PRESENTER);
-        }
-        return presenter;
-    }
-
-    public static int getIndexOfAnimalOnList(List<Animal> animals, Animal toFind) {
-        int indexOfChangedAnimal = -1;
-        for (int i = 0; i < animals.size(); i++) {
-            if (animals.get(i).getId().equals(toFind.getId()))
-                indexOfChangedAnimal = i;
-        }
-        return indexOfChangedAnimal;
-    }
-
-    public void handleUndoAnimal(Animal animalToUndo) {
-        repositoryService.setFavourite(animalToUndo.getId(), !animalToUndo.getFavourite())
-                .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::onFavChanged);
     }
 }

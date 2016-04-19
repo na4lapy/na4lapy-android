@@ -20,7 +20,7 @@ import pl.kodujdlapolski.na4lapy.model.Animal;
  * limitations under the License.
  *
  */
-public interface OnBrowseElementClickedAction extends Parcelable{
+public interface OnBrowseElementClickedAction {
     void favourite(Animal animal);
     void details(Animal animal);
 }

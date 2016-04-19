@@ -16,6 +16,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Animal;
+import pl.kodujdlapolski.na4lapy.ui.browse.AbstractBrowseActivity;
 import pl.kodujdlapolski.na4lapy.ui.browse.BrowsePresenter;
 
 /**
@@ -42,7 +43,6 @@ public class ListBrowseFragment extends Fragment {
     RecyclerView recycler;
     private RecyclerView.LayoutManager layoutManager;
     private ListBrowseRecyclerAdapter adapter;
-    private BrowsePresenter presenter;
 
     public ListBrowseFragment() {
     }
@@ -51,7 +51,7 @@ public class ListBrowseFragment extends Fragment {
         ListBrowseFragment fragment = new ListBrowseFragment();
         Bundle args = new Bundle();
         args.putSerializable(ARG_ANIMALS_LIST, (ArrayList<Animal>) animals);
-        args.putParcelable(BrowsePresenter.ARG_PRESENTER, presenter);
+
         fragment.setArguments(args);
         return fragment;
     }
@@ -68,13 +68,12 @@ public class ListBrowseFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initAnimals(savedInstanceState);
-        presenter = BrowsePresenter.init(getArguments(), savedInstanceState);
 
         recycler.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
         recycler.setLayoutManager(layoutManager);
         recycler.setItemAnimator(null);
-        adapter = new ListBrowseRecyclerAdapter(animals, presenter);
+        adapter = new ListBrowseRecyclerAdapter(animals, ((AbstractBrowseActivity) getActivity()).getPresenter());
         recycler.setAdapter(adapter);
     }
 
@@ -92,7 +91,7 @@ public class ListBrowseFragment extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         outState.putSerializable(ARG_ANIMALS_LIST, animals);
-        outState.putParcelable(BrowsePresenter.ARG_PRESENTER, presenter);
+
         super.onSaveInstanceState(outState);
     }
 
@@ -129,7 +128,7 @@ public class ListBrowseFragment extends Fragment {
         if (getView() != null) {
             Snackbar.make(getView(), String.format(getString(R.string.removed_from_fav_undo_mess), animalToUndo.getName()), Snackbar.LENGTH_LONG)
                     .setAction(R.string.removed_from_fav_undo_option, v -> {
-                        presenter.handleUndoAnimal(animalToUndo);
+                        ((AbstractBrowseActivity) getActivity()).getPresenter().handleUndoAnimal(animalToUndo);
                     })
                     .show();
         }

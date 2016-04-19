@@ -27,21 +27,19 @@ import pl.kodujdlapolski.na4lapy.ui.browse.BrowsePresenter;
  */
 public class SingleBrowsePagerAdapter extends FragmentPagerAdapter implements BrowsePresenter.UpdateSingleElement {
     private List<Animal> animals;
-    private BrowsePresenter presenter;
     private FragmentManager manager;
     private int viewPagerId;
 
-    public SingleBrowsePagerAdapter(List<Animal> animals, FragmentManager manager, BrowsePresenter presenter, int viewPagerId) {
+    public SingleBrowsePagerAdapter(List<Animal> animals, FragmentManager manager, int viewPagerId) {
         super(manager);
         this.manager = manager;
         this.animals = animals;
-        this.presenter = presenter;
         this.viewPagerId = viewPagerId;
     }
 
     @Override
     public Fragment getItem(int position) {
-        return SingleBrowseFragment.newInstance(animals.get(position), presenter);
+        return SingleBrowseFragment.newInstance(animals.get(position));
     }
 
     @Override

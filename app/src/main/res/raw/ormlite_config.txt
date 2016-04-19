@@ -40,6 +40,9 @@ fieldName=training
 fieldName=description
 # --field-end--
 # --field-start--
+fieldName=photosAuthor
+# --field-end--
+# --field-start--
 fieldName=sterilization
 # --field-end--
 # --field-start--
@@ -105,6 +108,9 @@ fieldName=website
 # --field-end--
 # --field-start--
 fieldName=accountNumber
+# --field-end--
+# --field-start--
+fieldName=adoptionRules
 # --field-end--
 # --field-start--
 fieldName=id

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -18,7 +19,18 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:lineSpacingExtra="4dp"
+        android:maxLines="5"
         tools:text="Lorem ipsum dolor sit amet, colentesque placllis, neque ex hendrerit erat, placerat tristique urna purus sed arcu. Interdum et malesuada fames ac ante ipsum primis in faucibus." />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/expand_or_collapse_btn"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="8dp"
+        android:theme="@style/borderlessButtonStyle"
+        tools:text="@string/more_info" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -73,7 +85,6 @@
             android:id="@+id/info_race"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="sdsdsd"
             tools:text="race" />
 
         <TextView
@@ -233,4 +244,10 @@
             tools:text="admittance_date" />
 
     </GridLayout>
+
+    <TextView
+        android:id="@+id/photos_author_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin" />
 </LinearLayout>

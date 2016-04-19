@@ -1,5 +1,6 @@
 package pl.kodujdlapolski.na4lapy.ui.details;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
@@ -8,6 +9,7 @@ import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -43,9 +45,12 @@ public class ContentDetailsView {
     private DetailsActivity ctx;
     private Animal animal;
     private static final int IMAGES_IN_ROW = 3;// defined in images_single_row.xml
+    private static final int MAX_LINES_COLLAPSED = 5;
 
     @Bind(R.id.description)
     TextView description;
+    @Bind(R.id.expand_or_collapse_btn)
+    Button expandOrCollapseBtn;
     @Bind(R.id.animal_size_image)
     ImageView sizeImage;
     @Bind(R.id.animal_gender_image)
@@ -81,6 +86,8 @@ public class ContentDetailsView {
     TextView infoSterilization;
     @Bind(R.id.info_vaccination)
     TextView infoVaccination;
+    @Bind(R.id.photos_author_info)
+    TextView photosAuthorInfo;
 
     String[] picturesSample1 = new String[]{"http://2.bp.blogspot.com/-uI_rgOFxmT0/Vw6lkKwdTDI/AAAAAAAABLw/T0d2NW0Uc-MsYe1y6u6zvdUdCJxFv4uwACK4B/s1600/pies1_5.jpg",
             "http://4.bp.blogspot.com/-oMb5TMvvpRc/Vw6lkHw7n6I/AAAAAAAABL4/r2hdfKttHpUMPhtFGYgt7KkxqUOFNFVOACK4B/s1600/pies1_2.jpg",
@@ -127,9 +134,17 @@ public class ContentDetailsView {
 
     private void initBasicInfoImagesAndDescription() {
         description.setText(animal.getDescription());
+        description.setOnClickListener(v -> {
+            expandOrCollapseDescription();
+        });
+        expandOrCollapseBtn.setText(R.string.more_info);
+        expandOrCollapseBtn.setOnClickListener(v -> {
+            expandOrCollapseDescription();
+        });
         sizeImage.setImageResource(AnimalUtils.getSizeImage(animal));
         activityImage.setImageResource(AnimalUtils.getActivityImage(animal));
         genderImage.setImageResource(AnimalUtils.getGenderImage(animal));
+        photosAuthorInfo.setText(String.format(ctx.getString(R.string.photos_author_info), animal.getPhotosAuthor()));
     }
 
     private void initImagesContainer() {
@@ -165,7 +180,6 @@ public class ContentDetailsView {
             Intent i = new Intent(ctx, AnimalGalleryActivity.class);
             i.putExtra(AnimalGalleryActivity.EXTRA_GALLERY, getGallery(urls));
             i.putExtra(AnimalGalleryActivity.EXTRA_SELECTED_PIC, index);
-            i.putExtra(AnimalGalleryActivity.EXTRA_ANIMAL_NAME, animal.getName());
             ctx.startActivity(i);
         });
     }
@@ -180,7 +194,6 @@ public class ContentDetailsView {
         return photos;
     }
 
-    //
     private int getDipFromInt(int value) {
         return (int) (value * TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1f, ctx.getResources()
                 .getDisplayMetrics()));
@@ -194,5 +207,13 @@ public class ContentDetailsView {
         int margin = ((int) (ctx.getResources().getDimension(R.dimen.activity_horizontal_margin))) * 4; // because of scrollview margin and inner images margin
         int actualWidth = width - margin;
         return actualWidth / IMAGES_IN_ROW;
+    }
+
+    private void expandOrCollapseDescription() {
+        boolean isExpanded = description.getMaxLines() == MAX_LINES_COLLAPSED;
+        ObjectAnimator animation = ObjectAnimator.ofInt(description, "maxLines",
+                isExpanded ? description.getLineCount() : MAX_LINES_COLLAPSED);
+        animation.setDuration(200).start();
+        expandOrCollapseBtn.setText(isExpanded ? R.string.less_info : R.string.more_info);
     }
 }

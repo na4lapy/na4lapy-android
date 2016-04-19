@@ -8,39 +8,36 @@ import android.view.ViewGroup;
 
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Animal;
-import pl.kodujdlapolski.na4lapy.ui.browse.BrowsePresenter;
+import pl.kodujdlapolski.na4lapy.ui.browse.AbstractBrowseActivity;
 
 /**
  * Created by Natalia Wróblewska on 2016-03-15.
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
  */
 public class SingleBrowseFragment extends Fragment {
 
     private static final String ARG_ANIMAL = "argAnimal";
     private Animal animal;
-    private BrowsePresenter presenter;
     private SingleBrowseViewHolder viewHolder;
 
     public SingleBrowseFragment() {
     }
 
-    public static SingleBrowseFragment newInstance(Animal animal, BrowsePresenter presenter) {
+    public static SingleBrowseFragment newInstance(Animal animal) {
         SingleBrowseFragment fragment = new SingleBrowseFragment();
         Bundle args = new Bundle();
         args.putSerializable(ARG_ANIMAL, animal);
-        args.putParcelable(BrowsePresenter.ARG_PRESENTER, presenter);
         fragment.setArguments(args);
         return fragment;
     }
@@ -55,10 +52,9 @@ public class SingleBrowseFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initAnimal(savedInstanceState);
-        presenter = BrowsePresenter.init(getArguments(), savedInstanceState);
-
         viewHolder = new SingleBrowseViewHolder(getView());
-        viewHolder.init(animal, presenter);
+        viewHolder.init(animal, ((AbstractBrowseActivity) getActivity()).getPresenter());
+
     }
 
     private void initAnimal(Bundle savedInstanceState) {
@@ -75,12 +71,12 @@ public class SingleBrowseFragment extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         outState.putSerializable(ARG_ANIMAL, animal);
-        outState.putParcelable(BrowsePresenter.ARG_PRESENTER, presenter);
         super.onSaveInstanceState(outState);
     }
 
+
     public void update(Animal changedAnimal) {
         animal = changedAnimal;
-        viewHolder.init(animal, presenter);
+        viewHolder.init(animal, ((AbstractBrowseActivity) getActivity()).getPresenter());
     }
 }

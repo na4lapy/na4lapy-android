@@ -17,6 +17,7 @@ public class Shelter extends BaseEntity implements Serializable {
     @DatabaseField private String phoneNumber;
     @DatabaseField private String website;
     @DatabaseField private String accountNumber;
+    @DatabaseField private String adoptionRules;
 
     public Shelter() {
         // needed by ormlite
@@ -92,6 +93,14 @@ public class Shelter extends BaseEntity implements Serializable {
 
     public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
+    }
+
+    public String getAdoptionRules() {
+        return adoptionRules;
+    }
+
+    public void setAdoptionRules(String adoptionRules) {
+        this.adoptionRules = adoptionRules;
     }
 
     @Override

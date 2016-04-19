@@ -33,6 +33,15 @@ public class FakeApiServiceImpl implements ApiService {
         shelter.setPhoneNumber("58 522-37-27");
         shelter.setWebsite("http://schroniskopromyk.pl/");
         shelter.setAccountNumber("18124012681111001038597629");
+        shelter.setAdoptionRules("Przed podjęciem decyzji o adopcji pomyśl czy jesteś w stanie :\n" +
+                "\n" +
+                "1. dobrze karmić i poić zwierzę każdego dnia,\n" +
+                "2. zapewnić psu spacery, minimum trzy razy dziennie,\n" +
+                "3. Jeśli potrzebujesz psa do pilnowania Twojej posesji, zaopatrzyć go w wygodną, ciepłą budę, kojec,\n" +
+                "4. profilaktycznie szczepić psa, kota, a jeśli zachoruje pójść z nim do lekarza weterynarii,\n" +
+                "5. zapewnić mu opiekę na czas Twoich wyjazdów ( wakacje, ferie, wyjazdy służbowe),\n" +
+                "6. poświęcić mu czas na zabawę i pielęgnację,\n" +
+                "7. zabezpieczyć swojego pupila przed niepotrzebnym rozmnażaniem.");
     }
 
     @Override
@@ -86,6 +95,7 @@ public class FakeApiServiceImpl implements ApiService {
         animal.setFavourite(random.nextBoolean());
         animal.setDescription("„Witam,\n" +
                 "W schronisku jestem od 2011 roku. Trafiłem tutaj jako ok. półroczne, całkowicie dzikie szczenię złapane na ul.Orłowskiej. Pierwszą pracę ze mną podjęła  Julita i powoli robiłem postępy. Niedawno dołączyła do tej współpracy Monika i moja socjalizacja poczyniła spore postępy. Już chodzę w szelkach i wychodzę na smyczy na krótkie spacery. Tan ostatni na sesję zdjęciową był już naprawdę nie lada wyczynem. Nie sądzę, żebym tak od razu znalazł dom, ale chciałem pokazać, że taka praca u podstaw realizowana min. przez wolontariuszy potrafi przynieść niesamowite efekty, chociaż czasem jak w moim przypadku jest to rozciągnięte w czasie. 30 marca, chyba po raz pierwszy miałem okazję  przebywać w pomieszczeniach zamkniętych (sala dydaktyczna). Owszem związany był z tym spory stres, ale jeszcze pól roku temu byłoby to zupełnie nierealne. Przede mną jeszcze długa droga, ale postaram się Was informować na bieżącą o czynionych postępach i być może przyjdzie dzień, w którym pojadę do nowego domu.” Pozdrawiam, Kokos.");
+        animal.setPhotosAuthor("Anny Kowalskiej");
         return animal;
     }
 }

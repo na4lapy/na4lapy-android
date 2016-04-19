@@ -5,6 +5,7 @@
     <color name="colorPrimaryDark">#006974</color>
     <color name="colorPrimaryDark50opacity">#e6006974</color>
     <color name="colorAccent">#FF5252</color>
+    <color name="colorAccent30opacity">#1eff5252</color>
     <color name="colorPrimaryLight">#80CBC4</color>
     <color name="divider">#EEEEEE</color>
     <color name="lightText">#FFFFFF</color>

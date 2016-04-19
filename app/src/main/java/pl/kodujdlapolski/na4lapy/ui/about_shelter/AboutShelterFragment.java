@@ -66,6 +66,9 @@ public class AboutShelterFragment extends Fragment {
     @Bind(R.id.shelter_www)
     TextView shelterWWW;
 
+    @Bind(R.id.shelter_adoption_rules)
+    TextView adoptionRules;
+
 
     @Bind(R.id.about_shelter_progress)
     ProgressBar progressBar;
@@ -115,6 +118,7 @@ public class AboutShelterFragment extends Fragment {
                 shelter.getBuildingNumber(),
                 shelter.getPostalCode(),
                 shelter.getCity()));
+        adoptionRules.setText(shelter.getAdoptionRules());
     }
 
     private String getFormattedAccount(String accountNumber) {

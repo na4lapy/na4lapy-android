@@ -36,6 +36,7 @@ public class Animal extends BaseEntity implements Serializable {
     @DatabaseField private ActivityAnimal activity;
     @DatabaseField private Training training;
     @DatabaseField private String description;
+    @DatabaseField private String photosAuthor;
 
 
     @DatabaseField private Boolean sterilization;
@@ -225,6 +226,14 @@ public class Animal extends BaseEntity implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getPhotosAuthor() {
+        return photosAuthor;
+    }
+
+    public void setPhotosAuthor(String photosAuthor) {
+        this.photosAuthor = photosAuthor;
     }
 
     @Override
