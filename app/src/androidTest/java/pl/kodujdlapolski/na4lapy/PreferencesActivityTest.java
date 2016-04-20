@@ -13,9 +13,9 @@ import org.junit.Test;
 
 import pl.kodujdlapolski.na4lapy.model.UserPreferences;
 import pl.kodujdlapolski.na4lapy.presenter.preferences.PreferencesPresenter;
-import pl.kodujdlapolski.na4lapy.ui.preferences.ToggleImageButton;
 import pl.kodujdlapolski.na4lapy.ui.preferences.PreferencesActivity;
 import pl.kodujdlapolski.na4lapy.ui.preferences.PreferencesFragment;
+import pl.kodujdlapolski.na4lapy.ui.preferences.ToggleImageButton;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -47,7 +47,10 @@ public class PreferencesActivityTest {
         PreferencesFragment fragment = (PreferencesFragment) activityRule.getActivity()
                 .getSupportFragmentManager().findFragmentById(R.id.preferences_app_fragment);
         PreferencesPresenter preferencesPresenter = fragment.getPresenter();
-        userPreferences = new UserPreferences(true, false, true, true, true, 1, 15, true, true, true, true, true);
+        userPreferences = new UserPreferences();
+        userPreferences.setTypeDog(true);
+        userPreferences.setAgeMin(1);
+        userPreferences.setAgeMax(15);
         preferencesPresenter.savePreferences(userPreferences);
     }
 
@@ -115,13 +118,19 @@ public class PreferencesActivityTest {
 
     @Test
     public void doesIconChangeColorWhenYouClickIt() {
+        ToggleImageButton button = (ToggleImageButton)activityRule.getActivity().findViewById(R.id.type_dog);
+        ColorFilter activatedColor;
+        if (button == null) {
+            throw new AssertionError("Couldn't find a view");
+        }
+        activatedColor = button.getColorFilter();
         onView(withId(R.id.type_dog)).perform(click());
         onView(withId(R.id.type_dog)).check(matches(new Matcher<View>() {
             @Override
             public boolean matches(Object item) {
                 ToggleImageButton button = (ToggleImageButton) item;
                 ColorFilter buttonFilter = button.getColorFilter();
-                return (buttonFilter == null);
+                return (!buttonFilter.equals(activatedColor));
             }
 
             @Override
@@ -181,16 +190,16 @@ public class PreferencesActivityTest {
     public void areIconsProperlyCheckedDueToUserPreferences() {
         onView(withId(R.id.type_dog)).check(matches(isChecked()));
         onView(withId(R.id.type_cat)).check(matches(isNotChecked()));
-        onView(withId(R.id.type_other)).check(matches(isChecked()));
-        onView(withId(R.id.gender_woman)).check(matches(isChecked()));
-        onView(withId(R.id.gender_man)).check(matches(isChecked()));
+        onView(withId(R.id.type_other)).check(matches(isNotChecked()));
+        onView(withId(R.id.gender_woman)).check(matches(isNotChecked()));
+        onView(withId(R.id.gender_man)).check(matches(isNotChecked()));
         onView(withId(R.id.age_min)).check(matches(withText("1")));
         onView(withId(R.id.age_max)).check(matches(withText("15")));
-        onView(withId(R.id.size_small)).check(matches(isChecked()));
-        onView(withId(R.id.size_medium)).check(matches(isChecked()));
-        onView(withId(R.id.size_large)).check(matches(isChecked()));
-        onView(withId(R.id.activity_low)).check(matches(isChecked()));
-        onView(withId(R.id.activity_high)).check(matches(isChecked()));
+        onView(withId(R.id.size_small)).check(matches(isNotChecked()));
+        onView(withId(R.id.size_medium)).check(matches(isNotChecked()));
+        onView(withId(R.id.size_large)).check(matches(isNotChecked()));
+        onView(withId(R.id.activity_low)).check(matches(isNotChecked()));
+        onView(withId(R.id.activity_high)).check(matches(isNotChecked()));
     }
 
     @Test

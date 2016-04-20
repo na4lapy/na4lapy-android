@@ -18,38 +18,20 @@ public class UserPreferences {
     private boolean activityLow;
     private boolean activityHigh;
 
-    public UserPreferences(boolean typeDog, boolean typeCat, boolean typeOther, boolean genderWoman,
-                           boolean genderMan, int ageMin, int ageMax, boolean sizeSmall,
-                           boolean sizeMedium, boolean sizeLarge, boolean activityLow, boolean activityHigh) {
-
-        this.typeDog = typeDog;
-        this.typeCat = typeCat;
-        this.typeOther = typeOther;
-        this.genderWoman = genderWoman;
-        this.genderMan = genderMan;
-        this.ageMin = ageMin;
-        this.ageMax = ageMax;
-        this.sizeSmall = sizeSmall;
-        this.sizeMedium = sizeMedium;
-        this.sizeLarge = sizeLarge;
-        this.activityLow = activityLow;
-        this.activityHigh = activityHigh;
-    }
-
     public UserPreferences() {
 
-        this.typeDog = false;
-        this.typeCat = false;
-        this.typeOther = false;
-        this.genderWoman = false;
-        this.genderMan = false;
-        this.ageMin = 0;
-        this.ageMax = 20;
-        this.sizeSmall = false;
-        this.sizeMedium = false;
-        this.sizeLarge = false;
-        this.activityLow = false;
-        this.activityHigh = false;
+        typeDog = false;
+        typeCat = false;
+        typeOther = false;
+        genderWoman = false;
+        genderMan = false;
+        ageMin = 0;
+        ageMax = 20;
+        sizeSmall = false;
+        sizeMedium = false;
+        sizeLarge = false;
+        activityLow = false;
+        activityHigh = false;
     }
 
     public boolean isTypeDog() {
