@@ -10,6 +10,8 @@
     <color name="divider">#EEEEEE</color>
     <color name="lightText">#FFFFFF</color>
     <color name="black70opacity">#AA000000</color>
+    <color name="colorIntroductionInicatorSelected">#99FFFFFF</color>
+    <color name="colorIntroductionInicatorNotSelected">#26FFFFFF</color>
 </resources>
 
     <!--> pierwsza paleta barw <-->

@@ -40,7 +40,7 @@ public class Animal extends BaseEntity implements Serializable {
 
 
     @DatabaseField private Boolean sterilization;
-    @DatabaseField private Boolean chip;
+    @DatabaseField private Long chip;
     @DatabaseField private Boolean vaccination;
 
     @DatabaseField private Attitude attitudeTowardsPeople;
@@ -146,11 +146,11 @@ public class Animal extends BaseEntity implements Serializable {
         this.sterilization = sterilization;
     }
 
-    public Boolean getChip() {
+    public Long getChip() {
         return chip;
     }
 
-    public void setChip(Boolean chip) {
+    public void setChip(Long chip) {
         this.chip = chip;
     }
 

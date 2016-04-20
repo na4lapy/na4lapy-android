@@ -66,7 +66,8 @@ public class DetailsActivity extends AppCompatActivity {
             ContentDetailsView contentDetailsView = new ContentDetailsView(this, animal);
             detailsContainer.addView(contentDetailsView.getView());
         } else {
-            showError();
+            // as we cannot do anything without an animal
+            finish();
         }
     }
 
@@ -80,10 +81,6 @@ public class DetailsActivity extends AppCompatActivity {
             animal = (Animal) savedInstanceState.getSerializable(EXTRA_ANIMAL);
         }
         return animal != null;
-    }
-
-    private void showError() {
-        // todo implementation
     }
 
     private void initToolbar() {

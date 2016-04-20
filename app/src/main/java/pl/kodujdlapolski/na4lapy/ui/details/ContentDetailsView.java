@@ -123,7 +123,7 @@ public class ContentDetailsView {
         infoAttitudeTowardsChildren.setText(ctx.getString(animal.getAttitudeTowardsChildren().resId));
         infoAttitudeTowardsDogs.setText(ctx.getString(animal.getAttitudeTowardsDogs().resId));
         infoAttitudeTowardsPeople.setText(ctx.getString(animal.getAttitudeTowardsPeople().resId));
-        infoChip.setText(animal.getChip() ? ctx.getString(R.string.yes) : ctx.getString(R.string.no));
+        infoChip.setText(animal.getChip().toString());
         infoRace.setText(animal.getRace());
         infoSize.setText(ctx.getString(animal.getSize().resId));
         infoGender.setText(ctx.getString(animal.getGender().resId));

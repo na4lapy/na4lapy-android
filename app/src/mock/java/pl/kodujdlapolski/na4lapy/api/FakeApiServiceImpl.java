@@ -86,7 +86,7 @@ public class FakeApiServiceImpl implements ApiService {
         animal.setActivity(ActivityAnimal.values()[random.nextInt(ActivityAnimal.values().length)]);
         animal.setTraining(Training.values()[random.nextInt(Training.values().length)]);
         animal.setSterilization(random.nextBoolean());
-        animal.setChip(random.nextBoolean());
+        animal.setChip(random.nextLong());
         animal.setVaccination(random.nextBoolean());
         animal.setAttitudeTowardsPeople(Attitude.values()[random.nextInt(Attitude.values().length)]);
         animal.setAttitudeTowardsChildren(Attitude.values()[random.nextInt(Attitude.values().length)]);

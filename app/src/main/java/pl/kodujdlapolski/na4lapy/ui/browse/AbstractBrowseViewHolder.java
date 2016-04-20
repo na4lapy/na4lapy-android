@@ -54,6 +54,7 @@ public abstract class AbstractBrowseViewHolder extends RecyclerView.ViewHolder {
 //          Photo pic = animal.getPhotos().iterator().next(); // todo remove comment when pictures are available
         Picasso.with(itemView.getContext())
                 .load(picturesSample[animal.getId() %2 == 0 ? 0 : 1 ])
+                .placeholder(R.drawable.pic_404dog)
                 .into(profilePic);
 
         name.setText(animal.getName());
