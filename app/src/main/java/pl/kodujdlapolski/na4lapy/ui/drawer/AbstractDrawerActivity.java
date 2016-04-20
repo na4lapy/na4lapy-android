@@ -39,16 +39,6 @@ public abstract class AbstractDrawerActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return handler.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu_option, menu);
-        return true;
-    }
 
     @Override
     public void onBackPressed() {

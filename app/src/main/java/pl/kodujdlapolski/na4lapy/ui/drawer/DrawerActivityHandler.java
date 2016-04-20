@@ -69,14 +69,6 @@ public class DrawerActivityHandler {
         return true;
     }
 
-    protected boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return false;
-    }
-
     public void setDrawer() {
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         activity.setSupportActionBar(toolbar);
