@@ -170,65 +170,26 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/details_table_inner_margin"
             android:layout_marginRight="@dimen/details_table_inner_margin"
-            android:text="@string/details_vaccination" />
+            android:text="@string/details_vaccination_basic" />
 
         <TextView
-            android:id="@+id/info_vaccination"
+            android:id="@+id/info_vaccination_basic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="vaccination" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/details_table_inner_margin"
-            android:layout_marginRight="@dimen/details_table_inner_margin"
-            android:text="@string/details_attitude_towards_people" />
-
-        <TextView
-            android:id="@+id/info_attitude_towards_people"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="attitude_towards_people" />
+            tools:text="vaccination basic" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/details_table_inner_margin"
             android:layout_marginRight="@dimen/details_table_inner_margin"
-            android:text="@string/details_attitude_towards_children" />
+            android:text="@string/details_vaccination_extended" />
 
         <TextView
-            android:id="@+id/info_attitude_towards_children"
+            android:id="@+id/info_vaccination_extended"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="attitude_towards_children" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/details_table_inner_margin"
-            android:layout_marginRight="@dimen/details_table_inner_margin"
-            android:text="@string/details_attitude_towards_dogs" />
-
-        <TextView
-            android:id="@+id/info_attitude_towards_dogs"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="attitude_towards_dogs" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/details_table_inner_margin"
-            android:layout_marginRight="@dimen/details_table_inner_margin"
-            android:text="@string/details_attitude_towards_cats" />
-
-        <TextView
-            android:id="@+id/info_attitude_towards_cats"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="attitude_towards_cats" />
+            tools:text="vaccination extended" />
 
         <TextView
             android:layout_width="wrap_content"

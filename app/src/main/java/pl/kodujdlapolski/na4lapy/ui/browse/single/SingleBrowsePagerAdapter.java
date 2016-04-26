@@ -3,6 +3,7 @@ package pl.kodujdlapolski.na4lapy.ui.browse.single;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import java.util.List;
 
@@ -52,7 +53,8 @@ public class SingleBrowsePagerAdapter extends FragmentPagerAdapter implements Br
         int positionOnList = BrowsePresenter.getIndexOfAnimalOnList(animals, animal);
         if (positionOnList != -1) {
             String tag = "android:switcher:" + viewPagerId + ":" + positionOnList;
-            ((SingleBrowseFragment) manager.findFragmentByTag(tag)).update(animal);
+            if (manager.findFragmentByTag(tag) != null)
+                ((SingleBrowseFragment) manager.findFragmentByTag(tag)).update(animal);
         }
     }
 

@@ -64,14 +64,6 @@ public class ContentDetailsView {
     TextView infoActivity;
     @Bind(R.id.info_admittance_date)
     TextView infoAdmittanceDate;
-    @Bind(R.id.info_attitude_towards_cats)
-    TextView infoAttitudeTowardsCats;
-    @Bind(R.id.info_attitude_towards_children)
-    TextView infoAttitudeTowardsChildren;
-    @Bind(R.id.info_attitude_towards_dogs)
-    TextView infoAttitudeTowardsDogs;
-    @Bind(R.id.info_attitude_towards_people)
-    TextView infoAttitudeTowardsPeople;
     @Bind(R.id.info_chip)
     TextView infoChip;
     @Bind(R.id.info_race)
@@ -84,8 +76,10 @@ public class ContentDetailsView {
     TextView infoTraining;
     @Bind(R.id.info_sterilization)
     TextView infoSterilization;
-    @Bind(R.id.info_vaccination)
-    TextView infoVaccination;
+    @Bind(R.id.info_vaccination_basic)
+    TextView infoVaccinationBasic;
+    @Bind(R.id.info_vaccination_extended)
+    TextView infoVaccinationExtended;
     @Bind(R.id.photos_author_info)
     TextView photosAuthorInfo;
 
@@ -119,17 +113,14 @@ public class ContentDetailsView {
         java.util.Date date = new java.util.Date(animal.getAdmittanceDate());
         infoActivity.setText(ctx.getString(animal.getActivity().resId));
         infoAdmittanceDate.setText(android.text.format.DateFormat.format("dd.MM.yyyy", date));
-        infoAttitudeTowardsCats.setText(ctx.getString(animal.getAttitudeTowardsCats().resId));
-        infoAttitudeTowardsChildren.setText(ctx.getString(animal.getAttitudeTowardsChildren().resId));
-        infoAttitudeTowardsDogs.setText(ctx.getString(animal.getAttitudeTowardsDogs().resId));
-        infoAttitudeTowardsPeople.setText(ctx.getString(animal.getAttitudeTowardsPeople().resId));
         infoChip.setText(animal.getChip().toString());
         infoRace.setText(animal.getRace());
         infoSize.setText(ctx.getString(animal.getSize().resId));
         infoGender.setText(ctx.getString(animal.getGender().resId));
         infoTraining.setText(ctx.getString(animal.getTraining().resId));
         infoSterilization.setText(animal.getSterilization() ? ctx.getString(R.string.yes) : ctx.getString(R.string.no));
-        infoVaccination.setText(animal.getVaccination() ? ctx.getString(R.string.yes) : ctx.getString(R.string.no));
+        infoVaccinationBasic.setText(animal.getVaccinationBasic() ? ctx.getString(R.string.yes) : ctx.getString(R.string.no));
+        infoVaccinationExtended.setText(animal.getVaccinationExtended() ? ctx.getString(R.string.yes) : ctx.getString(R.string.no));
     }
 
     private void initBasicInfoImagesAndDescription() {

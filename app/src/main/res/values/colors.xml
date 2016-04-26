@@ -12,6 +12,8 @@
     <color name="black70opacity">#AA000000</color>
     <color name="colorIntroductionInicatorSelected">#99FFFFFF</color>
     <color name="colorIntroductionInicatorNotSelected">#26FFFFFF</color>
+    <color name="introABgColor">#64c299</color>
+    <color name="introBBgColor">#6aa9b8</color>
 </resources>
 
     <!--> pierwsza paleta barw <-->

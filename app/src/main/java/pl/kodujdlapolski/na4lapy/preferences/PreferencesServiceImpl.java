@@ -30,4 +30,17 @@ public class PreferencesServiceImpl implements PreferencesService {
         String json = mSharedPreferences.getString(KEY_USER_PREFERENCES, null);
         return mGson.fromJson(json, UserPreferences.class);
     }
+
+    @Override
+    public boolean shouldIntroductionBeShown() {
+        boolean wasIntroductionShown = mSharedPreferences.getBoolean(KEY_WAS_INTRODUCTION_SHOWN, false);
+        if (!wasIntroductionShown) {
+            SharedPreferences.Editor editor = mSharedPreferences.edit();
+            editor.putBoolean(KEY_WAS_INTRODUCTION_SHOWN, true);
+            editor.apply();
+            return true;
+        }
+        return false;
+    }
+
 }

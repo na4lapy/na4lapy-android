@@ -1,5 +1,7 @@
 package pl.kodujdlapolski.na4lapy.ui.browse;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -13,6 +15,8 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import pl.kodujdlapolski.na4lapy.R;
+import pl.kodujdlapolski.na4lapy.model.Animal;
+import pl.kodujdlapolski.na4lapy.ui.details.DetailsActivity;
 import pl.kodujdlapolski.na4lapy.ui.drawer.AbstractDrawerActivity;
 import pl.kodujdlapolski.na4lapy.ui.drawer.DrawerActivityHandler;
 
@@ -34,7 +38,7 @@ public class AbstractBrowseActivity extends AbstractDrawerActivity {
 
     @SuppressWarnings("unused")
     @OnClick(R.id.try_again_btn)
-    public void onTryAgainClick(){
+    public void onTryAgainClick() {
         errorContainer.setVisibility(View.GONE);
         browsePresenter.startDownloadingData();
     }
@@ -129,11 +133,19 @@ public class AbstractBrowseActivity extends AbstractDrawerActivity {
         tabs.setVisibility(View.GONE);
     }
 
-    public int getViewPagerId(){
+    public int getViewPagerId() {
         return viewPager.getId();
     }
 
     public BrowsePresenter getPresenter() {
         return browsePresenter;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == DetailsActivity.REQUEST_CODE_ANIMAL && resultCode == Activity.RESULT_OK) {
+            Animal changedAnimal = (Animal) data.getSerializableExtra(DetailsActivity.EXTRA_ANIMAL);
+            browsePresenter.onChangedAnimalAvailable(changedAnimal);
+        }
     }
 }

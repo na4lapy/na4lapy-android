@@ -10,7 +10,6 @@ import java.io.Serializable;
 import java.util.Random;
 
 import pl.kodujdlapolski.na4lapy.model.type.ActivityAnimal;
-import pl.kodujdlapolski.na4lapy.model.type.Attitude;
 import pl.kodujdlapolski.na4lapy.model.type.Gender;
 import pl.kodujdlapolski.na4lapy.model.type.Size;
 import pl.kodujdlapolski.na4lapy.model.type.Species;
@@ -38,15 +37,10 @@ public class Animal extends BaseEntity implements Serializable {
     @DatabaseField private String description;
     @DatabaseField private String photosAuthor;
 
-
     @DatabaseField private Boolean sterilization;
     @DatabaseField private Long chip;
-    @DatabaseField private Boolean vaccination;
-
-    @DatabaseField private Attitude attitudeTowardsPeople;
-    @DatabaseField private Attitude attitudeTowardsChildren;
-    @DatabaseField private Attitude attitudeTowardsDogs;
-    @DatabaseField private Attitude attitudeTowardsCats;
+    @DatabaseField private Boolean vaccinationBasic;
+    @DatabaseField private Boolean vaccinationExtended;
 
     @ForeignCollectionField(eager = false)
     private Collection<Photo> photos;
@@ -154,46 +148,6 @@ public class Animal extends BaseEntity implements Serializable {
         this.chip = chip;
     }
 
-    public Boolean getVaccination() {
-        return vaccination;
-    }
-
-    public void setVaccination(Boolean vaccination) {
-        this.vaccination = vaccination;
-    }
-
-    public Attitude getAttitudeTowardsPeople() {
-        return attitudeTowardsPeople;
-    }
-
-    public void setAttitudeTowardsPeople(Attitude attitudeTowardsPeople) {
-        this.attitudeTowardsPeople = attitudeTowardsPeople;
-    }
-
-    public Attitude getAttitudeTowardsChildren() {
-        return attitudeTowardsChildren;
-    }
-
-    public void setAttitudeTowardsChildren(Attitude attitudeTowardsChildren) {
-        this.attitudeTowardsChildren = attitudeTowardsChildren;
-    }
-
-    public Attitude getAttitudeTowardsDogs() {
-        return attitudeTowardsDogs;
-    }
-
-    public void setAttitudeTowardsDogs(Attitude attitudeTowardsDogs) {
-        this.attitudeTowardsDogs = attitudeTowardsDogs;
-    }
-
-    public Attitude getAttitudeTowardsCats() {
-        return attitudeTowardsCats;
-    }
-
-    public void setAttitudeTowardsCats(Attitude attitudeTowardsCats) {
-        this.attitudeTowardsCats = attitudeTowardsCats;
-    }
-
     public Collection<Photo> getPhotos() {
         return photos;
     }
@@ -235,6 +189,21 @@ public class Animal extends BaseEntity implements Serializable {
     public void setPhotosAuthor(String photosAuthor) {
         this.photosAuthor = photosAuthor;
     }
+    public Boolean getVaccinationBasic() {
+        return vaccinationBasic;
+    }
+
+    public void setVaccinationBasic(Boolean vaccinationBasic) {
+        this.vaccinationBasic = vaccinationBasic;
+    }
+
+    public Boolean getVaccinationExtended() {
+        return vaccinationExtended;
+    }
+
+    public void setVaccinationExtended(Boolean vaccinationExtended) {
+        this.vaccinationExtended = vaccinationExtended;
+    }
 
     @Override
     public String toString() {
@@ -252,11 +221,8 @@ public class Animal extends BaseEntity implements Serializable {
                 ", training=" + training +
                 ", sterilization=" + sterilization +
                 ", chip=" + chip +
-                ", vaccination=" + vaccination +
-                ", attitudeTowardsPeople=" + attitudeTowardsPeople +
-                ", attitudeTowardsChildren=" + attitudeTowardsChildren +
-                ", attitudeTowardsDogs=" + attitudeTowardsDogs +
-                ", attitudeTowardsCats=" + attitudeTowardsCats +
+                ", vaccinationBasic=" + vaccinationBasic +
+                ", vaccinationExtended=" + vaccinationExtended +
                 ", photos=" + photos +
                 ", favourite=" + favourite +
                 '}';

@@ -2,6 +2,7 @@ package pl.kodujdlapolski.na4lapy.ui.browse;
 
 import android.content.Intent;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.content.LocalBroadcastManager;
 
 import java.util.ArrayList;
@@ -85,8 +86,8 @@ public class BrowsePresenter implements SynchronizationReceiver.SynchronizationR
         adapter = isSingleBrowse ?
                 new SingleBrowsePagerAdapter(animals, abstractBrowseActivity.getSupportFragmentManager(), abstractBrowseActivity.getViewPagerId())
                 : new ListBrowsePagerAdapter(abstractBrowseActivity, animals, abstractBrowseActivity.getSupportFragmentManager(), this);
-
         startDownloadingData();
+
     }
 
     public void startDownloadingData() {
@@ -119,12 +120,12 @@ public class BrowsePresenter implements SynchronizationReceiver.SynchronizationR
 
     public void onActivityStop() {
         LocalBroadcastManager.getInstance(abstractBrowseActivity).unregisterReceiver(synchronizationReceiver);
-        abstractBrowseActivity = null;
     }
 
     private void onAnimalsAvailable(List<Animal> animalsFromServer) {
         if (animalsFromServer != null) {
             animals.clear();
+            adapter.notifyDataSetChanged();
             animals.addAll(animalsFromServer);
             adapter.notifyDataSetChanged();
             abstractBrowseActivity.showProgressHideContent(false);
@@ -188,7 +189,7 @@ public class BrowsePresenter implements SynchronizationReceiver.SynchronizationR
                 .subscribe(this::onChangedAnimalAvailable);
     }
 
-    private void onChangedAnimalAvailable(Animal changedAnimal) {
+    public void onChangedAnimalAvailable(Animal changedAnimal) {
         int indexWhichShouldBeReplaced = getIndexOfAnimalOnList(animals, changedAnimal);
         if (indexWhichShouldBeReplaced != -1) {
             if (isFavList && !changedAnimal.isFavourite()) {
@@ -215,6 +216,6 @@ public class BrowsePresenter implements SynchronizationReceiver.SynchronizationR
     public void details(Animal animal) {
         Intent i = new Intent(abstractBrowseActivity, DetailsActivity.class);
         i.putExtra(DetailsActivity.EXTRA_ANIMAL, animal);
-        abstractBrowseActivity.startActivity(i);
+        abstractBrowseActivity.startActivityForResult(i, DetailsActivity.REQUEST_CODE_ANIMAL);
     }
 }

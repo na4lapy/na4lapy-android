@@ -59,4 +59,13 @@
     <style name="borderlessButtonStyle" parent="AppTheme">
         <item name="colorButtonNormal">@color/colorAccent30opacity</item>
     </style>
+
+    <style name="transparent" parent="AppTheme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
 </resources>

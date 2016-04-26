@@ -49,19 +49,10 @@ fieldName=sterilization
 fieldName=chip
 # --field-end--
 # --field-start--
-fieldName=vaccination
+fieldName=vaccinationBasic
 # --field-end--
 # --field-start--
-fieldName=attitudeTowardsPeople
-# --field-end--
-# --field-start--
-fieldName=attitudeTowardsChildren
-# --field-end--
-# --field-start--
-fieldName=attitudeTowardsDogs
-# --field-end--
-# --field-start--
-fieldName=attitudeTowardsCats
+fieldName=vaccinationExtended
 # --field-end--
 # --field-start--
 fieldName=photos

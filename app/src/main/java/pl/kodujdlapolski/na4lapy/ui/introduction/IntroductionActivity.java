@@ -1,29 +1,23 @@
 package pl.kodujdlapolski.na4lapy.ui.introduction;
 
 import android.animation.ArgbEvaluator;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.os.Build;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.Toolbar;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,6 +79,9 @@ public class IntroductionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_introduction);
         ButterKnife.bind(this);
         initIntroductionPages();
@@ -97,11 +94,14 @@ public class IntroductionActivity extends AppCompatActivity {
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                int fromColor = position == LAST_INTRO ? android.R.color.transparent : introductionPages.get(position).getBgColor();
-                int toColor = position == LAST_INTRO ? android.R.color.transparent : introductionPages.get(position == LAST_VISIBLE_INTRO ? position : position + 1).getBgColor();
+                int fromColor = position == LAST_INTRO ? ContextCompat.getColor(IntroductionActivity.this, android.R.color.transparent) : introductionPages.get(position).getBgColor();
+                int toColor = position == LAST_INTRO ? ContextCompat.getColor(IntroductionActivity.this, android.R.color.transparent) : introductionPages.get(position == LAST_VISIBLE_INTRO ? position : position + 1).getBgColor();
 
                 int colorUpdate = (Integer) evaluator.evaluate(positionOffset, fromColor, toColor);
                 introductionContainer.setBackgroundColor(colorUpdate);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    getWindow().setNavigationBarColor(colorUpdate);
+                }
             }
 
             @Override
@@ -109,12 +109,12 @@ public class IntroductionActivity extends AppCompatActivity {
                 currentPage = position;
                 updateIndicators(currentPage);
                 if (position == LAST_INTRO) {
+                    introductionContainer.setBackgroundColor(ContextCompat.getColor(IntroductionActivity.this, android.R.color.transparent));
                     nextBtn.setVisibility(View.GONE);
                     finishBtn.setVisibility(View.GONE);
                     skipBtn.setVisibility(View.GONE);
                     onFinish();
                 } else {
-                    introductionContainer.setBackgroundColor(introductionPages.get(position).getBgColor());
                     boolean lastPage = position == LAST_VISIBLE_INTRO;
                     nextBtn.setVisibility(lastPage ? View.GONE : View.VISIBLE);
                     finishBtn.setVisibility(lastPage ? View.VISIBLE : View.GONE);
@@ -129,8 +129,8 @@ public class IntroductionActivity extends AppCompatActivity {
 
     private void initIntroductionPages() {
         introductionPages = new ArrayList<>();
-        introductionPages.add(new IntroductionPage(getString(R.string.introduction_page_1), R.layout.fragment_introduction, ContextCompat.getColor(IntroductionActivity.this, android.R.color.holo_red_dark)));
-        introductionPages.add(new IntroductionPage(getString(R.string.introduction_page_2), R.layout.fragment_introduction, ContextCompat.getColor(IntroductionActivity.this, android.R.color.holo_green_dark)));
+        introductionPages.add(new IntroductionPage(getString(R.string.introduction_page_1), R.layout.fragment_intro_a, ContextCompat.getColor(IntroductionActivity.this, R.color.introABgColor)));
+        introductionPages.add(new IntroductionPage(getString(R.string.introduction_page_2), R.layout.fragment_intro_b, ContextCompat.getColor(IntroductionActivity.this, R.color.introBBgColor)));
         introductionPages.add(new IntroductionPage(getString(R.string.introduction_page_3), R.layout.fragment_introduction, ContextCompat.getColor(IntroductionActivity.this, android.R.color.holo_blue_dark)));
         introductionPages.add(new IntroductionPage(getString(R.string.introduction_page_4), R.layout.fragment_introduction, ContextCompat.getColor(IntroductionActivity.this, android.R.color.holo_orange_dark)));
         introductionPages.add(new IntroductionPage(getString(R.string.introduction_page_5), R.layout.fragment_introduction, ContextCompat.getColor(IntroductionActivity.this, android.R.color.holo_purple)));
@@ -140,6 +140,7 @@ public class IntroductionActivity extends AppCompatActivity {
         IntroductionPagerAdapter mSectionsPagerAdapter = new IntroductionPagerAdapter(getSupportFragmentManager(), introductionPages);
         viewPager.setAdapter(mSectionsPagerAdapter);
         viewPager.setCurrentItem(currentPage);
+        viewPager.setPageTransformer(true, new ZoomOutPageTransformer());
         updateIndicators(currentPage);
     }
 
@@ -149,18 +150,50 @@ public class IntroductionActivity extends AppCompatActivity {
         }
     }
 
-    private void saveIntroductionWasShowed() {
-        //TODO
-    }
-
     @Override
     public void onBackPressed() {
         onFinish();
     }
 
     private void onFinish() {
-        saveIntroductionWasShowed();
         finish();
         overridePendingTransition(0, 0);
+    }
+
+    private class ZoomOutPageTransformer implements ViewPager.PageTransformer {
+        public void transformPage(View view, float position) {
+            int pageWidth = view.getWidth();
+            View text = view.findViewById(R.id.introduction_text);
+            ImageView tut_a_3 = (ImageView) view.findViewById(R.id.tut_a_3);
+            ImageView tut_a_2 = (ImageView) view.findViewById(R.id.tut_a_2);
+
+            ImageView tut_b_3 = (ImageView) view.findViewById(R.id.tut_b_3);
+            ImageView tut_b_2 = (ImageView) view.findViewById(R.id.tut_b_2);
+
+            if (position <= -1.0f || position >= 1.0f) {
+            } else if (position == 0.0f) {
+            } else {
+                if (text != null) {
+                    text.setAlpha(1.0f - Math.abs(position));
+                }
+                if (tut_a_2 != null) {
+                    tut_a_2.setAlpha(1.0f - Math.abs(position * 2));
+                    tut_a_2.setTranslationY(pageWidth / 20 * position);
+                }
+                if (tut_a_3 != null) {
+                    tut_a_3.setTranslationX(pageWidth / 10 * position);
+                }
+
+                if (tut_a_2 != null) {
+                    tut_a_2.setAlpha(1.0f - Math.abs(position * 2));
+                }
+                if (tut_b_2 != null) {
+                    tut_b_2.setAlpha(1.0f - Math.abs(position * 2));
+                }
+                if (tut_b_3 != null) {
+                    tut_b_3.setTranslationX(pageWidth / 20 * position * -1);
+                }
+            }
+        }
     }
 }

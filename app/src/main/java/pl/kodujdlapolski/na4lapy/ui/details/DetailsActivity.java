@@ -1,5 +1,6 @@
 package pl.kodujdlapolski.na4lapy.ui.details;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -32,6 +33,7 @@ import rx.schedulers.Schedulers;
 
 public class DetailsActivity extends AppCompatActivity {
 
+    public static final int REQUEST_CODE_ANIMAL = 1;
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.background_picture)
@@ -107,6 +109,7 @@ public class DetailsActivity extends AppCompatActivity {
         matchingLvl.setImageResource(AnimalUtils.getMatchingLvlImage(animal));
         addToFavFab.setImageResource(AnimalUtils.getAddToFavFabImage(animal));
         addToFavFab.setOnClickListener(v -> {
+
             repositoryService.setFavourite(animal.getId(), !animal.getFavourite()).subscribe(this::onFavChanged);
         });
     }
@@ -119,6 +122,9 @@ public class DetailsActivity extends AppCompatActivity {
 
     private void onChangedAnimalAvailable(Animal changedAnimal) {
         animal = changedAnimal;
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra(EXTRA_ANIMAL, animal);
+        setResult(Activity.RESULT_OK, returnIntent);
         addToFavFab.setImageResource(AnimalUtils.getAddToFavFabImage(animal));
     }
 
