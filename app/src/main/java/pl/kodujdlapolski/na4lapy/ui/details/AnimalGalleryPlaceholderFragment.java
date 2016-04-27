@@ -9,6 +9,8 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Photo;
 import pl.kodujdlapolski.na4lapy.presenter.details.AnimalGalleryPresenter;
@@ -35,7 +37,9 @@ public class AnimalGalleryPlaceholderFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_animal_gallery, container, false);
+        View view = inflater.inflate(R.layout.fragment_animal_gallery, container, false);
+        ButterKnife.bind(this, view);
+        return view;
     }
 
     @Override
@@ -67,5 +71,10 @@ public class AnimalGalleryPlaceholderFragment extends Fragment {
             return;
         }
         Picasso.with(getContext()).load(selectedPicUrl).into(imageView);
+    }
+
+    @OnClick(R.id.animal_gallery_fragment)
+    protected void getBack(){
+        getActivity().onBackPressed();
     }
 }
