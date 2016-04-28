@@ -2,6 +2,7 @@ package pl.kodujdlapolski.na4lapy.ui.details;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.LevelListDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
@@ -109,7 +110,7 @@ public class DetailsActivity extends AppCompatActivity {
                 .transform(new CropCircleTransformation())
                 .into(profilePic);
 
-        matchingLvl.getDrawable().setLevel(userService.getPreferencesComplianceLevel(animal));
+        matchingLvl.setImageLevel(userService.getPreferencesComplianceLevel(animal));
         addToFavFab.setImageResource(AnimalUtils.getAddToFavFabImage(animal));
         addToFavFab.setOnClickListener(v -> repositoryService.setFavourite(animal.getId(), !animal.getFavourite()).subscribe(this::onFavChanged));
     }

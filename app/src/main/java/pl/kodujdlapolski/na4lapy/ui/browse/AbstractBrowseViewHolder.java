@@ -61,6 +61,6 @@ public abstract class AbstractBrowseViewHolder extends RecyclerView.ViewHolder {
 
         name.setText(animal.getName());
         age.setText(AnimalUtils.getAnimalAgeFormatted(itemView.getContext(), animal));
-        matchLevelImage.getDrawable().setLevel(mUserService.getPreferencesComplianceLevel(animal));
+        matchLevelImage.setImageLevel(mUserService.getPreferencesComplianceLevel(animal));
     }
 }

@@ -1,5 +1,7 @@
 package pl.kodujdlapolski.na4lapy.api;
 
+import android.text.format.DateUtils;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -77,7 +79,7 @@ public class FakeApiServiceImpl implements ApiService {
         animal.setShelter(shelter);
         animal.setAdmittanceDate(1457214300000L - (long) (random.nextFloat() * 63072000000L));
         animal.setName("Animal_" + random.nextInt(9999));
-        animal.setBirthDate(1457214300000L - (long) (random.nextFloat() * 63072000000L));
+        animal.setBirthDate(System.currentTimeMillis() - random.nextInt(20) * DateUtils.YEAR_IN_MILLIS);
         animal.setSpecies(Species.values()[random.nextInt(Species.values().length)]);
         animal.setGender(Gender.values()[random.nextInt(Gender.values().length)]);
         animal.setSize(Size.values()[random.nextInt(Gender.values().length)]);
