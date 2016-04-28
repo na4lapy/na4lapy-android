@@ -77,10 +77,6 @@
     <string name="details_admittance_date">W schronisku od:</string>
     <string name="activity_high">Wysoka</string>
     <string name="activity_low">Niska</string>
-    <string name="attitude_hostile">Wrogi</string>
-    <string name="attitude_friendly">Przyjazny</string>
-    <string name="attitude_neutral">Neutralny</string>
-    <string name="attitude_unknown">Nieznany</string>
     <string name="gender_male">Samiec</string>
     <string name="gender_female">Samica</string>
     <string name="gender_unknown">Nieznana</string>
@@ -93,7 +89,6 @@
     <string name="no">NIE</string>
     <string name="more_info">więcej informacji</string>
     <string name="less_info">mniej informacji</string>
-    <string name="photos_author_info">Zdjęcia autorstwa %1$s</string>
     <string name="introduction_finish">Zrobione</string>
     <string name="introduction_skip">Pomiń</string>
     <string name="introduction_page_1">Poszukiwanie czworonożnego przyjaciela bywa trudne</string>

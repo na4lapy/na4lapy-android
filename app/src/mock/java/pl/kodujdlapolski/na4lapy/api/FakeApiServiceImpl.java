@@ -8,7 +8,6 @@ import java.util.Random;
 import pl.kodujdlapolski.na4lapy.model.Animal;
 import pl.kodujdlapolski.na4lapy.model.Shelter;
 import pl.kodujdlapolski.na4lapy.model.type.ActivityAnimal;
-import pl.kodujdlapolski.na4lapy.model.type.Attitude;
 import pl.kodujdlapolski.na4lapy.model.type.Gender;
 import pl.kodujdlapolski.na4lapy.model.type.Size;
 import pl.kodujdlapolski.na4lapy.model.type.Species;
@@ -86,13 +85,12 @@ public class FakeApiServiceImpl implements ApiService {
         animal.setActivity(ActivityAnimal.values()[random.nextInt(ActivityAnimal.values().length)]);
         animal.setTraining(Training.values()[random.nextInt(Training.values().length)]);
         animal.setSterilization(random.nextBoolean());
-        animal.setChip(random.nextLong());
+        animal.setChip("CHIP_ID_" + id);
         animal.setVaccinationBasic(random.nextBoolean());
         animal.setVaccinationExtended(random.nextBoolean());
         animal.setFavourite(random.nextBoolean());
         animal.setDescription("„Witam,\n" +
                 "W schronisku jestem od 2011 roku. Trafiłem tutaj jako ok. półroczne, całkowicie dzikie szczenię złapane na ul.Orłowskiej. Pierwszą pracę ze mną podjęła  Julita i powoli robiłem postępy. Niedawno dołączyła do tej współpracy Monika i moja socjalizacja poczyniła spore postępy. Już chodzę w szelkach i wychodzę na smyczy na krótkie spacery. Tan ostatni na sesję zdjęciową był już naprawdę nie lada wyczynem. Nie sądzę, żebym tak od razu znalazł dom, ale chciałem pokazać, że taka praca u podstaw realizowana min. przez wolontariuszy potrafi przynieść niesamowite efekty, chociaż czasem jak w moim przypadku jest to rozciągnięte w czasie. 30 marca, chyba po raz pierwszy miałem okazję  przebywać w pomieszczeniach zamkniętych (sala dydaktyczna). Owszem związany był z tym spory stres, ale jeszcze pól roku temu byłoby to zupełnie nierealne. Przede mną jeszcze długa droga, ale postaram się Was informować na bieżącą o czynionych postępach i być może przyjdzie dzień, w którym pojadę do nowego domu.” Pozdrawiam, Kokos.");
-        animal.setPhotosAuthor("Anny Kowalskiej");
         return animal;
     }
 }

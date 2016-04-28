@@ -7,7 +7,6 @@ import com.j256.ormlite.table.DatabaseTable;
 
 import java.util.Collection;
 import java.io.Serializable;
-import java.util.Random;
 
 import pl.kodujdlapolski.na4lapy.model.type.ActivityAnimal;
 import pl.kodujdlapolski.na4lapy.model.type.Gender;
@@ -35,10 +34,9 @@ public class Animal extends BaseEntity implements Serializable {
     @DatabaseField private ActivityAnimal activity;
     @DatabaseField private Training training;
     @DatabaseField private String description;
-    @DatabaseField private String photosAuthor;
 
+    @DatabaseField private String chipId;
     @DatabaseField private Boolean sterilization;
-    @DatabaseField private Long chip;
     @DatabaseField private Boolean vaccinationBasic;
     @DatabaseField private Boolean vaccinationExtended;
 
@@ -140,12 +138,12 @@ public class Animal extends BaseEntity implements Serializable {
         this.sterilization = sterilization;
     }
 
-    public Long getChip() {
-        return chip;
+    public String getChipId() {
+        return chipId;
     }
 
-    public void setChip(Long chip) {
-        this.chip = chip;
+    public void setChip(String chipId) {
+        this.chipId = chipId;
     }
 
     public Collection<Photo> getPhotos() {
@@ -168,12 +166,6 @@ public class Animal extends BaseEntity implements Serializable {
         this.favourite = favourite;
     }
 
-    // todo add match lvl
-    public int getMatchLevel() {
-       Random random = new Random();
-       return  random.nextInt(6);
-    }
-
     public String getDescription() {
         return description;
     }
@@ -182,13 +174,6 @@ public class Animal extends BaseEntity implements Serializable {
         this.description = description;
     }
 
-    public String getPhotosAuthor() {
-        return photosAuthor;
-    }
-
-    public void setPhotosAuthor(String photosAuthor) {
-        this.photosAuthor = photosAuthor;
-    }
     public Boolean getVaccinationBasic() {
         return vaccinationBasic;
     }
@@ -220,7 +205,7 @@ public class Animal extends BaseEntity implements Serializable {
                 ", activity=" + activity +
                 ", training=" + training +
                 ", sterilization=" + sterilization +
-                ", chip=" + chip +
+                ", chipId=" + chipId +
                 ", vaccinationBasic=" + vaccinationBasic +
                 ", vaccinationExtended=" + vaccinationExtended +
                 ", photos=" + photos +

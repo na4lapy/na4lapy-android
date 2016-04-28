@@ -80,8 +80,6 @@ public class ContentDetailsView {
     TextView infoVaccinationBasic;
     @Bind(R.id.info_vaccination_extended)
     TextView infoVaccinationExtended;
-    @Bind(R.id.photos_author_info)
-    TextView photosAuthorInfo;
 
     String[] picturesSample1 = new String[]{"http://2.bp.blogspot.com/-uI_rgOFxmT0/Vw6lkKwdTDI/AAAAAAAABLw/T0d2NW0Uc-MsYe1y6u6zvdUdCJxFv4uwACK4B/s1600/pies1_5.jpg",
             "http://4.bp.blogspot.com/-oMb5TMvvpRc/Vw6lkHw7n6I/AAAAAAAABL4/r2hdfKttHpUMPhtFGYgt7KkxqUOFNFVOACK4B/s1600/pies1_2.jpg",
@@ -113,7 +111,7 @@ public class ContentDetailsView {
         java.util.Date date = new java.util.Date(animal.getAdmittanceDate());
         infoActivity.setText(ctx.getString(animal.getActivity().resId));
         infoAdmittanceDate.setText(android.text.format.DateFormat.format("dd.MM.yyyy", date));
-        infoChip.setText(animal.getChip().toString());
+        infoChip.setText(animal.getChipId());
         infoRace.setText(animal.getRace());
         infoSize.setText(ctx.getString(animal.getSize().resId));
         infoGender.setText(ctx.getString(animal.getGender().resId));
@@ -125,17 +123,12 @@ public class ContentDetailsView {
 
     private void initBasicInfoImagesAndDescription() {
         description.setText(animal.getDescription());
-        description.setOnClickListener(v -> {
-            expandOrCollapseDescription();
-        });
+        description.setOnClickListener(v -> expandOrCollapseDescription());
         expandOrCollapseBtn.setText(R.string.more_info);
-        expandOrCollapseBtn.setOnClickListener(v -> {
-            expandOrCollapseDescription();
-        });
+        expandOrCollapseBtn.setOnClickListener(v -> expandOrCollapseDescription());
         sizeImage.setImageResource(AnimalUtils.getSizeImage(animal));
         activityImage.setImageResource(AnimalUtils.getActivityImage(animal));
         genderImage.setImageResource(AnimalUtils.getGenderImage(animal));
-        photosAuthorInfo.setText(String.format(ctx.getString(R.string.photos_author_info), animal.getPhotosAuthor()));
     }
 
     private void initImagesContainer() {

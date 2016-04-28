@@ -8,7 +8,11 @@ import java.io.Serializable;
 @DatabaseTable(tableName = "photos")
 public class Photo extends BaseEntity implements Serializable{
 
-    @DatabaseField private String url;
+    @DatabaseField
+    private String url;
+
+    @DatabaseField
+    private String author;
 
     @DatabaseField(foreign = true)
     private Animal animal;
@@ -23,5 +27,13 @@ public class Photo extends BaseEntity implements Serializable{
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 }
