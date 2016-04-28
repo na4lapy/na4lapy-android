@@ -6,9 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import javax.inject.Inject;
+
+import pl.kodujdlapolski.na4lapy.Na4LapyApp;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Animal;
 import pl.kodujdlapolski.na4lapy.ui.browse.AbstractBrowseActivity;
+import pl.kodujdlapolski.na4lapy.user.UserService;
 
 /**
  * Created by Natalia Wróblewska on 2016-03-15.
@@ -28,6 +32,9 @@ import pl.kodujdlapolski.na4lapy.ui.browse.AbstractBrowseActivity;
 public class SingleBrowseFragment extends Fragment {
 
     private static final String ARG_ANIMAL = "argAnimal";
+
+    @Inject UserService userService;
+
     private Animal animal;
     private SingleBrowseViewHolder viewHolder;
 
@@ -51,8 +58,9 @@ public class SingleBrowseFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        ((Na4LapyApp) getActivity().getApplication()).getComponent().inject(this);
         initAnimal(savedInstanceState);
-        viewHolder = new SingleBrowseViewHolder(getView());
+        viewHolder = new SingleBrowseViewHolder(getView(), userService);
         viewHolder.init(animal, ((AbstractBrowseActivity) getActivity()).getPresenter());
 
     }

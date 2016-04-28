@@ -12,12 +12,16 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import pl.kodujdlapolski.na4lapy.Na4LapyApp;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Animal;
 import pl.kodujdlapolski.na4lapy.ui.browse.AbstractBrowseActivity;
 import pl.kodujdlapolski.na4lapy.ui.browse.BrowsePresenter;
+import pl.kodujdlapolski.na4lapy.user.UserService;
 
 /**
  * Created by Natalia Wróblewska on 2016-03-09.
@@ -37,6 +41,9 @@ import pl.kodujdlapolski.na4lapy.ui.browse.BrowsePresenter;
  */
 public class ListBrowseFragment extends Fragment {
     private static final String ARG_ANIMALS_LIST = "animals_list";
+
+    @Inject UserService userService;
+
     private ArrayList<Animal> animals;
 
     @Bind(R.id.animals_recycle)
@@ -67,13 +74,13 @@ public class ListBrowseFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        ((Na4LapyApp) getActivity().getApplication()).getComponent().inject(this);
         initAnimals(savedInstanceState);
-
         recycler.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
         recycler.setLayoutManager(layoutManager);
         recycler.setItemAnimator(null);
-        adapter = new ListBrowseRecyclerAdapter(animals, ((AbstractBrowseActivity) getActivity()).getPresenter());
+        adapter = new ListBrowseRecyclerAdapter(animals, ((AbstractBrowseActivity) getActivity()).getPresenter(), userService);
         recycler.setAdapter(adapter);
     }
 

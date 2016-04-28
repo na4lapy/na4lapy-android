@@ -76,25 +76,6 @@ public class AnimalUtils {
         }
     }
 
-    public static int getMatchingLvlImage(Animal animal) {
-        switch (animal.getMatchLevel()) {
-            case 0:
-                return R.drawable.vector_drawable_procent_0;
-            case 1:
-                return R.drawable.vector_drawable_procent_20;
-            case 2:
-                return R.drawable.vector_drawable_procent_40;
-            case 3:
-                return R.drawable.vector_drawable_procent_60;
-            case 4:
-                return R.drawable.vector_drawable_procent_80;
-            case 5:
-                return R.drawable.vector_drawable_procent_100;
-            default:
-                return -1;
-        }
-    }
-
     public static int getAddToFavFabImage(Animal animal) {
         return animal.isFavourite() ? R.drawable.ic_favorite_white : R.drawable.ic_favorite_border_white;
     }

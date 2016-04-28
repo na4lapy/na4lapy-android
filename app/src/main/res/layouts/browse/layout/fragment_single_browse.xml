@@ -28,7 +28,7 @@
         android:layout_alignParentRight="true"
         android:layout_margin="@dimen/activity_vertical_margin"
         android:contentDescription="@string/content_desc_matching_lvl"
-        tools:src="@drawable/vector_drawable_procent_40" />
+        android:src="@drawable/user_preferences_compliance_level" />
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"

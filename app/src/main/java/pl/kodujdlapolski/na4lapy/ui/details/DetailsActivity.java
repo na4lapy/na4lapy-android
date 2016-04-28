@@ -27,6 +27,7 @@ import pl.kodujdlapolski.na4lapy.Na4LapyApp;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Animal;
 import pl.kodujdlapolski.na4lapy.repository.RepositoryService;
+import pl.kodujdlapolski.na4lapy.user.UserService;
 import pl.kodujdlapolski.na4lapy.utils.AnimalUtils;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -52,6 +53,8 @@ public class DetailsActivity extends AppCompatActivity {
 
     @Inject
     RepositoryService repositoryService;
+    @Inject
+    UserService userService;
 
     String[] picturesSample = new String[]{"http://2.bp.blogspot.com/-uI_rgOFxmT0/Vw6lkKwdTDI/AAAAAAAABLw/T0d2NW0Uc-MsYe1y6u6zvdUdCJxFv4uwACK4B/s1600/pies1_5.jpg",
             "http://4.bp.blogspot.com/-zjCctidFhyA/Vw6lkEpvejI/AAAAAAAABLA/7Y375FdJBSgnNhHQLqj922KoJtRVQBDqACK4B/s1600/pies2_1.jpg"};
@@ -106,12 +109,9 @@ public class DetailsActivity extends AppCompatActivity {
                 .transform(new CropCircleTransformation())
                 .into(profilePic);
 
-        matchingLvl.setImageResource(AnimalUtils.getMatchingLvlImage(animal));
+        matchingLvl.getDrawable().setLevel(userService.getPreferencesComplianceLevel(animal));
         addToFavFab.setImageResource(AnimalUtils.getAddToFavFabImage(animal));
-        addToFavFab.setOnClickListener(v -> {
-
-            repositoryService.setFavourite(animal.getId(), !animal.getFavourite()).subscribe(this::onFavChanged);
-        });
+        addToFavFab.setOnClickListener(v -> repositoryService.setFavourite(animal.getId(), !animal.getFavourite()).subscribe(this::onFavChanged));
     }
 
     private void onFavChanged(Long changedAnimalId) {

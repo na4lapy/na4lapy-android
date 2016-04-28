@@ -8,6 +8,7 @@ import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Animal;
 import pl.kodujdlapolski.na4lapy.ui.browse.AbstractBrowseViewHolder;
 import pl.kodujdlapolski.na4lapy.ui.browse.OnBrowseElementClickedAction;
+import pl.kodujdlapolski.na4lapy.user.UserService;
 
 /**
  * Created by Natalia Wróblewska on 2016-03-22.
@@ -30,8 +31,8 @@ public class ListBrowseViewHolder extends AbstractBrowseViewHolder {
     @Bind(R.id.add_to_fav_btn)
     ImageButton addToFavBtn;
 
-    public ListBrowseViewHolder(View itemView) {
-        super(itemView);
+    public ListBrowseViewHolder(View itemView, UserService userService) {
+        super(itemView, userService);
     }
 
     @Override

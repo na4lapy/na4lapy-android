@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import butterknife.Bind;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Animal;
+import pl.kodujdlapolski.na4lapy.user.UserService;
 import pl.kodujdlapolski.na4lapy.utils.AnimalUtils;
 import pl.kodujdlapolski.na4lapy.ui.browse.AbstractBrowseViewHolder;
 import pl.kodujdlapolski.na4lapy.ui.browse.OnBrowseElementClickedAction;
@@ -39,8 +40,8 @@ public class SingleBrowseViewHolder extends AbstractBrowseViewHolder {
     @Bind(R.id.animal_activity_image)
     ImageView activityImage;
 
-    public SingleBrowseViewHolder(View itemView) {
-        super(itemView);
+    public SingleBrowseViewHolder(View itemView, UserService userService) {
+        super(itemView, userService);
     }
 
     @Override

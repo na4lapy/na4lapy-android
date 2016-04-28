@@ -51,7 +51,7 @@
         android:layout_height="48dp"
         android:id="@+id/matching_lvl_image"
         android:layout_marginRight="@dimen/activity_vertical_margin"
-        tools:src="@drawable/vector_drawable_procent_40" />
+        android:src="@drawable/user_preferences_compliance_level" />
 
 
     <ImageButton

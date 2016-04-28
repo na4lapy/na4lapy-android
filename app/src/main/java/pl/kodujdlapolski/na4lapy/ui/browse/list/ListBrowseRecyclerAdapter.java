@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Animal;
 import pl.kodujdlapolski.na4lapy.ui.browse.OnBrowseElementClickedAction;
+import pl.kodujdlapolski.na4lapy.user.UserService;
 
 /**
  * Created by Natalia Wróblewska on 2016-02-27.
@@ -27,19 +28,23 @@ import pl.kodujdlapolski.na4lapy.ui.browse.OnBrowseElementClickedAction;
  *
  */
 public class ListBrowseRecyclerAdapter extends RecyclerView.Adapter<ListBrowseViewHolder> {
+
     private ArrayList<Animal> animals;
     private OnBrowseElementClickedAction onBrowseElementClickedAction;
+    private UserService userService;
 
-    public ListBrowseRecyclerAdapter(ArrayList<Animal> animals, OnBrowseElementClickedAction onBrowseElementClickedAction) {
+    public ListBrowseRecyclerAdapter(ArrayList<Animal> animals, OnBrowseElementClickedAction onBrowseElementClickedAction, UserService userService) {
         this.animals = animals;
         this.onBrowseElementClickedAction = onBrowseElementClickedAction;
+        this.userService = userService;
     }
 
     @Override
     public ListBrowseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
         return new ListBrowseViewHolder(
                 LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.view_holder_list_browse, parent, false));
+                        .inflate(R.layout.view_holder_list_browse, parent, false), userService);
     }
 
     @Override

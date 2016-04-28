@@ -2,8 +2,11 @@ package pl.kodujdlapolski.na4lapy.user;
 
 import android.support.annotation.NonNull;
 
+import java.util.Random;
+
 import javax.inject.Inject;
 
+import pl.kodujdlapolski.na4lapy.model.Animal;
 import pl.kodujdlapolski.na4lapy.model.UserPreferences;
 import pl.kodujdlapolski.na4lapy.preferences.PreferencesService;
 
@@ -29,6 +32,12 @@ public class UserServiceImpl implements UserService {
     public UserPreferences loadCurrentUserPreferences() {
         UserPreferences userPreferences = mPreferencesService.getUserPreferences();
         return userPreferences != null ? userPreferences : new UserPreferences();
+    }
+
+    @Override
+    public int getPreferencesComplianceLevel(Animal animal) {
+        Random random = new Random();
+        return random.nextInt(6);
     }
 
     @Override

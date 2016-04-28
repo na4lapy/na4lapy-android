@@ -54,7 +54,7 @@
                     android:layout_marginRight="-15dp"
                     android:layout_marginTop="-10dp"
                     android:adjustViewBounds="true"
-                    android:src="@drawable/vector_drawable_procent_100" />
+                    android:src="@drawable/user_preferences_compliance_level" />
 
             </RelativeLayout>
 

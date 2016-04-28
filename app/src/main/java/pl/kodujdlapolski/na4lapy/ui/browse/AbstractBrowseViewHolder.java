@@ -7,12 +7,11 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import java.util.Random;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Animal;
+import pl.kodujdlapolski.na4lapy.user.UserService;
 import pl.kodujdlapolski.na4lapy.utils.AnimalUtils;
 
 /**
@@ -45,9 +44,12 @@ public abstract class AbstractBrowseViewHolder extends RecyclerView.ViewHolder {
     @Bind(R.id.profile_pic_on_list)
     public ImageView profilePic;
 
-    public AbstractBrowseViewHolder(View itemView) {
+    private UserService mUserService;
+
+    public AbstractBrowseViewHolder(View itemView, UserService userService) {
         super(itemView);
         ButterKnife.bind(this, itemView);
+        mUserService = userService;
     }
 
     public void init(Animal animal, OnBrowseElementClickedAction onBrowseElementClickedAction) {
@@ -59,6 +61,6 @@ public abstract class AbstractBrowseViewHolder extends RecyclerView.ViewHolder {
 
         name.setText(animal.getName());
         age.setText(AnimalUtils.getAnimalAgeFormatted(itemView.getContext(), animal));
-        matchLevelImage.setImageResource(AnimalUtils.getMatchingLvlImage(animal));
+        matchLevelImage.getDrawable().setLevel(mUserService.getPreferencesComplianceLevel(animal));
     }
 }
