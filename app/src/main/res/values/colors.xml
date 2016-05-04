@@ -14,6 +14,9 @@
     <color name="colorIntroductionInicatorNotSelected">#26FFFFFF</color>
     <color name="introABgColor">#64c299</color>
     <color name="introBBgColor">#6aa9b8</color>
+    <color name="introCBgColor">#0097a8</color>
+    <color name="introDBgColor">#80cbc4</color>
+    <color name="introEBgColor">#54a86a</color>
 </resources>
 
     <!--> pierwsza paleta barw <-->

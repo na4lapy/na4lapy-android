@@ -74,12 +74,6 @@ public class SettingsFragment extends Fragment {
     }
 
     @SuppressWarnings("unused")
-    @OnClick(R.id.regulations)
-    void onRegulationsClick() {
-        runWebViewActivity(WebPageTypes.REGULATIONS);
-    }
-
-    @SuppressWarnings("unused")
     @OnClick(R.id.openSourceLibs)
     void onOpenSourceClick() {
         runWebViewActivity(WebPageTypes.OPEN_SOURCE);

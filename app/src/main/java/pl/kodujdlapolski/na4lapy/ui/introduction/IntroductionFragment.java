@@ -46,7 +46,7 @@ public class IntroductionFragment extends Fragment {
         if (savedInstanceState != null && savedInstanceState.getSerializable(EXTRA_INTRO) != null && introductionPage == null) {
             introductionPage = (IntroductionPage) savedInstanceState.getSerializable(EXTRA_INTRO);
         }
-        if (introductionPage != null) {
+        if (introductionPage != null && introductionPage.getLayout() != -1) {
             View rootView = inflater.inflate(introductionPage.getLayout(), container, false);
             ((TextView) rootView.findViewById(R.id.introduction_text)).setText(introductionPage.getText());
             return rootView;

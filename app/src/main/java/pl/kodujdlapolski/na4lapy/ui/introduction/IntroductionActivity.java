@@ -1,8 +1,6 @@
 package pl.kodujdlapolski.na4lapy.ui.introduction;
 
 import android.animation.ArgbEvaluator;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.content.ContextCompat;
@@ -42,11 +40,9 @@ import pl.kodujdlapolski.na4lapy.R;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 public class IntroductionActivity extends AppCompatActivity {
 
     int currentPage = 0;
-    private final int LAST_VISIBLE_INTRO = 4;
     private final int LAST_INTRO = 5;
     @Bind(R.id.introduction_viewpager)
     ViewPager viewPager;
@@ -94,9 +90,8 @@ public class IntroductionActivity extends AppCompatActivity {
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                int fromColor = position == LAST_INTRO ? ContextCompat.getColor(IntroductionActivity.this, android.R.color.transparent) : introductionPages.get(position).getBgColor();
-                int toColor = position == LAST_INTRO ? ContextCompat.getColor(IntroductionActivity.this, android.R.color.transparent) : introductionPages.get(position == LAST_VISIBLE_INTRO ? position : position + 1).getBgColor();
-
+                int fromColor = introductionPages.get(position).getBgColor();
+                int toColor = introductionPages.get(position + 1).getBgColor();
                 int colorUpdate = (Integer) evaluator.evaluate(positionOffset, fromColor, toColor);
                 introductionContainer.setBackgroundColor(colorUpdate);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -115,7 +110,7 @@ public class IntroductionActivity extends AppCompatActivity {
                     skipBtn.setVisibility(View.GONE);
                     onFinish();
                 } else {
-                    boolean lastPage = position == LAST_VISIBLE_INTRO;
+                    boolean lastPage = position == LAST_INTRO -1;
                     nextBtn.setVisibility(lastPage ? View.GONE : View.VISIBLE);
                     finishBtn.setVisibility(lastPage ? View.VISIBLE : View.GONE);
                 }
@@ -131,16 +126,17 @@ public class IntroductionActivity extends AppCompatActivity {
         introductionPages = new ArrayList<>();
         introductionPages.add(new IntroductionPage(getString(R.string.introduction_page_1), R.layout.fragment_intro_a, ContextCompat.getColor(IntroductionActivity.this, R.color.introABgColor)));
         introductionPages.add(new IntroductionPage(getString(R.string.introduction_page_2), R.layout.fragment_intro_b, ContextCompat.getColor(IntroductionActivity.this, R.color.introBBgColor)));
-        introductionPages.add(new IntroductionPage(getString(R.string.introduction_page_3), R.layout.fragment_introduction, ContextCompat.getColor(IntroductionActivity.this, android.R.color.holo_blue_dark)));
-        introductionPages.add(new IntroductionPage(getString(R.string.introduction_page_4), R.layout.fragment_introduction, ContextCompat.getColor(IntroductionActivity.this, android.R.color.holo_orange_dark)));
-        introductionPages.add(new IntroductionPage(getString(R.string.introduction_page_5), R.layout.fragment_introduction, ContextCompat.getColor(IntroductionActivity.this, android.R.color.holo_purple)));
+        introductionPages.add(new IntroductionPage(getString(R.string.introduction_page_3), R.layout.fragment_intro_c, ContextCompat.getColor(IntroductionActivity.this, R.color.introCBgColor)));
+        introductionPages.add(new IntroductionPage(getString(R.string.introduction_page_4), R.layout.fragment_intro_d, ContextCompat.getColor(IntroductionActivity.this, R.color.introDBgColor)));
+        introductionPages.add(new IntroductionPage(getString(R.string.introduction_page_5), R.layout.fragment_intro_e, ContextCompat.getColor(IntroductionActivity.this, R.color.introEBgColor)));
+        introductionPages.add(new IntroductionPage());
     }
 
     private void initViewPager() {
         IntroductionPagerAdapter mSectionsPagerAdapter = new IntroductionPagerAdapter(getSupportFragmentManager(), introductionPages);
         viewPager.setAdapter(mSectionsPagerAdapter);
         viewPager.setCurrentItem(currentPage);
-        viewPager.setPageTransformer(true, new ZoomOutPageTransformer());
+        viewPager.setPageTransformer(true, new IntroductionPageTransformer());
         updateIndicators(currentPage);
     }
 
@@ -158,42 +154,5 @@ public class IntroductionActivity extends AppCompatActivity {
     private void onFinish() {
         finish();
         overridePendingTransition(0, 0);
-    }
-
-    private class ZoomOutPageTransformer implements ViewPager.PageTransformer {
-        public void transformPage(View view, float position) {
-            int pageWidth = view.getWidth();
-            View text = view.findViewById(R.id.introduction_text);
-            ImageView tut_a_3 = (ImageView) view.findViewById(R.id.tut_a_3);
-            ImageView tut_a_2 = (ImageView) view.findViewById(R.id.tut_a_2);
-
-            ImageView tut_b_3 = (ImageView) view.findViewById(R.id.tut_b_3);
-            ImageView tut_b_2 = (ImageView) view.findViewById(R.id.tut_b_2);
-
-            if (position <= -1.0f || position >= 1.0f) {
-            } else if (position == 0.0f) {
-            } else {
-                if (text != null) {
-                    text.setAlpha(1.0f - Math.abs(position));
-                }
-                if (tut_a_2 != null) {
-                    tut_a_2.setAlpha(1.0f - Math.abs(position * 2));
-                    tut_a_2.setTranslationY(pageWidth / 20 * position);
-                }
-                if (tut_a_3 != null) {
-                    tut_a_3.setTranslationX(pageWidth / 10 * position);
-                }
-
-                if (tut_a_2 != null) {
-                    tut_a_2.setAlpha(1.0f - Math.abs(position * 2));
-                }
-                if (tut_b_2 != null) {
-                    tut_b_2.setAlpha(1.0f - Math.abs(position * 2));
-                }
-                if (tut_b_3 != null) {
-                    tut_b_3.setTranslationX(pageWidth / 20 * position * -1);
-                }
-            }
-        }
     }
 }

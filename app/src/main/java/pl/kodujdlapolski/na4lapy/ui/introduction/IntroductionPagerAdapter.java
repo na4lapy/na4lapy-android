@@ -32,15 +32,11 @@ public class IntroductionPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        if (position + 1 == getCount()) {
-            return new IntroductionFragment();
-        } else {
-            return IntroductionFragment.newInstance(introductionPages.get(position));
-        }
+        return IntroductionFragment.newInstance(introductionPages.get(position));
     }
 
     @Override
     public int getCount() {
-        return introductionPages.size() + 1;
+        return introductionPages.size();
     }
 }

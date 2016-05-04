@@ -58,11 +58,6 @@ public class WebViewActivityTest {
     }
 
     @Test
-    public void isRegulationsDisplayed() {
-        testByType(WebPageTypes.REGULATIONS);
-    }
-
-    @Test
     public void isPrivacyPolicyDisplayed() {
         testByType(WebPageTypes.POLICY);
     }

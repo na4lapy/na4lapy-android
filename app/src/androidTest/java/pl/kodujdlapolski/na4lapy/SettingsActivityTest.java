@@ -82,20 +82,6 @@ public class SettingsActivityTest {
     }
 
     @Test
-    public void isRegulationsDisplayedAndOnClickFiresProperIntent() {
-        Intents.init();
-        ViewInteraction viewInteraction = onView(withText(mActivityRule.getActivity().getString(R.string.regulations_text)));
-        viewInteraction.check(matches(isDisplayed()));
-        viewInteraction.perform(click());
-        intended(allOf(
-                        hasComponent(hasClassName(WebViewActivity.class.getName())),
-                        hasExtra(WebViewActivity.EXTRA_TYPE, WebPageTypes.REGULATIONS)
-                )
-        );
-        Intents.release();
-    }
-
-    @Test
     public void isOpenSourceDisplayedAndOnClickFiresProperIntent() {
         Intents.init();
         ViewInteraction viewInteraction = onView(withText(mActivityRule.getActivity().getString(R.string.open_source_libs_text)));

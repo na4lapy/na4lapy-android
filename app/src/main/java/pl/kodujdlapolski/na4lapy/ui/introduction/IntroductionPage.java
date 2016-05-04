@@ -18,15 +18,19 @@ import java.io.Serializable;
  * limitations under the License.
  */
 public class IntroductionPage implements Serializable {
-    private final String text;
-    private final int layout;
-    private final int bgColor;
+    private String text;
+    private int layout = -1;
+    private int bgColor = android.R.color.transparent; // default color
 
     public IntroductionPage(String text, int layout, int bgColor) {
 
         this.text = text;
         this.layout = layout;
         this.bgColor = bgColor;
+    }
+
+    public IntroductionPage() {
+
     }
 
     public String getText() {
