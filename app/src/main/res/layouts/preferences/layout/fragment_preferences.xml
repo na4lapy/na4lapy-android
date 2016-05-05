@@ -86,7 +86,7 @@
                     android:layout_width="@dimen/preferences_image_margin"
                     android:layout_height="wrap_content"
                     style="@style/TextAppearance.AppCompat.Medium"
-                    android:text="@string/sex"
+                    android:text="@string/gender"
                     android:layout_gravity="center_vertical|start"
                     />
 

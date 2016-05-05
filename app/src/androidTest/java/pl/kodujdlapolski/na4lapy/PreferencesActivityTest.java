@@ -63,7 +63,7 @@ public class PreferencesActivityTest {
     public void areTextCategoriesDisplayed() {
         onView(withId(R.id.typeText)).check(matches(withText(R.string.type)));
         onView(withId(R.id.typeText)).check(matches(isDisplayed()));
-        onView(withId(R.id.genderText)).check(matches(withText(R.string.sex)));
+        onView(withId(R.id.genderText)).check(matches(withText(R.string.gender)));
         onView(withId(R.id.genderText)).check(matches(isDisplayed()));
         onView(withId(R.id.ageText)).check(matches(withText(R.string.age)));
         onView(withId(R.id.ageText)).check(matches(isDisplayed()));

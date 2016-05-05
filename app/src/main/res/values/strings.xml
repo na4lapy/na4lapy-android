@@ -21,14 +21,13 @@
     <string name="browsing">Przeglądaj</string>
     <string name="favouritiesList">Lista ulubionych</string>
     <string name="lookupPreferences">Preferencje</string>
-    <string name="accountSettings">Ustawienia</string>
-    <string name="aboutShelter">O schronisku</string>
     <string name="aboutApplication">O aplikacji</string>
+    <string name="aboutShelter">O schronisku</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="whatKindOfAnimalDoYouSeek">Jakiego zwierzaka szukasz?</string>
     <string name="type">Typ</string>
-    <string name="sex">Płeć</string>
+    <string name="gender">Płeć</string>
     <string name="age">Wiek</string>
     <string name="size">Rozmiar</string>
     <string name="activity">Aktywność</string>
@@ -57,7 +56,7 @@
     <string name="months">, %1$sm</string>
     <string name="years">, %1$sl</string>
     <string name="fav_animals_list_activity">Ulubione</string>
-    <string name="animals_list_activity">Dostepne zwierzęta</string>
+    <string name="animals_list_activity">Dostępne zwierzęta</string>
     <string name="removed_from_fav_undo_mess">Usunięto %1$s z ulubionych</string>
     <string name="removed_from_fav_undo_option">Cofnij</string>
     <string name="content_desc_main_image">zdjęcie główne</string>
@@ -97,7 +96,8 @@
     <string name="introduction_skip">Pomiń</string>
     <string name="introduction_page_1">Poszukiwanie czworonożnego przyjaciela bywa trudne</string>
     <string name="introduction_page_2">Określ swoje potrzeby</string>
-    <string name="introduction_page_3">Przeszukaj listę zwierzat poszukijących człowieka</string>
+    <string name="introduction_page_3">Przeszukaj listę zwierzat poszukujących człowieka</string>
     <string name="introduction_page_4">Zabierz szczęśliwca do domu…</string>
     <string name="introduction_page_5">…Albo daj mu się zaprowadzić</string>
+    <string name="photo_by">fot.</string>
 </resources>

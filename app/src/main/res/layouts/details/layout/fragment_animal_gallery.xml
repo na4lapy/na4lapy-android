@@ -1,4 +1,4 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,10 +13,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_centerInParent="true"
         android:adjustViewBounds="true"
         android:background="@null"
         android:clickable="true"
         android:scaleType="fitCenter"
         android:id="@+id/animal_pic_in_gallery"/>
 
-</FrameLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:textColor="@color/white70opacity"
+        android:layout_alignRight="@id/animal_pic_in_gallery"
+        android:layout_alignBottom="@id/animal_pic_in_gallery"
+        android:id="@+id/photo_author" />
+
+</RelativeLayout>

@@ -20,8 +20,8 @@
             android:title="@string/aboutShelter" />
         <item
             android:id="@+id/settings"
-            android:icon="@drawable/ic_settings_24dp"
-            android:title="@string/accountSettings" />
+            android:icon="@drawable/ic_info_outline_black_24dp"
+            android:title="@string/aboutApplication" />
     </group>
 
 </menu>

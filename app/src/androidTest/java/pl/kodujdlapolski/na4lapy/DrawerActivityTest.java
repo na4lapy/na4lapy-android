@@ -64,7 +64,7 @@ public class DrawerActivityTest {
         onView(withText(R.string.favouritiesList)).check(matches(isDisplayed()));
         onView(allOf(withText(R.string.lookupPreferences), withParent(withClassName(endsWith("NavigationMenuItemView"))))).check(matches(isDisplayed()));
         onView(withText(R.string.aboutShelter)).check(matches(isDisplayed()));
-        onView(withText(R.string.accountSettings)).check(matches(isDisplayed()));
+        onView(withText(R.string.aboutApplication)).check(matches(isDisplayed()));
     }
 
     @Test
@@ -105,7 +105,7 @@ public class DrawerActivityTest {
     @Test
     public void doesClickOnSettingsDirectsToSettingsActivity() {
         isProperActivityDisplayed(
-                R.string.accountSettings,
+                R.string.aboutApplication,
                 SettingsActivity.class);
     }
 

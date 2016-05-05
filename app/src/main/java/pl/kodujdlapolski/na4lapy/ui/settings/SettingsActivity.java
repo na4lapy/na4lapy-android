@@ -12,6 +12,6 @@ public class SettingsActivity extends AbstractSingleActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         if (getSupportActionBar() != null)
-            getSupportActionBar().setTitle(R.string.settings_page_title);
+            getSupportActionBar().setTitle(R.string.aboutApplication);
     }
 }

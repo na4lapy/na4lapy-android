@@ -102,7 +102,6 @@ public class PreferencesFragment extends Fragment implements PreferencesContract
 
         Dialog agePickerDialog = buildAgePickerDialog(isMinAgePicker, dialogView);
         agePickerDialog.show();
-    //    agePickerDialog.getWindow().setBackgroundDrawableResource(R.color.colorPrimaryLight);     //sets color for whole dialog window
     }
 
     private void setAgeNumberPickerValues(boolean isMinAgePicker) {

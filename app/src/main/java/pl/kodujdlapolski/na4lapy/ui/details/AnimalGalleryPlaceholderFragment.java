@@ -6,9 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import pl.kodujdlapolski.na4lapy.R;
@@ -22,6 +24,8 @@ public class AnimalGalleryPlaceholderFragment extends Fragment {
 
     private static final String ARG_PIC_NUMBER = "ARG_PIC_NUMBER";
     private Photo animalPic;
+    @Bind(R.id.photo_author)
+    TextView photoAuthor;
 
     public AnimalGalleryPlaceholderFragment() {
     }
@@ -48,6 +52,11 @@ public class AnimalGalleryPlaceholderFragment extends Fragment {
         loadPicture(savedInstanceState);
     }
 
+    @OnClick(R.id.animal_gallery_fragment)
+    protected void getBack(){
+        getActivity().onBackPressed();
+    }
+
     private void loadPicture (Bundle savedInstanceState) {
         if (getArguments() != null && (animalPic == null)) {
             if (getArguments().getSerializable(ARG_PIC_NUMBER) instanceof Photo) {
@@ -65,6 +74,7 @@ public class AnimalGalleryPlaceholderFragment extends Fragment {
     }
 
     private void setPicture(ImageView imageView) {
+        setPhotoAuthor();
         String selectedPicUrl = animalPic.getUrl();
         if (selectedPicUrl == null) {
             imageView.setImageDrawable(getResources().getDrawable(R.drawable.vector_drawable_error_dog));
@@ -73,8 +83,12 @@ public class AnimalGalleryPlaceholderFragment extends Fragment {
         Picasso.with(getContext()).load(selectedPicUrl).into(imageView);
     }
 
-    @OnClick(R.id.animal_gallery_fragment)
-    protected void getBack(){
-        getActivity().onBackPressed();
+    private void setPhotoAuthor() {
+        String aboutAuthor = animalPic.getAuthor();
+        if (aboutAuthor != null) {
+            aboutAuthor = getResources().getString(R.string.photo_by) + " " + aboutAuthor;
+            photoAuthor.setText(aboutAuthor);
+            System.out.println(aboutAuthor);
+        }
     }
 }
