@@ -13,6 +13,7 @@ import pl.kodujdlapolski.na4lapy.model.type.Gender;
 import pl.kodujdlapolski.na4lapy.model.type.Size;
 import pl.kodujdlapolski.na4lapy.model.type.Species;
 import pl.kodujdlapolski.na4lapy.model.type.Training;
+import pl.kodujdlapolski.na4lapy.model.type.Vaccination;
 
 @DatabaseTable(tableName = "animals")
 public class Animal extends BaseEntity implements Serializable {
@@ -22,23 +23,20 @@ public class Animal extends BaseEntity implements Serializable {
     @DatabaseField(foreign = true)
     private Shelter shelter;
 
-    @DatabaseField private Long admittanceDate;
-
     @DatabaseField private String name;
+    @DatabaseField private String race;
+    @DatabaseField private String description;
     @DatabaseField private Long birthDate;
+    @DatabaseField private Long admittanceDate;
+    @DatabaseField private String chipId;
+    @DatabaseField private Boolean sterilization;
 
     @DatabaseField private Species species;
     @DatabaseField private Gender gender;
     @DatabaseField private Size size;
-    @DatabaseField private String race;
     @DatabaseField private ActivityAnimal activity;
+    @DatabaseField private Vaccination vaccination;
     @DatabaseField private Training training;
-    @DatabaseField private String description;
-
-    @DatabaseField private String chipId;
-    @DatabaseField private Boolean sterilization;
-    @DatabaseField private Boolean vaccinationBasic;
-    @DatabaseField private Boolean vaccinationExtended;
 
     @ForeignCollectionField(eager = false)
     private Collection<Photo> photos;
@@ -142,7 +140,7 @@ public class Animal extends BaseEntity implements Serializable {
         return chipId;
     }
 
-    public void setChip(String chipId) {
+    public void setChipId(String chipId) {
         this.chipId = chipId;
     }
 
@@ -174,27 +172,18 @@ public class Animal extends BaseEntity implements Serializable {
         this.description = description;
     }
 
-    public Boolean getVaccinationBasic() {
-        return vaccinationBasic;
+    public Vaccination getVaccination() {
+        return vaccination;
     }
 
-    public void setVaccinationBasic(Boolean vaccinationBasic) {
-        this.vaccinationBasic = vaccinationBasic;
-    }
-
-    public Boolean getVaccinationExtended() {
-        return vaccinationExtended;
-    }
-
-    public void setVaccinationExtended(Boolean vaccinationExtended) {
-        this.vaccinationExtended = vaccinationExtended;
+    public void setVaccination(Vaccination vaccination) {
+        this.vaccination = vaccination;
     }
 
     @Override
     public String toString() {
         return "Animal{" +
-                "id=" + getId() +
-                ", shelter=" + shelter +
+                "shelter=" + shelter +
                 ", admittanceDate=" + admittanceDate +
                 ", name='" + name + '\'' +
                 ", birthDate=" + birthDate +
@@ -203,11 +192,11 @@ public class Animal extends BaseEntity implements Serializable {
                 ", size=" + size +
                 ", race='" + race + '\'' +
                 ", activity=" + activity +
+                ", vaccination=" + vaccination +
                 ", training=" + training +
+                ", description='" + description + '\'' +
+                ", chipId='" + chipId + '\'' +
                 ", sterilization=" + sterilization +
-                ", chipId=" + chipId +
-                ", vaccinationBasic=" + vaccinationBasic +
-                ", vaccinationExtended=" + vaccinationExtended +
                 ", photos=" + photos +
                 ", favourite=" + favourite +
                 '}';

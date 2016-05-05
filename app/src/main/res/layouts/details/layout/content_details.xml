@@ -169,26 +169,13 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/details_table_inner_margin"
             android:layout_marginRight="@dimen/details_table_inner_margin"
-            android:text="@string/details_vaccination_basic" />
+            android:text="@string/details_vaccination" />
 
         <TextView
-            android:id="@+id/info_vaccination_basic"
+            android:id="@+id/info_vaccination"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="vaccination basic" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/details_table_inner_margin"
-            android:layout_marginRight="@dimen/details_table_inner_margin"
-            android:text="@string/details_vaccination_extended" />
-
-        <TextView
-            android:id="@+id/info_vaccination_extended"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="vaccination extended" />
+            tools:text="vaccination type" />
 
         <TextView
             android:layout_width="wrap_content"

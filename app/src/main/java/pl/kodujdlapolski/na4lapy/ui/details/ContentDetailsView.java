@@ -76,10 +76,8 @@ public class ContentDetailsView {
     TextView infoTraining;
     @Bind(R.id.info_sterilization)
     TextView infoSterilization;
-    @Bind(R.id.info_vaccination_basic)
-    TextView infoVaccinationBasic;
-    @Bind(R.id.info_vaccination_extended)
-    TextView infoVaccinationExtended;
+    @Bind(R.id.info_vaccination)
+    TextView infoVaccination;
 
     String[] picturesSample1 = new String[]{"http://2.bp.blogspot.com/-uI_rgOFxmT0/Vw6lkKwdTDI/AAAAAAAABLw/T0d2NW0Uc-MsYe1y6u6zvdUdCJxFv4uwACK4B/s1600/pies1_5.jpg",
             "http://4.bp.blogspot.com/-oMb5TMvvpRc/Vw6lkHw7n6I/AAAAAAAABL4/r2hdfKttHpUMPhtFGYgt7KkxqUOFNFVOACK4B/s1600/pies1_2.jpg",
@@ -117,8 +115,7 @@ public class ContentDetailsView {
         infoGender.setText(ctx.getString(animal.getGender().resId));
         infoTraining.setText(ctx.getString(animal.getTraining().resId));
         infoSterilization.setText(animal.getSterilization() ? ctx.getString(R.string.yes) : ctx.getString(R.string.no));
-        infoVaccinationBasic.setText(animal.getVaccinationBasic() ? ctx.getString(R.string.yes) : ctx.getString(R.string.no));
-        infoVaccinationExtended.setText(animal.getVaccinationExtended() ? ctx.getString(R.string.yes) : ctx.getString(R.string.no));
+        infoVaccination.setText(ctx.getString(animal.getVaccination().resId));
     }
 
     private void initBasicInfoImagesAndDescription() {

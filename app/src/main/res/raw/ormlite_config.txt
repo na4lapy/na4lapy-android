@@ -1,5 +1,5 @@
 #
-# generated on 2016/04/28 04:42:03
+# generated on 2016/05/05 09:19:05
 #
 # --table-start--
 dataClass=pl.kodujdlapolski.na4lapy.model.Animal
@@ -34,6 +34,9 @@ fieldName=race
 fieldName=activity
 # --field-end--
 # --field-start--
+fieldName=vaccination
+# --field-end--
+# --field-start--
 fieldName=training
 # --field-end--
 # --field-start--
@@ -44,12 +47,6 @@ fieldName=chipId
 # --field-end--
 # --field-start--
 fieldName=sterilization
-# --field-end--
-# --field-start--
-fieldName=vaccinationBasic
-# --field-end--
-# --field-start--
-fieldName=vaccinationExtended
 # --field-end--
 # --field-start--
 fieldName=photos

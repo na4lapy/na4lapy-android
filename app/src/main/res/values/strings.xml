@@ -72,8 +72,11 @@
     <string name="details_training">Ułożenie:</string>
     <string name="details_sterilization">Sterylizacja/Kastracja:</string>
     <string name="details_chip">Chip:</string>
-    <string name="details_vaccination_basic">Szczepienia podstawowe:</string>
-    <string name="details_vaccination_extended">Szczepienia rozszerzone:</string>
+    <string name="vaccination_basic">Podstawowe</string>
+    <string name="vaccination_extended">Rozszerzone</string>
+    <string name="vaccination_none">Brak</string>
+    <string name="vaccination_unknown">Nieznane</string>
+    <string name="details_vaccination">Szczepienie:</string>
     <string name="details_admittance_date">W schronisku od:</string>
     <string name="activity_high">Wysoka</string>
     <string name="activity_low">Niska</string>
@@ -85,6 +88,7 @@
     <string name="size_small">Mała</string>
     <string name="training_trainined">Podstawowe</string>
     <string name="training_untrainined">Zaawansowane</string>
+    <string name="training_none">Brak</string>
     <string name="yes">TAK</string>
     <string name="no">NIE</string>
     <string name="more_info">więcej informacji</string>
