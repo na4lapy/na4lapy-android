@@ -88,7 +88,6 @@ public class AnimalGalleryPlaceholderFragment extends Fragment {
         if (aboutAuthor != null) {
             aboutAuthor = getResources().getString(R.string.photo_by) + " " + aboutAuthor;
             photoAuthor.setText(aboutAuthor);
-            System.out.println(aboutAuthor);
         }
     }
 }
