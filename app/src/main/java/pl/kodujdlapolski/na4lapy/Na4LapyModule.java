@@ -2,10 +2,16 @@ package pl.kodujdlapolski.na4lapy;
 
 import android.app.Application;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import org.joda.time.LocalDate;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import pl.kodujdlapolski.na4lapy.api.LocalDateDeserializer;
 
 @Module
 public class Na4LapyModule {
@@ -20,5 +26,13 @@ public class Na4LapyModule {
     @Provides
     public Application provideApplication() {
         return mApplication;
+    }
+
+    @Singleton
+    @Provides
+    public Gson provideGson() {
+        return new GsonBuilder()
+                .registerTypeAdapter(LocalDate.class, new LocalDateDeserializer())
+                .create();
     }
 }

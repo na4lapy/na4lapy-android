@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
@@ -98,8 +99,9 @@ public class DetailsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            String title = getString(R.string.animal_details_title, animal.getName(),
-                    getAgeTextShort(this, animal.getBirthDate()));
+            String title = animal.getBirthDate() != null ?
+                    getString(R.string.animal_details_title, animal.getName(), getAgeTextShort(this, animal.getBirthDate())) :
+                    animal.getName();
             getSupportActionBar().setTitle(title);
         }
     }
@@ -119,7 +121,8 @@ public class DetailsActivity extends AppCompatActivity {
 
         matchingLvl.setImageLevel(userService.getPreferencesComplianceLevel(animal));
         addToFavFab.setImageResource(AnimalUtils.getAddToFavFabImage(animal));
-        addToFavFab.setOnClickListener(v -> repositoryService.setFavourite(animal.getId(), !animal.getFavourite()).subscribe(this::onFavChanged));
+        addToFavFab.setOnClickListener(v -> repositoryService.setFavourite(animal.getId(), !Boolean.TRUE.equals(animal.getFavourite()))
+                .subscribe(this::onFavChanged));
     }
 
     private void onFavChanged(Long changedAnimalId) {
@@ -164,7 +167,7 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     //TODO przenieść do presentera kiedy powstawnie
-    public static String getAgeTextShort(Context context, LocalDate date) {
+    public static String getAgeTextShort(Context context, @NonNull LocalDate date) {
         int age = Years.yearsBetween(date, LocalDate.now()).getYears();
         int fromStringRes = R.plurals.years_short;
         if (age == 0) {

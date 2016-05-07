@@ -2,11 +2,11 @@ package pl.kodujdlapolski.na4lapy.api;
 
 import org.joda.time.LocalDate;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import pl.kodujdlapolski.na4lapy.api.model.PagedAnimalListDto;
 import pl.kodujdlapolski.na4lapy.model.Animal;
 import pl.kodujdlapolski.na4lapy.model.Shelter;
 import pl.kodujdlapolski.na4lapy.model.type.ActivityAnimal;
@@ -16,6 +16,7 @@ import pl.kodujdlapolski.na4lapy.model.type.Species;
 import pl.kodujdlapolski.na4lapy.model.type.Sterilization;
 import pl.kodujdlapolski.na4lapy.model.type.Training;
 import pl.kodujdlapolski.na4lapy.model.type.Vaccination;
+import rx.Observable;
 
 public class FakeApiServiceImpl implements ApiService {
 
@@ -48,31 +49,34 @@ public class FakeApiServiceImpl implements ApiService {
     }
 
     @Override
-    public Shelter getShelter() throws IOException {
-        return shelter;
+    public Observable<Shelter> getShelter() {
+        return Observable.just(shelter);
     }
 
     @Override
-    public List<Animal> getAnimalList() throws IOException {
+    public Observable<List<Animal>> getAnimalList() {
         List<Animal> animals = new ArrayList<>();
         for (int i = 0; i < 30; i++) {
             animals.add(generateAnimal((long) i));
         }
-        return animals;
+        return Observable.just(animals);
     }
 
     @Override
-    public List<Animal> getAnimalList(int page, int size) throws IOException {
+    public Observable<PagedAnimalListDto> getAnimalList(int page, int size) {
         List<Animal> animals = new ArrayList<>();
         for (int i = 0; i < size; i++) {
             animals.add(generateAnimal((long) i));
         }
-        return animals;
+        PagedAnimalListDto dto = new PagedAnimalListDto();
+        dto.setData(animals);
+        dto.setTotal(animals.size());
+        return Observable.just(dto);
     }
 
     @Override
-    public Animal getAnimal(Long id) throws IOException {
-        return generateAnimal(id);
+    public Observable<Animal> getAnimal(Long id) {
+        return Observable.just(generateAnimal(id));
     }
 
     private Animal generateAnimal(Long id) {

@@ -1,5 +1,7 @@
 package pl.kodujdlapolski.na4lapy.repository.database;
 
+import android.support.annotation.Nullable;
+
 import com.j256.ormlite.android.AndroidConnectionSource;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
@@ -66,7 +68,10 @@ public class DatabaseRepositoryImpl implements DatabaseRepository {
     }
 
     @Override
-    public <T> int save(T entity) throws SQLException {
+    public <T> int save(@Nullable T entity) throws SQLException {
+        if (entity == null) {
+            return 0;
+        }
         ConnectionSource connectionSource = new AndroidConnectionSource(mDatabaseHelper);
         Dao<T, Long> dao = getDao(entity.getClass(), connectionSource);
         int count = dao.createOrUpdate(entity).getNumLinesChanged();
@@ -75,8 +80,8 @@ public class DatabaseRepositoryImpl implements DatabaseRepository {
     }
 
     @Override
-    public <T> int saveAll(final List<T> entities) throws Exception {
-        if (entities.isEmpty()) {
+    public <T> int saveAll(@Nullable final List<T> entities) throws Exception {
+        if (entities == null || entities.isEmpty()) {
             return 0;
         }
         ConnectionSource connectionSource = new AndroidConnectionSource(mDatabaseHelper);

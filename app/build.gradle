@@ -36,7 +36,7 @@ android {
             applicationIdSuffix = ".mock"
         }
         prod {
-            buildConfigField 'String', 'BASE_URL', '"http://192.168.0.104:9000"'
+            buildConfigField 'String', 'BASE_URL', '"http://na4lapy.kodujdlapolski.pl/api/"'
         }
     }
     buildTypes {
@@ -78,6 +78,7 @@ android {
         jcenter()
     }
     def supportLibraryVersion = "23.3.0"
+    def retrofitVersion = "2.0.2"
 
     dependencies {
         compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -90,8 +91,9 @@ android {
         compile 'com.google.guava:guava:19.0'
         compile 'com.jakewharton:butterknife:7.0.1'
         compile 'com.j256.ormlite:ormlite-android:4.48'
-        compile 'com.squareup.retrofit2:retrofit:2.0.1'
-        compile 'com.squareup.retrofit2:converter-gson:2.0.1'
+        compile "com.squareup.retrofit2:retrofit:$retrofitVersion"
+        compile "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+        compile "com.squareup.retrofit2:adapter-rxjava:$retrofitVersion"
         compile 'com.squareup.picasso:picasso:2.5.2'
         compile 'com.github.japgolly.android:svg-android:2.0.6'
         compile 'io.reactivex:rxandroid:1.1.0'

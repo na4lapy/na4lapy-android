@@ -25,10 +25,4 @@ public class PreferencesModule {
     public SharedPreferences provideSharedPreferences(Application application) {
         return PreferenceManager.getDefaultSharedPreferences(application);
     }
-
-    @Singleton
-    @Provides
-    public Gson provideGson() {
-        return new Gson();
-    }
 }

@@ -60,8 +60,10 @@ public abstract class AbstractBrowseViewHolder extends RecyclerView.ViewHolder {
                 .placeholder(R.drawable.pic_404dog)
                 .into(profilePic);
 
-        name.setText(mContext.getString(R.string.animal_details_title,
-                animal.getName(), DetailsActivity.getAgeTextShort(mContext, animal.getBirthDate())));
+        String nameText = animal.getBirthDate() != null ? mContext.getString(R.string.animal_details_title,
+                animal.getName(), DetailsActivity.getAgeTextShort(mContext, animal.getBirthDate())) :
+                animal.getName();
+        name.setText(nameText);
         matchLevelImage.setImageLevel(mUserService.getPreferencesComplianceLevel(animal));
     }
 }

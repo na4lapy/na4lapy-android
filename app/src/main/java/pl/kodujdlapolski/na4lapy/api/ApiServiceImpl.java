@@ -1,6 +1,5 @@
 package pl.kodujdlapolski.na4lapy.api;
 
-import java.io.IOException;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -8,7 +7,7 @@ import javax.inject.Inject;
 import pl.kodujdlapolski.na4lapy.api.model.PagedAnimalListDto;
 import pl.kodujdlapolski.na4lapy.model.Animal;
 import pl.kodujdlapolski.na4lapy.model.Shelter;
-import retrofit2.Call;
+import rx.Observable;
 
 public class ApiServiceImpl implements ApiService {
 
@@ -20,27 +19,22 @@ public class ApiServiceImpl implements ApiService {
     }
 
     @Override
-    public Shelter getShelter() throws IOException {
-        Call<Shelter> call = mApi.getShelter();
-        return call.execute().body();
+    public Observable<Shelter> getShelter() {
+        return mApi.getShelter();
     }
 
     @Override
-    public List<Animal> getAnimalList() throws IOException {
-        Call<List<Animal>> call = mApi.getAnimalList();
-        return call.execute().body();
+    public Observable<List<Animal>> getAnimalList() {
+        return mApi.getAnimalList();
     }
 
     @Override
-    public List<Animal> getAnimalList(int page, int size) throws IOException {
-        Call<PagedAnimalListDto> call = mApi.getAnimalList(page, size);
-        PagedAnimalListDto dto = call.execute().body();
-        return dto.getData();
+    public Observable<PagedAnimalListDto> getAnimalList(int page, int size) {
+        return mApi.getAnimalList(page, size);
     }
 
     @Override
-    public Animal getAnimal(Long id) throws IOException {
-        Call<Animal> call = mApi.getAnimal(id);
-        return call.execute().body();
+    public Observable<Animal> getAnimal(Long id) {
+        return mApi.getAnimal(id);
     }
 }

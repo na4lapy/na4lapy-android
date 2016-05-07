@@ -26,7 +26,7 @@ public class AnimalUtils {
 
     //TODO użyć StateListDrawable dla buttona zamiast zmieniać jego grafikę ręcznie podmieniając drawable
     public static int getAddToFavFabImage(Animal animal) {
-        return animal.getFavourite() ? R.drawable.ic_favorite_white : R.drawable.ic_favorite_border_white;
+        return Boolean.TRUE.equals(animal.getFavourite()) ? R.drawable.ic_favorite_white : R.drawable.ic_favorite_border_white;
     }
 
     //TODO dodać zdjęcie zwierzęcia

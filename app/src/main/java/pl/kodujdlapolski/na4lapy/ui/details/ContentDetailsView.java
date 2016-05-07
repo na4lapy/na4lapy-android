@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
+import android.support.annotation.NonNull;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.View;
@@ -110,7 +111,9 @@ public class ContentDetailsView {
     }
 
     private void initMoreInfoTable() {
-        infoAdmittanceDate.setText(getShortDateTextFrom(animal.getAdmittanceDate()));
+        if (animal.getAdmittanceDate() != null) {
+            infoAdmittanceDate.setText(getShortDateTextFrom(animal.getAdmittanceDate()));
+        }
         infoActivity.setText(ctx.getString(animal.getActivity().getLabelResId()));
         infoChip.setText(animal.getChipId());
         infoRace.setText(animal.getRace());
@@ -201,7 +204,7 @@ public class ContentDetailsView {
         expandOrCollapseBtn.setText(isExpanded ? R.string.less_info : R.string.more_info);
     }
 
-    private String getShortDateTextFrom(LocalDate date) {
+    private String getShortDateTextFrom(@NonNull LocalDate date) {
         int age = Years.yearsBetween(date, LocalDate.now()).getYears();
         int fromStringRes = R.plurals.years_from;
         if (age == 0) {

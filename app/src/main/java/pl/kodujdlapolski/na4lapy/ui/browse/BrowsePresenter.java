@@ -206,7 +206,7 @@ public class BrowsePresenter implements SynchronizationReceiver.SynchronizationR
 
     @Override
     public void favourite(Animal animal) {
-        repositoryService.setFavourite(animal.getId(), !animal.getFavourite())
+        repositoryService.setFavourite(animal.getId(), !Boolean.TRUE.equals(animal.getFavourite()))
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::onFavChanged);
     }

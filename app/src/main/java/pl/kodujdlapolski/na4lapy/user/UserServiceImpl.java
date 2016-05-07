@@ -62,9 +62,11 @@ public class UserServiceImpl implements UserService {
                     ++result;
         }
 
-        int age = Years.yearsBetween(animal.getBirthDate(), LocalDate.now()).getYears();
-        if (age >= mUserPreferences.getAgeMin() && age <= mUserPreferences.getAgeMax()) {
-            ++result;
+        if (animal.getBirthDate() != null) {
+            int age = Years.yearsBetween(animal.getBirthDate(), LocalDate.now()).getYears();
+            if (age >= mUserPreferences.getAgeMin() && age <= mUserPreferences.getAgeMax()) {
+                ++result;
+            }
         }
 
         if ((mUserPreferences.isSizeSmall() && Size.SMALL.equals(animal.getSize())) ||
