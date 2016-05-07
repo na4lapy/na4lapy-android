@@ -1,6 +1,6 @@
 package pl.kodujdlapolski.na4lapy.user;
 
-import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,8 +16,7 @@ import pl.kodujdlapolski.na4lapy.model.type.Size;
 import pl.kodujdlapolski.na4lapy.model.type.Species;
 import pl.kodujdlapolski.na4lapy.preferences.PreferencesService;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.reset;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -67,7 +66,7 @@ public class UserServiceImplTest {
         Animal animal = new Animal();
         animal.setSpecies(Species.DOG);
         animal.setGender(Gender.MALE);
-        animal.setBirthDate(new DateTime(2016, 1, 1, 0, 0).getMillis());
+        animal.setBirthDate(new LocalDate(2016, 1, 1));
         animal.setSize(Size.LARGE);
         animal.setActivity(ActivityAnimal.HIGH);
         UserPreferences userPreferences = new UserPreferences();

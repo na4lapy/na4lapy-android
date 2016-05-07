@@ -2,7 +2,6 @@ package pl.kodujdlapolski.na4lapy.ui.browse;
 
 import android.content.Intent;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.content.LocalBroadcastManager;
 
 import java.util.ArrayList;
@@ -44,9 +43,9 @@ public class BrowsePresenter implements SynchronizationReceiver.SynchronizationR
 
     public enum PageTypes {
         ALL(R.string.list_section_all, null),
-        DOGS(R.string.list_section_dogs, Species.DOG),
-        CATS(R.string.list_section_cats, Species.CAT),
-        OTHER(R.string.list_section_other, Species.OTHER);
+        DOGS(Species.DOG.getLabelResId(), Species.DOG),
+        CATS(Species.CAT.getLabelResId(), Species.CAT),
+        OTHER(Species.OTHER.getLabelResId(), Species.OTHER);
         public int nameResId;
         Species specie;
 
@@ -192,7 +191,7 @@ public class BrowsePresenter implements SynchronizationReceiver.SynchronizationR
     public void onChangedAnimalAvailable(Animal changedAnimal) {
         int indexWhichShouldBeReplaced = getIndexOfAnimalOnList(animals, changedAnimal);
         if (indexWhichShouldBeReplaced != -1) {
-            if (isFavList && !changedAnimal.isFavourite()) {
+            if (isFavList && !changedAnimal.getFavourite()) {
                 animals.remove(indexWhichShouldBeReplaced);
                 ((UpdateSingleElement) adapter).notifyItemRemoved(changedAnimal);
             } else {

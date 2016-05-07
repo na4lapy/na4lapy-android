@@ -30,15 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:singleLine="true"
-            android:textAllCaps="true"
-            tools:text="Reksio" />
-
-        <TextView
-            android:id="@+id/view_holder_animal_age"
-            style="@style/TextAppearance.AppCompat.Body1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text=", 5l " />
+            tools:text="Reksio, 5 lat" />
     </LinearLayout>
 
     <LinearLayout

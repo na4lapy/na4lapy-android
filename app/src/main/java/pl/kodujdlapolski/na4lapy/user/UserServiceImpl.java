@@ -1,7 +1,9 @@
 package pl.kodujdlapolski.na4lapy.user;
 
 import android.support.annotation.NonNull;
-import android.text.format.DateUtils;
+
+import org.joda.time.LocalDate;
+import org.joda.time.Years;
 
 import javax.inject.Inject;
 
@@ -60,7 +62,7 @@ public class UserServiceImpl implements UserService {
                     ++result;
         }
 
-        long age = (System.currentTimeMillis() - animal.getBirthDate()) / DateUtils.YEAR_IN_MILLIS;
+        int age = Years.yearsBetween(animal.getBirthDate(), LocalDate.now()).getYears();
         if (age >= mUserPreferences.getAgeMin() && age <= mUserPreferences.getAgeMax()) {
             ++result;
         }

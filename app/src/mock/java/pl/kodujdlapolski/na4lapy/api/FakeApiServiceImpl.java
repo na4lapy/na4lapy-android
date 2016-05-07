@@ -1,6 +1,6 @@
 package pl.kodujdlapolski.na4lapy.api;
 
-import android.text.format.DateUtils;
+import org.joda.time.LocalDate;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,6 +13,7 @@ import pl.kodujdlapolski.na4lapy.model.type.ActivityAnimal;
 import pl.kodujdlapolski.na4lapy.model.type.Gender;
 import pl.kodujdlapolski.na4lapy.model.type.Size;
 import pl.kodujdlapolski.na4lapy.model.type.Species;
+import pl.kodujdlapolski.na4lapy.model.type.Sterilization;
 import pl.kodujdlapolski.na4lapy.model.type.Training;
 import pl.kodujdlapolski.na4lapy.model.type.Vaccination;
 
@@ -78,16 +79,16 @@ public class FakeApiServiceImpl implements ApiService {
         Animal animal = new Animal();
         animal.setId(id);
         animal.setShelter(shelter);
-        animal.setAdmittanceDate(1457214300000L - (long) (random.nextFloat() * 63072000000L));
+        animal.setAdmittanceDate(new LocalDate(random.nextInt(16) + 2000, random.nextInt(11) + 1, random.nextInt(28) + 1));
+        animal.setBirthDate(new LocalDate(random.nextInt(16) + 2000, random.nextInt(11) + 1, random.nextInt(28) + 1));
         animal.setName("Animal_" + random.nextInt(9999));
-        animal.setBirthDate(System.currentTimeMillis() - random.nextInt(20) * DateUtils.YEAR_IN_MILLIS);
         animal.setSpecies(Species.values()[random.nextInt(Species.values().length)]);
         animal.setGender(Gender.values()[random.nextInt(Gender.values().length)]);
         animal.setSize(Size.values()[random.nextInt(Gender.values().length)]);
         animal.setRace("rasa_" + random.nextInt(99));
         animal.setActivity(ActivityAnimal.values()[random.nextInt(ActivityAnimal.values().length)]);
         animal.setTraining(Training.values()[random.nextInt(Training.values().length)]);
-        animal.setSterilization(random.nextBoolean());
+        animal.setSterilization(Sterilization.values()[random.nextInt(Sterilization.values().length)]);
         animal.setChipId("CHIP_ID_" + id);
         animal.setVaccination(Vaccination.values()[random.nextInt(Vaccination.values().length)]);
         animal.setFavourite(random.nextBoolean());

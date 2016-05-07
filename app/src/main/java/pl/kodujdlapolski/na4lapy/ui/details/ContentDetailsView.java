@@ -16,6 +16,10 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import org.joda.time.LocalDate;
+import org.joda.time.Months;
+import org.joda.time.Years;
+
 import java.util.ArrayList;
 
 import butterknife.Bind;
@@ -23,7 +27,6 @@ import butterknife.ButterKnife;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Animal;
 import pl.kodujdlapolski.na4lapy.model.Photo;
-import pl.kodujdlapolski.na4lapy.utils.AnimalUtils;
 
 /**
  * Created by Natalia Wróblewska on 2016-04-13.
@@ -40,6 +43,7 @@ import pl.kodujdlapolski.na4lapy.utils.AnimalUtils;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+//TODO utworzyć presentera dla widoku
 public class ContentDetailsView {
 
     private DetailsActivity ctx;
@@ -106,16 +110,15 @@ public class ContentDetailsView {
     }
 
     private void initMoreInfoTable() {
-        java.util.Date date = new java.util.Date(animal.getAdmittanceDate());
-        infoActivity.setText(ctx.getString(animal.getActivity().resId));
-        infoAdmittanceDate.setText(android.text.format.DateFormat.format("dd.MM.yyyy", date));
+        infoAdmittanceDate.setText(getShortDateTextFrom(animal.getAdmittanceDate()));
+        infoActivity.setText(ctx.getString(animal.getActivity().getLabelResId()));
         infoChip.setText(animal.getChipId());
         infoRace.setText(animal.getRace());
-        infoSize.setText(ctx.getString(animal.getSize().resId));
-        infoGender.setText(ctx.getString(animal.getGender().resId));
-        infoTraining.setText(ctx.getString(animal.getTraining().resId));
-        infoSterilization.setText(animal.getSterilization() ? ctx.getString(R.string.yes) : ctx.getString(R.string.no));
-        infoVaccination.setText(ctx.getString(animal.getVaccination().resId));
+        infoSize.setText(ctx.getString(animal.getSize().getLabelResId()));
+        infoGender.setText(ctx.getString(animal.getGender().getLabelResId()));
+        infoTraining.setText(ctx.getString(animal.getTraining().getLabelResId()));
+        infoSterilization.setText(ctx.getString(animal.getSterilization().getLabelResId()));
+        infoVaccination.setText(ctx.getString(animal.getVaccination().getLabelResId()));
     }
 
     private void initBasicInfoImagesAndDescription() {
@@ -123,9 +126,9 @@ public class ContentDetailsView {
         description.setOnClickListener(v -> expandOrCollapseDescription());
         expandOrCollapseBtn.setText(R.string.more_info);
         expandOrCollapseBtn.setOnClickListener(v -> expandOrCollapseDescription());
-        sizeImage.setImageResource(AnimalUtils.getSizeImage(animal));
-        activityImage.setImageResource(AnimalUtils.getActivityImage(animal));
-        genderImage.setImageResource(AnimalUtils.getGenderImage(animal));
+        sizeImage.setImageResource(animal.getSize().getDrawableResId());
+        activityImage.setImageResource(animal.getActivity().getDrawableResId());
+        genderImage.setImageResource(animal.getGender().getDrawableResId());
     }
 
     private void initImagesContainer() {
@@ -196,5 +199,15 @@ public class ContentDetailsView {
                 isExpanded ? description.getLineCount() : MAX_LINES_COLLAPSED);
         animation.setDuration(200).start();
         expandOrCollapseBtn.setText(isExpanded ? R.string.less_info : R.string.more_info);
+    }
+
+    private String getShortDateTextFrom(LocalDate date) {
+        int age = Years.yearsBetween(date, LocalDate.now()).getYears();
+        int fromStringRes = R.plurals.years_from;
+        if (age == 0) {
+            age = Months.monthsBetween(date, LocalDate.now()).getMonths();
+            fromStringRes = R.plurals.months_from;
+        }
+        return ctx.getResources().getQuantityString(fromStringRes, age, age);
     }
 }

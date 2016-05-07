@@ -39,7 +39,7 @@ public class ListBrowseViewHolder extends AbstractBrowseViewHolder {
     public void init(Animal animal, OnBrowseElementClickedAction onBrowseElementClickedAction) {
         super.init(animal, onBrowseElementClickedAction);
 
-        addToFavBtn.setImageResource(animal.isFavourite() ? R.drawable.ic_favorite_accent : R.drawable.ic_favorite_border_accent);
+        addToFavBtn.setImageResource(animal.getFavourite() ? R.drawable.ic_favorite_accent : R.drawable.ic_favorite_border_accent);
         addToFavBtn.setOnClickListener(v -> {
             onBrowseElementClickedAction.favourite(animal);
         });

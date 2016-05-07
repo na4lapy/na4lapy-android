@@ -1,5 +1,6 @@
 package pl.kodujdlapolski.na4lapy.ui.browse;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -11,8 +12,8 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Animal;
+import pl.kodujdlapolski.na4lapy.ui.details.DetailsActivity;
 import pl.kodujdlapolski.na4lapy.user.UserService;
-import pl.kodujdlapolski.na4lapy.utils.AnimalUtils;
 
 /**
  * Created by Natalia Wróblewska on 2016-02-27.
@@ -37,19 +38,19 @@ public abstract class AbstractBrowseViewHolder extends RecyclerView.ViewHolder {
 
     @Bind(R.id.view_holder_animal_name)
     TextView name;
-    @Bind(R.id.view_holder_animal_age)
-    TextView age;
     @Bind(R.id.matching_lvl_image)
     ImageView matchLevelImage;
     @Bind(R.id.profile_pic_on_list)
     public ImageView profilePic;
 
+    private Context mContext;
     private UserService mUserService;
 
     public AbstractBrowseViewHolder(View itemView, UserService userService) {
         super(itemView);
         ButterKnife.bind(this, itemView);
         mUserService = userService;
+        mContext = itemView.getContext();
     }
 
     public void init(Animal animal, OnBrowseElementClickedAction onBrowseElementClickedAction) {
@@ -59,8 +60,8 @@ public abstract class AbstractBrowseViewHolder extends RecyclerView.ViewHolder {
                 .placeholder(R.drawable.pic_404dog)
                 .into(profilePic);
 
-        name.setText(animal.getName());
-        age.setText(AnimalUtils.getAnimalAgeFormatted(itemView.getContext(), animal));
+        name.setText(mContext.getString(R.string.animal_details_title,
+                animal.getName(), DetailsActivity.getAgeTextShort(mContext, animal.getBirthDate())));
         matchLevelImage.setImageLevel(mUserService.getPreferencesComplianceLevel(animal));
     }
 }

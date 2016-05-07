@@ -1,8 +1,8 @@
 package pl.kodujdlapolski.na4lapy.ui.details;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.LevelListDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
@@ -16,6 +16,10 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
+
+import org.joda.time.LocalDate;
+import org.joda.time.Months;
+import org.joda.time.Years;
 
 import javax.inject.Inject;
 
@@ -33,6 +37,7 @@ import pl.kodujdlapolski.na4lapy.utils.AnimalUtils;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
+//TODO utworzyć presentera dla widoku
 public class DetailsActivity extends AppCompatActivity {
 
     public static final int REQUEST_CODE_ANIMAL = 1;
@@ -93,7 +98,9 @@ public class DetailsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle(animal.getName() + AnimalUtils.getAnimalAgeFormatted(this, animal));
+            String title = getString(R.string.animal_details_title, animal.getName(),
+                    getAgeTextShort(this, animal.getBirthDate()));
+            getSupportActionBar().setTitle(title);
         }
     }
 
@@ -154,5 +161,16 @@ public class DetailsActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    //TODO przenieść do presentera kiedy powstawnie
+    public static String getAgeTextShort(Context context, LocalDate date) {
+        int age = Years.yearsBetween(date, LocalDate.now()).getYears();
+        int fromStringRes = R.plurals.years_short;
+        if (age == 0) {
+            age = Months.monthsBetween(date, LocalDate.now()).getMonths();
+            fromStringRes = R.plurals.months_short;
+        }
+        return context.getResources().getQuantityString(fromStringRes, age, age);
     }
 }

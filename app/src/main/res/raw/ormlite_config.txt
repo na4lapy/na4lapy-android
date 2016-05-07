@@ -1,5 +1,5 @@
 #
-# generated on 2016/05/05 09:19:05
+# generated on 2016/05/07 01:24:30
 #
 # --table-start--
 dataClass=pl.kodujdlapolski.na4lapy.model.Animal
@@ -10,13 +10,27 @@ fieldName=shelter
 foreign=true
 # --field-end--
 # --field-start--
-fieldName=admittanceDate
-# --field-end--
-# --field-start--
 fieldName=name
 # --field-end--
 # --field-start--
+fieldName=race
+# --field-end--
+# --field-start--
+fieldName=description
+# --field-end--
+# --field-start--
+fieldName=chipId
+# --field-end--
+# --field-start--
 fieldName=birthDate
+persisterClass=pl.kodujdlapolski.na4lapy.repository.database.LocalDatePersister
+# --field-end--
+# --field-start--
+fieldName=admittanceDate
+persisterClass=pl.kodujdlapolski.na4lapy.repository.database.LocalDatePersister
+# --field-end--
+# --field-start--
+fieldName=sterilization
 # --field-end--
 # --field-start--
 fieldName=species
@@ -28,9 +42,6 @@ fieldName=gender
 fieldName=size
 # --field-end--
 # --field-start--
-fieldName=race
-# --field-end--
-# --field-start--
 fieldName=activity
 # --field-end--
 # --field-start--
@@ -38,15 +49,6 @@ fieldName=vaccination
 # --field-end--
 # --field-start--
 fieldName=training
-# --field-end--
-# --field-start--
-fieldName=description
-# --field-end--
-# --field-start--
-fieldName=chipId
-# --field-end--
-# --field-start--
-fieldName=sterilization
 # --field-end--
 # --field-start--
 fieldName=photos

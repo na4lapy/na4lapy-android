@@ -1,16 +1,9 @@
 package pl.kodujdlapolski.na4lapy.utils;
 
-import android.content.Context;
 import android.content.Intent;
-
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Animal;
-import pl.kodujdlapolski.na4lapy.model.type.ActivityAnimal;
-import pl.kodujdlapolski.na4lapy.model.type.Gender;
 
 /**
  * Created by Natalia Wróblewska on 2016-03-13.
@@ -28,78 +21,15 @@ import pl.kodujdlapolski.na4lapy.model.type.Gender;
  * limitations under the License.
  *
  */
+//TODO przekształcić w komponent DI. Statyczne metody są słabo testowalne
 public class AnimalUtils {
 
-    public static String getAnimalAgeFormatted(Context ctx, Animal animal) {
-        GregorianCalendar calendarBirthDate = new GregorianCalendar();
-        calendarBirthDate.setTime(new Date(animal.getBirthDate()));
-
-        GregorianCalendar current = new GregorianCalendar();
-        current.setTime(new Date(System.currentTimeMillis()));
-        int days = daysBetween(current, calendarBirthDate);
-        int oneYearInDays = 365;
-        if (days < oneYearInDays) {
-            int months = days / 30;
-            return String.format(ctx.getString(R.string.months), months);
-        } else {
-            int years = days / oneYearInDays;
-            return String.format(ctx.getString(R.string.years), years);
-        }
-    }
-
-
-    public static int daysBetween(Calendar cal1, Calendar cal2) {
-        Calendar cal1a = (Calendar) cal1.clone();
-        Calendar cal2a = (Calendar) cal2.clone();
-        if (cal1a.get(Calendar.YEAR) == cal2a.get(Calendar.YEAR)) {
-            return Math.abs(cal1a.get(Calendar.DAY_OF_YEAR)
-                    - cal2a.get(Calendar.DAY_OF_YEAR));
-        } else {
-            if (cal2a.get(Calendar.YEAR) > cal1a.get(Calendar.YEAR)) {
-                // swap them
-                Calendar temp = cal1a;
-                cal1a = cal2a;
-                cal2a = temp;
-            }
-            int extraDays = 0;
-
-            int dayOneOriginalYearDays = cal1a.get(Calendar.DAY_OF_YEAR);
-
-            while (cal1a.get(Calendar.YEAR) > cal2a.get(Calendar.YEAR)) {
-                cal1a.add(Calendar.YEAR, -1);
-                // getActualMaximum() important for leap years
-                extraDays += cal1a.getActualMaximum(Calendar.DAY_OF_YEAR);
-            }
-
-            return extraDays - cal2a.get(Calendar.DAY_OF_YEAR)
-                    + dayOneOriginalYearDays;
-        }
-    }
-
+    //TODO użyć StateListDrawable dla buttona zamiast zmieniać jego grafikę ręcznie podmieniając drawable
     public static int getAddToFavFabImage(Animal animal) {
-        return animal.isFavourite() ? R.drawable.ic_favorite_white : R.drawable.ic_favorite_border_white;
+        return animal.getFavourite() ? R.drawable.ic_favorite_white : R.drawable.ic_favorite_border_white;
     }
 
-    public static int getSizeImage(Animal animal) {
-        switch (animal.getSize()) {
-            case SMALL:
-                return R.drawable.vector_drawable_przegladanie_maly;
-            case MEDIUM:
-                return R.drawable.vector_drawable_przegladanie_sredni;
-            case LARGE:
-                return R.drawable.vector_drawable_przegladanie_duzy;
-        }
-        return -1;
-    }
-
-    public static int getGenderImage(Animal animal) {
-        return animal.getGender() == Gender.FEMALE ? R.drawable.vector_drawable_przegladanie_suczka : R.drawable.vector_drawable_przegladanie_samiec;
-    }
-
-    public static int getActivityImage(Animal animal) {
-        return animal.getActivity() == ActivityAnimal.HIGH ? R.drawable.vector_drawable_przegladanie_aktywny : R.drawable.vector_drawable_przegladanie_domator;
-    }
-
+    //TODO dodać zdjęcie zwierzęcia
     public static Intent getShareIntent(Animal animal) {
         Intent sharingIntent = new Intent(Intent.ACTION_SEND);
         sharingIntent.setType("text/plain");

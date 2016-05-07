@@ -1,19 +1,22 @@
 package pl.kodujdlapolski.na4lapy.model;
 
-import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
 
-import java.util.Collection;
+import org.joda.time.LocalDate;
+
 import java.io.Serializable;
+import java.util.Collection;
 
 import pl.kodujdlapolski.na4lapy.model.type.ActivityAnimal;
 import pl.kodujdlapolski.na4lapy.model.type.Gender;
 import pl.kodujdlapolski.na4lapy.model.type.Size;
 import pl.kodujdlapolski.na4lapy.model.type.Species;
+import pl.kodujdlapolski.na4lapy.model.type.Sterilization;
 import pl.kodujdlapolski.na4lapy.model.type.Training;
 import pl.kodujdlapolski.na4lapy.model.type.Vaccination;
+import pl.kodujdlapolski.na4lapy.repository.database.LocalDatePersister;
 
 @DatabaseTable(tableName = "animals")
 public class Animal extends BaseEntity implements Serializable {
@@ -26,11 +29,15 @@ public class Animal extends BaseEntity implements Serializable {
     @DatabaseField private String name;
     @DatabaseField private String race;
     @DatabaseField private String description;
-    @DatabaseField private Long birthDate;
-    @DatabaseField private Long admittanceDate;
     @DatabaseField private String chipId;
-    @DatabaseField private Boolean sterilization;
 
+    @DatabaseField(persisterClass = LocalDatePersister.class)
+    private LocalDate birthDate;
+
+    @DatabaseField(persisterClass = LocalDatePersister.class)
+    private LocalDate admittanceDate;
+
+    @DatabaseField private Sterilization sterilization;
     @DatabaseField private Species species;
     @DatabaseField private Gender gender;
     @DatabaseField private Size size;
@@ -56,14 +63,6 @@ public class Animal extends BaseEntity implements Serializable {
         this.shelter = shelter;
     }
 
-    public Long getAdmittanceDate() {
-        return admittanceDate;
-    }
-
-    public void setAdmittanceDate(Long admittanceDate) {
-        this.admittanceDate = admittanceDate;
-    }
-
     public String getName() {
         return name;
     }
@@ -72,12 +71,52 @@ public class Animal extends BaseEntity implements Serializable {
         this.name = name;
     }
 
-    public Long getBirthDate() {
+    public String getRace() {
+        return race;
+    }
+
+    public void setRace(String race) {
+        this.race = race;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Long birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
+    }
+
+    public LocalDate getAdmittanceDate() {
+        return admittanceDate;
+    }
+
+    public void setAdmittanceDate(LocalDate admittanceDate) {
+        this.admittanceDate = admittanceDate;
+    }
+
+    public String getChipId() {
+        return chipId;
+    }
+
+    public void setChipId(String chipId) {
+        this.chipId = chipId;
+    }
+
+    public Sterilization getSterilization() {
+        return sterilization;
+    }
+
+    public void setSterilization(Sterilization sterilization) {
+        this.sterilization = sterilization;
     }
 
     public Species getSpecies() {
@@ -104,72 +143,12 @@ public class Animal extends BaseEntity implements Serializable {
         this.size = size;
     }
 
-    public String getRace() {
-        return race;
-    }
-
-    public void setRace(String race) {
-        this.race = race;
-    }
-
     public ActivityAnimal getActivity() {
         return activity;
     }
 
     public void setActivity(ActivityAnimal activity) {
         this.activity = activity;
-    }
-
-    public Training getTraining() {
-        return training;
-    }
-
-    public void setTraining(Training training) {
-        this.training = training;
-    }
-
-    public Boolean getSterilization() {
-        return sterilization;
-    }
-
-    public void setSterilization(Boolean sterilization) {
-        this.sterilization = sterilization;
-    }
-
-    public String getChipId() {
-        return chipId;
-    }
-
-    public void setChipId(String chipId) {
-        this.chipId = chipId;
-    }
-
-    public Collection<Photo> getPhotos() {
-        return photos;
-    }
-
-    public void setPhotos(ForeignCollection<Photo> photos) {
-        this.photos = photos;
-    }
-
-    public Boolean isFavourite() {
-        return favourite != null && favourite;
-    }
-
-    public Boolean getFavourite() {
-        return favourite;
-    }
-
-    public void setFavourite(Boolean favourite) {
-        this.favourite = favourite;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public Vaccination getVaccination() {
@@ -180,23 +159,47 @@ public class Animal extends BaseEntity implements Serializable {
         this.vaccination = vaccination;
     }
 
+    public Training getTraining() {
+        return training;
+    }
+
+    public void setTraining(Training training) {
+        this.training = training;
+    }
+
+    public Collection<Photo> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(Collection<Photo> photos) {
+        this.photos = photos;
+    }
+
+    public Boolean getFavourite() {
+        return favourite;
+    }
+
+    public void setFavourite(Boolean favourite) {
+        this.favourite = favourite;
+    }
+
     @Override
     public String toString() {
         return "Animal{" +
                 "shelter=" + shelter +
-                ", admittanceDate=" + admittanceDate +
                 ", name='" + name + '\'' +
+                ", race='" + race + '\'' +
+                ", description='" + description + '\'' +
                 ", birthDate=" + birthDate +
+                ", admittanceDate=" + admittanceDate +
+                ", chipId='" + chipId + '\'' +
+                ", sterilization=" + sterilization +
                 ", species=" + species +
                 ", gender=" + gender +
                 ", size=" + size +
-                ", race='" + race + '\'' +
                 ", activity=" + activity +
                 ", vaccination=" + vaccination +
                 ", training=" + training +
-                ", description='" + description + '\'' +
-                ", chipId='" + chipId + '\'' +
-                ", sterilization=" + sterilization +
                 ", photos=" + photos +
                 ", favourite=" + favourite +
                 '}';

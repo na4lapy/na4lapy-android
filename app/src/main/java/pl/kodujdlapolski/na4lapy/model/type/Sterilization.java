@@ -5,14 +5,14 @@ import android.support.annotation.StringRes;
 
 import pl.kodujdlapolski.na4lapy.R;
 
-public enum Species implements AnimalAttribute {
-    DOG(R.string.species_dogs),
-    CAT(R.string.speciec_cats),
-    OTHER(R.string.species_others);
+public enum Sterilization implements AnimalAttribute {
+    STERILIZED(R.string.sterilization_sterilized),
+    NOT_STERILIZED(R.string.sterilization_not_sterilized),
+    UNKNOWN(R.string.sterilization_unknown);
 
     private int mLabelResId;
 
-    Species(@StringRes int labelResId) {
+    Sterilization(@StringRes int labelResId) {
         mLabelResId = labelResId;
     }
 

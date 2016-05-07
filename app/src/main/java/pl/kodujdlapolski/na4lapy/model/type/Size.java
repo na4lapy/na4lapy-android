@@ -1,13 +1,30 @@
 package pl.kodujdlapolski.na4lapy.model.type;
 
+import android.support.annotation.DrawableRes;
+import android.support.annotation.StringRes;
+
 import pl.kodujdlapolski.na4lapy.R;
 
-public enum Size {
-    SMALL(R.string.size_small), MEDIUM(R.string.size_medium), LARGE(R.string.size_large);
+public enum Size implements AnimalAttribute {
+    SMALL(R.string.size_small, R.drawable.vector_drawable_przegladanie_maly),
+    MEDIUM(R.string.size_medium, R.drawable.vector_drawable_przegladanie_sredni),
+    LARGE(R.string.size_large, R.drawable.vector_drawable_przegladanie_duzy);
 
-    public int resId;
+    private int mLabelResId;
+    private int mDrawableResId;
 
-    Size(int resId) {
-        this.resId = resId;
+    Size(@StringRes int labelResId, @DrawableRes int drawableResId) {
+        mLabelResId = labelResId;
+        mDrawableResId = drawableResId;
+    }
+
+    @StringRes
+    public int getLabelResId() {
+        return mLabelResId;
+    }
+
+    @DrawableRes
+    public int getDrawableResId() {
+        return mDrawableResId;
     }
 }

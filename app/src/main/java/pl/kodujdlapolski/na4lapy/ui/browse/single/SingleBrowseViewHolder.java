@@ -7,10 +7,10 @@ import android.widget.ImageView;
 import butterknife.Bind;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Animal;
-import pl.kodujdlapolski.na4lapy.user.UserService;
-import pl.kodujdlapolski.na4lapy.utils.AnimalUtils;
 import pl.kodujdlapolski.na4lapy.ui.browse.AbstractBrowseViewHolder;
 import pl.kodujdlapolski.na4lapy.ui.browse.OnBrowseElementClickedAction;
+import pl.kodujdlapolski.na4lapy.user.UserService;
+import pl.kodujdlapolski.na4lapy.utils.AnimalUtils;
 
 /**
  * Created by Natalia Wróblewska on 2016-03-22.
@@ -55,8 +55,8 @@ public class SingleBrowseViewHolder extends AbstractBrowseViewHolder {
             onBrowseElementClickedAction.details(animal);
         });
 
-        sizeImage.setImageResource(AnimalUtils.getSizeImage(animal));
-        activityImage.setImageResource(AnimalUtils.getActivityImage(animal));
-        genderImage.setImageResource(AnimalUtils.getGenderImage(animal));
+        sizeImage.setImageResource(animal.getSize().getDrawableResId());
+        activityImage.setImageResource(animal.getActivity().getDrawableResId());
+        genderImage.setImageResource(animal.getGender().getDrawableResId());
     }
 }

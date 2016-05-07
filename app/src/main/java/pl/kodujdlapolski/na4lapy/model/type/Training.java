@@ -1,17 +1,29 @@
 package pl.kodujdlapolski.na4lapy.model.type;
 
+import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
 
 import pl.kodujdlapolski.na4lapy.R;
 
-public enum Training {
-    TRAINED(R.string.training_trainined),
-    UNTRAINED(R.string.training_untrainined),
-    NONE(R.string.training_none);
+public enum Training implements AnimalAttribute {
+    BASIC(R.string.training_trainined),
+    ADVANCED(R.string.training_untrainined),
+    NONE(R.string.training_none),
+    UNKNOWN(R.string.training_unknown);
 
-    public int resId;
+    private int mLabelResId;
 
-    Training(@StringRes int resId) {
-        this.resId = resId;
+    Training(@StringRes int labelResId) {
+        mLabelResId = labelResId;
+    }
+
+    @StringRes
+    public int getLabelResId() {
+        return mLabelResId;
+    }
+
+    @DrawableRes
+    public int getDrawableResId() {
+        return -1;
     }
 }
