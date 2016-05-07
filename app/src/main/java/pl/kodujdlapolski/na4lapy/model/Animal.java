@@ -1,5 +1,6 @@
 package pl.kodujdlapolski.na4lapy.model;
 
+import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
@@ -7,7 +8,6 @@ import com.j256.ormlite.table.DatabaseTable;
 import org.joda.time.LocalDate;
 
 import java.io.Serializable;
-import java.util.Collection;
 
 import pl.kodujdlapolski.na4lapy.model.type.ActivityAnimal;
 import pl.kodujdlapolski.na4lapy.model.type.Gender;
@@ -46,7 +46,7 @@ public class Animal extends BaseEntity implements Serializable {
     @DatabaseField private Training training;
 
     @ForeignCollectionField(eager = false)
-    private Collection<Photo> photos;
+    private ForeignCollection<Photo> photos;
 
     @DatabaseField(columnName = Animal.COLUMN_NAME_FAVOURITE)
     private Boolean favourite;
@@ -167,11 +167,11 @@ public class Animal extends BaseEntity implements Serializable {
         this.training = training;
     }
 
-    public Collection<Photo> getPhotos() {
+    public ForeignCollection<Photo> getPhotos() {
         return photos;
     }
 
-    public void setPhotos(Collection<Photo> photos) {
+    public void setPhotos(ForeignCollection<Photo> photos) {
         this.photos = photos;
     }
 

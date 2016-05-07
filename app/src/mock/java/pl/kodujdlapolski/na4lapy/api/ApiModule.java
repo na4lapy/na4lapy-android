@@ -4,13 +4,14 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import pl.kodujdlapolski.na4lapy.repository.database.DatabaseHelper;
 
 @Module
 public class ApiModule {
 
     @Singleton
     @Provides
-    public ApiService provideApiService() {
-        return new FakeApiServiceImpl();
+    public ApiService provideApiService(DatabaseHelper databaseHelper) {
+        return new FakeApiServiceImpl(databaseHelper);
     }
 }
