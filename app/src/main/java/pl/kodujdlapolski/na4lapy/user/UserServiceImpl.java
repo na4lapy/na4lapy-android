@@ -92,4 +92,21 @@ public class UserServiceImpl implements UserService {
     public void logout() {
         // TODO
     }
+
+    @Override
+    public String getFullUserName() {
+        // TODO
+        return null;
+    }
+
+    @Override
+    public String getUserPhotoUrl() {
+        // TODO
+        return null;
+    }
+
+    @Override
+    public boolean isLogged() {
+        return false;
+    }
 }
