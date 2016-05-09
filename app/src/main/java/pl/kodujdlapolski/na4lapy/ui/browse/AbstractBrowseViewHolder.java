@@ -12,6 +12,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Animal;
+import pl.kodujdlapolski.na4lapy.model.Photo;
 import pl.kodujdlapolski.na4lapy.ui.details.DetailsActivity;
 import pl.kodujdlapolski.na4lapy.user.UserService;
 
@@ -33,9 +34,6 @@ import pl.kodujdlapolski.na4lapy.user.UserService;
  */
 public abstract class AbstractBrowseViewHolder extends RecyclerView.ViewHolder {
 
-    String[] picturesSample = new String[]{"http://2.bp.blogspot.com/-uI_rgOFxmT0/Vw6lkKwdTDI/AAAAAAAABLw/T0d2NW0Uc-MsYe1y6u6zvdUdCJxFv4uwACK4B/s1600/pies1_5.jpg",
-            "http://4.bp.blogspot.com/-zjCctidFhyA/Vw6lkEpvejI/AAAAAAAABLA/7Y375FdJBSgnNhHQLqj922KoJtRVQBDqACK4B/s1600/pies2_1.jpg"};
-
     @Bind(R.id.view_holder_animal_name)
     TextView name;
     @Bind(R.id.matching_lvl_image)
@@ -54,12 +52,13 @@ public abstract class AbstractBrowseViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void init(Animal animal, OnBrowseElementClickedAction onBrowseElementClickedAction) {
-//          Photo pic = animal.getPhotos().iterator().next(); // todo remove comment when pictures are available
-        Picasso.with(itemView.getContext())
-                .load(picturesSample[animal.getId() %2 == 0 ? 0 : 1 ])
-                .placeholder(R.drawable.pic_404dog)
-                .into(profilePic);
-
+        if (animal.getPhotos() != null && animal.getPhotos().iterator().hasNext()) {
+            Photo pic = animal.getPhotos().iterator().next();
+            Picasso.with(itemView.getContext())
+                    .load(pic.getUrl())
+                    .placeholder(R.drawable.pic_404dog)
+                    .into(profilePic);
+        }
         String nameText = animal.getBirthDate() != null ? mContext.getString(R.string.animal_details_title,
                 animal.getName(), DetailsActivity.getAgeTextShort(mContext, animal.getBirthDate())) :
                 animal.getName();

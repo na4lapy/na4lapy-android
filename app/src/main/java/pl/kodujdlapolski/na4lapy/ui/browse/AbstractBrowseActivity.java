@@ -76,7 +76,9 @@ public class AbstractBrowseActivity extends AbstractDrawerActivity {
     public void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         viewPager.setAdapter(browsePresenter.getAdapter());
-        ((TabLayout) findViewById(R.id.tabs)).setupWithViewPager(viewPager);
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        if (tabLayout != null)
+            tabLayout.setupWithViewPager(viewPager);
 
     }
 
@@ -144,8 +146,9 @@ public class AbstractBrowseActivity extends AbstractDrawerActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == DetailsActivity.REQUEST_CODE_ANIMAL && resultCode == Activity.RESULT_OK) {
-            Animal changedAnimal = (Animal) data.getSerializableExtra(DetailsActivity.EXTRA_ANIMAL);
-            browsePresenter.onChangedAnimalAvailable(changedAnimal);
+            Long changedAnimalId = data.getLongExtra(DetailsActivity.EXTRA_ANIMAL_ID, -1);
+            if (changedAnimalId != -1)
+                browsePresenter.onChangedAnimalAvailable(changedAnimalId);
         }
     }
 }

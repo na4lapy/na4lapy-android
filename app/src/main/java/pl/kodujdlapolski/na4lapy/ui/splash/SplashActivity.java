@@ -36,10 +36,10 @@ public class SplashActivity extends AppCompatActivity {
         browse.putExtra(AbstractBrowseActivity.EXTRA_IS_FAV_LIST, false);
         browse.putExtra(AbstractBrowseActivity.EXTRA_IS_SINGLE_ELEMENT_BROWSE, true);
         b.addNextIntent(browse);
-        //    if (preferencesService.shouldIntroductionBeShown()) { // todo remove comment when introduction is done
-        Intent intent1 = new Intent(this, IntroductionActivity.class);
-        b.addNextIntent(intent1);
-        // }
+        if (preferencesService.shouldIntroductionBeShown()) {
+            Intent intent1 = new Intent(this, IntroductionActivity.class);
+            b.addNextIntent(intent1);
+        }
         b.startActivities();
         finish();
     }

@@ -55,7 +55,8 @@ public class DetailsActivity extends AppCompatActivity {
     @Bind(R.id.details_container)
     NestedScrollView detailsContainer;
 
-    public static final String EXTRA_ANIMAL = "extraAnimal";
+    public static final String EXTRA_ANIMAL_ID = "extraAnimalId";
+    private Long id;
     private Animal animal;
 
     @Inject
@@ -63,36 +64,46 @@ public class DetailsActivity extends AppCompatActivity {
     @Inject
     UserService userService;
 
-    String[] picturesSample = new String[]{"http://2.bp.blogspot.com/-uI_rgOFxmT0/Vw6lkKwdTDI/AAAAAAAABLw/T0d2NW0Uc-MsYe1y6u6zvdUdCJxFv4uwACK4B/s1600/pies1_5.jpg",
-            "http://4.bp.blogspot.com/-zjCctidFhyA/Vw6lkEpvejI/AAAAAAAABLA/7Y375FdJBSgnNhHQLqj922KoJtRVQBDqACK4B/s1600/pies2_1.jpg"};
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
         ButterKnife.bind(this);
         ((Na4LapyApp) getApplication()).getComponent().inject(this);
-        if (isAnimalAvailable(savedInstanceState)) {
-            initToolbar();
-            initToolbarImages();
-            ContentDetailsView contentDetailsView = new ContentDetailsView(this, animal);
-            detailsContainer.addView(contentDetailsView.getView());
+        if (isIdAvailable(savedInstanceState)) {
+            getAnimal();
         } else {
             // as we cannot do anything without an animal
             finish();
         }
     }
 
-    private boolean isAnimalAvailable(Bundle savedInstanceState) {
-        if (getIntent() != null && animal == null) {
-            if (getIntent().getExtras().getSerializable(EXTRA_ANIMAL) instanceof Animal) {
-                animal = (Animal) getIntent().getExtras().getSerializable(EXTRA_ANIMAL);
-            }
+    private boolean isIdAvailable(Bundle savedInstanceState) {
+        if (getIntent() != null && id == null) {
+            id = getIntent().getExtras().getLong(EXTRA_ANIMAL_ID);
         }
-        if (animal == null && savedInstanceState != null && savedInstanceState.getSerializable(EXTRA_ANIMAL) instanceof Animal) {
-            animal = (Animal) savedInstanceState.getSerializable(EXTRA_ANIMAL);
+        if (id == null && savedInstanceState != null) {
+            id = savedInstanceState.getLong(EXTRA_ANIMAL_ID);
         }
-        return animal != null;
+        return id != null;
+    }
+
+    private void getAnimal() {
+        repositoryService.getAnimal(id).subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::onAnimalAvailable);
+    }
+
+    private void onAnimalAvailable(Animal downloadedAnimal) {
+        animal = downloadedAnimal;
+        initContent();
+
+    }
+
+    private void initContent() {
+        initToolbar();
+        initToolbarImages();
+        ContentDetailsView contentDetailsView = new ContentDetailsView(this, animal);
+        detailsContainer.addView(contentDetailsView.getView());
     }
 
     private void initToolbar() {
@@ -107,18 +118,19 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     private void initToolbarImages() {
-        String url = picturesSample[animal.getId() % 2 == 0 ? 0 : 1]; // todo change na animal profile pic
-        Picasso.with(this)
-                .load(url)
-                .transform(new BlurTransformation(this, 2))
-                .transform(new ColorFilterTransformation(ContextCompat.getColor(this, R.color.colorPrimaryDark50opacity)))
-                .into(background);
+        if (animal.getPhotos() != null && animal.getPhotos().iterator().hasNext()) {
+            String url = animal.getPhotos().iterator().next().getUrl();
+            Picasso.with(this)
+                    .load(url)
+                    .transform(new BlurTransformation(this, 2))
+                    .transform(new ColorFilterTransformation(ContextCompat.getColor(this, R.color.colorPrimaryDark50opacity)))
+                    .into(background);
 
-        Picasso.with(this)
-                .load(url)
-                .transform(new CropCircleTransformation())
-                .into(profilePic);
-
+            Picasso.with(this)
+                    .load(url)
+                    .transform(new CropCircleTransformation())
+                    .into(profilePic);
+        }
         matchingLvl.setImageLevel(userService.getPreferencesComplianceLevel(animal));
         addToFavFab.setImageResource(AnimalUtils.getAddToFavFabImage(animal));
         addToFavFab.setOnClickListener(v -> repositoryService.setFavourite(animal.getId(), !Boolean.TRUE.equals(animal.getFavourite()))
@@ -134,7 +146,7 @@ public class DetailsActivity extends AppCompatActivity {
     private void onChangedAnimalAvailable(Animal changedAnimal) {
         animal = changedAnimal;
         Intent returnIntent = new Intent();
-        returnIntent.putExtra(EXTRA_ANIMAL, animal);
+        returnIntent.putExtra(EXTRA_ANIMAL_ID, id);
         setResult(Activity.RESULT_OK, returnIntent);
         addToFavFab.setImageResource(AnimalUtils.getAddToFavFabImage(animal));
     }
@@ -142,7 +154,7 @@ public class DetailsActivity extends AppCompatActivity {
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        outState.putSerializable(EXTRA_ANIMAL, animal);
+        outState.putSerializable(EXTRA_ANIMAL_ID, id);
         super.onSaveInstanceState(outState);
     }
 

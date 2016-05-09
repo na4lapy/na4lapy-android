@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.j256.ormlite.dao.ForeignCollection;
 import com.squareup.picasso.Picasso;
 
 import org.joda.time.LocalDate;
@@ -22,6 +23,9 @@ import org.joda.time.Months;
 import org.joda.time.Years;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -84,17 +88,6 @@ public class ContentDetailsView {
     @Bind(R.id.info_vaccination)
     TextView infoVaccination;
 
-    String[] picturesSample1 = new String[]{"http://2.bp.blogspot.com/-uI_rgOFxmT0/Vw6lkKwdTDI/AAAAAAAABLw/T0d2NW0Uc-MsYe1y6u6zvdUdCJxFv4uwACK4B/s1600/pies1_5.jpg",
-            "http://4.bp.blogspot.com/-oMb5TMvvpRc/Vw6lkHw7n6I/AAAAAAAABL4/r2hdfKttHpUMPhtFGYgt7KkxqUOFNFVOACK4B/s1600/pies1_2.jpg",
-            "http://2.bp.blogspot.com/-aud6eS52mpY/Vw6lkLZhTVI/AAAAAAAABLM/-GZ-1ZKRWJEoapaoSq6eKMbQdpS3Dn5ewCK4B/s1600/pies1_1.jpg",
-            "http://3.bp.blogspot.com/-rm-MDinVQLM/Vw6lkJXGqBI/AAAAAAAABLQ/_RsLLleqWPcKt1WbqvQktYD8bVaOQ2tSACK4B/s1600/pies1_3.jpg",
-            "http://1.bp.blogspot.com/-te0nTQS396o/Vw6lkE2QITI/AAAAAAAABLs/lmI7bApOE7UNubhXK8b45F1-W3bufZyJgCK4B/s1600/pies1_4.jpg"};
-    String[] picturesSample2 = new String[]{"http://4.bp.blogspot.com/-zjCctidFhyA/Vw6lkEpvejI/AAAAAAAABLA/7Y375FdJBSgnNhHQLqj922KoJtRVQBDqACK4B/s1600/pies2_1.jpg",
-            "http://4.bp.blogspot.com/-mJATJc3q74U/Vw6lkPHbZbI/AAAAAAAABK8/2ACbebDNoNU-6lH43d0OuvR5GRz5SdWugCK4B/s1600/pies2_2.jpg",
-            "http://3.bp.blogspot.com/-SQ2Kvg-gnmg/Vw6lkIJmskI/AAAAAAAABLc/agy0Sp1pgeg6HgcGhw0HnXQruR0RWb-VgCK4B/s1600/pies2_3.jpg",
-            "http://2.bp.blogspot.com/-wGjFf1_oGBw/Vw6lkLrVP2I/AAAAAAAABLg/Eybc3TCN2O476_03bn6q4uhGJxE726mnACK4B/s1600/pies2_4.jpg",
-            "http://4.bp.blogspot.com/-EMbMfdKPh2s/Vw6lj-f8DrI/AAAAAAAABKw/PFgMwqg3-_IBTWz72bq_iwIytr4BPWKUACK4B/s1600/pies2_5.jpg"};
-
     public ContentDetailsView(DetailsActivity activity, Animal animal) {
         ctx = activity;
         this.animal = animal;
@@ -114,14 +107,21 @@ public class ContentDetailsView {
         if (animal.getAdmittanceDate() != null) {
             infoAdmittanceDate.setText(getShortDateTextFrom(animal.getAdmittanceDate()));
         }
-        infoActivity.setText(ctx.getString(animal.getActivity().getLabelResId()));
+        if (animal.getActivity() != null)
+            infoActivity.setText(ctx.getString(animal.getActivity().getLabelResId()));
+
         infoChip.setText(animal.getChipId());
         infoRace.setText(animal.getRace());
-        infoSize.setText(ctx.getString(animal.getSize().getLabelResId()));
-        infoGender.setText(ctx.getString(animal.getGender().getLabelResId()));
-        infoTraining.setText(ctx.getString(animal.getTraining().getLabelResId()));
-        infoSterilization.setText(ctx.getString(animal.getSterilization().getLabelResId()));
-        infoVaccination.setText(ctx.getString(animal.getVaccination().getLabelResId()));
+        if (animal.getSize() != null)
+            infoSize.setText(ctx.getString(animal.getSize().getLabelResId()));
+        if (animal.getGender() != null)
+            infoGender.setText(ctx.getString(animal.getGender().getLabelResId()));
+        if (animal.getTraining() != null)
+            infoTraining.setText(ctx.getString(animal.getTraining().getLabelResId()));
+        if (animal.getSterilization() != null)
+            infoSterilization.setText(ctx.getString(animal.getSterilization().getLabelResId()));
+        if (animal.getVaccination() != null)
+            infoVaccination.setText(ctx.getString(animal.getVaccination().getLabelResId()));
     }
 
     private void initBasicInfoImagesAndDescription() {
@@ -129,56 +129,60 @@ public class ContentDetailsView {
         description.setOnClickListener(v -> expandOrCollapseDescription());
         expandOrCollapseBtn.setText(R.string.more_info);
         expandOrCollapseBtn.setOnClickListener(v -> expandOrCollapseDescription());
-        sizeImage.setImageResource(animal.getSize().getDrawableResId());
-        activityImage.setImageResource(animal.getActivity().getDrawableResId());
-        genderImage.setImageResource(animal.getGender().getDrawableResId());
+        if (animal.getSize() != null)
+            sizeImage.setImageResource(animal.getSize().getDrawableResId());
+        if (animal.getActivity() != null)
+            activityImage.setImageResource(animal.getActivity().getDrawableResId());
+        if (animal.getGender() != null)
+            genderImage.setImageResource(animal.getGender().getDrawableResId());
     }
 
     private void initImagesContainer() {
-        // todo to be changed to real images
-        String[] picturesSample = animal.getId() % 2 == 0 ? picturesSample1 : picturesSample2;
-        LinearLayout.LayoutParams singleRowLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1);
-        singleRowLayoutParams.setMargins(0, getDipFromInt(8), 0, getDipFromInt(8));
-        for (int i = 0; i < picturesSample.length / IMAGES_IN_ROW; i = i + IMAGES_IN_ROW) {
-            View singleRow = ctx.getLayoutInflater().inflate(R.layout.images_single_row, null);
-            singleRow.setLayoutParams(singleRowLayoutParams);
-            initImageView(singleRow, picturesSample, i, R.id.image_1);
-            initImageView(singleRow, picturesSample, i + 1, R.id.image_2);
-            initImageView(singleRow, picturesSample, i + 2, R.id.image_3);
-            imagesContainer.addView(singleRow);
-        }
-        int restOfImagesCount = picturesSample.length % IMAGES_IN_ROW;
-        if (restOfImagesCount >= 1) {
-            View singleRow = ctx.getLayoutInflater().inflate(R.layout.images_single_row, null);
-            singleRow.setLayoutParams(singleRowLayoutParams);
-            initImageView(singleRow, picturesSample, restOfImagesCount == 1 ? picturesSample.length - 1 : picturesSample.length - 2, R.id.image_1);
-            if (restOfImagesCount == 2) {
-                initImageView(singleRow, picturesSample, picturesSample.length - 1, R.id.image_2);
+        ForeignCollection<Photo> photos = animal.getPhotos();
+        if (photos != null) {
+
+            ArrayList<Photo> listOfPhotos = getPhotosAsList(photos);
+            LinearLayout.LayoutParams singleRowLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1);
+            singleRowLayoutParams.setMargins(0, getDipFromInt(8), 0, getDipFromInt(8));
+            for (int i = 0; i < photos.size() / IMAGES_IN_ROW; i = i + IMAGES_IN_ROW) {
+                View singleRow = ctx.getLayoutInflater().inflate(R.layout.images_single_row, null);
+                singleRow.setLayoutParams(singleRowLayoutParams);
+                initImageView(singleRow, listOfPhotos, i, R.id.image_1);
+                initImageView(singleRow, listOfPhotos, i + 1, R.id.image_2);
+                initImageView(singleRow, listOfPhotos, i + 2, R.id.image_3);
+                imagesContainer.addView(singleRow);
             }
-            imagesContainer.addView(singleRow);
+            int restOfImagesCount = photos.size() % IMAGES_IN_ROW;
+            if (restOfImagesCount >= 1) {
+                View singleRow = ctx.getLayoutInflater().inflate(R.layout.images_single_row, null);
+                singleRow.setLayoutParams(singleRowLayoutParams);
+                initImageView(singleRow, listOfPhotos, restOfImagesCount == 1 ? photos.size() - 1 : photos.size() - 2, R.id.image_1);
+                if (restOfImagesCount == 2) {
+                    initImageView(singleRow, listOfPhotos, photos.size() - 1, R.id.image_2);
+                }
+                imagesContainer.addView(singleRow);
+            }
         }
     }
 
-    private void initImageView(View parent, String[] urls, int index, int res) {
+    private ArrayList<Photo> getPhotosAsList(ForeignCollection<Photo> photos) {
+        ArrayList<Photo> ret = new ArrayList<>();
+        for (Photo photo : photos) {
+            ret.add(photo);
+        }
+        return ret;
+    }
+
+    private void initImageView(View parent, ArrayList<Photo> photos, int index, int res) {
         ImageView image1 = (ImageView) parent.findViewById(res);
         image1.getLayoutParams().height = getGalleryPicHeight();
-        Picasso.with(ctx).load(urls[index]).into(image1);
+        Picasso.with(ctx).load(photos.get(index).getUrl()).into(image1);
         image1.setOnClickListener(v -> {
             Intent i = new Intent(ctx, AnimalGalleryActivity.class);
-            i.putExtra(AnimalGalleryActivity.EXTRA_GALLERY, getGallery(urls));
+            i.putExtra(AnimalGalleryActivity.EXTRA_GALLERY, photos);
             i.putExtra(AnimalGalleryActivity.EXTRA_SELECTED_PIC, index);
             ctx.startActivity(i);
         });
-    }
-
-    private ArrayList<Photo> getGallery(String[] urls) {
-        ArrayList<Photo> photos = new ArrayList<>();
-        for (String s : urls) {
-            Photo p = new Photo();
-            p.setUrl(s);
-            photos.add(p);
-        }
-        return photos;
     }
 
     private int getDipFromInt(int value) {

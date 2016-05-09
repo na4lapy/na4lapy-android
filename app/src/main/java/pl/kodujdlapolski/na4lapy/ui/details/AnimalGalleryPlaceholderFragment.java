@@ -53,11 +53,11 @@ public class AnimalGalleryPlaceholderFragment extends Fragment {
     }
 
     @OnClick(R.id.animal_gallery_fragment)
-    protected void getBack(){
+    protected void getBack() {
         getActivity().onBackPressed();
     }
 
-    private void loadPicture (Bundle savedInstanceState) {
+    private void loadPicture(Bundle savedInstanceState) {
         if (getArguments() != null && (animalPic == null)) {
             if (getArguments().getSerializable(ARG_PIC_NUMBER) instanceof Photo) {
                 animalPic = (Photo) (getArguments().getSerializable(ARG_PIC_NUMBER));
@@ -66,10 +66,11 @@ public class AnimalGalleryPlaceholderFragment extends Fragment {
         if (animalPic == null && savedInstanceState != null && savedInstanceState.getSerializable(ARG_PIC_NUMBER) instanceof Photo) {
             animalPic = (Photo) savedInstanceState.getSerializable(ARG_PIC_NUMBER);
         }
-
-        ImageView imageView = (ImageView) getView().findViewById(R.id.animal_pic_in_gallery);
-        if (imageView != null) {
-            setPicture(imageView);
+        if (getView() != null) {
+            ImageView imageView = (ImageView) getView().findViewById(R.id.animal_pic_in_gallery);
+            if (imageView != null) {
+                setPicture(imageView);
+            }
         }
     }
 

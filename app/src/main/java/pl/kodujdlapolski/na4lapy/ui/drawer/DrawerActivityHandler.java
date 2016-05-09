@@ -82,7 +82,8 @@ public class DrawerActivityHandler {
         drawerToggle.syncState();
 
         navigationView = (NavigationView) activity.findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(activity);
+        if (navigationView != null)
+            navigationView.setNavigationItemSelectedListener(activity);
 
     }
 

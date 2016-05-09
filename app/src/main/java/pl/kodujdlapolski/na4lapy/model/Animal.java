@@ -1,5 +1,7 @@
 package pl.kodujdlapolski.na4lapy.model;
 
+import android.support.annotation.Nullable;
+
 import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.field.ForeignCollectionField;
@@ -46,7 +48,7 @@ public class Animal extends BaseEntity implements Serializable {
     @DatabaseField private Training training;
 
     @ForeignCollectionField(eager = false)
-    private ForeignCollection<Photo> photos;
+    private transient ForeignCollection<Photo> photos;
 
     @DatabaseField(columnName = Animal.COLUMN_NAME_FAVOURITE)
     private Boolean favourite;
@@ -55,7 +57,7 @@ public class Animal extends BaseEntity implements Serializable {
         // needed by ormlite
     }
 
-    public Shelter getShelter() {
+    public @Nullable Shelter getShelter() {
         return shelter;
     }
 
@@ -63,7 +65,7 @@ public class Animal extends BaseEntity implements Serializable {
         this.shelter = shelter;
     }
 
-    public String getName() {
+    public @Nullable String getName() {
         return name;
     }
 
@@ -71,7 +73,7 @@ public class Animal extends BaseEntity implements Serializable {
         this.name = name;
     }
 
-    public String getRace() {
+    public @Nullable String getRace() {
         return race;
     }
 
@@ -79,7 +81,7 @@ public class Animal extends BaseEntity implements Serializable {
         this.race = race;
     }
 
-    public String getDescription() {
+    public @Nullable String getDescription() {
         return description;
     }
 
@@ -87,7 +89,7 @@ public class Animal extends BaseEntity implements Serializable {
         this.description = description;
     }
 
-    public LocalDate getBirthDate() {
+    public @Nullable LocalDate getBirthDate() {
         return birthDate;
     }
 
@@ -95,7 +97,7 @@ public class Animal extends BaseEntity implements Serializable {
         this.birthDate = birthDate;
     }
 
-    public LocalDate getAdmittanceDate() {
+    public @Nullable LocalDate getAdmittanceDate() {
         return admittanceDate;
     }
 
@@ -103,7 +105,7 @@ public class Animal extends BaseEntity implements Serializable {
         this.admittanceDate = admittanceDate;
     }
 
-    public String getChipId() {
+    public @Nullable  String getChipId() {
         return chipId;
     }
 
@@ -111,7 +113,7 @@ public class Animal extends BaseEntity implements Serializable {
         this.chipId = chipId;
     }
 
-    public Sterilization getSterilization() {
+    public @Nullable Sterilization getSterilization() {
         return sterilization;
     }
 
@@ -119,7 +121,7 @@ public class Animal extends BaseEntity implements Serializable {
         this.sterilization = sterilization;
     }
 
-    public Species getSpecies() {
+    public @Nullable Species getSpecies() {
         return species;
     }
 
@@ -127,7 +129,7 @@ public class Animal extends BaseEntity implements Serializable {
         this.species = species;
     }
 
-    public Gender getGender() {
+    public @Nullable Gender getGender() {
         return gender;
     }
 
@@ -135,7 +137,7 @@ public class Animal extends BaseEntity implements Serializable {
         this.gender = gender;
     }
 
-    public Size getSize() {
+    public @Nullable Size getSize() {
         return size;
     }
 
@@ -143,7 +145,7 @@ public class Animal extends BaseEntity implements Serializable {
         this.size = size;
     }
 
-    public ActivityAnimal getActivity() {
+    public @Nullable ActivityAnimal getActivity() {
         return activity;
     }
 
@@ -151,7 +153,7 @@ public class Animal extends BaseEntity implements Serializable {
         this.activity = activity;
     }
 
-    public Vaccination getVaccination() {
+    public @Nullable Vaccination getVaccination() {
         return vaccination;
     }
 
@@ -159,7 +161,7 @@ public class Animal extends BaseEntity implements Serializable {
         this.vaccination = vaccination;
     }
 
-    public Training getTraining() {
+    public @Nullable Training getTraining() {
         return training;
     }
 
@@ -167,7 +169,7 @@ public class Animal extends BaseEntity implements Serializable {
         this.training = training;
     }
 
-    public ForeignCollection<Photo> getPhotos() {
+    public @Nullable ForeignCollection<Photo> getPhotos() {
         return photos;
     }
 
@@ -175,7 +177,7 @@ public class Animal extends BaseEntity implements Serializable {
         this.photos = photos;
     }
 
-    public Boolean getFavourite() {
+    public @Nullable Boolean getFavourite() {
         return favourite;
     }
 

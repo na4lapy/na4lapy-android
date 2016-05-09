@@ -159,7 +159,7 @@ public class BrowsePresenter implements SynchronizationReceiver.SynchronizationR
             result.addAll(animals);
         } else {
             for (Animal a : animals) {
-                if (a.getSpecies().equals(type.specie)) {
+                if (a.getSpecies() != null && a.getSpecies().equals(type.specie)) {
                     result.add(a);
                 }
             }
@@ -177,7 +177,7 @@ public class BrowsePresenter implements SynchronizationReceiver.SynchronizationR
     }
 
     public void handleUndoAnimal(Animal animalToUndo) {
-        repositoryService.setFavourite(animalToUndo.getId(), !animalToUndo.getFavourite())
+        repositoryService.setFavourite(animalToUndo.getId(), !Boolean.TRUE.equals(animalToUndo.getFavourite()))
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::onFavChanged);
     }
@@ -188,10 +188,16 @@ public class BrowsePresenter implements SynchronizationReceiver.SynchronizationR
                 .subscribe(this::onChangedAnimalAvailable);
     }
 
+    public void onChangedAnimalAvailable(Long changedAnimalId) {
+        repositoryService.getAnimal(changedAnimalId)
+                .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::onChangedAnimalAvailable);
+    }
+
     public void onChangedAnimalAvailable(Animal changedAnimal) {
         int indexWhichShouldBeReplaced = getIndexOfAnimalOnList(animals, changedAnimal);
         if (indexWhichShouldBeReplaced != -1) {
-            if (isFavList && !changedAnimal.getFavourite()) {
+            if (isFavList && !Boolean.TRUE.equals(changedAnimal.getFavourite())) {
                 animals.remove(indexWhichShouldBeReplaced);
                 ((UpdateSingleElement) adapter).notifyItemRemoved(changedAnimal);
             } else {
@@ -204,6 +210,7 @@ public class BrowsePresenter implements SynchronizationReceiver.SynchronizationR
         }
     }
 
+
     @Override
     public void favourite(Animal animal) {
         repositoryService.setFavourite(animal.getId(), !Boolean.TRUE.equals(animal.getFavourite()))
@@ -214,7 +221,7 @@ public class BrowsePresenter implements SynchronizationReceiver.SynchronizationR
     @Override
     public void details(Animal animal) {
         Intent i = new Intent(abstractBrowseActivity, DetailsActivity.class);
-        i.putExtra(DetailsActivity.EXTRA_ANIMAL, animal);
+        i.putExtra(DetailsActivity.EXTRA_ANIMAL_ID, animal.getId());
         abstractBrowseActivity.startActivityForResult(i, DetailsActivity.REQUEST_CODE_ANIMAL);
     }
 }

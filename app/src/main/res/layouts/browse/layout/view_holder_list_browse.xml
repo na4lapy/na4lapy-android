@@ -14,6 +14,7 @@
         android:id="@+id/profile_pic_on_list"
         android:layout_width="60dp"
         android:layout_height="60dp"
+        android:src="@drawable/pic_404dog"
         android:contentDescription="@string/content_desc_main_image"
         tools:background="@color/colorAccent" />
 

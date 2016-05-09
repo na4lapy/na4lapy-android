@@ -149,11 +149,13 @@ public class FakeApiServiceImpl implements ApiService {
         dao.assignEmptyForeignCollection(animal, "photos");
 
         String[] gallery = random.nextBoolean() ? photoGallery1 : photoGallery2;
-        for (String aPicturesSample1 : gallery) {
-            Photo photo = new Photo();
-            photo.setUrl(aPicturesSample1);
-            photo.setAuthor(photoGalleryAuthor);
-            animal.getPhotos().add(photo);
+        if (animal.getPhotos() != null) {
+            for (String aPicturesSample1 : gallery) {
+                Photo photo = new Photo();
+                photo.setUrl(aPicturesSample1);
+                photo.setAuthor(photoGalleryAuthor);
+                animal.getPhotos().add(photo);
+            }
         }
     }
 }
