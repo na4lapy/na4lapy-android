@@ -42,7 +42,7 @@ public class GalleryViewPager extends ViewPager {
     }
 
     private boolean canSwipe() {
-        //todo napisac sprawdzenie zooma
+        //todo code zoom-check
         return true;
     }
 

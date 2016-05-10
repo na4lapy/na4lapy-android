@@ -28,7 +28,8 @@ public class AnimalGallerySectionsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return AnimalGalleryPlaceholderFragment.newInstance(gallery.get(position), presenter);
+        return AnimalGalleryPlaceholderFragment.newInstance(
+                gallery.get(position), presenter, position, this.getCount());
     }
 
     @Override

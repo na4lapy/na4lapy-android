@@ -38,7 +38,13 @@ public class AnimalGalleryActivity extends AbstractSingleActivity {
         ButterKnife.bind(this);
 
         gallery = (ArrayList<Photo>) getIntent().getExtras().getSerializable(EXTRA_GALLERY);
+        if (gallery == null) {
+            onBackPressed();
+        }
         selectedPicNumber = getIntent().getExtras().getInt(EXTRA_SELECTED_PIC);
+        if (selectedPicNumber == null) {
+            selectedPicNumber = 0;
+        }
 
         presenter = new AnimalGalleryPresenter(this, gallery);
         mAnimalGallerySectionsPagerAdapter = presenter.getAdapter();
@@ -50,6 +56,5 @@ public class AnimalGalleryActivity extends AbstractSingleActivity {
             mViewPager.setActivity(this);
         }
     }
-
 
 }

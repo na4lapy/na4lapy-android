@@ -2,6 +2,7 @@ package pl.kodujdlapolski.na4lapy.ui.details;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,18 +23,27 @@ import pl.kodujdlapolski.na4lapy.presenter.details.AnimalGalleryPresenter;
  */
 public class AnimalGalleryPlaceholderFragment extends Fragment {
 
-    private static final String ARG_PIC_NUMBER = "ARG_PIC_NUMBER";
+    private static final String ARG_SELECTED_PHOTO = "ARG_SELECTED_PHOTO";
+    private static final String ARG_PIC_POSITION = "ARG_PIC_POSITION";
+    private static final String ARG_GALLERY_SIZE = "ARG_GALLERY_SIZE";
     private Photo animalPic;
+    private int position = -1;
+    private int gallerySize = -1;
     @Bind(R.id.photo_author)
     TextView photoAuthor;
+    @Bind(R.id.photo_number)
+    TextView photoNumber;
 
     public AnimalGalleryPlaceholderFragment() {
     }
 
-    public static AnimalGalleryPlaceholderFragment newInstance(Photo selectedPic, AnimalGalleryPresenter presenter) {
+    public static AnimalGalleryPlaceholderFragment newInstance(
+            Photo selectedPic, AnimalGalleryPresenter presenter, int position, int gallerySize) {
         AnimalGalleryPlaceholderFragment fragment = new AnimalGalleryPlaceholderFragment();
         Bundle args = new Bundle();
-        args.putSerializable(ARG_PIC_NUMBER, selectedPic);
+        args.putSerializable(ARG_SELECTED_PHOTO, selectedPic);
+        args.putInt(ARG_PIC_POSITION, position);
+        args.putInt(ARG_GALLERY_SIZE, gallerySize);
         fragment.setArguments(args);
         return fragment;
     }
@@ -49,46 +59,67 @@ public class AnimalGalleryPlaceholderFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        loadPicture(savedInstanceState);
+        loadPhoto(savedInstanceState);
     }
 
     @OnClick(R.id.animal_gallery_fragment)
-    protected void getBack() {
+    protected void getBack(){
         getActivity().onBackPressed();
     }
 
-    private void loadPicture(Bundle savedInstanceState) {
-        if (getArguments() != null && (animalPic == null)) {
-            if (getArguments().getSerializable(ARG_PIC_NUMBER) instanceof Photo) {
-                animalPic = (Photo) (getArguments().getSerializable(ARG_PIC_NUMBER));
-            }
+    private void loadPhoto(Bundle savedInstanceState) {
+        if (getArguments() != null
+                && (animalPic == null)
+                && getArguments().getSerializable(ARG_SELECTED_PHOTO) instanceof Photo) {
+            animalPic = (Photo) (getArguments().getSerializable(ARG_SELECTED_PHOTO));
         }
-        if (animalPic == null && savedInstanceState != null && savedInstanceState.getSerializable(ARG_PIC_NUMBER) instanceof Photo) {
-            animalPic = (Photo) savedInstanceState.getSerializable(ARG_PIC_NUMBER);
+        if (animalPic == null && savedInstanceState != null && savedInstanceState.getSerializable(ARG_SELECTED_PHOTO) instanceof Photo) {
+            animalPic = (Photo) savedInstanceState.getSerializable(ARG_SELECTED_PHOTO);
         }
-        if (getView() != null) {
-            ImageView imageView = (ImageView) getView().findViewById(R.id.animal_pic_in_gallery);
-            if (imageView != null) {
-                setPicture(imageView);
-            }
+
+        View view = getView();
+        if (view != null) {
+            ImageView imageView = (ImageView) view.findViewById(R.id.animal_pic_in_gallery);
+            setPhoto(imageView, savedInstanceState);
         }
     }
 
-    private void setPicture(ImageView imageView) {
-        setPhotoAuthor();
+    private void setPhoto (ImageView imageView, Bundle savedInstanceState) {
         String selectedPicUrl = animalPic.getUrl();
-        if (selectedPicUrl == null) {
+        if (TextUtils.isEmpty(selectedPicUrl)) {
             imageView.setImageDrawable(getResources().getDrawable(R.drawable.vector_drawable_error_dog));
             return;
         }
         Picasso.with(getContext()).load(selectedPicUrl).into(imageView);
+        setPhotoAuthor();
+        setPhotoNumber(savedInstanceState);
     }
 
     private void setPhotoAuthor() {
         String aboutAuthor = animalPic.getAuthor();
-        if (aboutAuthor != null) {
-            aboutAuthor = getResources().getString(R.string.photo_by) + " " + aboutAuthor;
-            photoAuthor.setText(aboutAuthor);
+        if (!TextUtils.isEmpty(aboutAuthor)) {
+            photoAuthor.setText(getString(R.string.photo_by, aboutAuthor));
+        }
+    }
+
+    private void setPhotoNumber(Bundle savedInstanceState) {
+
+        if ((getArguments() != null) && (this.position == -1)) {
+            position = getArguments().getInt(ARG_PIC_POSITION) + 1;
+        }
+        if ((getArguments() != null) && (this.gallerySize == -1)) {
+            gallerySize = getArguments().getInt(ARG_GALLERY_SIZE);
+        }
+        if (gallerySize == 0 && savedInstanceState != null) {
+            gallerySize = savedInstanceState.getInt(ARG_GALLERY_SIZE);
+        }
+
+        if (position == 1) {
+            photoNumber.setText(getString(R.string.number_of_photo_first, position, gallerySize));
+        } else if (position == gallerySize) {
+            photoNumber.setText(getString(R.string.number_of_photo_last, position, gallerySize));
+        } else {
+            photoNumber.setText(getString(R.string.number_of_photo_default, position, gallerySize));
         }
     }
 }

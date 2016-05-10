@@ -29,4 +29,14 @@
         android:layout_alignBottom="@id/animal_pic_in_gallery"
         android:id="@+id/photo_author" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:clickable="true"
+        android:textColor="@color/white70opacity"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/animal_pic_in_gallery"
+        android:id="@+id/photo_number" />
+
 </RelativeLayout>
