@@ -16,7 +16,7 @@ public interface UserService {
 
     void login();
     void logout();
-    @Nullable String getFullUserName();
+    @Nullable String getUserFirstName();
     @Nullable String getUserPhotoUrl();
     boolean isLogged();
 }

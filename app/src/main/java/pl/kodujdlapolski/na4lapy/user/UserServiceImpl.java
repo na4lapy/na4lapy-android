@@ -94,7 +94,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String getFullUserName() {
+    public String getUserFirstName() {
         // TODO
         return null;
     }

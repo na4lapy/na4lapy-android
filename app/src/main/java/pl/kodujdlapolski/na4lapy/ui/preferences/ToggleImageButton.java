@@ -51,7 +51,6 @@ public class ToggleImageButton extends ImageButton implements Checkable {
         }
 
         if (isChecked()) {
-            //   setColorFilter(Color.parseColor("#FF5722")); // our color accent from colors.xml
             this.setColorFilter(Color.parseColor(colorActivated));
         }
         else {

@@ -54,8 +54,9 @@ public class DrawerActivityTest {
     //todo - do zmiany po zaimplementowaniu logowania
     @Test
     public void isHeaderDisplayed() {
-        onView(withText("Imię użytkownika")).check(matches(isDisplayed()));
-        onView(withId(R.id.imageView)).check(matches(isDisplayed()));
+        onView(withText("Hermenegilda")).check(matches(isDisplayed()));
+        onView(withId(R.id.drawer_header_user_name)).check(matches(isDisplayed()));
+        onView(withId(R.id.drawer_header_photo)).check(matches(isDisplayed()));
     }
 
     @Test

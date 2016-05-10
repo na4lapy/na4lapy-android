@@ -34,8 +34,8 @@ public class FakeUserService implements UserService {
     }
 
     @Override
-    public String getFullUserName() {
-        return "Stefan Uśmiechnięty";
+    public String getUserFirstName() {
+        return "Hermenegilda";
     }
 
     @Override

@@ -34,8 +34,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:layout_marginTop="@dimen/appbar_padding_top"
-                android:layout_marginBottom="@dimen/appbar_padding_top">
+                android:layout_marginTop="@dimen/appbar_padding"
+                android:layout_marginBottom="@dimen/appbar_padding">
 
                 <TextView
                     android:id="@+id/typeText"
@@ -78,8 +78,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:layout_marginTop="@dimen/appbar_padding_top"
-                android:layout_marginBottom="@dimen/appbar_padding_top">
+                android:layout_marginTop="@dimen/appbar_padding"
+                android:layout_marginBottom="@dimen/appbar_padding">
 
                 <TextView
                     android:id="@+id/genderText"
@@ -114,8 +114,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:layout_marginTop="@dimen/appbar_padding_top"
-                android:layout_marginBottom="@dimen/appbar_padding_top">
+                android:layout_marginTop="@dimen/appbar_padding"
+                android:layout_marginBottom="@dimen/appbar_padding">
 
                 <TextView
                     android:layout_width="@dimen/preferences_image_margin"
@@ -171,8 +171,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:layout_marginTop="@dimen/appbar_padding_top"
-                android:layout_marginBottom="@dimen/appbar_padding_top">
+                android:layout_marginTop="@dimen/appbar_padding"
+                android:layout_marginBottom="@dimen/appbar_padding">
 
                 <TextView
                     android:layout_width="@dimen/preferences_image_margin"
@@ -214,8 +214,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:layout_marginTop="@dimen/appbar_padding_top"
-                android:layout_marginBottom="@dimen/appbar_padding_top">
+                android:layout_marginTop="@dimen/appbar_padding"
+                android:layout_marginBottom="@dimen/appbar_padding">
 
                 <TextView
                     android:layout_width="@dimen/preferences_image_margin_wide"
