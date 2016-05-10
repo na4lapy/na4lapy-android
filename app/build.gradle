@@ -98,7 +98,6 @@ android {
         compile 'com.github.japgolly.android:svg-android:2.0.6'
         compile 'io.reactivex:rxandroid:1.1.0'
         compile 'io.reactivex:rxjava:1.1.2'
-        compile 'com.commit451:PhotoView:1.2.5'
         compile 'jp.wasabeef:picasso-transformations:2.1.0'
         compile 'net.hockeyapp.android:HockeySDK:3.7.2'
         compile 'joda-time:joda-time:2.9.3'
