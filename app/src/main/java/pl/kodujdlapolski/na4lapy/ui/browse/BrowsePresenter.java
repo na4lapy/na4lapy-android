@@ -16,9 +16,12 @@ import pl.kodujdlapolski.na4lapy.model.type.Species;
 import pl.kodujdlapolski.na4lapy.repository.RepositoryService;
 import pl.kodujdlapolski.na4lapy.sync.SynchronizationService;
 import pl.kodujdlapolski.na4lapy.sync.receiver.SynchronizationReceiver;
+import pl.kodujdlapolski.na4lapy.ui.NotLoggedDialog;
 import pl.kodujdlapolski.na4lapy.ui.browse.list.ListBrowsePagerAdapter;
 import pl.kodujdlapolski.na4lapy.ui.browse.single.SingleBrowsePagerAdapter;
 import pl.kodujdlapolski.na4lapy.ui.details.DetailsActivity;
+import pl.kodujdlapolski.na4lapy.user.UserModule;
+import pl.kodujdlapolski.na4lapy.user.UserService;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -66,6 +69,8 @@ public class BrowsePresenter implements SynchronizationReceiver.SynchronizationR
     SynchronizationService synchronizationService;
     @Inject
     RepositoryService repositoryService;
+    @Inject
+    UserService userService;
     private SynchronizationReceiver synchronizationReceiver;
     private boolean isAfterSynchronization = false;
     private List<Animal> animals;
@@ -213,9 +218,13 @@ public class BrowsePresenter implements SynchronizationReceiver.SynchronizationR
 
     @Override
     public void favourite(Animal animal) {
-        repositoryService.setFavourite(animal.getId(), !Boolean.TRUE.equals(animal.getFavourite()))
-                .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::onFavChanged);
+        if (userService.isLogged())
+            repositoryService.setFavourite(animal.getId(), !Boolean.TRUE.equals(animal.getFavourite()))
+                    .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(this::onFavChanged);
+        else
+            NotLoggedDialog.get(abstractBrowseActivity).show();
+
     }
 
     @Override

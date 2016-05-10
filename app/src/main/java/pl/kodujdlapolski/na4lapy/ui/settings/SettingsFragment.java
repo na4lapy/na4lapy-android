@@ -10,27 +10,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import javax.inject.Inject;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import pl.kodujdlapolski.na4lapy.Na4LapyApp;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.presenter.settings.WebPageTypes;
+import pl.kodujdlapolski.na4lapy.user.UserService;
 
 /**
  * Created by Natalia Wróblewska on 2016-03-01.
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
  */
 public class SettingsFragment extends Fragment {
     @Bind(R.id.version_name)
@@ -38,6 +41,9 @@ public class SettingsFragment extends Fragment {
 
     @Bind(R.id.logInLogout)
     TextView logInLogoutText;
+
+    @Inject
+    UserService userService;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,6 +61,7 @@ public class SettingsFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        ((Na4LapyApp) getActivity().getApplication()).getComponent().inject(this);
         try {
             versionName.setText(
                     String.format(getResources().getString(R.string.version),
@@ -63,8 +70,7 @@ public class SettingsFragment extends Fragment {
         } catch (PackageManager.NameNotFoundException e) {
             versionName.setVisibility(View.GONE);
         }
-        // todo set proper name depending on if user is logged in or not
-        logInLogoutText.setText(getString(R.string.login));
+        logInLogoutText.setText(userService.isLogged() ? getString(R.string.logout) : getString(R.string.login));
     }
 
     @SuppressWarnings("unused")
@@ -82,7 +88,11 @@ public class SettingsFragment extends Fragment {
     @SuppressWarnings("unused")
     @OnClick(R.id.logInLogout)
     void onLoginLogoutClick() {
-        // todo run login activity when it is available
+        if (userService.isLogged())
+            userService.logout();
+        else {
+            // todo run login activity when it is available
+        }
     }
 
     void runWebViewActivity(WebPageTypes type) {

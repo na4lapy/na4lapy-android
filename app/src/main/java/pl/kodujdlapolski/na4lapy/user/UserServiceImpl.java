@@ -107,6 +107,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean isLogged() {
-        return false;
+        return false; // TODO
     }
 }

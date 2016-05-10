@@ -33,6 +33,7 @@ import pl.kodujdlapolski.na4lapy.Na4LapyApp;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Animal;
 import pl.kodujdlapolski.na4lapy.repository.RepositoryService;
+import pl.kodujdlapolski.na4lapy.ui.NotLoggedDialog;
 import pl.kodujdlapolski.na4lapy.user.UserService;
 import pl.kodujdlapolski.na4lapy.utils.AnimalUtils;
 import rx.android.schedulers.AndroidSchedulers;
@@ -133,8 +134,13 @@ public class DetailsActivity extends AppCompatActivity {
         }
         matchingLvl.setImageLevel(userService.getPreferencesComplianceLevel(animal));
         addToFavFab.setImageResource(AnimalUtils.getAddToFavFabImage(animal));
-        addToFavFab.setOnClickListener(v -> repositoryService.setFavourite(animal.getId(), !Boolean.TRUE.equals(animal.getFavourite()))
-                .subscribe(this::onFavChanged));
+        addToFavFab.setOnClickListener(v -> {
+            if (userService.isLogged())
+                repositoryService.setFavourite(animal.getId(), !Boolean.TRUE.equals(animal.getFavourite()))
+                        .subscribe(this::onFavChanged);
+            else
+                NotLoggedDialog.get(DetailsActivity.this).show();
+        });
     }
 
     private void onFavChanged(Long changedAnimalId) {

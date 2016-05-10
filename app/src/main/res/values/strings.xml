@@ -124,4 +124,6 @@
     </plurals>
 
     <string name="animal_details_title">%1$s, %2$s</string>
+    <string name="not_logged_in_message">Ta funkcjonalność wymaga zalogowania</string>
+    <string name="not_logged_in_title">Czy chcesz się zalogować?</string>
 </resources>

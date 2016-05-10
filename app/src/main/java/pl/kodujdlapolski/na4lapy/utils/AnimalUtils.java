@@ -29,11 +29,13 @@ public class AnimalUtils {
         return Boolean.TRUE.equals(animal.getFavourite()) ? R.drawable.ic_favorite_white : R.drawable.ic_favorite_border_white;
     }
 
-    //TODO dodać zdjęcie zwierzęcia
     public static Intent getShareIntent(Animal animal) {
         Intent sharingIntent = new Intent(Intent.ACTION_SEND);
         sharingIntent.setType("text/plain");
-        sharingIntent.putExtra(Intent.EXTRA_SUBJECT, animal.getName());
+        sharingIntent.putExtra(Intent.EXTRA_SUBJECT, animal.getName() + " " + animal.getChipId());
+        if (animal.getPhotos() != null && animal.getPhotos().iterator().hasNext()) {
+            sharingIntent.putExtra(Intent.EXTRA_TEXT, animal.getPhotos().iterator().next().getUrl());
+        }
         return sharingIntent;
     }
 }
