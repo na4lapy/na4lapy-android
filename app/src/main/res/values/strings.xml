@@ -8,7 +8,6 @@
         przekazywać datki na zwierzęta w formie elektronicznych mikropłatności.
     </string>
     <string name="version">Wersja: %1$s</string>
-    <string name="settings_page_title">Ustawienia</string>
     <string name="about_shelter_page_title">O schronisku - %1$s</string>
     <string name="shelter_address_label">Adres:</string>
     <string name="shelter_email_label">Adres e-mail:</string>

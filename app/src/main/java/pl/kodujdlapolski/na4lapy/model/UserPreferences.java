@@ -1,8 +1,13 @@
 package pl.kodujdlapolski.na4lapy.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * Created by Malgorzata Syska on 2016-03-05.
  */
+@Getter
+@Setter
 public class UserPreferences {
 
     private boolean typeDog;
@@ -19,7 +24,6 @@ public class UserPreferences {
     private boolean activityHigh;
 
     public UserPreferences() {
-
         typeDog = false;
         typeCat = false;
         typeOther = false;
@@ -32,101 +36,5 @@ public class UserPreferences {
         sizeLarge = false;
         activityLow = false;
         activityHigh = false;
-    }
-
-    public boolean isTypeDog() {
-        return typeDog;
-    }
-
-    public void setTypeDog(boolean argument) {
-        this.typeDog = argument;
-    }
-
-    public boolean isTypeCat() {
-        return typeCat;
-    }
-
-    public void setTypeCat(boolean argument) {
-        this.typeCat = argument;
-    }
-
-    public boolean isTypeOther() {
-        return typeOther;
-    }
-
-    public void setTypeOther(boolean argument) {
-        this.typeOther = argument;
-    }
-
-    public boolean isGenderWoman() {
-        return genderWoman;
-    }
-
-    public void setGenderWoman(boolean argument) {
-        this.genderWoman = argument;
-    }
-
-    public boolean isGenderMan() {
-        return genderMan;
-    }
-
-    public void setGenderMan(boolean argument) {
-        this.genderMan = argument;
-    }
-
-    public int getAgeMin() {
-        return ageMin;
-    }
-
-    public void setAgeMin(int ageMin) {
-        this.ageMin = ageMin;
-    }
-
-    public int getAgeMax() {
-        return ageMax;
-    }
-
-    public void setAgeMax(int ageMax) {
-        this.ageMax = ageMax;
-    }
-
-    public boolean isSizeSmall() {
-        return sizeSmall;
-    }
-
-    public void setSizeSmall(boolean argument) {
-        this.sizeSmall = argument;
-    }
-
-    public boolean isSizeMedium() {
-        return sizeMedium;
-    }
-
-    public void setSizeMedium(boolean argument) {
-        this.sizeMedium = argument;
-    }
-
-    public boolean isActivityLow() {
-        return activityLow;
-    }
-
-    public void setActivityLow(boolean argument) {
-        this.activityLow = argument;
-    }
-
-    public boolean isSizeLarge() {
-        return sizeLarge;
-    }
-
-    public void setSizeLarge(boolean argument) {
-        this.sizeLarge = argument;
-    }
-
-    public boolean isActivityHigh() {
-        return activityHigh;
-    }
-
-    public void setActivityHigh(boolean argument) {
-        this.activityHigh = argument;
     }
 }

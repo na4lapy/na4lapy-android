@@ -2,6 +2,8 @@ package pl.kodujdlapolski.na4lapy.user;
 
 import android.support.annotation.NonNull;
 
+import java.util.Random;
+
 import pl.kodujdlapolski.na4lapy.model.Animal;
 import pl.kodujdlapolski.na4lapy.model.UserPreferences;
 
@@ -17,12 +19,17 @@ public class FakeUserService implements UserService {
     @NonNull
     @Override
     public UserPreferences loadCurrentUserPreferences() {
-        return new UserPreferences();
+        UserPreferences up = new UserPreferences();
+        up.setTypeDog(true);
+        up.setGenderMan(true);
+        up.setSizeLarge(true);
+        return up;
     }
 
     @Override
     public int getPreferencesComplianceLevel(Animal animal) {
-        return 5;
+        Random random = new Random();
+        return random.nextInt(6);
     }
 
     @Override
