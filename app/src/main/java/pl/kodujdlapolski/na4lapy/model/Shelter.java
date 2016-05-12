@@ -1,5 +1,7 @@
 package pl.kodujdlapolski.na4lapy.model;
 
+import android.support.annotation.Nullable;
+
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -23,7 +25,7 @@ public class Shelter extends BaseEntity implements Serializable {
         // needed by ormlite
     }
 
-    public String getName() {
+    public @Nullable String  getName() {
         return name;
     }
 
@@ -31,7 +33,7 @@ public class Shelter extends BaseEntity implements Serializable {
         this.name = name;
     }
 
-    public String getStreet() {
+    public @Nullable String getStreet() {
         return street;
     }
 
@@ -39,7 +41,7 @@ public class Shelter extends BaseEntity implements Serializable {
         this.street = street;
     }
 
-    public String getBuildingNumber() {
+    public @Nullable String getBuildingNumber() {
         return buildingNumber;
     }
 
@@ -47,7 +49,7 @@ public class Shelter extends BaseEntity implements Serializable {
         this.buildingNumber = buildingNumber;
     }
 
-    public String getCity() {
+    public @Nullable String getCity() {
         return city;
     }
 
@@ -55,7 +57,7 @@ public class Shelter extends BaseEntity implements Serializable {
         this.city = city;
     }
 
-    public String getPostalCode() {
+    public @Nullable String getPostalCode() {
         return postalCode;
     }
 
@@ -63,7 +65,7 @@ public class Shelter extends BaseEntity implements Serializable {
         this.postalCode = postalCode;
     }
 
-    public String getEmail() {
+    public @Nullable String getEmail() {
         return email;
     }
 
@@ -71,7 +73,7 @@ public class Shelter extends BaseEntity implements Serializable {
         this.email = email;
     }
 
-    public String getPhoneNumber() {
+    public @Nullable String getPhoneNumber() {
         return phoneNumber;
     }
 
@@ -79,7 +81,7 @@ public class Shelter extends BaseEntity implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getWebsite() {
+    public @Nullable String getWebsite() {
         return website;
     }
 
@@ -87,7 +89,7 @@ public class Shelter extends BaseEntity implements Serializable {
         this.website = website;
     }
 
-    public String getAccountNumber() {
+    public @Nullable String getAccountNumber() {
         return accountNumber;
     }
 
@@ -95,7 +97,7 @@ public class Shelter extends BaseEntity implements Serializable {
         this.accountNumber = accountNumber;
     }
 
-    public String getAdoptionRules() {
+    public @Nullable String getAdoptionRules() {
         return adoptionRules;
     }
 

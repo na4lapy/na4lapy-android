@@ -144,7 +144,8 @@ public class ContentDetailsView {
             ArrayList<Photo> listOfPhotos = getPhotosAsList(photos);
             LinearLayout.LayoutParams singleRowLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1);
             singleRowLayoutParams.setMargins(0, getDipFromInt(8), 0, getDipFromInt(8));
-            for (int i = 0; i < photos.size() / IMAGES_IN_ROW; i = i + IMAGES_IN_ROW) {
+            int restOfImagesCount = photos.size() % IMAGES_IN_ROW;
+            for (int i = 0; i < photos.size()-restOfImagesCount; i = i + IMAGES_IN_ROW) {
                 View singleRow = ctx.getLayoutInflater().inflate(R.layout.images_single_row, null);
                 singleRow.setLayoutParams(singleRowLayoutParams);
                 initImageView(singleRow, listOfPhotos, i, R.id.image_1);
@@ -152,7 +153,7 @@ public class ContentDetailsView {
                 initImageView(singleRow, listOfPhotos, i + 2, R.id.image_3);
                 imagesContainer.addView(singleRow);
             }
-            int restOfImagesCount = photos.size() % IMAGES_IN_ROW;
+
             if (restOfImagesCount >= 1) {
                 View singleRow = ctx.getLayoutInflater().inflate(R.layout.images_single_row, null);
                 singleRow.setLayoutParams(singleRowLayoutParams);

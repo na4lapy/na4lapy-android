@@ -122,10 +122,13 @@ public class AboutShelterFragment extends Fragment {
     }
 
     private String getFormattedAccount(String accountNumber) {
-        String accountPart1 = accountNumber.substring(0, 2);
-        String accountPart2 = accountNumber.substring(2);
-        String shelterFormatted = splitStringEvery(accountPart2, 4);
-        return accountPart1 + " " + shelterFormatted;
+        if (accountNumber != null) {
+            String accountPart1 = accountNumber.substring(0, 2);
+            String accountPart2 = accountNumber.substring(2);
+            String shelterFormatted = splitStringEvery(accountPart2, 4);
+            return accountPart1 + " " + shelterFormatted;
+        }
+        return "";
     }
 
     private String splitStringEvery(String s, int interval) {

@@ -56,6 +56,7 @@ public abstract class AbstractBrowseViewHolder extends RecyclerView.ViewHolder {
             Photo pic = animal.getPhotos().iterator().next();
             Picasso.with(itemView.getContext())
                     .load(pic.getUrl())
+                    .fit().centerCrop()
                     .placeholder(R.drawable.pic_404dog)
                     .into(profilePic);
         }
