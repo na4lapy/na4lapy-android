@@ -5,7 +5,7 @@ import android.os.Bundle;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Photo;
@@ -26,7 +26,7 @@ public class AnimalGalleryActivity extends AbstractSingleActivity {
     private AnimalGallerySectionsPagerAdapter mAnimalGallerySectionsPagerAdapter;
     private AnimalGalleryPresenter presenter;
 
-    @Bind(R.id.gallery_container)
+    @BindView(R.id.gallery_container)
     GalleryViewPager mViewPager;
 
     @Override

@@ -5,7 +5,14 @@ import com.j256.ormlite.table.DatabaseTable;
 
 import java.io.Serializable;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
 @DatabaseTable(tableName = "photos")
+@Data
+@EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor //for ormlite
 public class Photo extends BaseEntity implements Serializable{
 
     @DatabaseField
@@ -16,24 +23,4 @@ public class Photo extends BaseEntity implements Serializable{
 
     @DatabaseField(foreign = true)
     private Animal animal;
-
-    public Photo() {
-        // needed by ormlite
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
 }

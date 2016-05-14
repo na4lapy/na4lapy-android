@@ -23,11 +23,8 @@ import org.joda.time.Months;
 import org.joda.time.Years;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Animal;
@@ -56,36 +53,36 @@ public class ContentDetailsView {
     private static final int IMAGES_IN_ROW = 3;// defined in images_single_row.xml
     private static final int MAX_LINES_COLLAPSED = 5;
 
-    @Bind(R.id.description)
+    @BindView(R.id.description)
     TextView description;
-    @Bind(R.id.expand_or_collapse_btn)
+    @BindView(R.id.expand_or_collapse_btn)
     Button expandOrCollapseBtn;
-    @Bind(R.id.animal_size_image)
+    @BindView(R.id.animal_size_image)
     ImageView sizeImage;
-    @Bind(R.id.animal_gender_image)
+    @BindView(R.id.animal_gender_image)
     ImageView genderImage;
-    @Bind(R.id.animal_activity_image)
+    @BindView(R.id.animal_activity_image)
     ImageView activityImage;
-    @Bind(R.id.images_container)
+    @BindView(R.id.images_container)
     LinearLayout imagesContainer;
 
-    @Bind(R.id.info_activity)
+    @BindView(R.id.info_activity)
     TextView infoActivity;
-    @Bind(R.id.info_admittance_date)
+    @BindView(R.id.info_admittance_date)
     TextView infoAdmittanceDate;
-    @Bind(R.id.info_chip)
+    @BindView(R.id.info_chip)
     TextView infoChip;
-    @Bind(R.id.info_race)
+    @BindView(R.id.info_race)
     TextView infoRace;
-    @Bind(R.id.info_size)
+    @BindView(R.id.info_size)
     TextView infoSize;
-    @Bind(R.id.info_gender)
+    @BindView(R.id.info_gender)
     TextView infoGender;
-    @Bind(R.id.info_training)
+    @BindView(R.id.info_training)
     TextView infoTraining;
-    @Bind(R.id.info_sterilization)
+    @BindView(R.id.info_sterilization)
     TextView infoSterilization;
-    @Bind(R.id.info_vaccination)
+    @BindView(R.id.info_vaccination)
     TextView infoVaccination;
 
     public ContentDetailsView(DetailsActivity activity, Animal animal) {

@@ -15,22 +15,24 @@ android {
         manifestPlaceholders = [HOCKEYAPP_APP_ID: "1b336de533e0489b894c1b202a264a70"]
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     sourceSets {
         main {
             res.srcDirs =
-                    [       'src/main/res/layouts/about_shelter',
-                            'src/main/res/layouts/browse',
-                            'src/main/res/layouts/details',
-                            'src/main/res/layouts/drawer',
-                            'src/main/res/layouts/preferences',
-                            'src/main/res/layouts',
-                            'src/main/res/layouts/settings',
-                            'src/main/res/layouts/splash',
-                            'src/main/res/layouts/introduction',
-                            'src/main/res'
+                    ['src/main/res/layouts/about_shelter',
+                     'src/main/res/layouts/browse',
+                     'src/main/res/layouts/details',
+                     'src/main/res/layouts/drawer',
+                     'src/main/res/layouts/preferences',
+                     'src/main/res/layouts',
+                     'src/main/res/layouts/settings',
+                     'src/main/res/layouts/splash',
+                     'src/main/res/layouts/introduction',
+                     'src/main/res'
                     ]
         }
     }
+
     productFlavors {
         mock {
             applicationIdSuffix = ".mock"
@@ -39,12 +41,27 @@ android {
             buildConfigField 'String', 'BASE_URL', '"http://na4lapy.kodujdlapolski.pl/api/"'
         }
     }
+
+    signingConfigs {
+        def keyPass = project.hasProperty('keyPassword') ? keyPassword.toString() : 'pass'
+        def storePass = project.hasProperty('storePassword') ? storePassword.toString() : 'pass'
+
+        playstore {
+            keyAlias 'na4lapy'
+            keyPassword keyPass
+            storeFile file('../keystore/na4lapy.keystore')
+            storePassword storePass
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.playstore
         }
     }
+
     packagingOptions {
         exclude 'META-INF/services/javax.annotation.processing.Processor' // butterknife
         exclude 'META-INF/maven/com.google.guava/guava/pom.xml'
@@ -74,22 +91,19 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    repositories {
-        jcenter()
-    }
-    def supportLibraryVersion = "23.3.0"
+    def supportLibraryVersion = "23.4.0"
     def retrofitVersion = "2.0.2"
-
     dependencies {
         compile fileTree(dir: 'libs', include: ['*.jar'])
         compile "com.android.support:appcompat-v7:$supportLibraryVersion"
         compile "com.android.support:design:$supportLibraryVersion"
         compile "com.android.support:support-annotations:$supportLibraryVersion"
         compile "com.android.support:support-v4:$supportLibraryVersion"
-        compile 'com.google.dagger:dagger:2.2'
-        apt 'com.google.dagger:dagger-compiler:2.2'
         compile 'com.google.guava:guava:19.0'
-        compile 'com.jakewharton:butterknife:7.0.1'
+        compile 'com.google.dagger:dagger:2.4'
+        apt 'com.google.dagger:dagger-compiler:2.4'
+        compile 'com.jakewharton:butterknife:8.0.1'
+        apt 'com.jakewharton:butterknife-compiler:8.0.1'
         compile 'com.j256.ormlite:ormlite-android:4.48'
         compile "com.squareup.retrofit2:retrofit:$retrofitVersion"
         compile "com.squareup.retrofit2:converter-gson:$retrofitVersion"
@@ -114,6 +128,5 @@ android {
         androidTestCompile "com.android.support:support-annotations:$supportLibraryVersion"
         androidTestCompile 'com.android.support.test.espresso:espresso-intents:2.2'
         androidTestCompile 'com.android.support.test.espresso:espresso-web:2.2.1'
-
     }
 }

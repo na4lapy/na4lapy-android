@@ -15,7 +15,7 @@ import android.widget.NumberPicker;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import pl.kodujdlapolski.na4lapy.R;
@@ -41,29 +41,29 @@ public class PreferencesFragment extends Fragment implements PreferencesContract
     UserPreferences userPreferences;
     NumberPicker ageNumberPicker;
 
-    @Bind(R.id.type_dog)
+    @BindView(R.id.type_dog)
     ToggleImageButton typeDogPreference;
-    @Bind(R.id.type_cat)
+    @BindView(R.id.type_cat)
     ToggleImageButton typeCatPreference;
-    @Bind(R.id.type_other)
+    @BindView(R.id.type_other)
     ToggleImageButton typeOtherPreference;
-    @Bind(R.id.gender_woman)
+    @BindView(R.id.gender_woman)
     ToggleImageButton genderWomanPreference;
-    @Bind(R.id.gender_man)
+    @BindView(R.id.gender_man)
     ToggleImageButton genderManPreference;
-    @Bind(R.id.age_min)
+    @BindView(R.id.age_min)
     EditText ageMinPreference;
-    @Bind(R.id.age_max)
+    @BindView(R.id.age_max)
     EditText ageMaxPreference;
-    @Bind(R.id.size_small)
+    @BindView(R.id.size_small)
     ToggleImageButton sizeSmallPreference;
-    @Bind(R.id.size_medium)
+    @BindView(R.id.size_medium)
     ToggleImageButton sizeMediumPreference;
-    @Bind(R.id.size_large)
+    @BindView(R.id.size_large)
     ToggleImageButton sizeLargePreference;
-    @Bind(R.id.activity_low)
+    @BindView(R.id.activity_low)
     ToggleImageButton activityLowPreference;
-    @Bind(R.id.activity_high)
+    @BindView(R.id.activity_high)
     ToggleImageButton activityHighPreference;
 
     @Override

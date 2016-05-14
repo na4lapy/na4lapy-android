@@ -24,7 +24,7 @@ import org.joda.time.Years;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import jp.wasabeef.picasso.transformations.BlurTransformation;
 import jp.wasabeef.picasso.transformations.ColorFilterTransformation;
@@ -43,17 +43,17 @@ import rx.schedulers.Schedulers;
 public class DetailsActivity extends AppCompatActivity {
 
     public static final int REQUEST_CODE_ANIMAL = 1;
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.background_picture)
+    @BindView(R.id.background_picture)
     ImageView background;
-    @Bind(R.id.profile_pic_on_details)
+    @BindView(R.id.profile_pic_on_details)
     ImageView profilePic;
-    @Bind(R.id.matching_lvl_image)
+    @BindView(R.id.matching_lvl_image)
     ImageView matchingLvl;
-    @Bind(R.id.add_to_fav_fab)
+    @BindView(R.id.add_to_fav_fab)
     FloatingActionButton addToFavFab;
-    @Bind(R.id.details_container)
+    @BindView(R.id.details_container)
     NestedScrollView detailsContainer;
 
     public static final String EXTRA_ANIMAL_ID = "extraAnimalId";

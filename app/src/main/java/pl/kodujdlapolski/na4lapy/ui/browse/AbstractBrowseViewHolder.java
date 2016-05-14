@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Animal;
@@ -34,11 +34,11 @@ import pl.kodujdlapolski.na4lapy.user.UserService;
  */
 public abstract class AbstractBrowseViewHolder extends RecyclerView.ViewHolder {
 
-    @Bind(R.id.view_holder_animal_name)
+    @BindView(R.id.view_holder_animal_name)
     TextView name;
-    @Bind(R.id.matching_lvl_image)
+    @BindView(R.id.matching_lvl_image)
     ImageView matchLevelImage;
-    @Bind(R.id.profile_pic_on_list)
+    @BindView(R.id.profile_pic_on_list)
     public ImageView profilePic;
 
     private Context mContext;

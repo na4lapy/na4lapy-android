@@ -4,7 +4,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 import android.widget.ImageView;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Animal;
 import pl.kodujdlapolski.na4lapy.ui.browse.AbstractBrowseViewHolder;
@@ -30,13 +30,13 @@ import pl.kodujdlapolski.na4lapy.utils.AnimalUtils;
 
 public class SingleBrowseViewHolder extends AbstractBrowseViewHolder {
 
-    @Bind(R.id.add_to_fav_fab)
+    @BindView(R.id.add_to_fav_fab)
     FloatingActionButton addToFavFab;
-    @Bind(R.id.animal_size_image)
+    @BindView(R.id.animal_size_image)
     ImageView sizeImage;
-    @Bind(R.id.animal_gender_image)
+    @BindView(R.id.animal_gender_image)
     ImageView genderImage;
-    @Bind(R.id.animal_activity_image)
+    @BindView(R.id.animal_activity_image)
     ImageView activityImage;
 
     public SingleBrowseViewHolder(View itemView, UserService userService) {

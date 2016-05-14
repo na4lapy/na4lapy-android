@@ -20,7 +20,8 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
+import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import pl.kodujdlapolski.na4lapy.R;
@@ -44,17 +45,17 @@ public class IntroductionActivity extends AppCompatActivity {
 
     int currentPage = 0;
     private final int LAST_INTRO = 5;
-    @Bind(R.id.introduction_viewpager)
+    @BindView(R.id.introduction_viewpager)
     ViewPager viewPager;
-    @Bind(R.id.introduction_container)
+    @BindView(R.id.introduction_container)
     CoordinatorLayout introductionContainer;
-    @Bind(R.id.intro_btn_finish)
+    @BindView(R.id.intro_btn_finish)
     AppCompatButton finishBtn;
-    @Bind(R.id.intro_btn_next)
+    @BindView(R.id.intro_btn_next)
     ImageButton nextBtn;
-    @Bind(R.id.intro_btn_skip)
+    @BindView(R.id.intro_btn_skip)
     Button skipBtn;
-    @Bind({R.id.intro_indicator_0, R.id.intro_indicator_1, R.id.intro_indicator_2, R.id.intro_indicator_3, R.id.intro_indicator_4})
+    @BindViews({R.id.intro_indicator_0, R.id.intro_indicator_1, R.id.intro_indicator_2, R.id.intro_indicator_3, R.id.intro_indicator_4})
     ImageView[] indicators;
 
     @SuppressWarnings("unused")

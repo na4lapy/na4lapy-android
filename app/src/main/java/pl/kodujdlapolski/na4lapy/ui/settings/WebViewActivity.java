@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.presenter.settings.WebPageTypes;
@@ -13,7 +13,7 @@ import pl.kodujdlapolski.na4lapy.ui.AbstractSingleActivity;
 public class WebViewActivity extends AbstractSingleActivity {
 
     public static final String EXTRA_TYPE = "WebViewActivity.EXTRA_TYPE";
-    @Bind(R.id.webView)
+    @BindView(R.id.webView)
     WebView webView;
     private WebPageTypes type;
 

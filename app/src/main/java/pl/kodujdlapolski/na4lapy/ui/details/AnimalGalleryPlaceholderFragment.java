@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import pl.kodujdlapolski.na4lapy.R;
@@ -29,9 +29,9 @@ public class AnimalGalleryPlaceholderFragment extends Fragment {
     private Photo animalPic;
     private int position = -1;
     private int gallerySize = -1;
-    @Bind(R.id.photo_author)
+    @BindView(R.id.photo_author)
     TextView photoAuthor;
-    @Bind(R.id.photo_number)
+    @BindView(R.id.photo_number)
     TextView photoNumber;
 
     public AnimalGalleryPlaceholderFragment() {

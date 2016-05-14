@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import pl.kodujdlapolski.na4lapy.Na4LapyApp;
@@ -36,10 +36,10 @@ import pl.kodujdlapolski.na4lapy.user.UserService;
  * limitations under the License.
  */
 public class SettingsFragment extends Fragment {
-    @Bind(R.id.version_name)
+    @BindView(R.id.version_name)
     TextView versionName;
 
-    @Bind(R.id.logInLogout)
+    @BindView(R.id.logInLogout)
     TextView logInLogoutText;
 
     @Inject

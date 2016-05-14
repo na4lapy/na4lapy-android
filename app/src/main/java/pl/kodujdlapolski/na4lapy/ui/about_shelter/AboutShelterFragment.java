@@ -13,7 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import pl.kodujdlapolski.na4lapy.R;
@@ -41,41 +41,41 @@ public class AboutShelterFragment extends Fragment {
     private AboutShelterPresenter presenter;
     private ActionBar actionBar;
 
-    @Bind(R.id.shelter_account_label)
+    @BindView(R.id.shelter_account_label)
     TextView shelterAccountLabel;
-    @Bind(R.id.shelter_account_number)
+    @BindView(R.id.shelter_account_number)
     TextView shelterAccountNumber;
 
-    @Bind(R.id.shelter_address_label)
+    @BindView(R.id.shelter_address_label)
     TextView shelterAddressLabel;
-    @Bind(R.id.shelter_address)
+    @BindView(R.id.shelter_address)
     TextView shelterAddress;
 
-    @Bind(R.id.shelter_email_label)
+    @BindView(R.id.shelter_email_label)
     TextView shelterEmailLabel;
-    @Bind(R.id.shelter_email_address)
+    @BindView(R.id.shelter_email_address)
     TextView shelterEmailAddress;
 
-    @Bind(R.id.shelter_phone_label)
+    @BindView(R.id.shelter_phone_label)
     TextView shelterPhoneLabel;
-    @Bind(R.id.shelter_phone_number)
+    @BindView(R.id.shelter_phone_number)
     TextView shelterPhoneNumber;
 
-    @Bind(R.id.shelter_www_label)
+    @BindView(R.id.shelter_www_label)
     TextView shelterWwwLabel;
-    @Bind(R.id.shelter_www)
+    @BindView(R.id.shelter_www)
     TextView shelterWWW;
 
-    @Bind(R.id.shelter_adoption_rules)
+    @BindView(R.id.shelter_adoption_rules)
     TextView adoptionRules;
 
 
-    @Bind(R.id.about_shelter_progress)
+    @BindView(R.id.about_shelter_progress)
     ProgressBar progressBar;
-    @Bind(R.id.about_shelter_content)
+    @BindView(R.id.about_shelter_content)
     ScrollView aboutShelterContent;
 
-    @Bind(R.id.error_container)
+    @BindView(R.id.error_container)
     LinearLayout errorContainer;
 
     @SuppressWarnings("unused")

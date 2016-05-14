@@ -3,7 +3,7 @@ package pl.kodujdlapolski.na4lapy.ui.browse.list;
 import android.view.View;
 import android.widget.ImageButton;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Animal;
 import pl.kodujdlapolski.na4lapy.ui.browse.AbstractBrowseViewHolder;
@@ -28,7 +28,7 @@ import pl.kodujdlapolski.na4lapy.user.UserService;
  */
 public class ListBrowseViewHolder extends AbstractBrowseViewHolder {
 
-    @Bind(R.id.add_to_fav_btn)
+    @BindView(R.id.add_to_fav_btn)
     ImageButton addToFavBtn;
 
     public ListBrowseViewHolder(View itemView, UserService userService) {

@@ -14,7 +14,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import pl.kodujdlapolski.na4lapy.Na4LapyApp;
 import pl.kodujdlapolski.na4lapy.R;
@@ -46,7 +46,7 @@ public class ListBrowseFragment extends Fragment {
 
     private ArrayList<Animal> animals;
 
-    @Bind(R.id.animals_recycle)
+    @BindView(R.id.animals_recycle)
     RecyclerView recycler;
     private RecyclerView.LayoutManager layoutManager;
     private ListBrowseRecyclerAdapter adapter;

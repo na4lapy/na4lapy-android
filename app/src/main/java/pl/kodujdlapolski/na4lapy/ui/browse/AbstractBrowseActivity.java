@@ -11,11 +11,10 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import pl.kodujdlapolski.na4lapy.R;
-import pl.kodujdlapolski.na4lapy.model.Animal;
 import pl.kodujdlapolski.na4lapy.ui.details.DetailsActivity;
 import pl.kodujdlapolski.na4lapy.ui.drawer.AbstractDrawerActivity;
 import pl.kodujdlapolski.na4lapy.ui.drawer.DrawerActivityHandler;
@@ -26,13 +25,13 @@ public class AbstractBrowseActivity extends AbstractDrawerActivity {
     private boolean isSingleBrowse = false;
     private BrowsePresenter browsePresenter;
     private boolean isAlive = true;
-    @Bind(R.id.container)
+    @BindView(R.id.container)
     ViewPager viewPager;
-    @Bind(R.id.error_container)
+    @BindView(R.id.error_container)
     LinearLayout errorContainer;
-    @Bind(R.id.animals_list_progress)
+    @BindView(R.id.animals_list_progress)
     ProgressBar progressBar;
-    @Bind(R.id.tabs)
+    @BindView(R.id.tabs)
     TabLayout tabs;
 
 
