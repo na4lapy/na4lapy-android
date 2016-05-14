@@ -61,7 +61,8 @@
     <string name="details_gender">Płeć:</string>
     <string name="details_activity">Aktywność:</string>
     <string name="details_training">Ułożenie:</string>
-    <string name="details_sterilization">Sterylizacja/Kastracja:</string>
+    <string name="details_sterilization">Sterylizacja:</string>
+    <string name="details_castration">Kastracja:</string>
     <string name="details_chip">Chip:</string>
     <string name="vaccination_basic">Podstawowe</string>
     <string name="vaccination_extended">Rozszerzone</string>

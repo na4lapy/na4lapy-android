@@ -139,11 +139,11 @@
             tools:text="training" />
 
         <TextView
+            android:id="@+id/sterilization_or_castration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/details_table_inner_margin"
-            android:layout_marginRight="@dimen/details_table_inner_margin"
-            android:text="@string/details_sterilization" />
+            android:layout_marginRight="@dimen/details_table_inner_margin" />
 
         <TextView
             android:id="@+id/info_sterilization"

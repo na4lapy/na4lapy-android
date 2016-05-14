@@ -29,6 +29,7 @@ import butterknife.ButterKnife;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Animal;
 import pl.kodujdlapolski.na4lapy.model.Photo;
+import pl.kodujdlapolski.na4lapy.model.type.Gender;
 
 /**
  * Created by Natalia Wróblewska on 2016-04-13.
@@ -82,6 +83,8 @@ public class ContentDetailsView {
     TextView infoTraining;
     @BindView(R.id.info_sterilization)
     TextView infoSterilization;
+    @BindView(R.id.sterilization_or_castration)
+    TextView sterilizationOrCastration;
     @BindView(R.id.info_vaccination)
     TextView infoVaccination;
 
@@ -111,8 +114,16 @@ public class ContentDetailsView {
         infoRace.setText(animal.getRace());
         if (animal.getSize() != null)
             infoSize.setText(ctx.getString(animal.getSize().getLabelResId()));
-        if (animal.getGender() != null)
+        if (animal.getGender() != null) {
+            if (animal.getGender().equals(Gender.FEMALE)) {
+                sterilizationOrCastration.setText(R.string.details_sterilization);
+            } else {
+                sterilizationOrCastration.setText(R.string.details_castration);
+            }
             infoGender.setText(ctx.getString(animal.getGender().getLabelResId()));
+        } else {
+            sterilizationOrCastration.setText(R.string.details_castration);
+        }
         if (animal.getTraining() != null)
             infoTraining.setText(ctx.getString(animal.getTraining().getLabelResId()));
         if (animal.getSterilization() != null)
