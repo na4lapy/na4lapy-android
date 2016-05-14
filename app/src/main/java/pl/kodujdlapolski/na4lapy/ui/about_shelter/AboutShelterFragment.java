@@ -113,11 +113,13 @@ public class AboutShelterFragment extends Fragment {
         shelterWWW.setText(shelter.getWebsite());
         shelterEmailAddress.setText(shelter.getEmail());
         shelterPhoneNumber.setText(shelter.getPhoneNumber());
-        shelterAddress.setText(String.format(getString(R.string.shelter_address_template),
-                shelter.getStreet(),
-                shelter.getBuildingNumber(),
-                shelter.getPostalCode(),
-                shelter.getCity()));
+        if (shelter.getStreet() != null && shelter.getBuildingNumber() != null && shelter.getPostalCode() != null && shelter.getCity() != null) {
+            shelterAddress.setText(String.format(getString(R.string.shelter_address_template),
+                    shelter.getStreet(),
+                    shelter.getBuildingNumber(),
+                    shelter.getPostalCode(),
+                    shelter.getCity()));
+        }
         adoptionRules.setText(shelter.getAdoptionRules());
     }
 
