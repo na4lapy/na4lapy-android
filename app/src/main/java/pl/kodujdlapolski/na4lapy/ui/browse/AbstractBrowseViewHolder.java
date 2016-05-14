@@ -10,6 +10,7 @@ import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import jp.wasabeef.picasso.transformations.CropSquareTransformation;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Animal;
 import pl.kodujdlapolski.na4lapy.model.Photo;
@@ -56,7 +57,7 @@ public abstract class AbstractBrowseViewHolder extends RecyclerView.ViewHolder {
             Photo pic = animal.getPhotos().iterator().next();
             Picasso.with(itemView.getContext())
                     .load(pic.getUrl())
-                    .fit().centerCrop()
+                    .transform(new CropSquareTransformation())
                     .placeholder(R.drawable.pic_404dog)
                     .into(profilePic);
         }

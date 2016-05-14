@@ -15,7 +15,7 @@
         android:clickable="true"
         android:contentDescription="@string/content_desc_main_image"
         android:foreground="?android:attr/selectableItemBackground"
-        android:scaleType="fitXY"
+        android:scaleType="fitCenter"
         tools:background="@color/colorAccent"
         tools:layout_height="400dp"
         tools:layout_width="match_parent"
