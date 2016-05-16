@@ -67,6 +67,16 @@ public class DatabaseRepositoryImpl implements DatabaseRepository {
         return list;
     }
 
+    public <T> List<T> findAllByIdList(List<Long> idList, Class clazz) throws SQLException {
+        ConnectionSource connectionSource = new AndroidConnectionSource(mDatabaseHelper);
+        Dao<T, Long> dao = getDao(clazz, connectionSource);
+        QueryBuilder<T, Long> qb = dao.queryBuilder();
+        qb.where().in(BaseEntity.COLUMN_NAME_ID, idList);
+        List<T> list = qb.query();
+        connectionSource.close();
+        return list;
+    }
+
     @Override
     public <T> int save(@Nullable T entity) throws SQLException {
         if (entity == null) {

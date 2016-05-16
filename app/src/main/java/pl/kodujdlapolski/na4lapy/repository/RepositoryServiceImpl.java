@@ -2,16 +2,14 @@ package pl.kodujdlapolski.na4lapy.repository;
 
 import android.support.annotation.NonNull;
 
-import com.google.common.collect.Maps;
-
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
 import pl.kodujdlapolski.na4lapy.model.Animal;
 import pl.kodujdlapolski.na4lapy.model.Shelter;
+import pl.kodujdlapolski.na4lapy.preferences.PreferencesService;
 import pl.kodujdlapolski.na4lapy.repository.database.DatabaseRepository;
 import rx.Observable;
 import rx.Subscriber;
@@ -21,10 +19,12 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public class RepositoryServiceImpl implements RepositoryService {
 
     private DatabaseRepository mDatabaseRepository;
+    private PreferencesService mPreferencesService;
 
     @Inject
-    public RepositoryServiceImpl(DatabaseRepository databaseRepository) {
+    public RepositoryServiceImpl(DatabaseRepository databaseRepository, PreferencesService preferencesService) {
         mDatabaseRepository = checkNotNull(databaseRepository, "DatabaseRepository cannot be null");
+        mPreferencesService = checkNotNull(preferencesService, "PreferencesService cannot be null");
     }
 
     @Override
@@ -83,9 +83,7 @@ public class RepositoryServiceImpl implements RepositoryService {
             @Override
             public void call(Subscriber<? super List<Animal>> subscriber) {
                 try {
-                    Map<String, Object> favouriteField = Maps.newHashMap();
-                    favouriteField.put(Animal.COLUMN_NAME_FAVOURITE, true);
-                    List<Animal> animals = mDatabaseRepository.findAllByFields(favouriteField, Animal.class);
+                    List<Animal> animals = mDatabaseRepository.findAllByIdList(mPreferencesService.getFavouriteList(), Animal.class);
                     subscriber.onNext(animals);
                     subscriber.onCompleted();
                 } catch (SQLException e) {

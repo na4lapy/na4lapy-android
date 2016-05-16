@@ -17,6 +17,7 @@ import java.util.Map;
 
 import pl.kodujdlapolski.na4lapy.model.Animal;
 import pl.kodujdlapolski.na4lapy.model.Shelter;
+import pl.kodujdlapolski.na4lapy.preferences.PreferencesService;
 import pl.kodujdlapolski.na4lapy.repository.database.DatabaseRepository;
 import rx.Observable;
 import rx.observers.TestSubscriber;
@@ -33,6 +34,9 @@ public class RepositoryServiceImplTest {
     @Mock
     private DatabaseRepository databaseRepository;
 
+    @Mock
+    private PreferencesService preferencesService;
+
     @InjectMocks
     private RepositoryServiceImpl repositoryService;
 
@@ -42,7 +46,7 @@ public class RepositoryServiceImplTest {
 
     @Before
     public void setUp() throws Exception {
-        repositoryService = new RepositoryServiceImpl(databaseRepository);
+        repositoryService = new RepositoryServiceImpl(databaseRepository, preferencesService);
 
         animal = new Animal();
         animal.setId(animalId);
