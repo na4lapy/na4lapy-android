@@ -39,16 +39,21 @@ public class SingleBrowseViewHolder extends AbstractBrowseViewHolder {
     @BindView(R.id.animal_activity_image)
     ImageView activityImage;
 
+    private UserService userService;
+
     public SingleBrowseViewHolder(View itemView, UserService userService) {
         super(itemView, userService);
+        this.userService = userService;
     }
 
     @Override
     public void init(Animal animal, OnBrowseElementClickedAction onBrowseElementClickedAction) {
         super.init(animal, onBrowseElementClickedAction);
+        animal.setFavourite(userService.isFavourite(animal));
         addToFavFab.setImageResource(AnimalUtils.getAddToFavFabImage(animal));
         addToFavFab.setOnClickListener(v -> {
             onBrowseElementClickedAction.favourite(animal);
+            addToFavFab.setImageResource(AnimalUtils.getAddToFavFabImage(animal));
         });
         profilePic.setOnClickListener(v -> {
             onBrowseElementClickedAction.details(animal);

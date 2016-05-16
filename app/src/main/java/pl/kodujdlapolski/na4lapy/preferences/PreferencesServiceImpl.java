@@ -51,7 +51,7 @@ public class PreferencesServiceImpl implements PreferencesService {
 
         favourites.add(animalId);
         json = mGson.toJson(favourites, listType);
-        mSharedPreferences.edit().putString(KEY_PAYMENT_USER, json).apply();
+        mSharedPreferences.edit().putString(KEY_USER_FAVOURITES, json).apply();
     }
 
     @Override
@@ -68,7 +68,7 @@ public class PreferencesServiceImpl implements PreferencesService {
 
         favourites.remove(favourites.indexOf(animalId));
         json = mGson.toJson(favourites, listType);
-        mSharedPreferences.edit().putString(KEY_PAYMENT_USER, json).apply();
+        mSharedPreferences.edit().putString(KEY_USER_FAVOURITES, json).apply();
     }
 
     @Override

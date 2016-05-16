@@ -5,6 +5,8 @@ import android.support.annotation.NonNull;
 import org.joda.time.LocalDate;
 import org.joda.time.Years;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import pl.kodujdlapolski.na4lapy.model.Animal;
@@ -124,6 +126,22 @@ public class UserServiceImpl implements UserService {
             return;
         }
         mPreferencesService.removeFromFavourite(animal.getId());
+    }
+
+    @Override
+    public boolean isFavourite(Animal animal) {
+        List<Long> favourites = mPreferencesService.getFavouriteList();
+        if (favourites == null || favourites.isEmpty() || animal == null || animal.getId() == null) {
+            return false;
+        }
+
+        for (Long l : favourites) {
+            if (l.equals(animal.getId())) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 }

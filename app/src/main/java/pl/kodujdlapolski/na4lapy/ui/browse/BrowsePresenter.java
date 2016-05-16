@@ -16,11 +16,9 @@ import pl.kodujdlapolski.na4lapy.model.type.Species;
 import pl.kodujdlapolski.na4lapy.repository.RepositoryService;
 import pl.kodujdlapolski.na4lapy.sync.SynchronizationService;
 import pl.kodujdlapolski.na4lapy.sync.receiver.SynchronizationReceiver;
-import pl.kodujdlapolski.na4lapy.ui.NotLoggedDialog;
 import pl.kodujdlapolski.na4lapy.ui.browse.list.ListBrowsePagerAdapter;
 import pl.kodujdlapolski.na4lapy.ui.browse.single.SingleBrowsePagerAdapter;
 import pl.kodujdlapolski.na4lapy.ui.details.DetailsActivity;
-import pl.kodujdlapolski.na4lapy.user.UserModule;
 import pl.kodujdlapolski.na4lapy.user.UserService;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -215,16 +213,15 @@ public class BrowsePresenter implements SynchronizationReceiver.SynchronizationR
         }
     }
 
-
     @Override
     public void favourite(Animal animal) {
-        if (userService.isLogged())
-            repositoryService.setFavourite(animal.getId(), !Boolean.TRUE.equals(animal.getFavourite()))
-                    .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(this::onFavChanged);
-        else
-            NotLoggedDialog.get(abstractBrowseActivity).show();
-
+        if (Boolean.TRUE.equals(animal.getFavourite())) {
+            animal.setFavourite(false);
+            userService.removeFromFavourite(animal);
+        } else {
+            animal.setFavourite(true);
+            userService.addToFavourite(animal);
+        }
     }
 
     @Override

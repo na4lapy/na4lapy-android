@@ -10,7 +10,6 @@ public interface PreferencesService {
 
     String KEY_USER_PREFERENCES = "PreferencesService.KEY_USER_PREFERENCES";
     String KEY_USER_FAVOURITES = "PreferencesService.KEY_USER_FAVOURITES";
-    String KEY_PAYMENT_USER = "PreferencesService.KEY_PAYMENT_USER";
     String KEY_WAS_INTRODUCTION_SHOWN = "PreferencesService.KEY_WAS_INTRODUCTION_SHOWN";
 
     void setUserPreferences(UserPreferences userPreferences);

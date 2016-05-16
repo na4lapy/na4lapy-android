@@ -22,4 +22,5 @@ public interface UserService {
 
     void addToFavourite(Animal animal);
     void removeFromFavourite(Animal animal);
+    boolean isFavourite(Animal animal);
 }
