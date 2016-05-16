@@ -117,12 +117,8 @@ public class ContentDetailsView {
         if (animal.getGender() != null) {
             if (animal.getGender().equals(Gender.FEMALE)) {
                 sterilizationOrCastration.setText(R.string.details_sterilization);
-            } else {
-                sterilizationOrCastration.setText(R.string.details_castration);
             }
             infoGender.setText(ctx.getString(animal.getGender().getLabelResId()));
-        } else {
-            sterilizationOrCastration.setText(R.string.details_castration);
         }
         if (animal.getTraining() != null)
             infoTraining.setText(ctx.getString(animal.getTraining().getLabelResId()));
