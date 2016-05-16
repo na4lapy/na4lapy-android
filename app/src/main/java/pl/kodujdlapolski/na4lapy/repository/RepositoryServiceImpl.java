@@ -84,6 +84,9 @@ public class RepositoryServiceImpl implements RepositoryService {
             public void call(Subscriber<? super List<Animal>> subscriber) {
                 try {
                     List<Animal> animals = mDatabaseRepository.findAllByIdList(mPreferencesService.getFavouriteList(), Animal.class);
+                    for (Animal a : animals) {
+                        a.setFavourite(true);
+                    }
                     subscriber.onNext(animals);
                     subscriber.onCompleted();
                 } catch (SQLException e) {
