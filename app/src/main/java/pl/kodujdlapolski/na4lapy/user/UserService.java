@@ -19,4 +19,7 @@ public interface UserService {
     @Nullable String getUserFirstName();
     @Nullable String getUserPhotoUrl();
     boolean isLogged();
+
+    void addToFavourite(Animal animal);
+    void removeFromFavourite(Animal animal);
 }

@@ -109,4 +109,21 @@ public class UserServiceImpl implements UserService {
     public boolean isLogged() {
         return false; // TODO
     }
+
+    @Override
+    public void addToFavourite(Animal animal) {
+        if (animal == null || animal.getId() == null) {
+            return;
+        }
+        mPreferencesService.addToFavourite(animal.getId());
+    }
+
+    @Override
+    public void removeFromFavourite(Animal animal) {
+        if (animal == null || animal.getId() == null) {
+            return;
+        }
+        mPreferencesService.removeFromFavourite(animal.getId());
+    }
+
 }
