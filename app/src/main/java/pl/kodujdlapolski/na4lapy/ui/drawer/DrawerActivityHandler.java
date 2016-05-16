@@ -119,7 +119,7 @@ public class DrawerActivityHandler {
     private void setDrawerHeader() {
         View headerView =  navigationView.getHeaderView(0);
 
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             headerView.setPadding(
                     headerView.getPaddingLeft(),
                     (int)(headerView.getPaddingTop() + activity.getResources().getDimension(R.dimen.status_bar)),
