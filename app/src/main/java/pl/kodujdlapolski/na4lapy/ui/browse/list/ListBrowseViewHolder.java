@@ -2,6 +2,7 @@ package pl.kodujdlapolski.na4lapy.ui.browse.list;
 
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import butterknife.BindView;
 import pl.kodujdlapolski.na4lapy.R;
@@ -29,7 +30,7 @@ import pl.kodujdlapolski.na4lapy.user.UserService;
 public class ListBrowseViewHolder extends AbstractBrowseViewHolder {
 
     @BindView(R.id.add_to_fav_btn)
-    ImageButton addToFavBtn;
+    ImageView addToFavBtn;
 
     public ListBrowseViewHolder(View itemView, UserService userService) {
         super(itemView, userService);
@@ -40,9 +41,9 @@ public class ListBrowseViewHolder extends AbstractBrowseViewHolder {
         super.init(animal, onBrowseElementClickedAction);
 
         addToFavBtn.setImageResource(Boolean.TRUE.equals(animal.getFavourite()) ? R.drawable.ic_favorite_accent : R.drawable.ic_favorite_border_accent);
-        addToFavBtn.setOnClickListener(v -> {
-            onBrowseElementClickedAction.favourite(animal);
-        });
+//        addToFavBtn.setOnClickListener(v -> {
+//            onBrowseElementClickedAction.favourite(animal);
+//        });
         itemView.setOnClickListener(v -> {
             onBrowseElementClickedAction.details(animal);
         });

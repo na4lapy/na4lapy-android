@@ -105,7 +105,8 @@ public class AbstractBrowseActivity extends AbstractDrawerActivity {
     public void showError() {
         progressBar.setVisibility(View.GONE);
         viewPager.setVisibility(View.GONE);
-        errorContainer.setVisibility(View.VISIBLE);
+       // todo synchronization fail shouldn't be called
+      //  errorContainer.setVisibility(View.VISIBLE);
     }
 
 

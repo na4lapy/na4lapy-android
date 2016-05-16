@@ -56,11 +56,10 @@
             android:src="@drawable/user_preferences_compliance_level" />
 
 
-        <ImageButton
+        <ImageView
             android:id="@+id/add_to_fav_btn"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:background="?android:attr/selectableItemBackground"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:src="@drawable/ic_favorite_accent" />
     </LinearLayout>
 

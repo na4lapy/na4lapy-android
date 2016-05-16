@@ -70,7 +70,8 @@ public class SettingsFragment extends Fragment {
         } catch (PackageManager.NameNotFoundException e) {
             versionName.setVisibility(View.GONE);
         }
-        logInLogoutText.setText(userService.isLogged() ? getString(R.string.logout) : getString(R.string.login));
+        // todo enable when login is available
+        // logInLogoutText.setText(userService.isLogged() ? getString(R.string.logout) : getString(R.string.login));
     }
 
     @SuppressWarnings("unused")
@@ -85,15 +86,16 @@ public class SettingsFragment extends Fragment {
         runWebViewActivity(WebPageTypes.OPEN_SOURCE);
     }
 
-    @SuppressWarnings("unused")
-    @OnClick(R.id.logInLogout)
-    void onLoginLogoutClick() {
-        if (userService.isLogged())
-            userService.logout();
-        else {
-            // todo run login activity when it is available
-        }
-    }
+    // todo enable when login is available
+//    @SuppressWarnings("unused")
+//    @OnClick(R.id.logInLogout)
+//    void onLoginLogoutClick() {
+//        if (userService.isLogged())
+//            userService.logout();
+//        else {
+//            // todo run login activity when it is available
+//        }
+//    }
 
     void runWebViewActivity(WebPageTypes type) {
         Intent i = new Intent(getActivity(), WebViewActivity.class);
