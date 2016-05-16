@@ -77,7 +77,8 @@ public class UserServiceImpl implements UserService {
                     ++result;
         }
 
-        if ((mUserPreferences.isActivityLow() && ActivityAnimal.LOW.equals(animal.getActivity())) ||
+        if ((mUserPreferences.isActivityLow() && mUserPreferences.isActivityHigh() && ActivityAnimal.UNKNOWN.equals(animal.getActivity())) ||
+                (mUserPreferences.isActivityLow() && ActivityAnimal.LOW.equals(animal.getActivity())) ||
                 (mUserPreferences.isActivityHigh() && ActivityAnimal.HIGH.equals(animal.getActivity()))) {
                     ++result;
         }
