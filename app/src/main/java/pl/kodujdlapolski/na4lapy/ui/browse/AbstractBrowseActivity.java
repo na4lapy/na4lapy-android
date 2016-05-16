@@ -75,6 +75,7 @@ public class AbstractBrowseActivity extends AbstractDrawerActivity {
     public void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         viewPager.setAdapter(browsePresenter.getAdapter());
+        viewPager.setOffscreenPageLimit(1);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         if (tabLayout != null)
             tabLayout.setupWithViewPager(viewPager);
@@ -111,6 +112,7 @@ public class AbstractBrowseActivity extends AbstractDrawerActivity {
     public void showProgressHideContent(boolean show) {
         progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
         viewPager.setVisibility(show ? View.GONE : View.VISIBLE);
+        errorContainer.setVisibility(View.GONE);
     }
 
     public boolean isAlive() {
