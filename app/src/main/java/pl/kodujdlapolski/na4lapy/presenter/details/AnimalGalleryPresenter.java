@@ -17,7 +17,7 @@ public class AnimalGalleryPresenter {
     public AnimalGalleryPresenter (AnimalGalleryActivity activity, List<Photo> gallery) {
         this.activity = activity;
         animalGallerySectionsPagerAdapter = new AnimalGallerySectionsPagerAdapter(
-                this.activity.getSupportFragmentManager(), gallery, this, activity);
+                this.activity.getSupportFragmentManager(), gallery, this);
     }
 
     public AnimalGallerySectionsPagerAdapter getAdapter() {

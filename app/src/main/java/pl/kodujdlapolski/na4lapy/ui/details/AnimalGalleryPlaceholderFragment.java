@@ -33,6 +33,8 @@ public class AnimalGalleryPlaceholderFragment extends Fragment {
     TextView photoAuthor;
     @BindView(R.id.photo_number)
     TextView photoNumber;
+    @BindView(R.id.animal_pic_in_gallery)
+    ImageView imageView;
 
     public AnimalGalleryPlaceholderFragment() {
     }
@@ -79,7 +81,6 @@ public class AnimalGalleryPlaceholderFragment extends Fragment {
 
         View view = getView();
         if (view != null) {
-            ImageView imageView = (ImageView) view.findViewById(R.id.animal_pic_in_gallery);
             setPhoto(imageView, savedInstanceState);
         }
     }

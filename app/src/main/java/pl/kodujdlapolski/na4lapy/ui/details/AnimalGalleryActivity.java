@@ -49,7 +49,6 @@ public class AnimalGalleryActivity extends AbstractSingleActivity {
         presenter = new AnimalGalleryPresenter(this, gallery);
         mAnimalGallerySectionsPagerAdapter = presenter.getAdapter();
 
-        mViewPager = (GalleryViewPager) findViewById(R.id.gallery_container);
         if (mViewPager != null) {
             mViewPager.setAdapter(mAnimalGallerySectionsPagerAdapter);
             mViewPager.setCurrentItem(selectedPicNumber);

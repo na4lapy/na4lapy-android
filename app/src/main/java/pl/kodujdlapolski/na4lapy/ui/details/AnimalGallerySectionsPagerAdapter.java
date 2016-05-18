@@ -16,14 +16,12 @@ public class AnimalGallerySectionsPagerAdapter extends FragmentPagerAdapter {
 
     private List<Photo> gallery;
     private AnimalGalleryPresenter presenter;
-    private AnimalGalleryActivity activity;
 
     public AnimalGallerySectionsPagerAdapter(FragmentManager fm, List<Photo> gallery,
-                                             AnimalGalleryPresenter presenter, AnimalGalleryActivity activity) {
+                                             AnimalGalleryPresenter presenter) {
         super(fm);
         this.gallery = gallery;
         this.presenter = presenter;
-        this.activity = activity;
     }
 
     @Override
