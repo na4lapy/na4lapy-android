@@ -11,6 +11,7 @@ import pl.kodujdlapolski.na4lapy.model.Animal;
 import pl.kodujdlapolski.na4lapy.model.Shelter;
 import pl.kodujdlapolski.na4lapy.preferences.PreferencesService;
 import pl.kodujdlapolski.na4lapy.repository.database.DatabaseRepository;
+import pl.kodujdlapolski.na4lapy.user.UserService;
 import rx.Observable;
 import rx.Subscriber;
 
@@ -20,11 +21,16 @@ public class RepositoryServiceImpl implements RepositoryService {
 
     private DatabaseRepository mDatabaseRepository;
     private PreferencesService mPreferencesService;
+    private UserService mUserService;
 
     @Inject
-    public RepositoryServiceImpl(DatabaseRepository databaseRepository, PreferencesService preferencesService) {
+    public RepositoryServiceImpl(
+            DatabaseRepository databaseRepository,
+            PreferencesService preferencesService,
+            UserService userService) {
         mDatabaseRepository = checkNotNull(databaseRepository, "DatabaseRepository cannot be null");
         mPreferencesService = checkNotNull(preferencesService, "PreferencesService cannot be null");
+        mUserService = checkNotNull(userService, "UserService cannot be null");
     }
 
     @Override
@@ -50,7 +56,7 @@ public class RepositoryServiceImpl implements RepositoryService {
             @Override
             public void call(Subscriber<? super List<Animal>> subscriber) {
                 try {
-                    List<Animal> animals = mDatabaseRepository.findAll(Animal.class);
+                    List<Animal> animals = mUserService.sortByUserPreferences(mDatabaseRepository.findAll(Animal.class));
                     subscriber.onNext(animals);
                     subscriber.onCompleted();
                 } catch (SQLException e) {
@@ -83,7 +89,7 @@ public class RepositoryServiceImpl implements RepositoryService {
             @Override
             public void call(Subscriber<? super List<Animal>> subscriber) {
                 try {
-                    List<Animal> animals = mDatabaseRepository.findAllByIdList(mPreferencesService.getFavouriteList(), Animal.class);
+                    List<Animal> animals = mUserService.sortByUserPreferences(mDatabaseRepository.findAllByIdList(mPreferencesService.getFavouriteList(), Animal.class));
                     for (Animal a : animals) {
                         a.setFavourite(true);
                     }
