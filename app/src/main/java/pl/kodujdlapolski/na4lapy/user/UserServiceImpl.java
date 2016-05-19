@@ -149,12 +149,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<Animal> sortByUserPreferences(List<Animal> animals) {
         if (animals != null) {
+
             Collections.sort(animals, (previousAnimal, nextAnimal) -> {
                 Integer previousAnimalComplianceLevel = getPreferencesComplianceLevel(previousAnimal);
                 Integer nextAnimalComplianceLevel = getPreferencesComplianceLevel(nextAnimal);
-                return nextAnimalComplianceLevel.compareTo(previousAnimalComplianceLevel);});
-        } return null;
+                return nextAnimalComplianceLevel.compareTo(previousAnimalComplianceLevel);
+            });
 
+            return animals;
+        }
+            return null; //in case argument animals is null
     }
 
 }
