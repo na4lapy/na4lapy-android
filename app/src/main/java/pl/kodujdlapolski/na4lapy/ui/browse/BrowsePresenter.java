@@ -5,7 +5,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.LocalBroadcastManager;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -130,9 +129,6 @@ public class BrowsePresenter implements SynchronizationReceiver.SynchronizationR
             animals.clear();
             adapter.notifyDataSetChanged();
             animals.addAll(animalsFromServer);
-
-            sortAnimals();
-
             adapter.notifyDataSetChanged();
             abstractBrowseActivity.showProgressHideContent(false);
         } else {
@@ -158,16 +154,6 @@ public class BrowsePresenter implements SynchronizationReceiver.SynchronizationR
 
     public FragmentPagerAdapter getAdapter() {
         return adapter;
-    }
-
-    private void sortAnimals() {
-        if (animals != null) {
-            Collections.sort(animals, (previousAnimal, nextAnimal) -> {
-                Integer previousAnimalComplianceLevel = userService.getPreferencesComplianceLevel(previousAnimal);
-                Integer nextAnimalComplianceLevel = userService.getPreferencesComplianceLevel(nextAnimal);
-                return nextAnimalComplianceLevel.compareTo(previousAnimalComplianceLevel);
-            });
-        }
     }
 
     public static List<Animal> getAnimalsByType(List<Animal> animals, PageTypes type) {

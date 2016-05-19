@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import org.joda.time.LocalDate;
 import org.joda.time.Years;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -143,6 +144,17 @@ public class UserServiceImpl implements UserService {
         }
 
         return false;
+    }
+
+    @Override
+    public List<Animal> sortByUserPreferences(List<Animal> animals) {
+        if (animals != null) {
+            Collections.sort(animals, (previousAnimal, nextAnimal) -> {
+                Integer previousAnimalComplianceLevel = getPreferencesComplianceLevel(previousAnimal);
+                Integer nextAnimalComplianceLevel = getPreferencesComplianceLevel(nextAnimal);
+                return nextAnimalComplianceLevel.compareTo(previousAnimalComplianceLevel);});
+        } return null;
+
     }
 
 }
