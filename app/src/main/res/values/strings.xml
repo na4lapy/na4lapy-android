@@ -117,6 +117,7 @@
 
     <plurals name="years_short">
         <item quantity="one">%d rok</item>
+        <item quantity="few">%d lata</item>
         <item quantity="other">%d lat</item>
     </plurals>
 
