@@ -57,6 +57,8 @@ public class UserServiceImpl implements UserService {
                 (mUserPreferences.isTypeCat() && Species.CAT.equals(animal.getSpecies())) ||
                 (mUserPreferences.isTypeOther() && Species.OTHER.equals(animal.getSpecies()))) {
                     ++result;
+        } else {
+            return 0;
         }
 
         if ((mUserPreferences.isGenderMan() && mUserPreferences.isGenderWoman() && Gender.UNKNOWN.equals(animal.getGender())) ||
