@@ -1,7 +1,5 @@
 package pl.kodujdlapolski.na4lapy.utils;
 
-import android.content.Intent;
-
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Animal;
 
@@ -27,15 +25,5 @@ public class AnimalUtils {
     //TODO użyć StateListDrawable dla buttona zamiast zmieniać jego grafikę ręcznie podmieniając drawable
     public static int getAddToFavFabImage(Animal animal) {
         return Boolean.TRUE.equals(animal.getFavourite()) ? R.drawable.ic_favorite_white_24dp : R.drawable.ic_favorite_border_white_24dp;
-    }
-
-    public static Intent getShareIntent(Animal animal) {
-        Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-        sharingIntent.setType("text/plain");
-        sharingIntent.putExtra(Intent.EXTRA_SUBJECT, animal.getName() + " " + animal.getChipId());
-        if (animal.getPhotos() != null && animal.getPhotos().iterator().hasNext()) {
-            sharingIntent.putExtra(Intent.EXTRA_TEXT, animal.getPhotos().iterator().next().getUrl());
-        }
-        return sharingIntent;
     }
 }

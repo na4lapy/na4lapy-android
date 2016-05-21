@@ -33,6 +33,7 @@ import pl.kodujdlapolski.na4lapy.Na4LapyApp;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Animal;
 import pl.kodujdlapolski.na4lapy.repository.RepositoryService;
+import pl.kodujdlapolski.na4lapy.system.SystemService;
 import pl.kodujdlapolski.na4lapy.user.UserService;
 import pl.kodujdlapolski.na4lapy.utils.AnimalUtils;
 import rx.android.schedulers.AndroidSchedulers;
@@ -42,6 +43,15 @@ import rx.schedulers.Schedulers;
 public class DetailsActivity extends AppCompatActivity {
 
     public static final int REQUEST_CODE_ANIMAL = 1;
+    public static final String EXTRA_ANIMAL_ID = "extraAnimalId";
+
+    @Inject
+    RepositoryService repositoryService;
+    @Inject
+    UserService userService;
+    @Inject
+    SystemService systemService;
+
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.background_picture)
@@ -55,14 +65,8 @@ public class DetailsActivity extends AppCompatActivity {
     @BindView(R.id.details_container)
     NestedScrollView detailsContainer;
 
-    public static final String EXTRA_ANIMAL_ID = "extraAnimalId";
     private Long id;
     private Animal animal;
-
-    @Inject
-    RepositoryService repositoryService;
-    @Inject
-    UserService userService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -160,7 +164,6 @@ public class DetailsActivity extends AppCompatActivity {
         addToFavFab.setImageResource(AnimalUtils.getAddToFavFabImage(animal));
     }
 
-
     @Override
     public void onSaveInstanceState(Bundle outState) {
         outState.putSerializable(EXTRA_ANIMAL_ID, id);
@@ -172,8 +175,7 @@ public class DetailsActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_details, menu);
         MenuItem shareMenuItem = menu.findItem(R.id.menu_item_share);
         ShareActionProvider shareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareMenuItem);
-        Intent shareIntent = AnimalUtils.getShareIntent(animal);
-        shareActionProvider.setShareIntent(shareIntent);
+        shareActionProvider.setShareIntent(systemService.getShareIntent(animal));
         return true;
     }
 
