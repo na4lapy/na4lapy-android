@@ -11,7 +11,9 @@ import java.util.List;
 import java.util.Map;
 
 import pl.kodujdlapolski.na4lapy.model.Animal;
+import pl.kodujdlapolski.na4lapy.ui.browse.BrowseContract;
 import pl.kodujdlapolski.na4lapy.ui.browse.BrowsePresenter;
+import pl.kodujdlapolski.na4lapy.ui.browse.PageTypes;
 
 /**
  * Created by Natalia Wróblewska on 2016-03-09.
@@ -29,52 +31,50 @@ import pl.kodujdlapolski.na4lapy.ui.browse.BrowsePresenter;
  * limitations under the License.
  *
  */
-public class ListBrowsePagerAdapter extends FragmentPagerAdapter implements BrowsePresenter.UpdateSingleElement {
+public class ListBrowsePagerAdapter extends FragmentPagerAdapter implements BrowseContract.Adapter {
 
     private Context ctx;
     private List<Animal> animals;
-    private HashMap<BrowsePresenter.PageTypes, ListBrowseFragment> fragments = new HashMap<>();
-    private BrowsePresenter presenter;
+    private HashMap<PageTypes, ListBrowseFragment> fragments = new HashMap<>();
 
-    public ListBrowsePagerAdapter(Context ctx, List<Animal> animals, FragmentManager fm, BrowsePresenter presenter) {
+    public ListBrowsePagerAdapter(Context ctx, List<Animal> animals, FragmentManager fm) {
         super(fm);
         this.ctx = ctx;
         this.animals = animals;
-        this.presenter = presenter;
     }
 
     @Override
     public Fragment getItem(int position) {
-        BrowsePresenter.PageTypes type = BrowsePresenter.PageTypes.values()[position];
+        PageTypes type = PageTypes.values()[position];
         return ListBrowseFragment.newInstance(BrowsePresenter.getAnimalsByType(animals,
-                type), presenter);
+                type));
     }
 
     @Override
     public int getCount() {
-        return BrowsePresenter.PageTypes.values().length;
+        return PageTypes.values().length;
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return ctx.getString(BrowsePresenter.PageTypes.values()[position].nameResId);
+        return ctx.getString(PageTypes.values()[position].nameResId);
     }
 
     @Override
     public void notifyDataSetChanged() {
-        for (Map.Entry<BrowsePresenter.PageTypes, ListBrowseFragment> set : fragments.entrySet()) {
+        for (Map.Entry<PageTypes, ListBrowseFragment> set : fragments.entrySet()) {
             set.getValue().updateList(BrowsePresenter.getAnimalsByType(animals, set.getKey()));
         }
         super.notifyDataSetChanged();
     }
 
     public void notifyItemChanged(Animal animal){
-        for (Map.Entry<BrowsePresenter.PageTypes, ListBrowseFragment> set : fragments.entrySet()) {
+        for (Map.Entry<PageTypes, ListBrowseFragment> set : fragments.entrySet()) {
             set.getValue().updateElement(animal);
         }
     }
     public  void notifyItemRemoved(Animal animal){
-        for (Map.Entry<BrowsePresenter.PageTypes, ListBrowseFragment> set : fragments.entrySet()) {
+        for (Map.Entry<PageTypes, ListBrowseFragment> set : fragments.entrySet()) {
             set.getValue().removeElement(animal);
         }
     }
@@ -83,7 +83,7 @@ public class ListBrowsePagerAdapter extends FragmentPagerAdapter implements Brow
     public Object instantiateItem(ViewGroup container, int position) {
         Fragment createdFragment = (Fragment) super.instantiateItem(container, position);
         // save the appropriate reference depending on position
-        fragments.put(BrowsePresenter.PageTypes.values()[position], (ListBrowseFragment) createdFragment);
+        fragments.put(PageTypes.values()[position], (ListBrowseFragment) createdFragment);
         return createdFragment;
     }
 }

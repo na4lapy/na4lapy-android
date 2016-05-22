@@ -19,7 +19,6 @@ import butterknife.ButterKnife;
 import pl.kodujdlapolski.na4lapy.Na4LapyApp;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Animal;
-import pl.kodujdlapolski.na4lapy.ui.browse.AbstractBrowseActivity;
 import pl.kodujdlapolski.na4lapy.ui.browse.BrowsePresenter;
 import pl.kodujdlapolski.na4lapy.user.UserService;
 
@@ -54,7 +53,7 @@ public class ListBrowseFragment extends Fragment {
     public ListBrowseFragment() {
     }
 
-    public static ListBrowseFragment newInstance(List<Animal> animals, BrowsePresenter presenter) {
+    public static ListBrowseFragment newInstance(List<Animal> animals) {
         ListBrowseFragment fragment = new ListBrowseFragment();
         Bundle args = new Bundle();
         args.putSerializable(ARG_ANIMALS_LIST, (ArrayList<Animal>) animals);
@@ -80,7 +79,7 @@ public class ListBrowseFragment extends Fragment {
         layoutManager = new LinearLayoutManager(getActivity());
         recycler.setLayoutManager(layoutManager);
         recycler.setItemAnimator(null);
-        adapter = new ListBrowseRecyclerAdapter(animals, ((AbstractBrowseActivity) getActivity()).getPresenter(), userService);
+        adapter = new ListBrowseRecyclerAdapter(animals, ((ListBrowseActivity) getActivity()).getPresenter(), userService);
         recycler.setAdapter(adapter);
     }
 
@@ -135,7 +134,7 @@ public class ListBrowseFragment extends Fragment {
         if (getView() != null) {
             Snackbar.make(getView(), String.format(getString(R.string.removed_from_fav_undo_mess), animalToUndo.getName()), Snackbar.LENGTH_LONG)
                     .setAction(R.string.removed_from_fav_undo_option, v -> {
-                        ((AbstractBrowseActivity) getActivity()).getPresenter().handleUndoAnimal(animalToUndo);
+                        ((ListBrowseActivity) getActivity()).getPresenter().handleUndoAnimal(animalToUndo);
                     })
                     .show();
         }

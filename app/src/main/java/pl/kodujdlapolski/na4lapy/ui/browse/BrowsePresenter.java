@@ -1,5 +1,6 @@
 package pl.kodujdlapolski.na4lapy.ui.browse;
 
+import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.LocalBroadcastManager;
@@ -17,7 +18,6 @@ import pl.kodujdlapolski.na4lapy.repository.RepositoryService;
 import pl.kodujdlapolski.na4lapy.sync.SynchronizationService;
 import pl.kodujdlapolski.na4lapy.sync.receiver.SynchronizationReceiver;
 import pl.kodujdlapolski.na4lapy.ui.browse.list.ListBrowsePagerAdapter;
-import pl.kodujdlapolski.na4lapy.ui.browse.single.SingleBrowsePagerAdapter;
 import pl.kodujdlapolski.na4lapy.ui.details.DetailsActivity;
 import pl.kodujdlapolski.na4lapy.user.UserService;
 import rx.android.schedulers.AndroidSchedulers;
@@ -40,29 +40,9 @@ import rx.schedulers.Schedulers;
  * Modified by Marek Wojtuszkiewicz on 2016-04-06
  */
 
-public class BrowsePresenter implements SynchronizationReceiver.SynchronizationReceiverCallback, OnBrowseElementClickedAction {
+public class BrowsePresenter implements SynchronizationReceiver.SynchronizationReceiverCallback, BrowseContract.Presenter {
 
-    public enum PageTypes {
-        ALL(R.string.list_section_all, null),
-        DOGS(Species.DOG.getLabelResId(), Species.DOG),
-        CATS(Species.CAT.getLabelResId(), Species.CAT),
-        OTHER(Species.OTHER.getLabelResId(), Species.OTHER);
-        public int nameResId;
-        Species specie;
-
-        PageTypes(int nameResId, Species specie) {
-            this.nameResId = nameResId;
-            this.specie = specie;
-        }
-    }
-
-    public interface UpdateSingleElement {
-        void notifyItemChanged(Animal animal);
-
-        void notifyItemRemoved(Animal animal);
-    }
-
-    private AbstractBrowseActivity abstractBrowseActivity;
+    private BrowseContract.View view;
     @Inject
     SynchronizationService synchronizationService;
     @Inject
@@ -73,27 +53,19 @@ public class BrowsePresenter implements SynchronizationReceiver.SynchronizationR
     private boolean isAfterSynchronization = false;
     private List<Animal> animals;
     private boolean isFavList;
-    private FragmentPagerAdapter adapter;
 
-    public BrowsePresenter(AbstractBrowseActivity abstractBrowseActivity, boolean isFavList, boolean isSingleBrowse) {
-        this.abstractBrowseActivity = abstractBrowseActivity;
+    public BrowsePresenter(BrowseContract.View view, boolean isFavList) {
+        this.view = view;
         this.isFavList = isFavList;
-        ((Na4LapyApp) abstractBrowseActivity.getApplication()).getComponent().inject(this);
+        ((Na4LapyApp) view.getActivity().getApplication()).getComponent().inject(this);
         synchronizationReceiver = new SynchronizationReceiver(this);
-
         animals = new ArrayList<>();
-        if (isSingleBrowse) {
-            abstractBrowseActivity.removeTabs();
-        }
-        adapter = isSingleBrowse ?
-                new SingleBrowsePagerAdapter(animals, abstractBrowseActivity.getSupportFragmentManager(), abstractBrowseActivity.getViewPagerId())
-                : new ListBrowsePagerAdapter(abstractBrowseActivity, animals, abstractBrowseActivity.getSupportFragmentManager(), this);
         startDownloadingData();
-
     }
 
+    @Override
     public void startDownloadingData() {
-        abstractBrowseActivity.showProgressHideContent(true);
+        view.showProgressHideContent(true);
         isAfterSynchronization = false;
         getData();
         synchronizationService.synchronize();
@@ -101,7 +73,7 @@ public class BrowsePresenter implements SynchronizationReceiver.SynchronizationR
 
     @Override
     public void onSynchronizationSuccess() {
-        if (abstractBrowseActivity.isAlive()) {
+        if (view.isAlive()) {
             isAfterSynchronization = true;
             getData();
         }
@@ -109,107 +81,8 @@ public class BrowsePresenter implements SynchronizationReceiver.SynchronizationR
 
     @Override
     public void onSynchronizationFail() {
-        if (animals.isEmpty() && abstractBrowseActivity.isAlive()) {
-            abstractBrowseActivity.showError();
-        }
-    }
-
-    public void onActivityStart(AbstractBrowseActivity abstractBrowseActivity) {
-        this.abstractBrowseActivity = abstractBrowseActivity;
-        LocalBroadcastManager.getInstance(this.abstractBrowseActivity)
-                .registerReceiver(synchronizationReceiver, SynchronizationReceiver.getIntentFilter());
-    }
-
-    public void onActivityStop() {
-        LocalBroadcastManager.getInstance(abstractBrowseActivity).unregisterReceiver(synchronizationReceiver);
-    }
-
-    private void onAnimalsAvailable(List<Animal> animalsFromServer) {
-        if (animalsFromServer != null) {
-            animals.clear();
-            adapter.notifyDataSetChanged();
-            animals.addAll(animalsFromServer);
-            adapter.notifyDataSetChanged();
-            abstractBrowseActivity.showProgressHideContent(false);
-        } else {
-            if (isAfterSynchronization) {
-                abstractBrowseActivity.showError();
-            } else {
-                abstractBrowseActivity.showProgressHideContent(true);
-            }
-        }
-    }
-
-    private void getData() {
-        if (isFavList) {
-            repositoryService.getAnimalsByFavourite()
-                    .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(this::onAnimalsAvailable);
-        } else {
-            repositoryService.getAnimals()
-                    .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(this::onAnimalsAvailable);
-        }
-    }
-
-    public FragmentPagerAdapter getAdapter() {
-        return adapter;
-    }
-
-    public static List<Animal> getAnimalsByType(List<Animal> animals, PageTypes type) {
-        ArrayList<Animal> result = new ArrayList<>();
-        if (type.specie == null) {
-            result.addAll(animals);
-        } else {
-            for (Animal a : animals) {
-                if (a.getSpecies() != null && a.getSpecies().equals(type.specie)) {
-                    result.add(a);
-                }
-            }
-        }
-        return result;
-    }
-
-    public static int getIndexOfAnimalOnList(List<Animal> animals, Animal toFind) {
-        int indexOfChangedAnimal = -1;
-        for (int i = 0; i < animals.size(); i++) {
-            if (animals.get(i).getId().equals(toFind.getId()))
-                indexOfChangedAnimal = i;
-        }
-        return indexOfChangedAnimal;
-    }
-
-    public void handleUndoAnimal(Animal animalToUndo) {
-        repositoryService.setFavourite(animalToUndo.getId(), !Boolean.TRUE.equals(animalToUndo.getFavourite()))
-                .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::onFavChanged);
-    }
-
-    private void onFavChanged(Long changedAnimalId) {
-        repositoryService.getAnimal(changedAnimalId)
-                .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::onChangedAnimalAvailable);
-    }
-
-    public void onChangedAnimalAvailable(Long changedAnimalId) {
-        repositoryService.getAnimal(changedAnimalId)
-                .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::onChangedAnimalAvailable);
-    }
-
-    public void onChangedAnimalAvailable(Animal changedAnimal) {
-        int indexWhichShouldBeReplaced = getIndexOfAnimalOnList(animals, changedAnimal);
-        if (indexWhichShouldBeReplaced != -1) {
-            if (isFavList && !Boolean.TRUE.equals(changedAnimal.getFavourite())) {
-                animals.remove(indexWhichShouldBeReplaced);
-                ((UpdateSingleElement) adapter).notifyItemRemoved(changedAnimal);
-            } else {
-                animals.set(indexWhichShouldBeReplaced, changedAnimal);
-                ((UpdateSingleElement) adapter).notifyItemChanged(changedAnimal);
-            }
-        } else {
-            animals.add(changedAnimal);
-            adapter.notifyDataSetChanged();
+        if (animals.isEmpty() && view.isAlive()) {
+            view.showError();
         }
     }
 
@@ -226,8 +99,112 @@ public class BrowsePresenter implements SynchronizationReceiver.SynchronizationR
 
     @Override
     public void details(Animal animal) {
-        Intent i = new Intent(abstractBrowseActivity, DetailsActivity.class);
+        Intent i = new Intent(view.getActivity(), DetailsActivity.class);
         i.putExtra(DetailsActivity.EXTRA_ANIMAL_ID, animal.getId());
-        abstractBrowseActivity.startActivityForResult(i, DetailsActivity.REQUEST_CODE_ANIMAL);
+        view.getActivity().startActivityForResult(i, DetailsActivity.REQUEST_CODE_ANIMAL);
+    }
+
+    @Override
+    public List<Animal> getAnimals() {
+        return animals;
+    }
+
+    @Override
+    public BroadcastReceiver getSynchronizationReceiver() {
+        return synchronizationReceiver;
+    }
+
+    @Override
+    public void onChangedAnimalAvailable(Long changedAnimalId) {
+        repositoryService.getAnimal(changedAnimalId)
+                .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::onChangedAnimalAvailable);
+    }
+
+    public static int getIndexOfAnimalOnList(List<Animal> animals, Animal toFind) {
+        int indexOfChangedAnimal = -1;
+        for (int i = 0; i < animals.size(); i++) {
+            if (animals.get(i).getId().equals(toFind.getId()))
+                indexOfChangedAnimal = i;
+        }
+        return indexOfChangedAnimal;
+    }
+
+    @Override
+    public void handleUndoAnimal(Animal animalToUndo) {
+        repositoryService.setFavourite(animalToUndo.getId(), !Boolean.TRUE.equals(animalToUndo.getFavourite()))
+                .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::onFavChanged);
+    }
+
+    @Override
+    public UserService getUserService() {
+        return userService;
+    }
+
+    public static List<Animal> getAnimalsByType(List<Animal> animals, PageTypes type) {
+        ArrayList<Animal> result = new ArrayList<>();
+        if (type.specie == null) {
+            result.addAll(animals);
+        } else {
+            for (Animal a : animals) {
+                if (a.getSpecies() != null && a.getSpecies().equals(type.specie)) {
+                    result.add(a);
+                }
+            }
+        }
+        return result;
+    }
+
+    private void onChangedAnimalAvailable(Animal changedAnimal) {
+        int indexWhichShouldBeReplaced = getIndexOfAnimalOnList(animals, changedAnimal);
+        if (indexWhichShouldBeReplaced != -1) {
+            if (isFavList && !Boolean.TRUE.equals(changedAnimal.getFavourite())) {
+                animals.remove(indexWhichShouldBeReplaced);
+                view.getAdapter().notifyItemRemoved(changedAnimal);
+            } else {
+                animals.set(indexWhichShouldBeReplaced, changedAnimal);
+                view.getAdapter().notifyItemChanged(changedAnimal);
+            }
+        } else {
+            animals.add(changedAnimal);
+            view.getAdapter().notifyDataSetChanged();
+        }
+    }
+
+
+    private void onAnimalsAvailable(List<Animal> animalsFromServer) {
+        if (animalsFromServer != null) {
+            animals.clear();
+            view.getAdapter().notifyDataSetChanged();
+            animals.addAll(animalsFromServer);
+            view.getAdapter().notifyDataSetChanged();
+            view.showProgressHideContent(false);
+        } else {
+            if (isAfterSynchronization) {
+                view.showError();
+            } else {
+                view.showProgressHideContent(true);
+            }
+        }
+    }
+
+    private void getData() {
+        if (isFavList) {
+            repositoryService.getAnimalsByFavourite()
+                    .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(this::onAnimalsAvailable);
+        } else {
+            repositoryService.getAnimals()
+                    .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(this::onAnimalsAvailable);
+        }
+    }
+
+
+    private void onFavChanged(Long changedAnimalId) {
+        repositoryService.getAnimal(changedAnimalId)
+                .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::onChangedAnimalAvailable);
     }
 }

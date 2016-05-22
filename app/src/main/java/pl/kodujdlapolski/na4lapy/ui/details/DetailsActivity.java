@@ -146,6 +146,7 @@ public class DetailsActivity extends AppCompatActivity {
                 animal.setFavourite(true);
                 userService.addToFavourite(animal);
             }
+            onFavChanged(animal.getId());
             addToFavFab.setImageResource(AnimalUtils.getAddToFavFabImage(animal));
         });
     }

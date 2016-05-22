@@ -22,9 +22,8 @@ import pl.kodujdlapolski.na4lapy.Na4LapyApp;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Shelter;
 import pl.kodujdlapolski.na4lapy.ui.about_shelter.AboutShelterActivity;
-import pl.kodujdlapolski.na4lapy.ui.browse.AbstractBrowseActivity;
-import pl.kodujdlapolski.na4lapy.ui.browse.single.SingleBrowseActivity;
 import pl.kodujdlapolski.na4lapy.ui.browse.list.ListBrowseActivity;
+import pl.kodujdlapolski.na4lapy.ui.browse.single.SingleBrowseActivity;
 import pl.kodujdlapolski.na4lapy.ui.preferences.PreferencesActivity;
 import pl.kodujdlapolski.na4lapy.ui.settings.SettingsActivity;
 import pl.kodujdlapolski.na4lapy.user.UserService;
@@ -67,12 +66,8 @@ public class DrawerActivityHandler {
 
         if (id == R.id.browser && !(clazz.equals(SingleBrowseActivity.class))) {
             intent = new Intent(context, SingleBrowseActivity.class);
-            intent.putExtra(AbstractBrowseActivity.EXTRA_IS_FAV_LIST, false);
-            intent.putExtra(AbstractBrowseActivity.EXTRA_IS_SINGLE_ELEMENT_BROWSE, true);
         } else if (id == R.id.favourites && !(clazz.equals(ListBrowseActivity.class))) {
             intent = new Intent(context, ListBrowseActivity.class);
-            intent.putExtra(ListBrowseActivity.EXTRA_IS_FAV_LIST, true);
-            intent.putExtra(ListBrowseActivity.EXTRA_IS_SINGLE_ELEMENT_BROWSE, false);
         } else if (id == R.id.preferences && !(clazz.equals(PreferencesActivity.class))) {
             intent = new Intent(context, PreferencesActivity.class);
         } else if (id == R.id.aboutShelter && !(clazz.equals(AboutShelterActivity.class))) {
