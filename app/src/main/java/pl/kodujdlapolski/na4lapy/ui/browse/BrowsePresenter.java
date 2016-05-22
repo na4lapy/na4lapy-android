@@ -47,16 +47,31 @@ public class BrowsePresenter implements BrowseContract.Presenter {
         this.view = view;
         this.isFavList = isFavList;
         ((Na4LapyApp) view.getActivity().getApplication()).getComponent().inject(this);
-
+        synchronizationReceiver = new SynchronizationReceiver(this);
         animals = new ArrayList<>();
         startDownloadingData();
     }
 
     private void startDownloadingData() {
+  
         view.showProgressHideContent(true);
         getData();
+        synchronizationService.synchronize();
     }
 
+    @Override
+    public void onSynchronizationSuccess() {
+        if (view.isAlive()) {
+            isAfterSynchronization = true;
+            getData();
+        }
+    }
+
+        if (animals.isEmpty() && view.isAlive()) {
+            view.showError();
+    }
+
+    @Override
     public void favourite(Animal animal) {
         if (Boolean.TRUE.equals(animal.getFavourite())) {
             animal.setFavourite(false);
@@ -68,6 +83,13 @@ public class BrowsePresenter implements BrowseContract.Presenter {
         Intent i = new Intent(view.getActivity(), DetailsActivity.class);
         i.putExtra(DetailsActivity.EXTRA_ANIMAL_ID, animal.getId());
         view.getActivity().startActivityForResult(i, DetailsActivity.REQUEST_CODE_ANIMAL);
+            animal.setFavourite(true);
+            userService.addToFavourite(animal);
+    @Override
+    public void details(Animal animal) {
+        Intent i = new Intent(view.getActivity(), DetailsActivity.class);
+        i.putExtra(DetailsActivity.EXTRA_ANIMAL_ID, animal.getId());
+        view.getActivity().startActivityForResult(i, DetailsActivity.REQUEST_CODE_ANIMAL);
     }
 
     @Override
@@ -75,6 +97,9 @@ public class BrowsePresenter implements BrowseContract.Presenter {
         return animals;
     }
 
+    @Override
+    public BroadcastReceiver getSynchronizationReceiver() {
+        return synchronizationReceiver;
     @Override
     public void onChangedAnimalAvailable(Long changedAnimalId) {
         repositoryService.getAnimal(changedAnimalId)
@@ -156,6 +181,7 @@ public class BrowsePresenter implements BrowseContract.Presenter {
                     .subscribe(this::onAnimalsAvailable, t -> {/*TODO obsłużyć błąd*/});
         }
     }
+
 
     private void onFavChanged(Long changedAnimalId) {
         repositoryService.getAnimal(changedAnimalId)

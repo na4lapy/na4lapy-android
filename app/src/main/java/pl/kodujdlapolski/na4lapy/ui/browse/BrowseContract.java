@@ -57,3 +57,38 @@ public interface BrowseContract {
     }
 
 }
+        boolean isAlive();
+
+        void showError();
+
+        Adapter getAdapter();
+
+        Activity getActivity();
+    }
+
+    interface Presenter extends OnBrowseElementClickedAction {
+
+        List<Animal> getAnimals();
+
+        BroadcastReceiver getSynchronizationReceiver();
+
+        void startDownloadingData();
+
+        void onChangedAnimalAvailable(Long changedAnimalId);
+
+        void handleUndoAnimal(Animal animalToUndo);
+
+        UserService getUserService();
+    }
+
+
+    interface Adapter {
+
+        void notifyItemChanged(Animal animal);
+
+        void notifyItemRemoved(Animal animal);
+
+        void notifyDataSetChanged();
+    }
+
+}

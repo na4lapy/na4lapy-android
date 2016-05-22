@@ -69,8 +69,36 @@ public class SingleBrowseActivity extends AbstractDrawerActivity implements Brow
     }
 
     @Override
+    public void showError() {
+        progressBar.setVisibility(View.GONE);
+        // viewPager.setVisibility(View.GONE);
+        // todo synchronization fail shouldn't be called
+        //  errorContainer.setVisibility(View.VISIBLE);
+    }
+
+    @Override
     public BrowseContract.Adapter getAdapter() {
         return adapter;
+    }
+
+    @Override
+    public Activity getActivity() {
+        return this;
+    }
+
+    @Override
+    public void showProgressHideContent(boolean show) {
+        progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
+        //  viewPager.setVisibility(show ? View.GONE : View.VISIBLE);
+        errorContainer.setVisibility(View.GONE);
+    }
+
+    @Override
+    public boolean isAlive() {
+        return isAlive;
+    }
+
+    @Override
     }
 
     @Override
@@ -88,6 +116,11 @@ public class SingleBrowseActivity extends AbstractDrawerActivity implements Brow
     protected void onResume() {
         super.onResume();
         handler.onResume();
+        CrashManager.register(this);
+    }
+
+    @Override
+    protected void onPause() {
         CrashManager.register(this);
     }
 
