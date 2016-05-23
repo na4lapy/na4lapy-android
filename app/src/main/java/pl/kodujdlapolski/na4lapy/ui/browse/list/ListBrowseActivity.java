@@ -5,19 +5,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import pl.kodujdlapolski.na4lapy.R;
-import pl.kodujdlapolski.na4lapy.sync.receiver.SynchronizationReceiver;
 import pl.kodujdlapolski.na4lapy.ui.browse.BrowseContract;
 import pl.kodujdlapolski.na4lapy.ui.browse.BrowsePresenter;
 import pl.kodujdlapolski.na4lapy.ui.details.DetailsActivity;
@@ -42,20 +38,10 @@ import pl.kodujdlapolski.na4lapy.ui.drawer.DrawerActivityHandler;
 public class ListBrowseActivity extends AbstractDrawerActivity implements BrowseContract.View {
 
     private BrowseContract.Presenter browsePresenter;
-    private boolean isAlive = true;
     @BindView(R.id.container)
     ViewPager viewPager;
-    @BindView(R.id.error_container)
-    LinearLayout errorContainer;
     @BindView(R.id.animals_list_progress)
     ProgressBar progressBar;
-
-    @SuppressWarnings("unused")
-    @OnClick(R.id.try_again_btn)
-    public void onTryAgainClick() {
-        errorContainer.setVisibility(View.GONE);
-        browsePresenter.startDownloadingData();
-    }
 
     FragmentPagerAdapter adapter;
 
@@ -71,7 +57,7 @@ public class ListBrowseActivity extends AbstractDrawerActivity implements Browse
         ButterKnife.bind(this);
 
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle(R.string.fav_animals_list_activity );
+            getSupportActionBar().setTitle(R.string.fav_animals_list_activity);
         }
         browsePresenter = new BrowsePresenter(this, true);
         adapter = new ListBrowsePagerAdapter(this, browsePresenter.getAnimals(), getSupportFragmentManager());
@@ -90,33 +76,6 @@ public class ListBrowseActivity extends AbstractDrawerActivity implements Browse
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
-        if (isFinishing()) {
-            isAlive = false;
-        }
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        LocalBroadcastManager.getInstance(this).registerReceiver(browsePresenter.getSynchronizationReceiver(), SynchronizationReceiver.getIntentFilter());
-    }
-
-    @Override
-    protected void onStop() {
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(browsePresenter.getSynchronizationReceiver());
-        super.onStop();
-    }
-
-    public void showError() {
-        progressBar.setVisibility(View.GONE);
-        viewPager.setVisibility(View.GONE);
-        // todo synchronization fail shouldn't be called
-        //  errorContainer.setVisibility(View.VISIBLE);
-    }
-
-    @Override
     public BrowseContract.Adapter getAdapter() {
         return (BrowseContract.Adapter) adapter;
     }
@@ -130,11 +89,6 @@ public class ListBrowseActivity extends AbstractDrawerActivity implements Browse
     public void showProgressHideContent(boolean show) {
         progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
         viewPager.setVisibility(show ? View.GONE : View.VISIBLE);
-        errorContainer.setVisibility(View.GONE);
-    }
-
-    public boolean isAlive() {
-        return isAlive;
     }
 
     @Override

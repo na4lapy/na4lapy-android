@@ -1,9 +1,7 @@
 package pl.kodujdlapolski.na4lapy.ui.browse;
 
-import android.content.BroadcastReceiver;
 import android.content.Intent;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,13 +9,8 @@ import java.util.List;
 import javax.inject.Inject;
 
 import pl.kodujdlapolski.na4lapy.Na4LapyApp;
-import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Animal;
-import pl.kodujdlapolski.na4lapy.model.type.Species;
 import pl.kodujdlapolski.na4lapy.repository.RepositoryService;
-import pl.kodujdlapolski.na4lapy.sync.SynchronizationService;
-import pl.kodujdlapolski.na4lapy.sync.receiver.SynchronizationReceiver;
-import pl.kodujdlapolski.na4lapy.ui.browse.list.ListBrowsePagerAdapter;
 import pl.kodujdlapolski.na4lapy.ui.details.DetailsActivity;
 import pl.kodujdlapolski.na4lapy.user.UserService;
 import rx.android.schedulers.AndroidSchedulers;
@@ -40,17 +33,13 @@ import rx.schedulers.Schedulers;
  * Modified by Marek Wojtuszkiewicz on 2016-04-06
  */
 
-public class BrowsePresenter implements SynchronizationReceiver.SynchronizationReceiverCallback, BrowseContract.Presenter {
+public class BrowsePresenter implements BrowseContract.Presenter {
 
     private BrowseContract.View view;
-    @Inject
-    SynchronizationService synchronizationService;
     @Inject
     RepositoryService repositoryService;
     @Inject
     UserService userService;
-    private SynchronizationReceiver synchronizationReceiver;
-    private boolean isAfterSynchronization = false;
     private List<Animal> animals;
     private boolean isFavList;
 
@@ -58,32 +47,14 @@ public class BrowsePresenter implements SynchronizationReceiver.SynchronizationR
         this.view = view;
         this.isFavList = isFavList;
         ((Na4LapyApp) view.getActivity().getApplication()).getComponent().inject(this);
-        synchronizationReceiver = new SynchronizationReceiver(this);
+
         animals = new ArrayList<>();
         startDownloadingData();
     }
 
-    @Override
-    public void startDownloadingData() {
+    private void startDownloadingData() {
         view.showProgressHideContent(true);
-        isAfterSynchronization = false;
         getData();
-        synchronizationService.synchronize();
-    }
-
-    @Override
-    public void onSynchronizationSuccess() {
-        if (view.isAlive()) {
-            isAfterSynchronization = true;
-            getData();
-        }
-    }
-
-    @Override
-    public void onSynchronizationFail() {
-        if (animals.isEmpty() && view.isAlive()) {
-            view.showError();
-        }
     }
 
     @Override
@@ -107,11 +78,6 @@ public class BrowsePresenter implements SynchronizationReceiver.SynchronizationR
     @Override
     public List<Animal> getAnimals() {
         return animals;
-    }
-
-    @Override
-    public BroadcastReceiver getSynchronizationReceiver() {
-        return synchronizationReceiver;
     }
 
     @Override
@@ -172,21 +138,16 @@ public class BrowsePresenter implements SynchronizationReceiver.SynchronizationR
         }
     }
 
-
     private void onAnimalsAvailable(List<Animal> animalsFromServer) {
-        if (animalsFromServer != null) {
+        if (animalsFromServer != null && !animalsFromServer.isEmpty()) {
             animals.clear();
             view.getAdapter().notifyDataSetChanged();
             animals.addAll(animalsFromServer);
             view.getAdapter().notifyDataSetChanged();
-            view.showProgressHideContent(false);
         } else {
-            if (isAfterSynchronization) {
-                view.showError();
-            } else {
-                view.showProgressHideContent(true);
-            }
+            Log.d(this.getClass().toString(), "Data base is empty!");
         }
+        view.showProgressHideContent(false);
     }
 
     private void getData() {
@@ -200,7 +161,6 @@ public class BrowsePresenter implements SynchronizationReceiver.SynchronizationR
                     .subscribe(this::onAnimalsAvailable);
         }
     }
-
 
     private void onFavChanged(Long changedAnimalId) {
         repositoryService.getAnimal(changedAnimalId)

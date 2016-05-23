@@ -43,22 +43,12 @@ import pl.kodujdlapolski.na4lapy.ui.drawer.DrawerActivityHandler;
  */
 public class SingleBrowseActivity extends AbstractDrawerActivity implements BrowseContract.View {
 
-    private boolean isAlive = true;
-    @BindView(R.id.error_container)
-    LinearLayout errorContainer;
     @BindView(R.id.animals_list_progress)
     ProgressBar progressBar;
     @BindView(R.id.list)
     RecyclerViewPager recyclerView;
     private BrowseContract.Presenter browsePresenter;
     private SingleBrowseAdapter adapter;
-
-    @SuppressWarnings("unused")
-    @OnClick(R.id.try_again_btn)
-    public void onTryAgainClick() {
-        errorContainer.setVisibility(View.GONE);
-        browsePresenter.startDownloadingData();
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -79,14 +69,6 @@ public class SingleBrowseActivity extends AbstractDrawerActivity implements Brow
     }
 
     @Override
-    public void showError() {
-        progressBar.setVisibility(View.GONE);
-        // viewPager.setVisibility(View.GONE);
-        // todo synchronization fail shouldn't be called
-        //  errorContainer.setVisibility(View.VISIBLE);
-    }
-
-    @Override
     public BrowseContract.Adapter getAdapter() {
         return adapter;
     }
@@ -99,13 +81,7 @@ public class SingleBrowseActivity extends AbstractDrawerActivity implements Brow
     @Override
     public void showProgressHideContent(boolean show) {
         progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
-        //  viewPager.setVisibility(show ? View.GONE : View.VISIBLE);
-        errorContainer.setVisibility(View.GONE);
-    }
-
-    @Override
-    public boolean isAlive() {
-        return isAlive;
+        recyclerView.setVisibility(show ? View.GONE : View.VISIBLE);
     }
 
     @Override
@@ -114,27 +90,6 @@ public class SingleBrowseActivity extends AbstractDrawerActivity implements Brow
         handler.onResume();
         CrashManager.register(this);
     }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if (isFinishing()) {
-            isAlive = false;
-        }
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        LocalBroadcastManager.getInstance(this).registerReceiver(browsePresenter.getSynchronizationReceiver(), SynchronizationReceiver.getIntentFilter());
-    }
-
-    @Override
-    protected void onStop() {
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(browsePresenter.getSynchronizationReceiver());
-        super.onStop();
-    }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

@@ -69,21 +69,10 @@ public class AboutShelterFragment extends Fragment {
     @BindView(R.id.shelter_adoption_rules)
     TextView adoptionRules;
 
-
     @BindView(R.id.about_shelter_progress)
     ProgressBar progressBar;
     @BindView(R.id.about_shelter_content)
     ScrollView aboutShelterContent;
-
-    @BindView(R.id.error_container)
-    LinearLayout errorContainer;
-
-    @SuppressWarnings("unused")
-    @OnClick(R.id.try_again_btn)
-    void onTryAgainClick() {
-        errorContainer.setVisibility(View.GONE);
-        presenter.startDownloadingData();
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -153,13 +142,6 @@ public class AboutShelterFragment extends Fragment {
         aboutShelterContent.setVisibility(show ? View.GONE : View.VISIBLE);
     }
 
-    public void showError() {
-        progressBar.setVisibility(View.GONE);
-        aboutShelterContent.setVisibility(View.GONE);
-        errorContainer.setVisibility(View.VISIBLE);
-    }
-
-
     public String getFormattedInfoText() {
         String result = "";
 
@@ -194,17 +176,5 @@ public class AboutShelterFragment extends Fragment {
         if (actionBar != null && actionBar.getTitle() != null) {
             return actionBar.getTitle().toString();
         } else return "";
-    }
-
-    public void onActivityStart() {
-        if (presenter != null) {
-            presenter.onActivityStart();
-        }
-    }
-
-    public void onActivityStop() {
-        if (presenter != null) {
-            presenter.onActivityStop();
-        }
     }
 }
