@@ -69,14 +69,6 @@ public class SingleBrowseActivity extends AbstractDrawerActivity implements Brow
     }
 
     @Override
-    public void showError() {
-        progressBar.setVisibility(View.GONE);
-        // viewPager.setVisibility(View.GONE);
-        // todo synchronization fail shouldn't be called
-        //  errorContainer.setVisibility(View.VISIBLE);
-    }
-
-    @Override
     public BrowseContract.Adapter getAdapter() {
         return adapter;
     }
@@ -89,8 +81,6 @@ public class SingleBrowseActivity extends AbstractDrawerActivity implements Brow
     @Override
     public void showProgressHideContent(boolean show) {
         progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
-        //  viewPager.setVisibility(show ? View.GONE : View.VISIBLE);
-        errorContainer.setVisibility(View.GONE);
     }
 
     @Override

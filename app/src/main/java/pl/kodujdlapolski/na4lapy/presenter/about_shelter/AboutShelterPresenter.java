@@ -34,7 +34,6 @@ public class AboutShelterPresenter {
 
     @Inject
     RepositoryService repositoryService;
-
     private AboutShelterFragment aboutShelterFragment;
     private final Long shelterId;
     private Shelter shelter;

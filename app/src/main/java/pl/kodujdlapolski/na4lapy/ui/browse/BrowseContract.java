@@ -57,10 +57,6 @@ public interface BrowseContract {
     }
 
 }
-        boolean isAlive();
-
-        void showError();
-
         Adapter getAdapter();
 
         Activity getActivity();
@@ -69,10 +65,6 @@ public interface BrowseContract {
     interface Presenter extends OnBrowseElementClickedAction {
 
         List<Animal> getAnimals();
-
-        BroadcastReceiver getSynchronizationReceiver();
-
-        void startDownloadingData();
 
         void onChangedAnimalAvailable(Long changedAnimalId);
 
