@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
+import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 
 import org.joda.time.LocalDate;
@@ -126,12 +127,14 @@ public class DetailsActivity extends AppCompatActivity {
             String url = animal.getPhotos().iterator().next().getUrl();
             Picasso.with(this)
                     .load(url)
+                    .memoryPolicy(MemoryPolicy.NO_STORE, MemoryPolicy.NO_CACHE)
                     .transform(new BlurTransformation(this, 2))
                     .transform(new ColorFilterTransformation(ContextCompat.getColor(this, R.color.colorPrimaryDark50opacity)))
                     .into(background);
 
             Picasso.with(this)
                     .load(url)
+                    .memoryPolicy(MemoryPolicy.NO_STORE, MemoryPolicy.NO_CACHE)
                     .transform(new CropCircleTransformation())
                     .into(profilePic);
         }
