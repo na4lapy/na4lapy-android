@@ -16,18 +16,21 @@ public class AnimalGallerySectionsPagerAdapter extends FragmentPagerAdapter {
 
     private List<Photo> gallery;
     private AnimalGalleryPresenter presenter;
+    private GalleryViewPager galleryViewPager;
 
     public AnimalGallerySectionsPagerAdapter(FragmentManager fm, List<Photo> gallery,
-                                             AnimalGalleryPresenter presenter) {
+                                             AnimalGalleryPresenter presenter,
+                                             GalleryViewPager galleryViewPager) {
         super(fm);
         this.gallery = gallery;
         this.presenter = presenter;
+        this.galleryViewPager = galleryViewPager;
     }
 
     @Override
     public Fragment getItem(int position) {
         return AnimalGalleryPlaceholderFragment.newInstance(
-                gallery.get(position), presenter, position, this.getCount());
+                gallery.get(position), this.galleryViewPager, position, this.getCount());
     }
 
     @Override
