@@ -36,7 +36,7 @@ import rx.schedulers.Schedulers;
 public class BrowsePresenter implements BrowseContract.Presenter {
 
     private BrowseContract.View view;
-
+    @Inject
     RepositoryService repositoryService;
     @Inject
     UserService userService;
@@ -52,7 +52,7 @@ public class BrowsePresenter implements BrowseContract.Presenter {
         startDownloadingData();
     }
 
-    public void startDownloadingData() {
+    private void startDownloadingData() {
         view.showProgressHideContent(true);
         getData();
     }
@@ -65,6 +65,9 @@ public class BrowsePresenter implements BrowseContract.Presenter {
         } else {
             animal.setFavourite(true);
             userService.addToFavourite(animal);
+        }
+    }
+
     @Override
     public void details(Animal animal) {
         Intent i = new Intent(view.getActivity(), DetailsActivity.class);
@@ -156,6 +159,7 @@ public class BrowsePresenter implements BrowseContract.Presenter {
             repositoryService.getAnimals()
                     .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
                     .subscribe(this::onAnimalsAvailable, t -> {/*TODO obsłużyć błąd*/});
+
         }
     }
 

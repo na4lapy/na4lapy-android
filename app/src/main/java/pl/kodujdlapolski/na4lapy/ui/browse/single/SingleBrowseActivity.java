@@ -3,12 +3,10 @@ package pl.kodujdlapolski.na4lapy.ui.browse.single;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 import com.lsjwzh.widget.recyclerviewpager.RecyclerViewPager;
@@ -19,7 +17,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import pl.kodujdlapolski.na4lapy.R;
-import pl.kodujdlapolski.na4lapy.sync.receiver.SynchronizationReceiver;
 import pl.kodujdlapolski.na4lapy.ui.browse.BrowseContract;
 import pl.kodujdlapolski.na4lapy.ui.browse.BrowsePresenter;
 import pl.kodujdlapolski.na4lapy.ui.details.DetailsActivity;
@@ -81,24 +78,6 @@ public class SingleBrowseActivity extends AbstractDrawerActivity implements Brow
     @Override
     public void showProgressHideContent(boolean show) {
         progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
-    }
-
-    @Override
-    public boolean isAlive() {
-        return isAlive;
-    }
-
-    @Override
-    }
-
-    @Override
-    public Activity getActivity() {
-        return this;
-    }
-
-    @Override
-    public void showProgressHideContent(boolean show) {
-        progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
         recyclerView.setVisibility(show ? View.GONE : View.VISIBLE);
     }
 
@@ -106,11 +85,6 @@ public class SingleBrowseActivity extends AbstractDrawerActivity implements Brow
     protected void onResume() {
         super.onResume();
         handler.onResume();
-        CrashManager.register(this);
-    }
-
-    @Override
-    protected void onPause() {
         CrashManager.register(this);
     }
 
