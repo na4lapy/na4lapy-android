@@ -2,7 +2,6 @@ package pl.kodujdlapolski.na4lapy.ui.browse;
 
 import android.content.Intent;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.content.LocalBroadcastManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +13,6 @@ import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Animal;
 import pl.kodujdlapolski.na4lapy.model.type.Species;
 import pl.kodujdlapolski.na4lapy.repository.RepositoryService;
-import pl.kodujdlapolski.na4lapy.sync.SynchronizationService;
-import pl.kodujdlapolski.na4lapy.sync.receiver.SynchronizationReceiver;
 import pl.kodujdlapolski.na4lapy.ui.browse.list.ListBrowsePagerAdapter;
 import pl.kodujdlapolski.na4lapy.ui.browse.single.SingleBrowsePagerAdapter;
 import pl.kodujdlapolski.na4lapy.ui.details.DetailsActivity;
@@ -40,7 +37,7 @@ import rx.schedulers.Schedulers;
  * Modified by Marek Wojtuszkiewicz on 2016-04-06
  */
 
-public class BrowsePresenter implements SynchronizationReceiver.SynchronizationReceiverCallback, OnBrowseElementClickedAction {
+public class BrowsePresenter implements OnBrowseElementClickedAction {
 
     public enum PageTypes {
         ALL(R.string.list_section_all, null),
@@ -63,13 +60,11 @@ public class BrowsePresenter implements SynchronizationReceiver.SynchronizationR
     }
 
     private AbstractBrowseActivity abstractBrowseActivity;
-    @Inject
-    SynchronizationService synchronizationService;
+
     @Inject
     RepositoryService repositoryService;
     @Inject
     UserService userService;
-    private SynchronizationReceiver synchronizationReceiver;
     private boolean isAfterSynchronization = false;
     private List<Animal> animals;
     private boolean isFavList;
@@ -79,7 +74,6 @@ public class BrowsePresenter implements SynchronizationReceiver.SynchronizationR
         this.abstractBrowseActivity = abstractBrowseActivity;
         this.isFavList = isFavList;
         ((Na4LapyApp) abstractBrowseActivity.getApplication()).getComponent().inject(this);
-        synchronizationReceiver = new SynchronizationReceiver(this);
 
         animals = new ArrayList<>();
         if (isSingleBrowse) {
@@ -96,32 +90,6 @@ public class BrowsePresenter implements SynchronizationReceiver.SynchronizationR
         abstractBrowseActivity.showProgressHideContent(true);
         isAfterSynchronization = false;
         getData();
-        synchronizationService.synchronize();
-    }
-
-    @Override
-    public void onSynchronizationSuccess() {
-        if (abstractBrowseActivity.isAlive()) {
-            isAfterSynchronization = true;
-            getData();
-        }
-    }
-
-    @Override
-    public void onSynchronizationFail() {
-        if (animals.isEmpty() && abstractBrowseActivity.isAlive()) {
-            abstractBrowseActivity.showError();
-        }
-    }
-
-    public void onActivityStart(AbstractBrowseActivity abstractBrowseActivity) {
-        this.abstractBrowseActivity = abstractBrowseActivity;
-        LocalBroadcastManager.getInstance(this.abstractBrowseActivity)
-                .registerReceiver(synchronizationReceiver, SynchronizationReceiver.getIntentFilter());
-    }
-
-    public void onActivityStop() {
-        LocalBroadcastManager.getInstance(abstractBrowseActivity).unregisterReceiver(synchronizationReceiver);
     }
 
     private void onAnimalsAvailable(List<Animal> animalsFromServer) {

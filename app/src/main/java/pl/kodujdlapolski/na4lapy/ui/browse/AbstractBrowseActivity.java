@@ -90,18 +90,6 @@ public class AbstractBrowseActivity extends AbstractDrawerActivity {
         }
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        browsePresenter.onActivityStart(this);
-    }
-
-    @Override
-    protected void onStop() {
-        browsePresenter.onActivityStop();
-        super.onStop();
-    }
-
     public void showError() {
         progressBar.setVisibility(View.GONE);
         viewPager.setVisibility(View.GONE);

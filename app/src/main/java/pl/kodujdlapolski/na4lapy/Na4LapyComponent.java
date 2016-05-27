@@ -9,7 +9,6 @@ import pl.kodujdlapolski.na4lapy.presenter.about_shelter.AboutShelterPresenter;
 import pl.kodujdlapolski.na4lapy.presenter.preferences.PreferencesPresenter;
 import pl.kodujdlapolski.na4lapy.repository.RepositoryModule;
 import pl.kodujdlapolski.na4lapy.repository.database.DatabaseModule;
-import pl.kodujdlapolski.na4lapy.sync.SynchronizationModule;
 import pl.kodujdlapolski.na4lapy.system.SystemModule;
 import pl.kodujdlapolski.na4lapy.ui.browse.BrowsePresenter;
 import pl.kodujdlapolski.na4lapy.ui.browse.list.ListBrowseFragment;
@@ -26,7 +25,6 @@ import pl.kodujdlapolski.na4lapy.user.UserModule;
         RepositoryModule.class,
         ApiModule.class,
         DatabaseModule.class,
-        SynchronizationModule.class,
         PreferencesModule.class,
         SystemModule.class,
         UserModule.class

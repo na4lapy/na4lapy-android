@@ -66,16 +66,4 @@ public class AboutShelterActivity extends AbstractSingleActivity {
             mShareActionProvider.setShareIntent(shareIntent);
         }
     }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        aboutShelterFragment.onActivityStart();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        aboutShelterFragment.onActivityStop();
-    }
 }

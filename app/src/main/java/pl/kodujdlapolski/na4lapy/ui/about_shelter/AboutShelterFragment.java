@@ -195,16 +195,4 @@ public class AboutShelterFragment extends Fragment {
             return actionBar.getTitle().toString();
         } else return "";
     }
-
-    public void onActivityStart() {
-        if (presenter != null) {
-            presenter.onActivityStart();
-        }
-    }
-
-    public void onActivityStop() {
-        if (presenter != null) {
-            presenter.onActivityStop();
-        }
-    }
 }
