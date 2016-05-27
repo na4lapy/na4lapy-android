@@ -116,7 +116,7 @@ public class BrowsePresenter implements OnBrowseElementClickedAction {
         } else {
             repositoryService.getAnimals()
                     .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(this::onAnimalsAvailable);
+                    .subscribe(this::onAnimalsAvailable, t -> {/*TODO obsłużyć błąd*/});
         }
     }
 

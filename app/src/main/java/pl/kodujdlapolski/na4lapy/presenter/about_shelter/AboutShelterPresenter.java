@@ -82,6 +82,7 @@ public class AboutShelterPresenter {
                 .subscribe(s -> {
                     shelter = s;
                     onShelterAvailable();
-                });
+                },
+                t -> {/*TODO obsłużyć błąd*/});
     }
 }
