@@ -48,7 +48,7 @@ public class ListBrowseActivity extends AbstractDrawerActivity implements Browse
     @Override
     public void onCreate(Bundle savedInstanceState) {
         callSuperOnCreate(savedInstanceState);
-        setContentView(R.layout.activity_abstract_browse);
+        setContentView(R.layout.activity_list_browse);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         handler = new DrawerActivityHandler(this);
