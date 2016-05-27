@@ -1,7 +1,7 @@
 package pl.kodujdlapolski.na4lapy.ui.browse;
 
 import android.content.Intent;
-import android.util.Log;
+import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +36,7 @@ import rx.schedulers.Schedulers;
 public class BrowsePresenter implements BrowseContract.Presenter {
 
     private BrowseContract.View view;
-    @Inject
+
     RepositoryService repositoryService;
     @Inject
     UserService userService;
@@ -57,7 +57,6 @@ public class BrowsePresenter implements BrowseContract.Presenter {
         getData();
     }
 
-    @Override
     public void favourite(Animal animal) {
         if (Boolean.TRUE.equals(animal.getFavourite())) {
             animal.setFavourite(false);
@@ -65,10 +64,6 @@ public class BrowsePresenter implements BrowseContract.Presenter {
         } else {
             animal.setFavourite(true);
             userService.addToFavourite(animal);
-        }
-    }
-
-    @Override
     public void details(Animal animal) {
         Intent i = new Intent(view.getActivity(), DetailsActivity.class);
         i.putExtra(DetailsActivity.EXTRA_ANIMAL_ID, animal.getId());
