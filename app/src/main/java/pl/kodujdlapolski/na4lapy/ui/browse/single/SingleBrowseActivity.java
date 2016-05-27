@@ -15,7 +15,6 @@ import net.hockeyapp.android.CrashManager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.ui.browse.BrowseContract;
 import pl.kodujdlapolski.na4lapy.ui.browse.BrowsePresenter;
