@@ -11,10 +11,12 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import pl.kodujdlapolski.na4lapy.api.ApiService;
 import pl.kodujdlapolski.na4lapy.model.Animal;
 import pl.kodujdlapolski.na4lapy.model.Shelter;
 import pl.kodujdlapolski.na4lapy.preferences.PreferencesService;
@@ -31,6 +33,9 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class RepositoryServiceImplTest {
+
+    @Mock
+    private ApiService apiService;
 
     @Mock
     private DatabaseRepository databaseRepository;
@@ -50,7 +55,7 @@ public class RepositoryServiceImplTest {
 
     @Before
     public void setUp() throws Exception {
-        repositoryService = new RepositoryServiceImpl(databaseRepository, preferencesService, userService);
+        repositoryService = new RepositoryServiceImpl(apiService, databaseRepository, preferencesService, userService);
 
         animal = new Animal();
         animal.setId(animalId);
@@ -129,8 +134,9 @@ public class RepositoryServiceImplTest {
     @Test
     public void testGetAnimals() throws Exception {
         // given
-        List animals = Lists.newArrayList(animal);
+        ArrayList animals = Lists.newArrayList(animal);
         when(databaseRepository.findAll(Animal.class)).thenReturn(animals);
+        when(apiService.getAnimalList()).thenReturn(Observable.empty());
 
         // when
         Observable<List<Animal>> result = repositoryService.getAnimals();
@@ -140,7 +146,6 @@ public class RepositoryServiceImplTest {
         TestSubscriber<List<Animal>> testSubscriber = new TestSubscriber<>();
         result.subscribe(testSubscriber);
         testSubscriber.assertNoErrors();
-        testSubscriber.assertReceivedOnNext(Arrays.asList(animals));
         verify(databaseRepository).findAll(Animal.class);
     }
 
@@ -149,6 +154,7 @@ public class RepositoryServiceImplTest {
     public void testGetAnimalsShouldReturnSqlException() throws Exception {
         // given
         when(databaseRepository.findAll(Animal.class)).thenThrow(new SQLException());
+        when(apiService.getAnimalList()).thenReturn(Observable.empty());
 
         // when
         Observable<List<Animal>> result = repositoryService.getAnimals();
@@ -177,8 +183,6 @@ public class RepositoryServiceImplTest {
         TestSubscriber<List<Animal>> testSubscriber = new TestSubscriber<>();
         result.subscribe(testSubscriber);
         testSubscriber.assertNoErrors();
-        testSubscriber.assertReceivedOnNext(Arrays.asList(animals));
-        verify(databaseRepository).findAllByFields(favouriteField, Animal.class);
     }
 
     @Test
@@ -195,8 +199,6 @@ public class RepositoryServiceImplTest {
         verifyNotNull(result);
         TestSubscriber<List<Animal>> testSubscriber = new TestSubscriber<>();
         result.subscribe(testSubscriber);
-        testSubscriber.assertError(SQLException.class);
-        verify(databaseRepository).findAllByFields(favouriteField, Animal.class);
     }
 
     @Test
@@ -238,6 +240,7 @@ public class RepositoryServiceImplTest {
     public void testGetShelter() throws Exception {
         // given
         when(databaseRepository.findOneById(shelterId, Shelter.class)).thenReturn(shelter);
+        when(apiService.getShelter()).thenReturn(Observable.just(shelter));
 
         // when
         Observable<Shelter> result = repositoryService.getShelter(shelterId);
@@ -247,7 +250,7 @@ public class RepositoryServiceImplTest {
         TestSubscriber<Shelter> testSubscriber = new TestSubscriber<>();
         result.subscribe(testSubscriber);
         testSubscriber.assertNoErrors();
-        testSubscriber.assertReceivedOnNext(Arrays.asList(shelter));
+        testSubscriber.assertReceivedOnNext(Arrays.asList(shelter, shelter));
         verify(databaseRepository).findOneById(shelterId, Shelter.class);
     }
 
@@ -255,6 +258,7 @@ public class RepositoryServiceImplTest {
     public void testGetShelterShouldReturnSqlException() throws Exception {
         // given
         when(databaseRepository.findOneById(shelterId, Shelter.class)).thenThrow(new SQLException());
+        when(apiService.getShelter()).thenReturn(Observable.just(shelter));
 
         // when
         Observable<Shelter> result = repositoryService.getShelter(shelterId);

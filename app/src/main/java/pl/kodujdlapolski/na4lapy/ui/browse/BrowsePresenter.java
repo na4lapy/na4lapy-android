@@ -153,7 +153,7 @@ public class BrowsePresenter implements BrowseContract.Presenter {
         } else {
             repositoryService.getAnimals()
                     .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(this::onAnimalsAvailable);
+                    .subscribe(this::onAnimalsAvailable, t -> {/*TODO obsłużyć błąd*/});
         }
     }
 

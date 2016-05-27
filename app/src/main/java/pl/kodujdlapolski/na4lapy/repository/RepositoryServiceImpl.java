@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import pl.kodujdlapolski.na4lapy.api.ApiService;
 import pl.kodujdlapolski.na4lapy.model.Animal;
 import pl.kodujdlapolski.na4lapy.model.Shelter;
 import pl.kodujdlapolski.na4lapy.preferences.PreferencesService;
@@ -19,15 +20,16 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 public class RepositoryServiceImpl implements RepositoryService {
 
+    private ApiService mApiService;
     private DatabaseRepository mDatabaseRepository;
     private PreferencesService mPreferencesService;
     private UserService mUserService;
 
     @Inject
     public RepositoryServiceImpl(
-            DatabaseRepository databaseRepository,
-            PreferencesService preferencesService,
-            UserService userService) {
+            ApiService apiService, DatabaseRepository databaseRepository,
+            PreferencesService preferencesService, UserService userService) {
+        mApiService = checkNotNull(apiService, "ApiService cannot be null");
         mDatabaseRepository = checkNotNull(databaseRepository, "DatabaseRepository cannot be null");
         mPreferencesService = checkNotNull(preferencesService, "PreferencesService cannot be null");
         mUserService = checkNotNull(userService, "UserService cannot be null");
@@ -63,7 +65,15 @@ public class RepositoryServiceImpl implements RepositoryService {
                     subscriber.onError(e);
                 }
             }
-        });
+        })
+        .concatWith(mApiService.getAnimalList().doOnNext(animals -> {
+            try {
+                mDatabaseRepository.saveAll(animals);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }))
+        .filter(animals -> animals != null);
     }
 
     @Override
@@ -124,18 +134,27 @@ public class RepositoryServiceImpl implements RepositoryService {
     @Override
     public Observable<Shelter> getShelter(@NonNull Long id) {
         checkNotNull(id, "id cannot be null");
-        return Observable.create(new Observable.OnSubscribe<Shelter>() {
-            @Override
-            public void call(Subscriber<? super Shelter> subscriber) {
-                try {
-                    Shelter shelter = mDatabaseRepository.findOneById(id, Shelter.class);
-                    subscriber.onNext(shelter);
-                    subscriber.onCompleted();
-                } catch (SQLException e) {
-                    subscriber.onError(e);
+        return
+            Observable.create(new Observable.OnSubscribe<Shelter>() {
+                @Override
+                public void call(Subscriber<? super Shelter> subscriber) {
+                    try {
+                        Shelter shelter = mDatabaseRepository.findOneById(id, Shelter.class);
+                        subscriber.onNext(shelter);
+                        subscriber.onCompleted();
+                    } catch (SQLException e) {
+                        subscriber.onError(e);
+                    }
                 }
-            }
-        });
+            })
+            .concatWith(mApiService.getShelter().doOnNext(shelter -> {
+                try {
+                    mDatabaseRepository.save(shelter);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }))
+            .filter(shelter -> shelter != null);
     }
 
     @Override

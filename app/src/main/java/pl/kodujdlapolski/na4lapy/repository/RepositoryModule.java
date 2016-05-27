@@ -4,6 +4,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import pl.kodujdlapolski.na4lapy.api.ApiService;
 import pl.kodujdlapolski.na4lapy.preferences.PreferencesService;
 import pl.kodujdlapolski.na4lapy.repository.database.DatabaseRepository;
 import pl.kodujdlapolski.na4lapy.user.UserService;
@@ -14,10 +15,9 @@ public class RepositoryModule {
     @Singleton
     @Provides
     public RepositoryService provideRepositoryService(
-            DatabaseRepository databaseRepository,
-            PreferencesService preferencesService,
-            UserService userService
+            ApiService apiService, DatabaseRepository databaseRepository,
+            PreferencesService preferencesService, UserService userService
     ) {
-        return new RepositoryServiceImpl(databaseRepository, preferencesService, userService);
+        return new RepositoryServiceImpl(apiService, databaseRepository, preferencesService, userService);
     }
 }
