@@ -9,6 +9,7 @@ import pl.kodujdlapolski.na4lapy.Na4LapyApp;
 import pl.kodujdlapolski.na4lapy.model.Shelter;
 import pl.kodujdlapolski.na4lapy.repository.RepositoryService;
 import pl.kodujdlapolski.na4lapy.ui.about_shelter.AboutShelterActivity;
+import pl.kodujdlapolski.na4lapy.ui.about_shelter.AboutShelterContract;
 import pl.kodujdlapolski.na4lapy.ui.about_shelter.AboutShelterFragment;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -34,48 +35,43 @@ public class AboutShelterPresenter {
 
     @Inject
     RepositoryService repositoryService;
-    private AboutShelterFragment aboutShelterFragment;
+    private AboutShelterContract.View view;
     private final Long shelterId;
-    private Shelter shelter;
 
-    public AboutShelterPresenter(AboutShelterFragment aboutShelterFragment) {
-        this.aboutShelterFragment = aboutShelterFragment;
-        AboutShelterActivity aboutShelterActivity = (AboutShelterActivity) aboutShelterFragment.getActivity();
-        shelterId = aboutShelterActivity.getShelterId();
-        ((Na4LapyApp) aboutShelterActivity.getApplication()).getComponent().inject(this);
+    public AboutShelterPresenter(AboutShelterContract.View view) {
+        this.view = view;
+        shelterId = view.getShelterId();
+        ((Na4LapyApp) view.getActivity().getApplication()).getComponent().inject(this);
         startDownloadingData();
     }
 
     private void startDownloadingData() {
-        aboutShelterFragment.showProgressHideContent(true);
+        view.showStateWaitingForData();
         getData();
     }
 
-    private void onShelterAvailable() {
+    private void onShelterAvailable(Shelter shelter) {
         if (shelter != null) {
-            ((AboutShelterActivity) aboutShelterFragment.getActivity()).setShareIntent(getShareIntent());
-            aboutShelterFragment.populateView(shelter);
+            view.setShareIntent(getShareIntent());
+            view.populateView(shelter);
+            view.showStateDataIsAvailable();
         } else {
-            Log.d(this.getClass().toString(), "Data base is empty!");
+            view.showStateDataIsEmpty();
         }
-        aboutShelterFragment.showProgressHideContent(false);
     }
 
     private Intent getShareIntent() {
         Intent sharingIntent = new Intent(Intent.ACTION_SEND);
         sharingIntent.setType("text/plain");
-        sharingIntent.putExtra(Intent.EXTRA_SUBJECT, aboutShelterFragment.getFormattedTitle());
-        sharingIntent.putExtra(Intent.EXTRA_TEXT, aboutShelterFragment.getFormattedInfoText());
+        sharingIntent.putExtra(Intent.EXTRA_SUBJECT, view.getFormattedTitle());
+        sharingIntent.putExtra(Intent.EXTRA_TEXT, view.getFormattedInfoText());
         return sharingIntent;
     }
 
     private void getData() {
         repositoryService.getShelter(shelterId)
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(s -> {
-                    shelter = s;
-                    onShelterAvailable();
-                },
-                t -> {/*TODO obsłużyć błąd*/});
+                .subscribe(this::onShelterAvailable,
+                        view::showStateError);
     }
 }

@@ -7,6 +7,7 @@ import android.content.BroadcastReceiver;
 import java.util.List;
 
 import pl.kodujdlapolski.na4lapy.model.Animal;
+import pl.kodujdlapolski.na4lapy.ui.DataSynchronization;
 import pl.kodujdlapolski.na4lapy.user.UserService;
 
 /**
@@ -26,21 +27,11 @@ import pl.kodujdlapolski.na4lapy.user.UserService;
  */
 public interface BrowseContract {
 
-    interface View {
+    interface View extends DataSynchronization {
 
         Adapter getAdapter();
 
         Activity getActivity();
-
-        void showStateWaitingForData();
-
-        void showStateNoInternetConnection();
-
-        void showStateDataIsAvailable();
-
-        void showStateDataIsEmpty();
-
-        void showStateError(Throwable t);
     }
 
     interface Presenter extends OnBrowseElementClickedAction {

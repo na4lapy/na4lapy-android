@@ -11,6 +11,15 @@
         android:layout_centerInParent="true"
         android:visibility="gone" />
 
+    <include
+        layout="@layout/error_template"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+
     <ScrollView
         android:id="@+id/about_shelter_content"
         android:layout_width="match_parent"
