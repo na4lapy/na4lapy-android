@@ -21,12 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_horizontal_margin"
-        android:text="@string/error_data_cannot_be_loaded" />
-
-    <Button
-        android:id="@+id/try_again_btn"
-        style="?attr/borderlessButtonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/try_again" />
+        android:id="@+id/error_message"
+        android:gravity="center"
+        tools:text="@string/error_data_cannot_be_loaded" />
 </LinearLayout>

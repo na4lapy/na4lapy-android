@@ -47,7 +47,6 @@ public class ListBrowseFragment extends Fragment {
 
     @BindView(R.id.animals_recycle)
     RecyclerView recycler;
-    private RecyclerView.LayoutManager layoutManager;
     private ListBrowseRecyclerAdapter adapter;
 
     public ListBrowseFragment() {
@@ -76,7 +75,7 @@ public class ListBrowseFragment extends Fragment {
         ((Na4LapyApp) getActivity().getApplication()).getComponent().inject(this);
         initAnimals(savedInstanceState);
         recycler.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(getActivity());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recycler.setLayoutManager(layoutManager);
         recycler.setItemAnimator(null);
         adapter = new ListBrowseRecyclerAdapter(animals, ((ListBrowseActivity) getActivity()).getPresenter(), userService);

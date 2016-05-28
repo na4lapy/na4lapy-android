@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import pl.kodujdlapolski.na4lapy.Na4LapyApp;
 import pl.kodujdlapolski.na4lapy.model.Animal;
 import pl.kodujdlapolski.na4lapy.repository.RepositoryService;
+import pl.kodujdlapolski.na4lapy.system.SystemService;
 import pl.kodujdlapolski.na4lapy.ui.details.DetailsActivity;
 import pl.kodujdlapolski.na4lapy.user.UserService;
 import rx.android.schedulers.AndroidSchedulers;
@@ -40,6 +41,8 @@ public class BrowsePresenter implements BrowseContract.Presenter {
     RepositoryService repositoryService;
     @Inject
     UserService userService;
+    @Inject
+    SystemService systemService;
     private List<Animal> animals;
     private boolean isFavList;
 
@@ -50,11 +53,23 @@ public class BrowsePresenter implements BrowseContract.Presenter {
 
         animals = new ArrayList<>();
         startDownloadingData();
+
+        systemService.getNetworkStatusPublisher().subscribe(this::checkIsOnline);
     }
 
     private void startDownloadingData() {
-        view.showProgressHideContent(true);
+        view.showStateWaitingForData();
         getData();
+    }
+
+    private void checkIsOnline(Boolean isOnline) {
+        if (isOnline != null) {
+            if(isOnline){
+                startDownloadingData();
+            }else {
+                view.showStateNoInternetConnection();
+            }
+        }
     }
 
     @Override
@@ -139,15 +154,15 @@ public class BrowsePresenter implements BrowseContract.Presenter {
     }
 
     private void onAnimalsAvailable(List<Animal> animalsFromServer) {
+        animals.clear();
+        view.getAdapter().notifyDataSetChanged();
         if (animalsFromServer != null && !animalsFromServer.isEmpty()) {
-            animals.clear();
-            view.getAdapter().notifyDataSetChanged();
             animals.addAll(animalsFromServer);
             view.getAdapter().notifyDataSetChanged();
+            view.showStateDataIsAvailable();
         } else {
-            Log.d(this.getClass().toString(), "Data base is empty!");
+            view.showStateDataIsEmpty();
         }
-        view.showProgressHideContent(false);
     }
 
     private void getData() {
@@ -158,7 +173,7 @@ public class BrowsePresenter implements BrowseContract.Presenter {
         } else {
             repositoryService.getAnimals()
                     .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(this::onAnimalsAvailable, t -> {/*TODO obsłużyć błąd*/});
+                    .subscribe(this::onAnimalsAvailable, view::showStateError);
 
         }
     }

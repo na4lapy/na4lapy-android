@@ -9,21 +9,10 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ProgressBar;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import pl.kodujdlapolski.na4lapy.R;
-import pl.kodujdlapolski.na4lapy.ui.browse.BrowseContract;
-import pl.kodujdlapolski.na4lapy.ui.browse.BrowsePresenter;
-import pl.kodujdlapolski.na4lapy.ui.details.DetailsActivity;
-import pl.kodujdlapolski.na4lapy.ui.drawer.AbstractDrawerActivity;
-import pl.kodujdlapolski.na4lapy.ui.drawer.DrawerActivityHandler;
-import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -56,6 +45,10 @@ public class ListBrowseActivity extends AbstractDrawerActivity implements Browse
     ViewPager viewPager;
     @BindView(R.id.animals_list_progress)
     ProgressBar progressBar;
+    @BindView(R.id.error_message)
+    TextView errorMessage;
+    @BindView(R.id.error_container)
+    ViewGroup errorContainer;
 
     FragmentPagerAdapter adapter;
 
@@ -99,10 +92,36 @@ public class ListBrowseActivity extends AbstractDrawerActivity implements Browse
         return this;
     }
 
+    @Override
+    public void showStateWaitingForData() {
+        progressBar.setVisibility(View.VISIBLE);
+        viewPager.setVisibility(View.GONE);
+        errorContainer.setVisibility(View.GONE);
+    }
 
-    public void showProgressHideContent(boolean show) {
-        progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
-        viewPager.setVisibility(show ? View.GONE : View.VISIBLE);
+    @Override
+    public void showStateNoInternetConnection() {
+        Toast.makeText(getApplicationContext(), R.string.error_data_no_internet_connection, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showStateDataIsAvailable() {
+        progressBar.setVisibility(View.GONE);
+        viewPager.setVisibility(View.VISIBLE);
+        errorContainer.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showStateDataIsEmpty() {
+        progressBar.setVisibility(View.GONE);
+        viewPager.setVisibility(View.GONE);
+        errorContainer.setVisibility(View.VISIBLE);
+        errorMessage.setText(R.string.error_no_data_fav);
+    }
+
+    @Override
+    public void showStateError(Throwable t) {
+        Toast.makeText(getApplicationContext(), R.string.error_data_cannot_be_loaded, Toast.LENGTH_LONG).show();
     }
 
     @Override

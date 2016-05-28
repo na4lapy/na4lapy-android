@@ -6,8 +6,12 @@ import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.lsjwzh.widget.recyclerviewpager.RecyclerViewPager;
 
@@ -43,6 +47,10 @@ public class SingleBrowseActivity extends AbstractDrawerActivity implements Brow
     ProgressBar progressBar;
     @BindView(R.id.list)
     RecyclerViewPager recyclerView;
+    @BindView(R.id.error_message)
+    TextView errorMessage;
+    @BindView(R.id.error_container)
+    ViewGroup errorContainer;
     private BrowseContract.Presenter browsePresenter;
     private SingleBrowseAdapter adapter;
 
@@ -75,10 +83,38 @@ public class SingleBrowseActivity extends AbstractDrawerActivity implements Brow
     }
 
     @Override
-    public void showProgressHideContent(boolean show) {
-        progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
-        recyclerView.setVisibility(show ? View.GONE : View.VISIBLE);
+    public void showStateWaitingForData() {
+        progressBar.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.GONE);
+        errorContainer.setVisibility(View.GONE);
     }
+
+    @Override
+    public void showStateNoInternetConnection() {
+        Toast.makeText(getApplicationContext(), R.string.error_data_no_internet_connection, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showStateDataIsAvailable() {
+        progressBar.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
+        errorContainer.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showStateDataIsEmpty() {
+        progressBar.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.GONE);
+        errorContainer.setVisibility(View.VISIBLE);
+        errorMessage.setText(R.string.error_no_data);
+    }
+
+    @Override
+    public void showStateError(Throwable t) {
+        Log.d(this.getClass().toString(), t.getMessage());
+        Toast.makeText(getApplicationContext(), R.string.error_data_cannot_be_loaded, Toast.LENGTH_LONG).show();
+    }
+
 
     @Override
     protected void onResume() {

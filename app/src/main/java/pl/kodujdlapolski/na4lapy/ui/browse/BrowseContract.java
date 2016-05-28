@@ -28,11 +28,19 @@ public interface BrowseContract {
 
     interface View {
 
-        void showProgressHideContent(boolean show);
-
         Adapter getAdapter();
 
         Activity getActivity();
+
+        void showStateWaitingForData();
+
+        void showStateNoInternetConnection();
+
+        void showStateDataIsAvailable();
+
+        void showStateDataIsEmpty();
+
+        void showStateError(Throwable t);
     }
 
     interface Presenter extends OnBrowseElementClickedAction {
