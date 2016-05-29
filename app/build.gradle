@@ -109,7 +109,6 @@ android {
         compile "com.squareup.retrofit2:converter-gson:$retrofitVersion"
         compile "com.squareup.retrofit2:adapter-rxjava:$retrofitVersion"
         compile 'com.squareup.picasso:picasso:2.5.2'
-        compile 'com.github.japgolly.android:svg-android:2.0.6'
         compile 'io.reactivex:rxandroid:1.1.0'
         compile 'io.reactivex:rxjava:1.1.2'
         compile 'jp.wasabeef:picasso-transformations:2.1.0'

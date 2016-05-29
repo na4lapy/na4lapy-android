@@ -1,3 +1,18 @@
+/*
+ * Copyright (C) 2016 [name of copyright owner]
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package pl.kodujdlapolski.na4lapy.ui.details;
 
 import android.os.Bundle;
@@ -17,23 +32,24 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Photo;
+import pl.kodujdlapolski.na4lapy.presenter.details.AnimalGalleryContract;
+import pl.kodujdlapolski.na4lapy.presenter.details.AnimalGalleryPresenter;
 
-/**
- * Created by Malgorzata Syska on 2016-03-29.
- */
-public class AnimalGalleryPlaceholderFragment extends Fragment {
+public class AnimalGalleryPlaceholderFragment extends Fragment implements AnimalGalleryContract.View{
 
     private static final String ARG_SELECTED_PHOTO = "ARG_SELECTED_PHOTO";
     private static final String ARG_PIC_POSITION = "ARG_PIC_POSITION";
     private static final String ARG_GALLERY_SIZE = "ARG_GALLERY_SIZE";
+
+    private AnimalGalleryPresenter presenter;
     private Photo animalPic;
-    private int position = -1;
-    private int gallerySize = -1;
-    private static GalleryViewPager mGalleryViewPager;
+    private int galleryPosition;
+    private int gallerySize;
+
     @BindView(R.id.photo_author)
     TextView photoAuthor;
     @BindView(R.id.photo_number)
-    TextView photoNumber;
+    TextView photoFullNumber;
     @BindView(R.id.animal_pic_in_gallery)
     ImageView imageView;
     @BindView(R.id.gallery_navigation_arrow_back)
@@ -45,14 +61,13 @@ public class AnimalGalleryPlaceholderFragment extends Fragment {
     }
 
     public static AnimalGalleryPlaceholderFragment newInstance(
-            Photo selectedPic, GalleryViewPager galleryViewPager, int position, int gallerySize) {
+            Photo selectedPic, int position, int gallerySize) {
         AnimalGalleryPlaceholderFragment fragment = new AnimalGalleryPlaceholderFragment();
         Bundle args = new Bundle();
         args.putSerializable(ARG_SELECTED_PHOTO, selectedPic);
         args.putInt(ARG_PIC_POSITION, position);
         args.putInt(ARG_GALLERY_SIZE, gallerySize);
         fragment.setArguments(args);
-        mGalleryViewPager = galleryViewPager;
         return fragment;
     }
 
@@ -61,22 +76,23 @@ public class AnimalGalleryPlaceholderFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_animal_gallery, container, false);
         ButterKnife.bind(this, view);
+        presenter = new AnimalGalleryPresenter((AnimalGalleryActivity) getActivity());
         return view;
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        loadPhoto(savedInstanceState);
+        if (getView() == null) {
+            return;
+        }
+        getPhotoFromArguments (savedInstanceState);
+        loadPhotoIntoImageView(savedInstanceState);
         displayNavigationArrows();
     }
 
-    @OnClick(R.id.animal_gallery_fragment)
-    protected void getBack(){
-        getActivity().onBackPressed();
-    }
-
-    private void loadPhoto(Bundle savedInstanceState) {
+    @Override
+    public void getPhotoFromArguments (Bundle savedInstanceState) {
         if (getArguments() != null
                 && (animalPic == null)
                 && getArguments().getSerializable(ARG_SELECTED_PHOTO) instanceof Photo) {
@@ -86,13 +102,10 @@ public class AnimalGalleryPlaceholderFragment extends Fragment {
             animalPic = (Photo) savedInstanceState.getSerializable(ARG_SELECTED_PHOTO);
         }
 
-        View view = getView();
-        if (view != null) {
-            setPhoto(imageView, savedInstanceState);
-        }
     }
 
-    private void setPhoto (ImageView imageView, Bundle savedInstanceState) {
+    @Override
+    public void loadPhotoIntoImageView(Bundle savedInstanceState) {
         String selectedPicUrl = animalPic.getUrl();
         if (TextUtils.isEmpty(selectedPicUrl)) {
             imageView.setImageDrawable(getResources().getDrawable(R.drawable.vector_drawable_error_dog));
@@ -111,28 +124,25 @@ public class AnimalGalleryPlaceholderFragment extends Fragment {
     }
 
     private void setPhotoNumber(Bundle savedInstanceState) {
+        if (getArguments() == null) {
+            return;
+        }
+        galleryPosition = getArguments().getInt(ARG_PIC_POSITION) + 1;
+        gallerySize = getArguments().getInt(ARG_GALLERY_SIZE);
 
-        if ((getArguments() != null) && (this.position == -1)) {
-            position = getArguments().getInt(ARG_PIC_POSITION) + 1;
-        }
-        if ((getArguments() != null) && (this.gallerySize == -1)) {
-            gallerySize = getArguments().getInt(ARG_GALLERY_SIZE);
-        }
         if (gallerySize == 0 && savedInstanceState != null) {
             gallerySize = savedInstanceState.getInt(ARG_GALLERY_SIZE);
         }
-
-        photoNumber.setText(getString(R.string.number_of_photo, position, gallerySize));
+        photoFullNumber.setText(getString(R.string.number_of_photo, galleryPosition, gallerySize));
     }
 
-    private void displayNavigationArrows() {
-
-        if (position == 1) {
+    @Override
+    public void displayNavigationArrows() {
+        if (galleryPosition == 1) {
             galleryNavigationArrowBack.setVisibility(View.GONE);
             galleryNavigationArrowBack.setClickable(false);
         }
-
-        if (position == gallerySize) {
+        if (galleryPosition == gallerySize) {
             galleryNavigationArrowNext.setVisibility(View.GONE);
             galleryNavigationArrowNext.setClickable(false);
         }
@@ -140,11 +150,16 @@ public class AnimalGalleryPlaceholderFragment extends Fragment {
 
     @OnClick(R.id.gallery_navigation_arrow_next)
     void setNextPhoto() {
-        mGalleryViewPager.setCurrentItem(mGalleryViewPager.getCurrentItem() + 1, true);
+        presenter.setNextPhoto();
     }
 
     @OnClick(R.id.gallery_navigation_arrow_back)
     void setPreviousPhoto() {
-        mGalleryViewPager.setCurrentItem(mGalleryViewPager.getCurrentItem() - 1, true);
+        presenter.setPreviousPhoto();
+    }
+
+    @OnClick(R.id.animal_gallery_fragment)
+    protected void getBack(){
+        presenter.setOnBackPressed();
     }
 }
