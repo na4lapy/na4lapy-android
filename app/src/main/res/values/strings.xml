@@ -104,9 +104,7 @@
     <string name="introduction_page_4">Zabierz szczęśliwca do domu…</string>
     <string name="introduction_page_5">…Albo daj mu się zaprowadzić</string>
     <string name="photo_by">fot. %s</string>
-    <string name="number_of_photo_first">%1$d / %2$d &gt;&gt;</string>
-    <string name="number_of_photo_default">&lt;&lt; %1$d / %2$d &gt;&gt;</string>
-    <string name="number_of_photo_last">&lt;&lt; %1$d / %2$d</string>
+    <string name="number_of_photo">%1$d / %2$d</string>
 
     <plurals name="years_from">
         <item quantity="one">%d roku</item>

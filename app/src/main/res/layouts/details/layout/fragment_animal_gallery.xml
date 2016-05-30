@@ -39,4 +39,24 @@
         android:layout_below="@id/animal_pic_in_gallery"
         android:id="@+id/photo_number" />
 
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/preferences_image_margin_wide"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@id/animal_pic_in_gallery"
+        android:src="@drawable/ic_navigate_before_white_24px"
+        android:id="@+id/gallery_navigation_arrow_back"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/preferences_image_margin_wide"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:layout_centerVertical="true"
+        android:layout_alignRight="@id/animal_pic_in_gallery"
+        android:src="@drawable/ic_navigate_next_white_24px"
+        android:id="@+id/gallery_navigation_arrow_next"/>
+
 </RelativeLayout>

@@ -13,33 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package pl.kodujdlapolski.na4lapy.ui.details;
+package pl.kodujdlapolski.na4lapy.presenter.details;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.os.Bundle;
 
 import java.util.List;
 
 import pl.kodujdlapolski.na4lapy.model.Photo;
 
-public class AnimalGallerySectionsPagerAdapter extends FragmentPagerAdapter {
+public interface AnimalGalleryContract {
 
-    private List<Photo> gallery;
-
-    public AnimalGallerySectionsPagerAdapter(FragmentManager fm, List<Photo> gallery) {
-        super(fm);
-        this.gallery = gallery;
+    interface View {
+        void getPhotoFromArguments (Bundle savedInstanceState);
+        void loadPhotoIntoImageView(Bundle savedInstanceState);
+        void displayNavigationArrows();
     }
 
-    @Override
-    public Fragment getItem(int position) {
-        return AnimalGalleryPlaceholderFragment.newInstance(
-                gallery.get(position), position, getCount());
-    }
-
-    @Override
-    public int getCount() {
-        return gallery.size();
+    interface UserActionListener {
+        List<Photo> getAnimalGallery();
+        Integer getSelectedPhotoNumber();
+        void setNextPhoto();
+        void setPreviousPhoto();
+        void setOnBackPressed();
     }
 }
