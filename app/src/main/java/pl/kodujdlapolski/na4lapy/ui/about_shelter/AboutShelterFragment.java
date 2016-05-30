@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -173,7 +174,11 @@ public class AboutShelterFragment extends Fragment implements AboutShelterContra
 
     @Override
     public void showStateError(Throwable t) {
-        Toast.makeText(getActivity(), R.string.error_data_cannot_be_loaded, Toast.LENGTH_LONG).show();
+        // Toast.makeText(getActivity(), R.string.error_data_cannot_be_loaded, Toast.LENGTH_LONG).show();
+        //todo 457  uncomment when new database is ready
+        if (t != null && t.getMessage() != null) {
+            Log.d(this.getClass().toString(), t.getMessage());
+        }
     }
 
 

@@ -111,8 +111,11 @@ public class SingleBrowseActivity extends AbstractDrawerActivity implements Brow
 
     @Override
     public void showStateError(Throwable t) {
-        Log.d(this.getClass().toString(), t.getMessage());
-        Toast.makeText(getApplicationContext(), R.string.error_data_cannot_be_loaded, Toast.LENGTH_LONG).show();
+//        Toast.makeText(getApplicationContext(), R.string.error_data_cannot_be_loaded, Toast.LENGTH_LONG).show();
+        //todo 457  uncomment when new database is ready
+        if (t != null && t.getMessage() != null) {
+            Log.d(this.getClass().toString(), t.getMessage());
+        }
     }
 
 

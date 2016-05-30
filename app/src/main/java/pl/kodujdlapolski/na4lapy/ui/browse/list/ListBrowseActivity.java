@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
@@ -121,7 +122,11 @@ public class ListBrowseActivity extends AbstractDrawerActivity implements Browse
 
     @Override
     public void showStateError(Throwable t) {
-        Toast.makeText(getApplicationContext(), R.string.error_data_cannot_be_loaded, Toast.LENGTH_LONG).show();
+        //  Toast.makeText(getApplicationContext(), R.string.error_data_cannot_be_loaded, Toast.LENGTH_LONG).show();
+        //todo 457  uncomment when new database is ready
+        if (t != null && t.getMessage() != null) {
+            Log.d(this.getClass().toString(), t.getMessage());
+        }
     }
 
     @Override

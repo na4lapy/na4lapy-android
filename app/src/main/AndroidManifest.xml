@@ -48,10 +48,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.WithActionBar" />
         <activity
-            android:name=".ui.browse.AbstractBrowseActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".ui.browse.single.SingleBrowseActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />

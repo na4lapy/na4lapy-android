@@ -1,8 +1,6 @@
 package pl.kodujdlapolski.na4lapy.ui.browse;
 
 import android.content.Intent;
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,6 +43,7 @@ public class BrowsePresenter implements BrowseContract.Presenter {
     SystemService systemService;
     private List<Animal> animals;
     private boolean isFavList;
+    private boolean shouldReloadDataAfterConnectionLost = false;
 
     public BrowsePresenter(BrowseContract.View view, boolean isFavList) {
         this.view = view;
@@ -64,9 +63,11 @@ public class BrowsePresenter implements BrowseContract.Presenter {
 
     private void checkIsOnline(Boolean isOnline) {
         if (isOnline != null) {
-            if(isOnline){
-                startDownloadingData();
-            }else {
+            if (isOnline) {
+                if (shouldReloadDataAfterConnectionLost)
+                    startDownloadingData();
+            } else {
+                shouldReloadDataAfterConnectionLost = true;
                 view.showStateNoInternetConnection();
             }
         }
