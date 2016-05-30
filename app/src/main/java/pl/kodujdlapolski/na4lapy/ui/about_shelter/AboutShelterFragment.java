@@ -1,10 +1,12 @@
 package pl.kodujdlapolski.na4lapy.ui.about_shelter;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -19,26 +22,25 @@ import butterknife.OnClick;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Shelter;
 import pl.kodujdlapolski.na4lapy.presenter.about_shelter.AboutShelterPresenter;
+import pl.kodujdlapolski.na4lapy.ui.DataSynchronization;
 
 /**
  * Created by Natalia Wróblewska on 2016-03-01.
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
  */
-public class AboutShelterFragment extends Fragment {
+public class AboutShelterFragment extends Fragment implements AboutShelterContract.View {
 
-    private AboutShelterPresenter presenter;
     private ActionBar actionBar;
 
     @BindView(R.id.shelter_account_label)
@@ -69,21 +71,16 @@ public class AboutShelterFragment extends Fragment {
     @BindView(R.id.shelter_adoption_rules)
     TextView adoptionRules;
 
-
     @BindView(R.id.about_shelter_progress)
     ProgressBar progressBar;
     @BindView(R.id.about_shelter_content)
     ScrollView aboutShelterContent;
 
+    @BindView(R.id.error_message)
+    TextView errorMessage;
     @BindView(R.id.error_container)
-    LinearLayout errorContainer;
+    ViewGroup errorContainer;
 
-    @SuppressWarnings("unused")
-    @OnClick(R.id.try_again_btn)
-    void onTryAgainClick() {
-        errorContainer.setVisibility(View.GONE);
-        presenter.startDownloadingData();
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -101,7 +98,7 @@ public class AboutShelterFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        presenter = new AboutShelterPresenter(this);
+        new AboutShelterPresenter(this);
     }
 
     public void populateView(Shelter shelter) {
@@ -148,15 +145,40 @@ public class AboutShelterFragment extends Fragment {
         return result.toString();
     }
 
-    public void showProgressHideContent(boolean show) {
-        progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
-        aboutShelterContent.setVisibility(show ? View.GONE : View.VISIBLE);
+    @Override
+    public void showStateWaitingForData() {
+        progressBar.setVisibility(View.VISIBLE);
+        aboutShelterContent.setVisibility(View.GONE);
+        errorContainer.setVisibility(View.GONE);
     }
 
-    public void showError() {
+    @Override
+    public void showStateNoInternetConnection() {
+        Toast.makeText(getActivity(), R.string.error_data_no_internet_connection, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showStateDataIsAvailable() {
+        progressBar.setVisibility(View.GONE);
+        aboutShelterContent.setVisibility(View.VISIBLE);
+        errorContainer.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showStateDataIsEmpty() {
         progressBar.setVisibility(View.GONE);
         aboutShelterContent.setVisibility(View.GONE);
         errorContainer.setVisibility(View.VISIBLE);
+        errorMessage.setText(R.string.error_no_data);
+    }
+
+    @Override
+    public void showStateError(Throwable t) {
+        // Toast.makeText(getActivity(), R.string.error_data_cannot_be_loaded, Toast.LENGTH_LONG).show();
+        //todo 457  uncomment when new database is ready
+        if (t != null && t.getMessage() != null) {
+            Log.d(this.getClass().toString(), t.getMessage());
+        }
     }
 
 
@@ -190,9 +212,21 @@ public class AboutShelterFragment extends Fragment {
         return result;
     }
 
+    @Override
+    public void setShareIntent(Intent shareIntent) {
+        AboutShelterActivity aboutShelterActivity = (AboutShelterActivity) getActivity();
+        aboutShelterActivity.setShareIntent(shareIntent);
+    }
+
     public String getFormattedTitle() {
         if (actionBar != null && actionBar.getTitle() != null) {
             return actionBar.getTitle().toString();
         } else return "";
+    }
+
+    @Override
+    public Long getShelterId() {
+        AboutShelterActivity aboutShelterActivity = (AboutShelterActivity) getActivity();
+        return aboutShelterActivity.getShelterId();
     }
 }

@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.j256.ormlite.dao.ForeignCollection;
+import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 
 import org.joda.time.LocalDate;
@@ -181,7 +182,7 @@ public class ContentDetailsView {
     private void initImageView(View parent, ArrayList<Photo> photos, int index, int res) {
         ImageView image1 = (ImageView) parent.findViewById(res);
         image1.getLayoutParams().height = getGalleryPicHeight();
-        Picasso.with(ctx).load(photos.get(index).getUrl()).into(image1);
+        Picasso.with(ctx).load(photos.get(index).getUrl()).memoryPolicy(MemoryPolicy.NO_STORE, MemoryPolicy.NO_CACHE).into(image1);
         image1.setOnClickListener(v -> {
             Intent i = new Intent(ctx, AnimalGalleryActivity.class);
             i.putExtra(AnimalGalleryActivity.EXTRA_GALLERY, photos);

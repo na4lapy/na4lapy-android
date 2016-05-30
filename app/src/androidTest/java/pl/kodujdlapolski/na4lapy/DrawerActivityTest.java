@@ -72,9 +72,7 @@ public class DrawerActivityTest {
     public void doesClickOnBrowseDirectsToBrowsingActivity() {
         isProperActivityDisplayed(
                 R.string.browsing,
-                SingleBrowseActivity.class,
-                SingleBrowseActivity.EXTRA_IS_SINGLE_ELEMENT_BROWSE,
-                true);
+                SingleBrowseActivity.class);
     }
 
     @Test

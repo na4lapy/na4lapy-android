@@ -41,7 +41,10 @@
     <string name="tooMuch">Podano za dużą liczbę</string>
     <string name="save_preferences_message">Preferencje zostały zapisane</string>
     <string name="share">podziel się</string>
-    <string name="error_data_cannot_be_loaded">Nie można załadować danych</string>
+    <string name="error_data_cannot_be_loaded">Nie można zsynchronizować danych z serwerem</string>
+    <string name="error_data_no_internet_connection">Brak połączenia interentowego</string>
+    <string name="error_no_data">Brak danych</string>
+    <string name="error_no_data_fav">Jeszcze nie masz żadnych ulubionych</string>
     <string name="try_again">Spróbuj ponownie</string>
     <string name="content_desc_error_image">Obraz informujący o błędzie</string>
     <string name="login">Zaloguj się</string>

@@ -22,7 +22,6 @@ import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.UserPreferences;
 import pl.kodujdlapolski.na4lapy.presenter.preferences.PreferencesContract;
 import pl.kodujdlapolski.na4lapy.presenter.preferences.PreferencesPresenter;
-import pl.kodujdlapolski.na4lapy.ui.browse.AbstractBrowseActivity;
 import pl.kodujdlapolski.na4lapy.ui.browse.single.SingleBrowseActivity;
 
 /**
@@ -228,8 +227,6 @@ public class PreferencesFragment extends Fragment implements PreferencesContract
 
     private void goToBrowse() {
         Intent i = new Intent(context, SingleBrowseActivity.class);
-        i.putExtra(AbstractBrowseActivity.EXTRA_IS_FAV_LIST, false);
-        i.putExtra(AbstractBrowseActivity.EXTRA_IS_SINGLE_ELEMENT_BROWSE, true);
         startActivity(i);
     }
 }
