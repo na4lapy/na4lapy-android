@@ -72,8 +72,7 @@ public class RepositoryServiceImpl implements RepositoryService {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }))
-        .filter(animals -> animals != null);
+        }));
     }
 
     @Override
@@ -153,8 +152,7 @@ public class RepositoryServiceImpl implements RepositoryService {
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
-            }))
-            .filter(shelter -> shelter != null);
+            }));
     }
 
     @Override
