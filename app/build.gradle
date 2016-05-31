@@ -10,8 +10,8 @@ android {
         applicationId "pl.kodujdlapolski.na4lapy"
         minSdkVersion 16
         targetSdkVersion 23
-        versionCode 5
-        versionName "1.0.1"
+        versionCode 6
+        versionName "1.0.2"
         manifestPlaceholders = [HOCKEYAPP_APP_ID: "1b336de533e0489b894c1b202a264a70"]
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -60,9 +60,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.playstore
         }
-    }
-    repositories {
-        maven { url "https://jitpack.io" }
     }
 
     packagingOptions {
