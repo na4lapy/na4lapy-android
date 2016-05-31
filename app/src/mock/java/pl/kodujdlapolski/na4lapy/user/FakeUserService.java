@@ -2,6 +2,8 @@ package pl.kodujdlapolski.na4lapy.user;
 
 import android.support.annotation.NonNull;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import pl.kodujdlapolski.na4lapy.model.Animal;
@@ -53,5 +55,25 @@ public class FakeUserService implements UserService {
     @Override
     public boolean isLogged() {
         return true;
+    }
+
+    @Override
+    public void addToFavourite(Animal animal) {
+
+    }
+
+    @Override
+    public void removeFromFavourite(Animal animal) {
+
+    }
+
+    @Override
+    public boolean isFavourite(Animal animal) {
+        return false;
+    }
+
+    @Override
+    public List<Animal> sortByUserPreferences(List<Animal> animals) {
+        return new ArrayList<>();
     }
 }

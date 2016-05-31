@@ -79,9 +79,7 @@ public class DrawerActivityTest {
     public void doesClickOnFavouritesDirectsToFavouritesListActivity() {
         isProperActivityDisplayed(
                 R.string.favouritiesList,
-                ListBrowseActivity.class,
-                ListBrowseActivity.EXTRA_IS_FAV_LIST,
-                true);
+                ListBrowseActivity.class);
     }
 
     @Test
