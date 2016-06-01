@@ -15,6 +15,7 @@
  */
 package pl.kodujdlapolski.na4lapy.ui.details;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -23,6 +24,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -113,6 +115,7 @@ public class AnimalGalleryPlaceholderFragment extends Fragment implements Animal
         }
         Picasso.with(getContext()).load(selectedPicUrl).into(imageView);
         setPhotoAuthor();
+        setDifferentLayoutParamsIfApiIsJellyBean();
         setPhotoNumber(savedInstanceState);
     }
 
@@ -121,6 +124,20 @@ public class AnimalGalleryPlaceholderFragment extends Fragment implements Animal
         if (!TextUtils.isEmpty(aboutAuthor)) {
             photoAuthor.setText(getString(R.string.photo_by, aboutAuthor));
         }
+    }
+
+    //todo delete this comment before next update of app
+    // If API is 16, layout width param is set to "match parent" and scale type is set to "fit center",
+    // there is a need to change layout width to "wrap content" to properly display text view with author of photo,
+    // because API 16 does not scale image view to fit the screen
+    private void setDifferentLayoutParamsIfApiIsJellyBean() {
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN) {
+            return;
+          }
+        RelativeLayout.LayoutParams layoutParams =
+                (RelativeLayout.LayoutParams)imageView.getLayoutParams();
+        layoutParams.width = RelativeLayout.LayoutParams.WRAP_CONTENT;
+        imageView.setLayoutParams(layoutParams);
     }
 
     private void setPhotoNumber(Bundle savedInstanceState) {
