@@ -26,4 +26,9 @@ public class PreferencesActivity extends AbstractDrawerActivity {
             drawerActivityContent.addView(preferencesActivityView);
     }
 
+    @Override
+    protected int getContentView() {
+        return R.layout.activity_drawer;
+    }
+
 }

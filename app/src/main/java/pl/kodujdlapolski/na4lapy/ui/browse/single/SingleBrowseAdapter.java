@@ -58,7 +58,7 @@ public class SingleBrowseAdapter extends RecyclerView.Adapter<SingleBrowseViewHo
 
     @Override
     public void notifyItemChanged(Animal animal) {
-        super.notifyItemChanged(animals.indexOf(animal));
+        super.notifyDataSetChanged();
     }
 
     @Override

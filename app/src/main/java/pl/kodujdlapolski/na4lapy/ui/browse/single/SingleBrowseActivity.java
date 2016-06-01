@@ -56,12 +56,7 @@ public class SingleBrowseActivity extends AbstractDrawerActivity implements Brow
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        callSuperOnCreate(savedInstanceState);
-        setContentView(R.layout.activity_single_browse);
-        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        handler = new DrawerActivityHandler(this);
-        handler.setDrawer();
+        super.onCreate(savedInstanceState);
 
         ButterKnife.bind(this);
 
@@ -70,6 +65,11 @@ public class SingleBrowseActivity extends AbstractDrawerActivity implements Brow
         }
         browsePresenter = new BrowsePresenter(this, false);
         initRecyclerView();
+    }
+
+    @Override
+    protected int getContentView() {
+        return R.layout.activity_single_browse;
     }
 
     @Override

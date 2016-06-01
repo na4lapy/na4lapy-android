@@ -6,6 +6,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import pl.kodujdlapolski.na4lapy.R;
@@ -23,11 +24,16 @@ public abstract class AbstractDrawerActivity extends AppCompatActivity
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_drawer);
+        setContentView(getContentView());
+        if (findViewById(R.id.toolbar) != null) {
+            setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+        }
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         handler = new DrawerActivityHandler(this);
         handler.setDrawer();
     }
+
+    protected abstract int getContentView();
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {

@@ -143,29 +143,20 @@ public class DetailsActivity extends AppCompatActivity {
         addToFavFab.setImageResource(AnimalUtils.getAddToFavFabImage(animal));
         addToFavFab.setOnClickListener(v -> {
             if (Boolean.TRUE.equals(animal.getFavourite())) {
-                animal.setFavourite(false);
                 userService.removeFromFavourite(animal);
             } else {
-                animal.setFavourite(true);
                 userService.addToFavourite(animal);
             }
-            onFavChanged(animal.getId());
+            updateAnimal();
             addToFavFab.setImageResource(AnimalUtils.getAddToFavFabImage(animal));
         });
     }
 
-    private void onFavChanged(Long changedAnimalId) {
-        repositoryService.getAnimal(changedAnimalId)
-                .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::onChangedAnimalAvailable);
-    }
-
-    private void onChangedAnimalAvailable(Animal changedAnimal) {
-        animal = changedAnimal;
+    private void updateAnimal() {
+        animal.setFavourite(userService.isFavourite(animal));
         Intent returnIntent = new Intent();
         returnIntent.putExtra(EXTRA_ANIMAL_ID, id);
         setResult(Activity.RESULT_OK, returnIntent);
-        addToFavFab.setImageResource(AnimalUtils.getAddToFavFabImage(animal));
     }
 
     @Override
