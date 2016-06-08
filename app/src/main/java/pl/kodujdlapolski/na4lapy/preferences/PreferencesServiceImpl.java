@@ -65,10 +65,11 @@ public class PreferencesServiceImpl implements PreferencesService {
         if (favourites == null) {
             return;
         }
-
-        favourites.remove(favourites.indexOf(animalId));
-        json = mGson.toJson(favourites, listType);
-        mSharedPreferences.edit().putString(KEY_USER_FAVOURITES, json).apply();
+        if (favourites.contains(animalId)) {
+            favourites.remove(favourites.indexOf(animalId));
+            json = mGson.toJson(favourites, listType);
+            mSharedPreferences.edit().putString(KEY_USER_FAVOURITES, json).apply();
+        }
     }
 
     @Override

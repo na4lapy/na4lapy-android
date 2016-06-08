@@ -1,6 +1,7 @@
 package pl.kodujdlapolski.na4lapy.ui.browse;
 
 import android.content.Intent;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,12 +77,14 @@ public class BrowsePresenter implements BrowseContract.Presenter {
     @Override
     public void favourite(Animal animal) {
         if (Boolean.TRUE.equals(animal.getFavourite())) {
-            animal.setFavourite(false);
             userService.removeFromFavourite(animal);
         } else {
-            animal.setFavourite(true);
             userService.addToFavourite(animal);
         }
+        animal.setFavourite(userService.isFavourite(animal));
+        if (isFavList)
+            onChangedAnimalAvailable(animal);
+
     }
 
     @Override
@@ -100,7 +103,10 @@ public class BrowsePresenter implements BrowseContract.Presenter {
     public void onChangedAnimalAvailable(Long changedAnimalId) {
         repositoryService.getAnimal(changedAnimalId)
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::onChangedAnimalAvailable);
+                .subscribe((changedAnimal) -> {
+                    changedAnimal.setFavourite(userService.isFavourite(changedAnimal));
+                    onChangedAnimalAvailable(changedAnimal);
+                });
     }
 
     public static int getIndexOfAnimalOnList(List<Animal> animals, Animal toFind) {
@@ -114,9 +120,7 @@ public class BrowsePresenter implements BrowseContract.Presenter {
 
     @Override
     public void handleUndoAnimal(Animal animalToUndo) {
-        repositoryService.setFavourite(animalToUndo.getId(), !Boolean.TRUE.equals(animalToUndo.getFavourite()))
-                .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::onFavChanged);
+        favourite(animalToUndo);
     }
 
     @Override
@@ -177,11 +181,5 @@ public class BrowsePresenter implements BrowseContract.Presenter {
                     .subscribe(this::onAnimalsAvailable, view::showStateError);
 
         }
-    }
-
-    private void onFavChanged(Long changedAnimalId) {
-        repositoryService.getAnimal(changedAnimalId)
-                .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::onChangedAnimalAvailable);
     }
 }
