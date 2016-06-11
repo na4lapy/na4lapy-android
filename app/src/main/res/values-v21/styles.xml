@@ -11,4 +11,10 @@
         <item name="android:layout_margin">16dp</item>
     </style>
 
+    <style name="PaymentButton" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:theme">@style/AppTheme.AppBarOverlay</item>
+        <item name="android:colorButtonNormal">@color/colorPrimary</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+    </style>
+
 </resources>

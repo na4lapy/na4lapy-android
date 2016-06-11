@@ -2,6 +2,7 @@ package pl.kodujdlapolski.na4lapy.api;
 
 import com.google.gson.Gson;
 
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -29,6 +30,7 @@ public class ApiModule {
 
     @Singleton
     @Provides
+    @Named("api")
     public Retrofit provideRetrofit(HttpUrl baseUrl, Gson gson) {
         return new Retrofit.Builder()
                 .baseUrl(baseUrl)
@@ -39,7 +41,7 @@ public class ApiModule {
 
     @Singleton
     @Provides
-    public Api provideApi(Retrofit retrofit) {
+    public Api provideApi(@Named("api") Retrofit retrofit) {
         return retrofit.create(Api.class);
     }
 }

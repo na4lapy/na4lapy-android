@@ -10,7 +10,7 @@ android {
         applicationId "pl.kodujdlapolski.na4lapy"
         minSdkVersion 16
         targetSdkVersion 23
-        versionCode 6
+        versionCode 8
         versionName "1.0.2"
         manifestPlaceholders = [HOCKEYAPP_APP_ID: "1b336de533e0489b894c1b202a264a70"]
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -34,17 +34,22 @@ android {
     }
 
     productFlavors {
+        def paylaneLogin = project.hasProperty('payLogin') ? '"' + payLogin.toString() + '"' : '"na4lapy"'
+        def paylanePass = project.hasProperty('payPass') ? '"' + payPass.toString() + '"' : '"na4lapy"'
+
         mock {
             applicationIdSuffix = ".mock"
         }
         prod {
             buildConfigField 'String', 'BASE_URL', '"http://na4lapy.kodujdlapolski.pl/api/"'
+            buildConfigField 'String', 'PAYLANE_LOGIN', paylaneLogin
+            buildConfigField 'String', 'PAYLANE_PASSWORD', paylanePass
         }
     }
 
     signingConfigs {
-        def keyPass = project.hasProperty('keyPassword') ? keyPassword.toString() : 'pass'
-        def storePass = project.hasProperty('storePassword') ? storePassword.toString() : 'pass'
+        def keyPass = project.hasProperty('keyPassword') ? keyPassword.toString() : 'na4lapy'
+        def storePass = project.hasProperty('storePassword') ? storePassword.toString() : 'na4lapy'
 
         playstore {
             keyAlias 'na4lapy'
@@ -96,10 +101,10 @@ android {
     dependencies {
         compile fileTree(dir: 'libs', include: ['*.jar'])
         compile "com.android.support:appcompat-v7:$supportLibraryVersion"
+        compile "com.android.support:cardview-v7:$supportLibraryVersion"
         compile "com.android.support:design:$supportLibraryVersion"
         compile "com.android.support:support-annotations:$supportLibraryVersion"
         compile "com.android.support:support-v4:$supportLibraryVersion"
-        compile "com.android.support:cardview-v7:$supportLibraryVersion"
         compile 'com.google.guava:guava:19.0'
         compile 'com.google.dagger:dagger:2.4'
         apt 'com.google.dagger:dagger-compiler:2.4'
@@ -109,16 +114,15 @@ android {
         compile "com.squareup.retrofit2:retrofit:$retrofitVersion"
         compile "com.squareup.retrofit2:converter-gson:$retrofitVersion"
         compile "com.squareup.retrofit2:adapter-rxjava:$retrofitVersion"
-        compile 'io.reactivex:rxandroid:1.1.0'
+        compile 'io.reactivex:rxandroid:1.2.0'
         compile 'io.reactivex:rxjava:1.1.5'
         compile 'com.squareup.picasso:picasso:2.5.2'
         compile 'jp.wasabeef:picasso-transformations:2.1.0'
         compile 'net.hockeyapp.android:HockeySDK:3.7.2'
-        compile 'joda-time:joda-time:2.9.3'
-        provided 'org.projectlombok:lombok:1.12.6'
-        apt "org.projectlombok:lombok:1.12.6"
+        compile 'joda-time:joda-time:2.9.4'
+        provided "org.projectlombok:lombok:1.16.8"
+        apt "org.projectlombok:lombok:1.16.8"
         compile 'com.github.lsjwzh.RecyclerViewPager:lib:v1.1.0'
-
 
         testCompile 'junit:junit:4.12'
         testCompile 'org.mockito:mockito-core:1.10.19'

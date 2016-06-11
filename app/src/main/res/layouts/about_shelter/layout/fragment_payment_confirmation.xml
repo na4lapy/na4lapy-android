@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="pl.kodujdlapolski.na4lapy.ui.payment.PaymentActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/element_spacing"
+        android:layout_marginTop="@dimen/element_spacing"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/amountCard"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/element_spacing"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:foreground="?selectableItemBackground"
+                app:cardCornerRadius="2dp"
+                app:elevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="@dimen/element_spacing">
+
+                    <TextView
+                        style="@style/PaymentCardTitle"
+                        android:text="@string/paymentAmount" />
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:contentDescription="@string/paymentAmount"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/amount_background" />
+
+                        <TextView
+                            android:id="@+id/amountText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Title.Inverse"
+                            android:textSize="24sp"
+                            tools:text="50 zł" />
+                    </FrameLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/paymentTypeCard"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/element_spacing"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:foreground="?selectableItemBackground"
+                app:cardCornerRadius="2dp"
+                app:elevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/element_spacing">
+
+                    <TextView
+                        style="@style/PaymentCardTitle"
+                        android:text="@string/paymentType" />
+
+                    <ImageView
+                        android:id="@+id/paymentTypeIcon"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/paymentType"
+                        android:scaleType="fitCenter"
+                        tools:src="@drawable/payment_mt" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/userDataCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/element_spacing"
+            android:clickable="true"
+            android:foreground="?selectableItemBackground"
+            app:cardCornerRadius="2dp"
+            app:elevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/element_spacing">
+
+                <TextView
+                    style="@style/PaymentCardTitle"
+                    android:text="@string/paymentUserData" />
+
+                <TextView
+                    android:id="@+id/userDataText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                    tools:text="Imię Nazwisko\nul. Ulica Przykładowa 10/223\n12-345 Miasto" />
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <Button
+            android:id="@+id/makePaymentButton"
+            style="@style/PaymentButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="@dimen/element_spacing"
+            android:drawableEnd="@drawable/ic_chevron_right_white_24dp"
+            android:drawablePadding="@dimen/element_spacing"
+            android:drawableRight="@drawable/ic_chevron_right_white_24dp"
+            android:text="@string/makePayment" />
+
+        <TextView
+            style="@style/TextAppearance.AppCompat.Caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/operator_logo_margin"
+            android:drawablePadding="@dimen/grid_layout_item_margin"
+            android:drawableBottom="@drawable/paylane_logo"
+            android:text="@string/paymentOperator" />
+
+    </LinearLayout>
+</ScrollView>

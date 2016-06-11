@@ -20,7 +20,8 @@ import pl.kodujdlapolski.na4lapy.R;
  */
 public enum WebPageTypes {
     POLICY("file:///android_asset/policy.html", R.string.privacy_policy_text),
-    OPEN_SOURCE("file:///android_asset/opensource.html", R.string.open_source_libs_text);
+    OPEN_SOURCE("file:///android_asset/opensource.html", R.string.open_source_libs_text),
+    PAYMENT_TERMS("file:///android_asset/payments.html", -1);
 
     private String url;
     private int resPageName;

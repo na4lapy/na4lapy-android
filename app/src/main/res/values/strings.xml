@@ -22,6 +22,7 @@
     <string name="lookupPreferences">Preferencje</string>
     <string name="aboutApplication">O aplikacji</string>
     <string name="aboutShelter">O schronisku</string>
+    <string name="donate_us">Wesprzyj nas</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="whatKindOfAnimalDoYouSeek">Jakiego zwierzaka szukasz?</string>
@@ -138,4 +139,91 @@
     <string name="no_compliance_level_dialog_message">Czy chcesz określić swoje preferencje?</string>
     <string name="no_compliance_level_dialog_title">Brak preferencji</string>
     <string name="later">później</string>
+
+    <!-- Forms -->
+    <string name="validation_error_empty">To pole nie może pozostać puste</string>
+
+    <!-- Payments Activity -->
+
+    <string name="fullName">Imię i nazwisko</string>
+    <string name="email">Adres e-mail</string>
+    <string name="streetHouse">Ulica i numer budynku</string>
+    <string name="zipCode">Kod pocztowy</string>
+    <string name="city">Miasto</string>
+    <string name="state">Województwo</string>
+
+    <string-array name="states">
+        <item> </item>
+        <item>dolnośląskie</item>
+        <item>kujawsko-pomorskie</item>
+        <item>lubelskie</item>
+        <item>lubuskie</item>
+        <item>łódzkie</item>
+        <item>małopolskie</item>
+        <item>mazowieckie</item>
+        <item>opolskie</item>
+        <item>podkarpackie</item>
+        <item>podlaskie</item>
+        <item>pomorskie</item>
+        <item>śląskie</item>
+        <item>świętokrzyskie</item>
+        <item>warmińsko-mazurskie</item>
+        <item>wielkopolskie</item>
+        <item>zachodnipomorskie</item>
+    </string-array>
+
+    <string-array name="paymentPageTitles">
+        <item>Wybierz kwotę</item>
+        <item>Wybierz swój bank</item>
+        <item>Podaj swoje dane</item>
+        <item>Potwierdź dane do wpłaty</item>
+        <item>Dokonaj płatności</item>
+        <item>Dziękujemy!</item>
+    </string-array>
+
+    <string name="paymentStep">Krok %d z 5</string>
+    <string name="buttonNext">Dalej</string>
+    <string name="buttonClose">Zamknij</string>
+    <string name="paymentValue1">5 zł</string>
+    <string name="paymentValue2">20 zł</string>
+    <string name="paymentValue3">50 zł</string>
+
+    <string name="paymentTermsAccept">Potwierdzam zapoznanie się i akceptuję regulamin płatności</string>
+    <string name="paymentTermsNotAccepted">Aby dokonać wpłaty na rzecz schroniska, musisz zaakceptować regulamin płatności</string>
+    <string name="makePayment">Dokonaj wpłaty</string>
+    <string name="paymentShelterData">Odbiorca wpłaty</string>
+    <string name="paymentUserData">Dane wpłacającego</string>
+    <string name="paymentAmount">Wysokość wpłaty</string>
+    <string name="paymentType">Sposób płatności</string>
+    <string name="paymentBankPageLoading">Trwa otwieranie strony banku…</string>
+    <string name="paymentConfirmation">Płatność zakończona sukcesem</string>
+    <string name="paymentSuccessSummary">Dziękujemy! Przekazałeś nam %1$d %2$s!</string>
+
+    <string name="paymentUserValue">%1$s\n%2$s\n%3$s %4$s\n%5$s</string>
+    <string name="paymentAmountValue">%d zł</string>
+    <string name="paymentOperator">Operator płatności</string>
+    <string name="paymentTerms">Regulamin płatności</string>
+
+    <string name="paymentTypeAB">Alior Bank</string>
+    <string name="paymentTypeAS">T-Mobile Usługi Bankowe</string>
+    <string name="paymentTypeMT">mBank (mTransfer)</string>
+    <string name="paymentTypeIN">Inteligo</string>
+    <string name="paymentTypeIP">iPKO</string>
+    <string name="paymentTypeDB">Deutsche Bank</string>
+    <string name="paymentTypeMI">Millennium</string>
+    <string name="paymentTypeCA">Credit Agricole</string>
+    <string name="paymentTypePP">Poczta Polska (przekaz pocztowy)</string>
+    <string name="paymentTypePCZ">Bank Pocztowy</string>
+    <string name="paymentTypeBP">Bank BPH</string>
+    <string name="paymentTypeIB">Idea Bank</string>
+    <string name="paymentTypePO">Pekao S.A.</string>
+    <string name="paymentTypeGB">Getin Bank</string>
+    <string name="paymentTypeIG">ING Bank Śląski</string>
+    <string name="paymentTypeWB">Bank Zachodni WBK</string>
+    <string name="paymentTypeBG">Bank BGŻ BNP PARIBAS (BGŻ)</string>
+    <string name="paymentTypePB">Bank BGŻ BNP PARIBAS (BNP)</string>
+    <string name="paymentTypeOH">przelew z innego banku</string>
+
+    <string name="payment_no_connection">Aby dokonać płatności połącz się z Internetem</string>
+    <string name="payment_close">Powrót do listy zwierząt</string>
 </resources>

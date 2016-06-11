@@ -36,9 +36,11 @@ import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 import pl.kodujdlapolski.na4lapy.Na4LapyApp;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Shelter;
+import pl.kodujdlapolski.na4lapy.presenter.payment.PaymentContract;
 import pl.kodujdlapolski.na4lapy.ui.about_shelter.AboutShelterActivity;
 import pl.kodujdlapolski.na4lapy.ui.browse.list.ListBrowseActivity;
 import pl.kodujdlapolski.na4lapy.ui.browse.single.SingleBrowseActivity;
+import pl.kodujdlapolski.na4lapy.ui.payment.PaymentActivity;
 import pl.kodujdlapolski.na4lapy.ui.preferences.PreferencesActivity;
 import pl.kodujdlapolski.na4lapy.ui.settings.SettingsActivity;
 import pl.kodujdlapolski.na4lapy.user.UserService;
@@ -87,7 +89,9 @@ public class DrawerActivityHandler {
             Shelter shelter = new Shelter();
             shelter.setId(1L);
             intent.putExtra(AboutShelterActivity.EXTRA_SHELTER_ID, 1l);
-
+        } else if (id == R.id.makePayment && !(clazz.equals(PaymentActivity.class))) {
+            intent = new Intent(context, PaymentActivity.class);
+            intent.putExtra(PaymentContract.KEY_SHELTER_ID, 1L);
         } else if (id == R.id.settings && !(clazz.equals(SettingsActivity.class))) {
             intent = new Intent(context, SettingsActivity.class);
         }

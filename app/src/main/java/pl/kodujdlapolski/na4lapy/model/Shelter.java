@@ -15,14 +15,33 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor //for ormlite
 public class Shelter extends BaseEntity implements Serializable {
 
-    @DatabaseField private String name;
-    @DatabaseField private String street;
-    @DatabaseField private String buildingNumber;
-    @DatabaseField private String city;
-    @DatabaseField private String postalCode;
-    @DatabaseField private String email;
-    @DatabaseField private String phoneNumber;
-    @DatabaseField private String website;
-    @DatabaseField private String accountNumber;
-    @DatabaseField private String adoptionRules;
+    @DatabaseField
+    private String name;
+
+    @DatabaseField
+    private String street;
+
+    @DatabaseField
+    private String buildingNumber;
+
+    @DatabaseField
+    private String city;
+
+    @DatabaseField
+    private String postalCode;
+
+    @DatabaseField
+    private String email;
+
+    @DatabaseField
+    private String phoneNumber;
+
+    @DatabaseField
+    private String website;
+
+    @DatabaseField
+    private String accountNumber;
+
+    @DatabaseField
+    private String adoptionRules;
 }

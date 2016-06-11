@@ -1,6 +1,7 @@
 package pl.kodujdlapolski.na4lapy.preferences;
 
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.google.gson.Gson;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pl.kodujdlapolski.na4lapy.model.UserPreferences;
+import pl.kodujdlapolski.na4lapy.payments.model.Customer;
 
 
 public class PreferencesServiceImpl implements PreferencesService {
@@ -84,15 +86,27 @@ public class PreferencesServiceImpl implements PreferencesService {
     }
 
     @Override
-    public boolean shouldIntroductionBeShown() {
-        boolean wasIntroductionShown = mSharedPreferences.getBoolean(KEY_WAS_INTRODUCTION_SHOWN, false);
-        if (!wasIntroductionShown) {
-            SharedPreferences.Editor editor = mSharedPreferences.edit();
-            editor.putBoolean(KEY_WAS_INTRODUCTION_SHOWN, true);
-            editor.apply();
-            return true;
-        }
-        return false;
+    public void setCustomer(Customer customer) {
+        String json = mGson.toJson(customer);
+        mSharedPreferences.edit().putString(KEY_PAYMENT_CUSTOMER, json).apply();
     }
 
+    @NonNull
+    @Override
+    public Customer getCustomer() {
+        String json = mSharedPreferences.getString(KEY_PAYMENT_CUSTOMER, null);
+        return mGson.fromJson(json, Customer.class);
+    }
+
+    @Override
+    public boolean shouldIntroductionBeShown() {
+        boolean wasIntroductionShown = mSharedPreferences.getBoolean(KEY_WAS_INTRODUCTION_SHOWN, false);
+
+        if (wasIntroductionShown) {
+            return false;
+        }
+
+        mSharedPreferences.edit().putBoolean(KEY_WAS_INTRODUCTION_SHOWN, true).apply();
+        return true;
+    }
 }

@@ -13,4 +13,8 @@
     <dimen name="appbar_padding">8dp</dimen>
     <dimen name="app_bar_height">250dp</dimen>
     <dimen name="details_table_inner_margin">8dp</dimen>
+    <dimen name="payment_title_top_margin">48dp</dimen>
+    <dimen name="element_spacing">8dp</dimen>
+    <dimen name="grid_layout_item_margin">4dp</dimen>
+    <dimen name="operator_logo_margin">16dp</dimen>
 </resources>

@@ -68,4 +68,27 @@
         <item name="android:backgroundDimEnabled">false</item>
     </style>
 
+    <style name="SimpleDialog" parent="Theme.AppCompat.Light.Dialog.Alert" />
+
+    <style name="PaymentButton" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:theme">@style/AppTheme.AppBarOverlay</item>
+        <item name="colorButtonNormal">@color/colorPrimary</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+    </style>
+
+    <style name="PaymentButtonBorderLess" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:theme">@style/AppTheme.AppBarOverlay</item>
+        <item name="colorButtonNormal">@android:color/transparent</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:background">?selectableItemBackground</item>
+    </style>
+
+    <style name="PaymentCardTitle" parent="@style/TextAppearance.AppCompat.Subhead">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_marginBottom">@dimen/element_spacing</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
+
 </resources>

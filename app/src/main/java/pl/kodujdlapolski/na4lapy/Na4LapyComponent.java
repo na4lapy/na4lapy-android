@@ -4,8 +4,10 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 import pl.kodujdlapolski.na4lapy.api.ApiModule;
+import pl.kodujdlapolski.na4lapy.payments.PaymentsModule;
 import pl.kodujdlapolski.na4lapy.preferences.PreferencesModule;
 import pl.kodujdlapolski.na4lapy.presenter.about_shelter.AboutShelterPresenter;
+import pl.kodujdlapolski.na4lapy.presenter.payment.PaymentPresenter;
 import pl.kodujdlapolski.na4lapy.presenter.preferences.PreferencesPresenter;
 import pl.kodujdlapolski.na4lapy.repository.RepositoryModule;
 import pl.kodujdlapolski.na4lapy.repository.database.DatabaseModule;
@@ -24,6 +26,7 @@ import pl.kodujdlapolski.na4lapy.user.UserModule;
         RepositoryModule.class,
         ApiModule.class,
         DatabaseModule.class,
+        PaymentsModule.class,
         PreferencesModule.class,
         SystemModule.class,
         UserModule.class
@@ -38,4 +41,5 @@ public interface Na4LapyComponent {
     void inject(ListBrowseFragment fragment);
     void inject(DrawerActivityHandler handler);
     void inject(SettingsFragment fragment);
+    void inject(PaymentPresenter presenter);
 }

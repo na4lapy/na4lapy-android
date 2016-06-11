@@ -66,6 +66,12 @@
             android:name=".ui.introduction.IntroductionActivity"
             android:screenOrientation="portrait"
             android:theme="@style/transparent" />
+        <activity
+            android:name=".ui.payment.PaymentActivity"
+            android:label="@string/donate_us"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/AppTheme"/>
     </application>
 
 </manifest>
