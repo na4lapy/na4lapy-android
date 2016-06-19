@@ -23,4 +23,5 @@ import pl.kodujdlapolski.na4lapy.model.Animal;
 public interface OnBrowseElementClickedAction {
     void favourite(Animal animal);
     void details(Animal animal);
+    void complianceLevel();
 }

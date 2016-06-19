@@ -3,6 +3,7 @@ package pl.kodujdlapolski.na4lapy.ui.browse;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -37,7 +38,7 @@ public abstract class AbstractBrowseViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.view_holder_animal_name)
     TextView name;
     @BindView(R.id.matching_lvl_image)
-    ImageView matchLevelImage;
+    ImageButton matchLevelImage;
     @BindView(R.id.profile_pic_on_list)
     public ImageView profilePic;
 
@@ -64,5 +65,6 @@ public abstract class AbstractBrowseViewHolder extends RecyclerView.ViewHolder {
                 animal.getName();
         name.setText(nameText);
         matchLevelImage.setImageLevel(mUserService.getPreferencesComplianceLevel(animal));
+        matchLevelImage.setOnClickListener(v -> onBrowseElementClickedAction.complianceLevel());
     }
 }

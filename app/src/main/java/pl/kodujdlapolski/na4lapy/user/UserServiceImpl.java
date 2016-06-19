@@ -90,6 +90,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public boolean isComplianceLevelAvailable() {
+        return mUserPreferences!=null;
+    }
+
+    @Override
     public void login() {
         // TODO
     }

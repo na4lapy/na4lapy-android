@@ -11,6 +11,7 @@ import pl.kodujdlapolski.na4lapy.Na4LapyApp;
 import pl.kodujdlapolski.na4lapy.model.Animal;
 import pl.kodujdlapolski.na4lapy.repository.RepositoryService;
 import pl.kodujdlapolski.na4lapy.system.SystemService;
+import pl.kodujdlapolski.na4lapy.ui.compliance_level.ComplianceLevelDialog;
 import pl.kodujdlapolski.na4lapy.ui.details.DetailsActivity;
 import pl.kodujdlapolski.na4lapy.user.UserService;
 import rx.android.schedulers.AndroidSchedulers;
@@ -92,6 +93,14 @@ public class BrowsePresenter implements BrowseContract.Presenter {
         Intent i = new Intent(view.getActivity(), DetailsActivity.class);
         i.putExtra(DetailsActivity.EXTRA_ANIMAL_ID, animal.getId());
         view.getActivity().startActivityForResult(i, DetailsActivity.REQUEST_CODE_ANIMAL);
+    }
+
+    @Override
+    public void complianceLevel() {
+      if(userService.isComplianceLevelAvailable())
+          ComplianceLevelDialog.showComplianceLevelInfoDialog(view.getActivity());
+        else
+          ComplianceLevelDialog.showNoComplianceLevelYetDialog(view.getActivity());
     }
 
     @Override

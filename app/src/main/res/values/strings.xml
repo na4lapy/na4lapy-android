@@ -131,4 +131,11 @@
     <string name="animal_details_title">%1$s, %2$s</string>
     <string name="not_logged_in_message">Ta funkcjonalność wymaga zalogowania</string>
     <string name="not_logged_in_title">Czy chcesz się zalogować?</string>
+    <string name="ok">OK</string>
+    <string name="go_to_preferences">Zmień preferencje</string>
+    <string name="compliance_level_dialog_title">Stopień dopasowania</string>
+    <string name="compliance_level_dialog_message">Określa ile cech z preferencji posiada dane zwierze.</string>
+    <string name="no_compliance_level_dialog_message">Czy chcesz określić swoje preferencje?</string>
+    <string name="no_compliance_level_dialog_title">Brak preferencji</string>
+    <string name="later">później</string>
 </resources>

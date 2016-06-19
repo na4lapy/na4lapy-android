@@ -47,12 +47,14 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <ImageView
+        <ImageButton
             android:id="@+id/matching_lvl_image"
             android:layout_width="48dp"
             android:layout_height="48dp"
+            android:scaleType="centerInside"
             android:layout_marginEnd="@dimen/activity_vertical_margin"
             android:layout_marginRight="@dimen/activity_vertical_margin"
+            android:background="?android:attr/selectableItemBackground"
             android:src="@drawable/user_preferences_compliance_level" />
 
 

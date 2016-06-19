@@ -21,18 +21,20 @@
             android:contentDescription="@string/content_desc_main_image"
             android:foreground="?android:attr/selectableItemBackground"
             android:scaleType="centerCrop"
-            tools:src="@drawable/pic_404dog"
             tools:background="@color/colorAccent"
             tools:layout_height="400dp"
-            tools:layout_width="match_parent" />
+            tools:layout_width="match_parent"
+            tools:src="@drawable/pic_404dog" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/matching_lvl_image"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
+            android:scaleType="centerInside"
             android:layout_margin="@dimen/activity_vertical_margin"
+            android:background="?android:attr/selectableItemBackground"
             android:contentDescription="@string/content_desc_matching_lvl"
             android:src="@drawable/user_preferences_compliance_level" />
 

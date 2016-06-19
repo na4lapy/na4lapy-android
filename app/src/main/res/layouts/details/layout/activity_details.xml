@@ -43,10 +43,11 @@
                     android:adjustViewBounds="true"
                     tools:src="@android:color/holo_blue_bright" />
 
-                <ImageView
+                <ImageButton
                     android:id="@+id/matching_lvl_image"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
+                    android:scaleType="centerInside"
                     android:layout_alignEnd="@id/profile_pic_on_details"
                     android:layout_alignRight="@id/profile_pic_on_details"
                     android:layout_alignTop="@id/profile_pic_on_details"
@@ -54,6 +55,7 @@
                     android:layout_marginRight="-15dp"
                     android:layout_marginTop="-10dp"
                     android:adjustViewBounds="true"
+                    android:background="?android:attr/selectableItemBackground"
                     android:src="@drawable/user_preferences_compliance_level" />
 
             </RelativeLayout>

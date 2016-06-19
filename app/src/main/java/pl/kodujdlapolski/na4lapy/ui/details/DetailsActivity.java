@@ -14,6 +14,7 @@ import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.squareup.picasso.MemoryPolicy;
@@ -35,6 +36,7 @@ import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Animal;
 import pl.kodujdlapolski.na4lapy.repository.RepositoryService;
 import pl.kodujdlapolski.na4lapy.system.SystemService;
+import pl.kodujdlapolski.na4lapy.ui.compliance_level.ComplianceLevelDialog;
 import pl.kodujdlapolski.na4lapy.user.UserService;
 import pl.kodujdlapolski.na4lapy.utils.AnimalUtils;
 import rx.android.schedulers.AndroidSchedulers;
@@ -139,6 +141,9 @@ public class DetailsActivity extends AppCompatActivity {
                     .into(profilePic);
         }
         matchingLvl.setImageLevel(userService.getPreferencesComplianceLevel(animal));
+        matchingLvl.setOnClickListener(v -> {
+            onComplianceLevelClick();
+        });
         animal.setFavourite(userService.isFavourite(animal));
         addToFavFab.setImageResource(AnimalUtils.getAddToFavFabImage(animal));
         addToFavFab.setOnClickListener(v -> {
@@ -150,6 +155,13 @@ public class DetailsActivity extends AppCompatActivity {
             updateAnimal();
             addToFavFab.setImageResource(AnimalUtils.getAddToFavFabImage(animal));
         });
+    }
+
+    private void onComplianceLevelClick() {
+        if(userService.isComplianceLevelAvailable())
+            ComplianceLevelDialog.showComplianceLevelInfoDialog(this);
+        else
+            ComplianceLevelDialog.showNoComplianceLevelYetDialog(this);
     }
 
     private void updateAnimal() {

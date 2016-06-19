@@ -16,6 +16,8 @@ public interface UserService {
 
     int getPreferencesComplianceLevel(Animal animal);
 
+    boolean isComplianceLevelAvailable();
+
     void login();
     void logout();
     @Nullable String getUserFirstName();
