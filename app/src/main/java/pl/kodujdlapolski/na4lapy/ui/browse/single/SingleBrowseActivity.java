@@ -16,6 +16,8 @@ import android.widget.Toast;
 import com.lsjwzh.widget.recyclerviewpager.RecyclerViewPager;
 
 import net.hockeyapp.android.CrashManager;
+import net.hockeyapp.android.CrashManagerListener;
+import net.hockeyapp.android.utils.Util;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -123,7 +125,11 @@ public class SingleBrowseActivity extends AbstractDrawerActivity implements Brow
     protected void onResume() {
         super.onResume();
         handler.onResume();
-        CrashManager.register(this);
+        CrashManager.register(this, Util.getAppIdentifier(this), new CrashManagerListener() {
+            public boolean shouldAutoUploadCrashes() {
+                return true;
+            }
+        });
     }
 
     @Override
