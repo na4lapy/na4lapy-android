@@ -14,10 +14,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import pl.kodujdlapolski.na4lapy.R;
-import pl.kodujdlapolski.na4lapy.payments.model.Address;
-import pl.kodujdlapolski.na4lapy.payments.model.Customer;
-import pl.kodujdlapolski.na4lapy.payments.model.Payment;
 import pl.kodujdlapolski.na4lapy.presenter.payment.PaymentContract;
+import pl.kodujdlapolski.na4lapy.service.payments.model.Address;
+import pl.kodujdlapolski.na4lapy.service.payments.model.Customer;
+import pl.kodujdlapolski.na4lapy.service.payments.model.Payment;
 
 public class PaymentConfirmationFragment extends PaymentFragment {
 
@@ -31,10 +31,10 @@ public class PaymentConfirmationFragment extends PaymentFragment {
     ImageView paymentTypeIcon;
 
     public static PaymentConfirmationFragment newInstance(PaymentContract.UserActionListener listener, int pageNumber) {
-        PaymentConfirmationFragment f = new PaymentConfirmationFragment();
-        f.setListener(listener);
-        f.setPageNumber(pageNumber);
-        return f;
+        PaymentConfirmationFragment fragment = new PaymentConfirmationFragment();
+        fragment.setListener(listener);
+        fragment.setPageNumber(pageNumber);
+        return fragment;
     }
 
     @Nullable

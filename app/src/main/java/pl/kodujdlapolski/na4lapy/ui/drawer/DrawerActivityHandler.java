@@ -37,13 +37,13 @@ import pl.kodujdlapolski.na4lapy.Na4LapyApp;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Shelter;
 import pl.kodujdlapolski.na4lapy.presenter.payment.PaymentContract;
+import pl.kodujdlapolski.na4lapy.service.user.UserService;
 import pl.kodujdlapolski.na4lapy.ui.about_shelter.AboutShelterActivity;
 import pl.kodujdlapolski.na4lapy.ui.browse.list.ListBrowseActivity;
 import pl.kodujdlapolski.na4lapy.ui.browse.single.SingleBrowseActivity;
 import pl.kodujdlapolski.na4lapy.ui.payment.PaymentActivity;
 import pl.kodujdlapolski.na4lapy.ui.preferences.PreferencesActivity;
 import pl.kodujdlapolski.na4lapy.ui.settings.SettingsActivity;
-import pl.kodujdlapolski.na4lapy.user.UserService;
 
 public class DrawerActivityHandler {
 

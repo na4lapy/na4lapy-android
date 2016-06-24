@@ -1,4 +1,4 @@
-package pl.kodujdlapolski.na4lapy.user;
+package pl.kodujdlapolski.na4lapy.service.user;
 
 import android.support.annotation.NonNull;
 

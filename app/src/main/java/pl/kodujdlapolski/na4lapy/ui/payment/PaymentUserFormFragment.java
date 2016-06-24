@@ -24,10 +24,10 @@ import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import pl.kodujdlapolski.na4lapy.R;
-import pl.kodujdlapolski.na4lapy.payments.model.Address;
-import pl.kodujdlapolski.na4lapy.payments.model.Customer;
 import pl.kodujdlapolski.na4lapy.presenter.payment.PaymentContract;
 import pl.kodujdlapolski.na4lapy.presenter.settings.WebPageTypes;
+import pl.kodujdlapolski.na4lapy.service.payments.model.Address;
+import pl.kodujdlapolski.na4lapy.service.payments.model.Customer;
 
 public class PaymentUserFormFragment extends PaymentFragment {
 
@@ -71,10 +71,10 @@ public class PaymentUserFormFragment extends PaymentFragment {
     List<TextInputEditText> notEmptyValidationGroupInput;
 
     public static PaymentUserFormFragment newInstance(PaymentContract.UserActionListener listener, int pageNumber) {
-        PaymentUserFormFragment f = new PaymentUserFormFragment();
-        f.setListener(listener);
-        f.setPageNumber(pageNumber);
-        return f;
+        PaymentUserFormFragment fragment = new PaymentUserFormFragment();
+        fragment.setListener(listener);
+        fragment.setPageNumber(pageNumber);
+        return fragment;
     }
 
     @Nullable

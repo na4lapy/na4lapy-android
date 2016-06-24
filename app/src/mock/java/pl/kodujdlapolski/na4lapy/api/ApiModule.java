@@ -1,10 +1,10 @@
-package pl.kodujdlapolski.na4lapy.api;
+package pl.kodujdlapolski.na4lapy.service.api;
 
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import pl.kodujdlapolski.na4lapy.repository.database.DatabaseHelper;
+import pl.kodujdlapolski.na4lapy.service.repository.database.DatabaseHelper;
 
 @Module
 public class ApiModule {

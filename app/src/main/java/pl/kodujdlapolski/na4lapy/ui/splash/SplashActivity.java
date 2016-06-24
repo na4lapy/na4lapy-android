@@ -9,7 +9,7 @@ import javax.inject.Inject;
 
 import pl.kodujdlapolski.na4lapy.Na4LapyApp;
 import pl.kodujdlapolski.na4lapy.R;
-import pl.kodujdlapolski.na4lapy.preferences.PreferencesService;
+import pl.kodujdlapolski.na4lapy.service.preferences.PreferencesService;
 import pl.kodujdlapolski.na4lapy.ui.browse.single.SingleBrowseActivity;
 import pl.kodujdlapolski.na4lapy.ui.introduction.IntroductionActivity;
 

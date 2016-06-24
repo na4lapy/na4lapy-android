@@ -1,10 +1,10 @@
-package pl.kodujdlapolski.na4lapy.user;
+package pl.kodujdlapolski.na4lapy.service.user;
 
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import pl.kodujdlapolski.na4lapy.preferences.PreferencesService;
+import pl.kodujdlapolski.na4lapy.service.preferences.PreferencesService;
 
 @Module
 public class UserModule {

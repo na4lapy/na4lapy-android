@@ -4,10 +4,10 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import pl.kodujdlapolski.na4lapy.model.Shelter;
-import pl.kodujdlapolski.na4lapy.payments.model.Customer;
-import pl.kodujdlapolski.na4lapy.payments.model.Payment;
-import pl.kodujdlapolski.na4lapy.payments.model.PaymentResponse;
-import pl.kodujdlapolski.na4lapy.payments.model.type.PaymentType;
+import pl.kodujdlapolski.na4lapy.service.payments.model.Customer;
+import pl.kodujdlapolski.na4lapy.service.payments.model.Payment;
+import pl.kodujdlapolski.na4lapy.service.payments.model.PaymentResponse;
+import pl.kodujdlapolski.na4lapy.service.payments.model.type.PaymentType;
 
 public interface PaymentContract {
 

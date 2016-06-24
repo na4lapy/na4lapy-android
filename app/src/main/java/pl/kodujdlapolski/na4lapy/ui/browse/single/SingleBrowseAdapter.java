@@ -9,9 +9,9 @@ import java.util.List;
 
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Animal;
+import pl.kodujdlapolski.na4lapy.service.user.UserService;
 import pl.kodujdlapolski.na4lapy.ui.browse.BrowseContract;
 import pl.kodujdlapolski.na4lapy.ui.browse.OnBrowseElementClickedAction;
-import pl.kodujdlapolski.na4lapy.user.UserService;
 
 /**
  * Created by Natalia Wróblewska on 2016-05-22.

@@ -14,8 +14,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Shelter;
-import pl.kodujdlapolski.na4lapy.payments.PaymentsService;
 import pl.kodujdlapolski.na4lapy.presenter.payment.PaymentContract;
+import pl.kodujdlapolski.na4lapy.service.payments.PaymentsService;
 
 public class PaymentAmountChooserFragment extends PaymentFragment {
 
@@ -23,10 +23,10 @@ public class PaymentAmountChooserFragment extends PaymentFragment {
     TextView shelterText;
 
     public static PaymentAmountChooserFragment newInstance(PaymentContract.UserActionListener listener, int pageNumber) {
-        PaymentAmountChooserFragment f = new PaymentAmountChooserFragment();
-        f.setListener(listener);
-        f.setPageNumber(pageNumber);
-        return f;
+        PaymentAmountChooserFragment fragment = new PaymentAmountChooserFragment();
+        fragment.setListener(listener);
+        fragment.setPageNumber(pageNumber);
+        return fragment;
     }
 
     @Nullable

@@ -6,7 +6,7 @@ import javax.inject.Inject;
 
 import pl.kodujdlapolski.na4lapy.Na4LapyApp;
 import pl.kodujdlapolski.na4lapy.model.UserPreferences;
-import pl.kodujdlapolski.na4lapy.user.UserService;
+import pl.kodujdlapolski.na4lapy.service.user.UserService;
 
 /**
  * Created by Malgorzata Syska on 2016-03-12.

@@ -11,15 +11,15 @@ import javax.inject.Inject;
 import pl.kodujdlapolski.na4lapy.Na4LapyApp;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Shelter;
-import pl.kodujdlapolski.na4lapy.payments.PaymentsService;
-import pl.kodujdlapolski.na4lapy.payments.model.Customer;
-import pl.kodujdlapolski.na4lapy.payments.model.Payment;
-import pl.kodujdlapolski.na4lapy.payments.model.PaymentResponse;
-import pl.kodujdlapolski.na4lapy.payments.model.Sale;
-import pl.kodujdlapolski.na4lapy.payments.model.type.PaymentType;
-import pl.kodujdlapolski.na4lapy.preferences.PreferencesService;
-import pl.kodujdlapolski.na4lapy.repository.RepositoryService;
-import pl.kodujdlapolski.na4lapy.system.SystemService;
+import pl.kodujdlapolski.na4lapy.service.payments.PaymentsService;
+import pl.kodujdlapolski.na4lapy.service.payments.model.Customer;
+import pl.kodujdlapolski.na4lapy.service.payments.model.Payment;
+import pl.kodujdlapolski.na4lapy.service.payments.model.PaymentResponse;
+import pl.kodujdlapolski.na4lapy.service.payments.model.Sale;
+import pl.kodujdlapolski.na4lapy.service.payments.model.type.PaymentType;
+import pl.kodujdlapolski.na4lapy.service.preferences.PreferencesService;
+import pl.kodujdlapolski.na4lapy.service.repository.RepositoryService;
+import pl.kodujdlapolski.na4lapy.service.system.SystemService;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -89,7 +89,10 @@ public class PaymentPresenter implements PaymentContract.UserActionListener {
                             paymentResponse = r;
                             mView.setPage(PaymentContract.PAGE_BANK_TRANSFER, this);
                         },
-                        t -> Log.e(getClass().getSimpleName(), "Error when processing bank transfer", t)
+                        t -> {
+                            Toast.makeText(mActivity, R.string.paymentsRequestError, Toast.LENGTH_SHORT).show();
+                            Log.e(getClass().getSimpleName(), "Error when processing bank transfer", t);
+                        }
                 );
     }
 

@@ -2,14 +2,13 @@ package pl.kodujdlapolski.na4lapy.ui.browse.list;
 
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 
 import butterknife.BindView;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Animal;
+import pl.kodujdlapolski.na4lapy.service.user.UserService;
 import pl.kodujdlapolski.na4lapy.ui.browse.AbstractBrowseViewHolder;
 import pl.kodujdlapolski.na4lapy.ui.browse.OnBrowseElementClickedAction;
-import pl.kodujdlapolski.na4lapy.user.UserService;
 
 /**
  * Created by Natalia Wróblewska on 2016-03-22.

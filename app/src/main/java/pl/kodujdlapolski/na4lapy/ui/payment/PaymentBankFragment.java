@@ -14,9 +14,9 @@ import android.webkit.WebViewClient;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import pl.kodujdlapolski.na4lapy.R;
-import pl.kodujdlapolski.na4lapy.payments.PaymentsService;
-import pl.kodujdlapolski.na4lapy.payments.model.PaymentResponse;
 import pl.kodujdlapolski.na4lapy.presenter.payment.PaymentContract;
+import pl.kodujdlapolski.na4lapy.service.payments.PaymentsService;
+import pl.kodujdlapolski.na4lapy.service.payments.model.PaymentResponse;
 
 public class PaymentBankFragment extends PaymentFragment {
 
@@ -27,10 +27,10 @@ public class PaymentBankFragment extends PaymentFragment {
     View progressBar;
 
     public static PaymentBankFragment newInstance(PaymentContract.UserActionListener listener, int pageNumber) {
-        PaymentBankFragment f = new PaymentBankFragment();
-        f.setListener(listener);
-        f.setPageNumber(pageNumber);
-        return f;
+        PaymentBankFragment fragment = new PaymentBankFragment();
+        fragment.setListener(listener);
+        fragment.setPageNumber(pageNumber);
+        return fragment;
     }
 
     @Nullable

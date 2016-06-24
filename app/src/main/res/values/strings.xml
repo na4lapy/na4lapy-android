@@ -198,6 +198,7 @@
     <string name="paymentBankPageLoading">Trwa otwieranie strony banku…</string>
     <string name="paymentConfirmation">Płatność zakończona sukcesem</string>
     <string name="paymentSuccessSummary">Dziękujemy! Przekazałeś nam %1$d %2$s!</string>
+    <string name="paymentsRequestError">Coś poszło nie tak przy przetwarzaniu płatności przez operatora…</string>
 
     <string name="paymentUserValue">%1$s\n%2$s\n%3$s %4$s\n%5$s</string>
     <string name="paymentAmountValue">%d zł</string>

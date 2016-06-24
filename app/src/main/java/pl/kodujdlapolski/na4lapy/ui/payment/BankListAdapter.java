@@ -10,8 +10,8 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import pl.kodujdlapolski.na4lapy.R;
-import pl.kodujdlapolski.na4lapy.payments.model.type.PaymentType;
 import pl.kodujdlapolski.na4lapy.presenter.payment.PaymentContract;
+import pl.kodujdlapolski.na4lapy.service.payments.model.type.PaymentType;
 
 public class BankListAdapter extends RecyclerView.Adapter<BankListAdapter.ViewHolder> {
 

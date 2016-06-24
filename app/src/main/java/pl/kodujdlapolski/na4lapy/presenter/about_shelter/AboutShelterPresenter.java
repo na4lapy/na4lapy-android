@@ -1,16 +1,13 @@
 package pl.kodujdlapolski.na4lapy.presenter.about_shelter;
 
 import android.content.Intent;
-import android.util.Log;
 
 import javax.inject.Inject;
 
 import pl.kodujdlapolski.na4lapy.Na4LapyApp;
 import pl.kodujdlapolski.na4lapy.model.Shelter;
-import pl.kodujdlapolski.na4lapy.repository.RepositoryService;
-import pl.kodujdlapolski.na4lapy.ui.about_shelter.AboutShelterActivity;
+import pl.kodujdlapolski.na4lapy.service.repository.RepositoryService;
 import pl.kodujdlapolski.na4lapy.ui.about_shelter.AboutShelterContract;
-import pl.kodujdlapolski.na4lapy.ui.about_shelter.AboutShelterFragment;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 

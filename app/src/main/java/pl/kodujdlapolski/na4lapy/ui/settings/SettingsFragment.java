@@ -18,7 +18,7 @@ import butterknife.OnClick;
 import pl.kodujdlapolski.na4lapy.Na4LapyApp;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.presenter.settings.WebPageTypes;
-import pl.kodujdlapolski.na4lapy.user.UserService;
+import pl.kodujdlapolski.na4lapy.service.user.UserService;
 
 /**
  * Created by Natalia Wróblewska on 2016-03-01.

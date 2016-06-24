@@ -19,10 +19,10 @@ public class PaymentTypeChooserFragment extends PaymentFragment {
     RecyclerView recyclerView;
 
     public static PaymentTypeChooserFragment newInstance(PaymentContract.UserActionListener listener, int pageNumber) {
-        PaymentTypeChooserFragment f = new PaymentTypeChooserFragment();
-        f.setListener(listener);
-        f.setPageNumber(pageNumber);
-        return f;
+        PaymentTypeChooserFragment fragment = new PaymentTypeChooserFragment();
+        fragment.setListener(listener);
+        fragment.setPageNumber(pageNumber);
+        return fragment;
     }
 
     @Nullable

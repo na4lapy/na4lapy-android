@@ -22,17 +22,8 @@ public class BankListDecoration extends RecyclerView.ItemDecoration {
         int position = parent.getChildAdapterPosition(view);
         int column = position % mSpanCount;
 
-        if (position < mSpanCount) {
-            outRect.top = mSpace;
-        } else {
-            outRect.top = 0;
-        }
-
-        if (column == mSpanCount - 1) {
-            outRect.right = mSpace;
-        } else {
-            outRect.right = 0;
-        }
+        outRect.top = (position < mSpanCount) ? mSpace : 0;
+        outRect.right = (column == mSpanCount - 1) ? mSpace : 0;
 
         outRect.left = mSpace;
         outRect.bottom = mSpace;

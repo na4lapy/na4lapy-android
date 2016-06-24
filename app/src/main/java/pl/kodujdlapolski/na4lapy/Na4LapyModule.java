@@ -11,9 +11,9 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import pl.kodujdlapolski.na4lapy.api.AnimalDeserializer;
-import pl.kodujdlapolski.na4lapy.api.LocalDateDeserializer;
 import pl.kodujdlapolski.na4lapy.model.Animal;
+import pl.kodujdlapolski.na4lapy.service.api.AnimalDeserializer;
+import pl.kodujdlapolski.na4lapy.service.api.LocalDateDeserializer;
 
 @Module
 public class Na4LapyModule {

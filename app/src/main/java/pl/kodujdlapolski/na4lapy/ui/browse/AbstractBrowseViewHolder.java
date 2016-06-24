@@ -15,8 +15,8 @@ import butterknife.ButterKnife;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Animal;
 import pl.kodujdlapolski.na4lapy.model.Photo;
+import pl.kodujdlapolski.na4lapy.service.user.UserService;
 import pl.kodujdlapolski.na4lapy.ui.details.DetailsActivity;
-import pl.kodujdlapolski.na4lapy.user.UserService;
 
 /**
  * Created by Natalia Wróblewska on 2016-02-27.

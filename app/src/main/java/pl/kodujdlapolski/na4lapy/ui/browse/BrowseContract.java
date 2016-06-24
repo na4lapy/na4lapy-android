@@ -1,14 +1,12 @@
 package pl.kodujdlapolski.na4lapy.ui.browse;
 
 import android.app.Activity;
-import android.app.Application;
-import android.content.BroadcastReceiver;
 
 import java.util.List;
 
 import pl.kodujdlapolski.na4lapy.model.Animal;
+import pl.kodujdlapolski.na4lapy.service.user.UserService;
 import pl.kodujdlapolski.na4lapy.ui.DataSynchronization;
-import pl.kodujdlapolski.na4lapy.user.UserService;
 
 /**
  * Created by Natalia Wróblewska on 2016-05-22.

@@ -9,11 +9,11 @@ import javax.inject.Inject;
 
 import pl.kodujdlapolski.na4lapy.Na4LapyApp;
 import pl.kodujdlapolski.na4lapy.model.Animal;
-import pl.kodujdlapolski.na4lapy.repository.RepositoryService;
-import pl.kodujdlapolski.na4lapy.system.SystemService;
+import pl.kodujdlapolski.na4lapy.service.repository.RepositoryService;
+import pl.kodujdlapolski.na4lapy.service.system.SystemService;
+import pl.kodujdlapolski.na4lapy.service.user.UserService;
 import pl.kodujdlapolski.na4lapy.ui.compliance_level.ComplianceLevelDialog;
 import pl.kodujdlapolski.na4lapy.ui.details.DetailsActivity;
-import pl.kodujdlapolski.na4lapy.user.UserService;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 

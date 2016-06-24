@@ -19,10 +19,11 @@ import pl.kodujdlapolski.na4lapy.model.Animal;
  * limitations under the License.
  *
  */
-//TODO przekształcić w komponent DI. Statyczne metody są słabo testowalne
+@Deprecated
 public class AnimalUtils {
 
-    //TODO użyć StateListDrawable dla buttona zamiast zmieniać jego grafikę ręcznie podmieniając drawable
+    //TODO https://trello.com/c/MAZ8umPt
+    @Deprecated
     public static int getAddToFavFabImage(Animal animal) {
         return Boolean.TRUE.equals(animal.getFavourite()) ? R.drawable.ic_favorite_white_24dp : R.drawable.ic_favorite_border_white_24dp;
     }

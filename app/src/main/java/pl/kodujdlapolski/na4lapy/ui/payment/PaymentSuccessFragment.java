@@ -12,9 +12,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Shelter;
-import pl.kodujdlapolski.na4lapy.payments.model.Payment;
-import pl.kodujdlapolski.na4lapy.payments.model.Sale;
 import pl.kodujdlapolski.na4lapy.presenter.payment.PaymentContract;
+import pl.kodujdlapolski.na4lapy.service.payments.model.Payment;
+import pl.kodujdlapolski.na4lapy.service.payments.model.Sale;
 
 public class PaymentSuccessFragment extends PaymentFragment {
 
@@ -25,10 +25,10 @@ public class PaymentSuccessFragment extends PaymentFragment {
     TextView summary;
 
     public static PaymentSuccessFragment newInstance(PaymentContract.UserActionListener listener, int pageNumber) {
-        PaymentSuccessFragment f = new PaymentSuccessFragment();
-        f.setListener(listener);
-        f.setPageNumber(pageNumber);
-        return f;
+        PaymentSuccessFragment fragment = new PaymentSuccessFragment();
+        fragment.setListener(listener);
+        fragment.setPageNumber(pageNumber);
+        return fragment;
     }
 
     @Nullable

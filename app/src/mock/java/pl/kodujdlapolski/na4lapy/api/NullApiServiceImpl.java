@@ -1,4 +1,4 @@
-package pl.kodujdlapolski.na4lapy.api;
+package pl.kodujdlapolski.na4lapy.service.api;
 
 import android.util.Log;
 
@@ -16,7 +16,7 @@ import java.util.Random;
 
 import javax.inject.Inject;
 
-import pl.kodujdlapolski.na4lapy.api.model.PagedAnimalListDto;
+import pl.kodujdlapolski.na4lapy.service.api.model.PagedAnimalListDto;
 import pl.kodujdlapolski.na4lapy.model.Animal;
 import pl.kodujdlapolski.na4lapy.model.Photo;
 import pl.kodujdlapolski.na4lapy.model.Shelter;
@@ -27,7 +27,7 @@ import pl.kodujdlapolski.na4lapy.model.type.Species;
 import pl.kodujdlapolski.na4lapy.model.type.Sterilization;
 import pl.kodujdlapolski.na4lapy.model.type.Training;
 import pl.kodujdlapolski.na4lapy.model.type.Vaccination;
-import pl.kodujdlapolski.na4lapy.repository.database.DatabaseHelper;
+import pl.kodujdlapolski.na4lapy.service.repository.database.DatabaseHelper;
 import rx.Observable;
 
 public class NullApiServiceImpl implements ApiService {
