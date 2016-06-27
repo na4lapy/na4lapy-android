@@ -10,8 +10,8 @@ android {
         applicationId "pl.kodujdlapolski.na4lapy"
         minSdkVersion 16
         targetSdkVersion 23
-        versionCode 8
-        versionName "1.0.2"
+        versionCode 9
+        versionName "1.0.3"
         manifestPlaceholders = [HOCKEYAPP_APP_ID: "1b336de533e0489b894c1b202a264a70"]
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
