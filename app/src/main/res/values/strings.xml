@@ -83,6 +83,7 @@
     <string name="size_large">Duża</string>
     <string name="size_medium">Średnia</string>
     <string name="size_small">Mała</string>
+    <string name="size_unknown">Nieznana</string>
     <string name="training_trainined">Podstawowe</string>
     <string name="training_untrainined">Zaawansowane</string>
     <string name="training_none">Brak</string>

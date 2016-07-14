@@ -44,7 +44,7 @@
             android:layout_weight="1"
             android:adjustViewBounds="true"
             android:contentDescription="@string/content_desc_animal_size"
-            tools:src="@drawable/animal_size_medium_200dp" />
+            tools:src="@drawable/animal_size_medium_100dp" />
 
         <ImageView
             android:id="@+id/animal_gender_image"
@@ -53,7 +53,7 @@
             android:layout_weight="1"
             android:adjustViewBounds="true"
             android:contentDescription="@string/content_desc_animal_gender"
-            tools:src="@drawable/animal_gender_male_200dp" />
+            tools:src="@drawable/animal_gender_male_100dp" />
 
         <ImageView
             android:id="@+id/animal_activity_image"
@@ -62,7 +62,7 @@
             android:layout_weight="1"
             android:adjustViewBounds="true"
             android:contentDescription="@string/content_desc_animal_activity"
-            tools:src="@drawable/animal_activity_low_200dp" />
+            tools:src="@drawable/animal_activity_low_100dp" />
     </LinearLayout>
 
 
