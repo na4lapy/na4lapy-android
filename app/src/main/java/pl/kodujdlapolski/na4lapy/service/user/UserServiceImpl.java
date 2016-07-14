@@ -74,7 +74,8 @@ public class UserServiceImpl implements UserService {
             }
         }
 
-        if ((mUserPreferences.isSizeSmall() && Size.SMALL.equals(animal.getSize())) ||
+        if ((mUserPreferences.isSizeSmall() && mUserPreferences.isSizeMedium() && mUserPreferences.isSizeLarge() && Size.UNKNOWN.equals(animal.getSize())) ||
+                (mUserPreferences.isSizeSmall() && Size.SMALL.equals(animal.getSize())) ||
                 (mUserPreferences.isSizeMedium() && Size.MEDIUM.equals(animal.getSize())) ||
                 (mUserPreferences.isSizeLarge() && Size.LARGE.equals(animal.getSize()))) {
                     ++result;

@@ -58,11 +58,24 @@ public class SingleBrowseViewHolder extends AbstractBrowseViewHolder {
         profilePic.setOnClickListener(v -> {
             onBrowseElementClickedAction.details(animal);
         });
+        setAnimalAttributesIcons(animal);
+    }
+
+    private void setAnimalAttributesIcons(Animal animal) {
         if (animal.getSize() != null)
             sizeImage.setImageResource(animal.getSize().getDrawableResId());
-        if (animal.getActivity() != null)
-            activityImage.setImageResource(animal.getActivity().getDrawableResId());
+        else {
+            sizeImage.setImageResource(R.drawable.animal_size_unknown_100dp);
+        }
         if (animal.getGender() != null)
             genderImage.setImageResource(animal.getGender().getDrawableResId());
+        else {
+            genderImage.setImageResource(R.drawable.animal_gender_unknown_100dp);
+        }
+        if (animal.getActivity() != null)
+            activityImage.setImageResource(animal.getActivity().getDrawableResId());
+        else {
+            activityImage.setImageResource(R.drawable.animal_activity_unknown_100dp);
+        }
     }
 }
