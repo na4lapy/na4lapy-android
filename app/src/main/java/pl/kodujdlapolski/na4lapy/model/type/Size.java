@@ -6,9 +6,9 @@ import android.support.annotation.StringRes;
 import pl.kodujdlapolski.na4lapy.R;
 
 public enum Size implements AnimalAttribute {
-    SMALL(R.string.size_small, R.drawable.vector_drawable_przegladanie_maly),
-    MEDIUM(R.string.size_medium, R.drawable.vector_drawable_przegladanie_sredni),
-    LARGE(R.string.size_large, R.drawable.vector_drawable_przegladanie_duzy);
+    SMALL(R.string.size_small, R.drawable.animal_size_small_200dp),
+    MEDIUM(R.string.size_medium, R.drawable.animal_size_medium_200dp),
+    LARGE(R.string.size_large, R.drawable.animal_size_big_200dp);
 
     private int mLabelResId;
     private int mDrawableResId;

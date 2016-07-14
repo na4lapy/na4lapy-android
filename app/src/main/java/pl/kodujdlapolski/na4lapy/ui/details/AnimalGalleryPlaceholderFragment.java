@@ -110,7 +110,7 @@ public class AnimalGalleryPlaceholderFragment extends Fragment implements Animal
     public void loadPhotoIntoImageView(Bundle savedInstanceState) {
         String selectedPicUrl = animalPic.getUrl();
         if (TextUtils.isEmpty(selectedPicUrl)) {
-            imageView.setImageDrawable(getResources().getDrawable(R.drawable.vector_drawable_error_dog));
+            imageView.setImageDrawable(getResources().getDrawable(R.drawable.pic_error_dog_283dp));
             return;
         }
         Picasso.with(getContext()).load(selectedPicUrl).into(imageView);

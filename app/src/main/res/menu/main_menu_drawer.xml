@@ -4,19 +4,19 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/browser"
-            android:icon="@drawable/ic_filter_none_24dp"
+            android:icon="@drawable/ic_filter_none_black_24dp"
             android:title="@string/browsing" />
         <item
             android:id="@+id/favourites"
-            android:icon="@drawable/ic_favorite_24dp"
+            android:icon="@drawable/ic_favorite_black_24dp"
             android:title="@string/favouritiesList" />
         <item
             android:id="@+id/preferences"
-            android:icon="@drawable/ic_receipt_24dp"
+            android:icon="@drawable/ic_receipt_black_24dp"
             android:title="@string/lookupPreferences" />
         <item
             android:id="@+id/aboutShelter"
-            android:icon="@drawable/ic_shelter_24dp"
+            android:icon="@drawable/ic_shelter_black_24dp"
             android:title="@string/aboutShelter" />
         <item
             android:id="@+id/makePayment"

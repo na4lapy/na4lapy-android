@@ -143,7 +143,7 @@ public class IntroductionActivity extends AppCompatActivity {
 
     private void updateIndicators(int currentPage) {
         for (int i = 0; i < indicators.length; i++) {
-            indicators[i].setBackgroundResource(i == currentPage ? R.drawable.introduction_indicator_selected : R.drawable.introduction_indicator_not_selected);
+            indicators[i].setBackgroundResource(i == currentPage ? R.drawable.introduction_indicator_selected_10dp : R.drawable.introduction_indicator_not_selected_10dp);
         }
     }
 

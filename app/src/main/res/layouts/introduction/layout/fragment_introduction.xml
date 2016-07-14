@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:src="@drawable/pic_404dog" />
+        android:src="@drawable/pic_error_dog_283dp" />
 
     <TextView
         android:id="@+id/introduction_text"

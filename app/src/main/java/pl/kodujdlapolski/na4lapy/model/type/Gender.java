@@ -6,9 +6,9 @@ import android.support.annotation.StringRes;
 import pl.kodujdlapolski.na4lapy.R;
 
 public enum Gender implements AnimalAttribute {
-    MALE(R.string.gender_male, R.drawable.vector_drawable_przegladanie_samiec),
-    FEMALE(R.string.gender_female, R.drawable.vector_drawable_przegladanie_suczka),
-    UNKNOWN(R.string.gender_unknown, R.drawable.vector_drawable_przegladanie_samiec);
+    MALE(R.string.gender_male, R.drawable.animal_gender_male_200dp),
+    FEMALE(R.string.gender_female, R.drawable.animal_gender_female_200dp),
+    UNKNOWN(R.string.gender_unknown, R.drawable.animal_gender_male_200dp);
 
     private int mLabelResId;
     private int mDrawableResId;

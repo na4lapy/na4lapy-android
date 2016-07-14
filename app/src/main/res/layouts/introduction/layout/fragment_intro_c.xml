@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:adjustViewBounds="true"
-        android:src="@drawable/tut_c_1" />
+        android:src="@drawable/tutorial_c_1_534dp" />
 
     <ImageView
         android:id="@+id/tut_c_2"
@@ -17,20 +17,20 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:adjustViewBounds="true"
-        android:src="@drawable/tut_c_2" />
+        android:src="@drawable/tutorial_c_2_534dp" />
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
         android:id="@+id/tut_c_3"
-        android:src="@drawable/tut_c_3" />
+        android:src="@drawable/tutorial_c_3_534dp" />
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
         android:id="@+id/tut_c_4"
-        android:src="@drawable/tut_c_4" />
+        android:src="@drawable/tutorial_c_4_534dp" />
 
     <TextView
         android:id="@+id/introduction_text"
