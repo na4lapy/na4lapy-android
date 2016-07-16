@@ -1,7 +1,6 @@
 package pl.kodujdlapolski.na4lapy.service.user;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import java.util.List;
 
@@ -17,12 +16,6 @@ public interface UserService {
     int getPreferencesComplianceLevel(Animal animal);
 
     boolean isComplianceLevelAvailable();
-
-    void login();
-    void logout();
-    @Nullable String getUserFirstName();
-    @Nullable String getUserPhotoUrl();
-    boolean isLogged();
 
     void addToFavourite(Animal animal);
     void removeFromFavourite(Animal animal);
