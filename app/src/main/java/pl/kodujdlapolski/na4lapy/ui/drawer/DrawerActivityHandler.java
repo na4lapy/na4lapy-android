@@ -22,17 +22,13 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
 import javax.inject.Inject;
 
-import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 import pl.kodujdlapolski.na4lapy.Na4LapyApp;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Shelter;
@@ -141,37 +137,7 @@ public class DrawerActivityHandler {
         ImageView drawerHeaderPhoto = (ImageView)headerView.findViewById(R.id.drawer_header_photo);
         TextView drawerHeaderUserName = (TextView)headerView.findViewById(R.id.drawer_header_user_name);
 
-        if (!userService.isLogged()) {
-            drawerHeaderUserName.setText(R.string.app_name);
-            drawerHeaderPhoto.setImageResource(R.drawable.application_logo);
-            return;
-        }
-
-        setUserPhotoInHeader(drawerHeaderPhoto);
-        setUserNameInHeader(drawerHeaderUserName);
-
+        drawerHeaderUserName.setText(R.string.app_name);
+        drawerHeaderPhoto.setImageResource(R.drawable.application_logo);
     }
-
-    private void setUserNameInHeader(TextView drawerHeaderUserName) {
-        String fullUserName = userService.getUserFirstName();
-        if (TextUtils.isEmpty(fullUserName)) {
-            drawerHeaderUserName.setText(R.string.app_name);
-        } else {
-            drawerHeaderUserName.setText(fullUserName);
-        }
-    }
-
-    private void setUserPhotoInHeader(ImageView drawerHeaderPhoto) {
-        String userPhotoUrl = userService.getUserPhotoUrl();
-        if (TextUtils.isEmpty(userPhotoUrl)) {
-            drawerHeaderPhoto.setImageResource(R.drawable.application_logo);
-        }
-        else {
-            Picasso.with(activity.getApplication().getApplicationContext())
-                    .load(userPhotoUrl)
-                    .transform(new CropCircleTransformation())
-                    .into(drawerHeaderPhoto);
-        }
-    }
-
 }
