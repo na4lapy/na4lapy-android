@@ -35,25 +35,7 @@ public class FakeUserService implements UserService {
     }
 
     @Override
-    public void login() {
-    }
-
-    @Override
-    public void logout() {
-    }
-
-    @Override
-    public String getUserFirstName() {
-        return "Hermenegilda";
-    }
-
-    @Override
-    public String getUserPhotoUrl() {
-        return "https://secure-static.tagged.com/im/people/silhouette_m_300.png";
-    }
-
-    @Override
-    public boolean isLogged() {
+    public boolean isComplianceLevelAvailable() {
         return true;
     }
 

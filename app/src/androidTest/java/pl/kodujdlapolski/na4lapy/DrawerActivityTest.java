@@ -21,8 +21,8 @@ import static android.support.test.espresso.intent.Intents.intended;
 import static android.support.test.espresso.intent.matcher.ComponentNameMatchers.hasClassName;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasExtra;
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.isChecked;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
 import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -33,7 +33,7 @@ import static org.hamcrest.CoreMatchers.endsWith;
 
 
 /**
- * Created by Malgorzata Syska on 2016-03-27.
+ * @author Malgorzata Syska
  */
 public class DrawerActivityTest {
 
@@ -49,14 +49,6 @@ public class DrawerActivityTest {
         onView(withContentDescription(activityRule.getActivity().getString(R.string.navigation_drawer_open)))
                 .perform(click());
         onView(withId(R.id.nav_view)).check(matches(isDisplayed()));
-    }
-
-    //todo - do zmiany po zaimplementowaniu logowania
-    @Test
-    public void isHeaderDisplayed() {
-        onView(withText("Hermenegilda")).check(matches(isDisplayed()));
-        onView(withId(R.id.drawer_header_user_name)).check(matches(isDisplayed()));
-        onView(withId(R.id.drawer_header_photo)).check(matches(isDisplayed()));
     }
 
     @Test

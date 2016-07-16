@@ -96,33 +96,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void login() {
-        // TODO
-    }
-
-    @Override
-    public void logout() {
-        // TODO
-    }
-
-    @Override
-    public String getUserFirstName() {
-        // TODO
-        return null;
-    }
-
-    @Override
-    public String getUserPhotoUrl() {
-        // TODO
-        return null;
-    }
-
-    @Override
-    public boolean isLogged() {
-        return false; // TODO
-    }
-
-    @Override
     public void addToFavourite(Animal animal) {
         if (animal == null || animal.getId() == null) {
             return;
