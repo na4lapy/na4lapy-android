@@ -21,7 +21,7 @@
         <item
             android:id="@+id/makePayment"
             android:icon="@drawable/ic_payment_white_24dp"
-            android:title="@string/makePayment" />
+            android:title="@string/donate_us" />
         <item
             android:id="@+id/settings"
             android:icon="@drawable/ic_info_outline_black_24dp"
