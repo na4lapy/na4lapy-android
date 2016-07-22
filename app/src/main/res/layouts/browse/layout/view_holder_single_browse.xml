@@ -24,7 +24,7 @@
             tools:background="@color/colorAccent"
             tools:layout_height="400dp"
             tools:layout_width="match_parent"
-            tools:src="@drawable/pic_error_dog_283dp" />
+            tools:src="@drawable/pic_error_dog_256dp" />
 
         <ImageButton
             android:id="@+id/matching_lvl_image"

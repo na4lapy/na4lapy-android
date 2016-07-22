@@ -17,7 +17,7 @@
         android:layout_alignParentStart="true"
         android:layout_centerInParent="true"
         android:contentDescription="@string/content_desc_main_image"
-        android:src="@drawable/pic_error_dog_283dp"
+        android:src="@drawable/pic_error_dog_256dp"
         tools:background="@color/colorAccent" />
 
 
