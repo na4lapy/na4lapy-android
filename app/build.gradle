@@ -4,10 +4,7 @@ apply plugin: 'me.tatarka.retrolambda'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion "24.0.0"
-
-    def paylaneLogin = project.hasProperty('payLogin') ? '"' + payLogin.toString() + '"' : '"na4lapy"'
-    def paylanePass = project.hasProperty('payPass') ? '"' + payPass.toString() + '"' : '"na4lapy"'
+    buildToolsVersion "24.0.1"
 
     defaultConfig {
         applicationId "pl.kodujdlapolski.na4lapy"
@@ -18,8 +15,8 @@ android {
         manifestPlaceholders = [HOCKEYAPP_APP_ID: "1b336de533e0489b894c1b202a264a70"]
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
-        buildConfigField 'String', 'PAYLANE_LOGIN', paylaneLogin
-        buildConfigField 'String', 'PAYLANE_PASSWORD', paylanePass
+        buildConfigField 'String', 'PAYLANE_LOGIN', "$System.env.PROMYK_PAYLANE_API_KEY"
+        buildConfigField 'String', 'PAYLANE_PASSWORD', "$System.env.PROMYK_PAYLANE_PASSWORD"
     }
 
     sourceSets {
@@ -41,25 +38,20 @@ android {
     }
 
     productFlavors {
-
-
         mock {
             applicationIdSuffix = ".mock"
         }
         prod {
-            buildConfigField 'String', 'BASE_URL', '"http://na4lapy.kodujdlapolski.pl/api/"'
+            buildConfigField 'String', 'BASE_URL', System.getenv("N4L_API_URL") ?: '"http://na4lapy.kodujdlapolski.pl/api/"'
         }
     }
 
     signingConfigs {
-        def keyPass = project.hasProperty('keyPassword') ? keyPassword.toString() : 'na4lapy'
-        def storePass = project.hasProperty('storePassword') ? storePassword.toString() : 'na4lapy'
-
         playstore {
-            keyAlias 'na4lapy'
-            keyPassword keyPass
-            storeFile file('../keystore/na4lapy.keystore')
-            storePassword storePass
+            storeFile file(System.getenv("N4L_KEY_PATH") ?: "../keystore/na4lapy.keystore")
+            storePassword System.getenv("N4L_KEYSTORE_PASSWORD") ?: "na4lapy"
+            keyPassword System.getenv("N4L_KEY_PASSWORD") ?: "na4lapy"
+            keyAlias System.getenv("N4L_KEY_ALIAS") ?: "na4lapy"
         }
     }
 
@@ -100,7 +92,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    def supportLibraryVersion = "24.0.0"
+    def supportLibraryVersion = "24.1.1"
     def retrofitVersion = "2.1.0"
     dependencies {
         compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -112,8 +104,8 @@ android {
         compile 'com.google.guava:guava:19.0'
         compile 'com.google.dagger:dagger:2.5'
         apt 'com.google.dagger:dagger-compiler:2.5'
-        compile 'com.jakewharton:butterknife:8.0.1'
-        apt 'com.jakewharton:butterknife-compiler:8.0.1'
+        compile 'com.jakewharton:butterknife:8.2.1'
+        apt 'com.jakewharton:butterknife-compiler:8.2.1'
         compile 'com.j256.ormlite:ormlite-android:4.48'
         compile "com.squareup.retrofit2:retrofit:$retrofitVersion"
         compile "com.squareup.retrofit2:converter-gson:$retrofitVersion"
