@@ -22,17 +22,13 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
 
-import jp.wasabeef.picasso.transformations.CropCircleTransformation;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import pl.kodujdlapolski.na4lapy.Na4LapyApp;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Shelter;
@@ -50,15 +46,23 @@ public class DrawerActivityHandler {
     @Inject
     UserService userService;
 
-    private DrawerLayout drawerLayout;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
+    @BindView(R.id.drawer_layout)
+    DrawerLayout drawerLayout;
+
+    @BindView(R.id.nav_view)
+    NavigationView navigationView;
+
     private Context context;
     private AbstractDrawerActivity activity;
-    private NavigationView navigationView;
 
     public DrawerActivityHandler(AbstractDrawerActivity activity) {
-        ((Na4LapyApp)activity.getApplication()).getComponent().inject(this);
+        ((Na4LapyApp) activity.getApplication()).getComponent().inject(this);
         this.activity = activity;
         context = this.activity.getApplicationContext();
+        ButterKnife.bind(this, activity);
     }
 
     public void onResume() {
@@ -108,18 +112,15 @@ public class DrawerActivityHandler {
     }
 
     public void setDrawer() {
-        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         activity.setSupportActionBar(toolbar);
         if (activity.getSupportActionBar() != null) {
             activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        drawerLayout = (DrawerLayout) activity.findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(
                 activity, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
 
-        navigationView = (NavigationView) activity.findViewById(R.id.nav_view);
         if (navigationView != null) {
             navigationView.setNavigationItemSelectedListener(activity);
         }
@@ -128,50 +129,14 @@ public class DrawerActivityHandler {
     }
 
     private void setDrawerHeader() {
-        View headerView =  navigationView.getHeaderView(0);
+        View headerView = navigationView.getHeaderView(0);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             headerView.setPadding(
                     headerView.getPaddingLeft(),
-                    (int)(headerView.getPaddingTop() + activity.getResources().getDimension(R.dimen.status_bar)),
+                    (int) (headerView.getPaddingTop() + activity.getResources().getDimension(R.dimen.status_bar)),
                     headerView.getPaddingRight(),
                     headerView.getPaddingBottom());
         }
-
-        ImageView drawerHeaderPhoto = (ImageView)headerView.findViewById(R.id.drawer_header_photo);
-        TextView drawerHeaderUserName = (TextView)headerView.findViewById(R.id.drawer_header_user_name);
-
-        if (!userService.isLogged()) {
-            drawerHeaderUserName.setText(R.string.app_name);
-            drawerHeaderPhoto.setImageResource(R.drawable.application_logo);
-            return;
-        }
-
-        setUserPhotoInHeader(drawerHeaderPhoto);
-        setUserNameInHeader(drawerHeaderUserName);
-
     }
-
-    private void setUserNameInHeader(TextView drawerHeaderUserName) {
-        String fullUserName = userService.getUserFirstName();
-        if (TextUtils.isEmpty(fullUserName)) {
-            drawerHeaderUserName.setText(R.string.app_name);
-        } else {
-            drawerHeaderUserName.setText(fullUserName);
-        }
-    }
-
-    private void setUserPhotoInHeader(ImageView drawerHeaderPhoto) {
-        String userPhotoUrl = userService.getUserPhotoUrl();
-        if (TextUtils.isEmpty(userPhotoUrl)) {
-            drawerHeaderPhoto.setImageResource(R.drawable.application_logo);
-        }
-        else {
-            Picasso.with(activity.getApplication().getApplicationContext())
-                    .load(userPhotoUrl)
-                    .transform(new CropCircleTransformation())
-                    .into(drawerHeaderPhoto);
-        }
-    }
-
 }
