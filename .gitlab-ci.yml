@@ -1,0 +1,58 @@
+before_script:  
+    - export ANDROID_HOME=/opt/android-sdk-linux
+
+stages:
+    - test
+    - build
+    - clean
+
+test:
+    stage: test
+    script:
+        - chmod +x gradlew
+        - ./gradlew clean test
+
+master:
+    stage: build
+    only:
+        - master
+    script:
+        - chmod +x gradlew
+        - ./gradlew assembleRelease
+    artifacts:
+        paths:
+        - ./app/build/outputs/apk/*prod-release.apk
+        when: on_success
+
+dev:
+    stage: build
+    only:
+        - dev
+    script:
+        - chmod +x gradlew
+        - ./gradlew assembleDebug
+    artifacts:
+        paths:
+        - ./app/build/outputs/apk/*prod-debug.apk
+        when: on_success
+
+manual:
+    stage: build
+    except:
+        - master
+        - dev
+    script:
+        - chmod +x gradlew
+        - ./gradlew assembleDebug
+    artifacts:
+        paths:
+        - ./app/build/outputs/apk/*prod-debug.apk
+        when: on_success
+    when: manual
+
+clean:
+    stage: clean
+    script:
+        - chmod +x gradlew
+        - ./gradlew clean
+    when: always
