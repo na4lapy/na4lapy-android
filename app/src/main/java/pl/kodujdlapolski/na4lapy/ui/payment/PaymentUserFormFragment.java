@@ -64,10 +64,10 @@ public class PaymentUserFormFragment extends PaymentFragment {
     @BindView(R.id.acceptPaymentTerms)
     CheckBox acceptTerms;
 
-    @BindViews({ R.id.nameInputLayout, R.id.streetHouseInputLayout, R.id.zipCodeInputLayout, R.id.cityInputLayout, R.id.emailInputLayout })
+    @BindViews({ R.id.nameInputLayout, R.id.streetHouseInputLayout, R.id.cityInputLayout, R.id.emailInputLayout })
     List<TextInputLayout> notEmptyValidationGroupLayout;
 
-    @BindViews({ R.id.nameInput, R.id.streetHouseInput, R.id.zipCodeInput, R.id.cityInput, R.id.emailInput })
+    @BindViews({ R.id.nameInput, R.id.streetHouseInput, R.id.cityInput, R.id.emailInput })
     List<TextInputEditText> notEmptyValidationGroupInput;
 
     public static PaymentUserFormFragment newInstance(PaymentContract.UserActionListener listener, int pageNumber) {
@@ -147,7 +147,13 @@ public class PaymentUserFormFragment extends PaymentFragment {
     }
 
     boolean validateForm() {
-        return Lists.newArrayList(Iterables.filter(notEmptyValidationGroupInput,
+        boolean zipCodeIsValid = true;
+        if (TextUtils.isEmpty(zipCodeInput.getText().toString())) {
+            zipCodeInput.setError(getString(R.string.validation_error_empty));
+            zipCodeIsValid = false;
+        }
+
+        return zipCodeIsValid && Lists.newArrayList(Iterables.filter(notEmptyValidationGroupInput,
                 input -> checkIfEmpty(input, notEmptyValidationGroupLayout.get(notEmptyValidationGroupInput.indexOf(input))))).isEmpty();
     }
 
