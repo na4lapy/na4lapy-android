@@ -53,7 +53,10 @@ public class PaymentPresenter implements PaymentContract.UserActionListener {
                 .subscribe(s -> {
                     setShelter(s);
                     mView.setPage(PaymentContract.PAGE_AMOUNT_CHOOSER, this);
-                }, t -> parent.finish());
+                }, t -> {
+                    parent.finish();
+                    Toast.makeText(mActivity, R.string.payment_no_connection, Toast.LENGTH_LONG).show();
+                });
     }
 
     @Override
