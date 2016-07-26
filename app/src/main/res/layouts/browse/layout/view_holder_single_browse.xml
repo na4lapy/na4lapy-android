@@ -24,7 +24,7 @@
             tools:background="@color/colorAccent"
             tools:layout_height="400dp"
             tools:layout_width="match_parent"
-            tools:src="@drawable/pic_404dog" />
+            tools:src="@drawable/pic_error_dog_256dp" />
 
         <ImageButton
             android:id="@+id/matching_lvl_image"
@@ -83,7 +83,7 @@
                         android:layout_weight="1"
                         android:adjustViewBounds="true"
                         android:contentDescription="@string/content_desc_animal_size"
-                        tools:src="@drawable/vector_drawable_przegladanie_sredni" />
+                        tools:src="@drawable/animal_size_unknown_100dp" />
 
                     <ImageView
                         android:id="@+id/animal_gender_image"
@@ -92,7 +92,7 @@
                         android:layout_weight="1"
                         android:adjustViewBounds="true"
                         android:contentDescription="@string/content_desc_animal_gender"
-                        tools:src="@drawable/vector_drawable_przegladanie_samiec" />
+                        tools:src="@drawable/animal_gender_unknown_100dp" />
 
                     <ImageView
                         android:id="@+id/animal_activity_image"
@@ -101,7 +101,7 @@
                         android:layout_weight="1"
                         android:adjustViewBounds="true"
                         android:contentDescription="@string/content_desc_animal_activity"
-                        tools:src="@drawable/vector_drawable_przegladanie_domator" />
+                        tools:src="@drawable/animal_activity_unknown_100dp" />
                 </LinearLayout>
             </RelativeLayout>
 

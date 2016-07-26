@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/content_desc_error_image"
-        android:src="@drawable/pic_404dog" />
+        android:src="@drawable/pic_error_dog_256dp" />
 
     <TextView
         style="@style/TextAppearance.AppCompat.Medium"

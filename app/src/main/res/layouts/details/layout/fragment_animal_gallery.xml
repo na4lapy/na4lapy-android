@@ -46,7 +46,7 @@
         android:clickable="true"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
-        android:src="@drawable/ic_navigate_before_white_24px"
+        android:src="@drawable/ic_navigate_before_white_48dp"
         android:id="@+id/gallery_navigation_arrow_back"/>
 
     <ImageButton
@@ -56,7 +56,7 @@
         android:clickable="true"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
-        android:src="@drawable/ic_navigate_next_white_24px"
+        android:src="@drawable/ic_navigate_next_white_48dp"
         android:id="@+id/gallery_navigation_arrow_next"/>
 
 </RelativeLayout>
