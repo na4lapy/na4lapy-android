@@ -153,8 +153,9 @@ public class PaymentUserFormFragment extends PaymentFragment {
             zipCodeIsValid = false;
         }
 
-        return zipCodeIsValid && Lists.newArrayList(Iterables.filter(notEmptyValidationGroupInput,
-                input -> checkIfEmpty(input, notEmptyValidationGroupLayout.get(notEmptyValidationGroupInput.indexOf(input))))).isEmpty();
+        return Lists.newArrayList(Iterables.filter(notEmptyValidationGroupInput,
+                input -> checkIfEmpty(input, notEmptyValidationGroupLayout.get(notEmptyValidationGroupInput.indexOf(input))))).isEmpty()
+                && zipCodeIsValid;
     }
 
     boolean checkIfEmpty(TextInputEditText input, TextInputLayout layout) {
