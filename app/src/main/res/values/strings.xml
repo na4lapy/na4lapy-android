@@ -22,7 +22,7 @@
     <string name="lookupPreferences">Preferencje</string>
     <string name="aboutApplication">O aplikacji</string>
     <string name="aboutShelter">O schronisku</string>
-    <string name="donate_us">Wesprzyj nas</string>
+    <string name="donate_us">Pomóż nam</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="whatKindOfAnimalDoYouSeek">Jakiego zwierzaka szukasz?</string>
@@ -83,6 +83,7 @@
     <string name="size_large">Duża</string>
     <string name="size_medium">Średnia</string>
     <string name="size_small">Mała</string>
+    <string name="size_unknown">Nieznana</string>
     <string name="training_trainined">Podstawowe</string>
     <string name="training_untrainined">Zaawansowane</string>
     <string name="training_none">Brak</string>

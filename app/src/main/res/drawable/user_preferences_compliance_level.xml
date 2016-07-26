@@ -2,27 +2,27 @@
 <level-list
     xmlns:android="http://schemas.android.com/apk/res/android" >
     <item
-        android:drawable="@drawable/vector_drawable_procent_0"
+        android:drawable="@drawable/compliance_level_percent_0_100dp"
         android:minLevel="0"
         android:maxLevel="0" />
     <item
-        android:drawable="@drawable/vector_drawable_procent_20"
+        android:drawable="@drawable/compliance_level_percent_20_100dp"
         android:minLevel="1"
         android:maxLevel="1" />
     <item
-        android:drawable="@drawable/vector_drawable_procent_40"
+        android:drawable="@drawable/compliance_level_percent_40_100dp"
         android:minLevel="2"
         android:maxLevel="2" />
     <item
-        android:drawable="@drawable/vector_drawable_procent_60"
+        android:drawable="@drawable/compliance_level_percent_60_100dp"
         android:minLevel="3"
         android:maxLevel="3" />
     <item
-        android:drawable="@drawable/vector_drawable_procent_80"
+        android:drawable="@drawable/compliance_level_percent_80_100dp"
         android:minLevel="4"
         android:maxLevel="4" />
     <item
-        android:drawable="@drawable/vector_drawable_procent_100"
+        android:drawable="@drawable/compliance_level_percent_100_100dp"
         android:minLevel="5"
         android:maxLevel="5" />
 </level-list>

@@ -50,7 +50,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:background="?android:attr/selectableItemBackground"
-                    android:src="@drawable/ic_dog"
+                    android:src="@drawable/ic_type_dog_70dp"
                     android:id="@+id/type_dog"/>
 
                 <pl.kodujdlapolski.na4lapy.ui.preferences.ToggleImageButton
@@ -58,7 +58,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:background="?android:attr/selectableItemBackground"
-                    android:src="@drawable/ic_cat"
+                    android:src="@drawable/ic_type_cat_70dp"
                     android:id="@+id/type_cat"/>
 
                 <pl.kodujdlapolski.na4lapy.ui.preferences.ToggleImageButton
@@ -66,7 +66,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:background="?android:attr/selectableItemBackground"
-                    android:src="@drawable/ic_other"
+                    android:src="@drawable/ic_type_other_70dp"
                     android:id="@+id/type_other"/>
             </LinearLayout>
 
@@ -94,7 +94,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="?android:attr/selectableItemBackground"
-                    android:src="@drawable/ic_woman"
+                    android:src="@drawable/ic_gender_woman_70dp"
                     android:layout_gravity="center_vertical"
                     android:id="@+id/gender_woman"/>
 
@@ -102,7 +102,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="?android:attr/selectableItemBackground"
-                    android:src="@drawable/ic_man"
+                    android:src="@drawable/ic_gender_man_70dp"
                     android:layout_gravity="center_vertical"
                     android:id="@+id/gender_man"/>
 
@@ -187,7 +187,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:background="?android:attr/selectableItemBackground"
-                    android:src="@drawable/ic_size_small"
+                    android:src="@drawable/ic_size_small_70dp"
                     android:id="@+id/size_small"/>
 
                 <pl.kodujdlapolski.na4lapy.ui.preferences.ToggleImageButton
@@ -195,7 +195,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:background="?android:attr/selectableItemBackground"
-                    android:src="@drawable/ic_size_medium"
+                    android:src="@drawable/ic_size_medium_70dp"
                     android:id="@+id/size_medium"/>
 
                 <pl.kodujdlapolski.na4lapy.ui.preferences.ToggleImageButton
@@ -203,7 +203,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:background="?android:attr/selectableItemBackground"
-                    android:src="@drawable/ic_size_large"
+                    android:src="@drawable/ic_size_large_70dp"
                     android:id="@+id/size_large"/>
 
             </LinearLayout>
@@ -230,7 +230,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:background="?android:attr/selectableItemBackground"
-                    android:src="@drawable/ic_activity_low"
+                    android:src="@drawable/ic_activity_low_72dp"
                     android:id="@+id/activity_low"/>
 
                 <pl.kodujdlapolski.na4lapy.ui.preferences.ToggleImageButton
@@ -238,7 +238,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:background="?android:attr/selectableItemBackground"
-                    android:src="@drawable/ic_activity_high"
+                    android:src="@drawable/ic_activity_high_72dp"
                     android:id="@+id/activity_high"/>
 
             </LinearLayout>
