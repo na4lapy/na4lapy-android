@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 [name of copyright owner]
+ * Copyright (C) 2016 Stowarzyszenie Na4Łapy
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -110,7 +110,7 @@ public class AnimalGalleryPlaceholderFragment extends Fragment implements Animal
     public void loadPhotoIntoImageView(Bundle savedInstanceState) {
         String selectedPicUrl = animalPic.getUrl();
         if (TextUtils.isEmpty(selectedPicUrl)) {
-            imageView.setImageDrawable(getResources().getDrawable(R.drawable.vector_drawable_error_dog));
+            imageView.setImageDrawable(getResources().getDrawable(R.drawable.pic_error_dog_256dp));
             return;
         }
         Picasso.with(getContext()).load(selectedPicUrl).into(imageView);

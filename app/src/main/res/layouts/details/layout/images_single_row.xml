@@ -15,7 +15,7 @@
         android:layout_weight="1"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
-        tools:src="@drawable/vector_drawable_przegladanie_duzy" />
+        tools:src="@drawable/animal_size_big_100dp" />
 
     <ImageView
         android:id="@+id/image_2"
@@ -26,7 +26,7 @@
         android:layout_weight="1"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
-        tools:src="@drawable/vector_drawable_przegladanie_sredni" />
+        tools:src="@drawable/animal_size_medium_100dp" />
 
     <ImageView
         android:id="@+id/image_3"
@@ -35,6 +35,6 @@
         android:layout_weight="1"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
-        tools:src="@drawable/vector_drawable_przegladanie_maly" />
+        tools:src="@drawable/animal_size_small_100dp" />
 
 </LinearLayout>

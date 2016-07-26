@@ -49,7 +49,7 @@
                             android:layout_height="match_parent"
                             android:contentDescription="@string/paymentAmount"
                             android:scaleType="centerInside"
-                            android:src="@drawable/amount_background" />
+                            android:src="@drawable/amount_background_72dp" />
 
                         <TextView
                             android:id="@+id/amountText"

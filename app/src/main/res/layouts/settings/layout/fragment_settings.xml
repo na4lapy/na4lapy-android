@@ -69,7 +69,8 @@
             android:visibility="gone"
             android:background="@color/divider" />
 
-        <TextView
+        <!--todo - it should be deleted, because we resigned from login/logout feature
+        TextView
             android:id="@+id/logInLogout"
             style="@style/Base.TextAppearance.Widget.AppCompat.ExpandedMenu.Item"
             android:layout_width="match_parent"
@@ -79,7 +80,7 @@
             android:paddingBottom="@dimen/activity_vertical_margin"
             android:paddingTop="@dimen/activity_vertical_margin"
             android:visibility="gone"
-            tools:text="@string/login" />
+            tools:text="@string/login" /-->
 
 
     </LinearLayout>
