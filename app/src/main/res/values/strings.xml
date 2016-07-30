@@ -142,6 +142,7 @@
     <string name="later">później</string>
 
     <!-- Forms -->
+    <string name="validation_error_checked">Zaznaczenie tej opcji jest wymagane</string>
     <string name="validation_error_empty">To pole nie może pozostać puste</string>
 
     <!-- Payments Activity -->
