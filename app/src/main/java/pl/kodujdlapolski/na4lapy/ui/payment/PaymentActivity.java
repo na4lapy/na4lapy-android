@@ -24,6 +24,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -110,6 +111,12 @@ public class PaymentActivity extends AppCompatActivity implements PaymentContrac
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
+    }
+
+    @Override
+    public void showConnectionErrorAndFinish() {
+        Toast.makeText(this, R.string.payment_no_connection, Toast.LENGTH_LONG).show();
+        finish();
     }
 
     private void setFragment(Fragment fragment, String name) {

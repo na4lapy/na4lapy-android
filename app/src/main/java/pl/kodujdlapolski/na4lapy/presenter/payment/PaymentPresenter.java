@@ -52,10 +52,9 @@ public class PaymentPresenter implements PaymentContract.UserActionListener {
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(s -> {
                     setShelter(s);
-                    mView.setPage(PaymentContract.PAGE_AMOUNT_CHOOSER, this);
+                    view.setPage(PaymentContract.PAGE_AMOUNT_CHOOSER, this);
                 }, t -> {
-                    parent.finish();
-                    Toast.makeText(mActivity, R.string.payment_no_connection, Toast.LENGTH_LONG).show();
+                    view.showConnectionErrorAndFinish();
                 });
     }
 
