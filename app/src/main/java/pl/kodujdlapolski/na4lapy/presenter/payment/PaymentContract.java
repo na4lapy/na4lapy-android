@@ -24,6 +24,7 @@ public interface PaymentContract {
         void setPage(int page, PaymentContract.UserActionListener listener);
         void setTitle(int page);
         void hideKeyboard();
+        void showConnectionErrorAndFinish();
     }
 
     interface UserActionListener{
