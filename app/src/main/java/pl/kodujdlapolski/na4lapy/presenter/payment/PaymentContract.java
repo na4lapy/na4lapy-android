@@ -52,6 +52,8 @@ public interface PaymentContract {
         void showAcceptRequirementDialog();
 
         void showPaymentTermsDialog();
+
+        void showConnectionErrorAndFinish();
     }
 
     interface UserActionListener {

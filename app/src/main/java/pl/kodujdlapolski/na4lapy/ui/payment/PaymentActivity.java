@@ -28,6 +28,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebView;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -132,6 +133,12 @@ public class PaymentActivity extends AppCompatActivity implements PaymentContrac
                 .setView(view).setPositiveButton(R.string.buttonClose, null).create();
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         dialog.show();
+    }
+
+    @Override
+    public void showConnectionErrorAndFinish() {
+        Toast.makeText(this, R.string.payment_no_connection, Toast.LENGTH_LONG).show();
+        finish();
     }
 
     private void setFragment(Fragment fragment, String name) {
