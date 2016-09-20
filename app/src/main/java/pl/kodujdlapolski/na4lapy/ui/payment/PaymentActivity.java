@@ -19,10 +19,14 @@ package pl.kodujdlapolski.na4lapy.ui.payment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.webkit.WebView;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
@@ -31,6 +35,7 @@ import butterknife.ButterKnife;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.presenter.payment.PaymentContract;
 import pl.kodujdlapolski.na4lapy.presenter.payment.PaymentPresenter;
+import pl.kodujdlapolski.na4lapy.presenter.settings.WebPageTypes;
 
 public class PaymentActivity extends AppCompatActivity implements PaymentContract.View {
 
@@ -111,6 +116,23 @@ public class PaymentActivity extends AppCompatActivity implements PaymentContrac
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
+    }
+
+    @Override
+    public void showAcceptRequirementDialog() {
+        new AlertDialog.Builder(this, R.style.SimpleDialog)
+                .setMessage(R.string.paymentTermsNotAccepted).setPositiveButton(R.string.buttonClose, null)
+                .create().show();
+    }
+
+    @Override
+    public void showPaymentTermsDialog() {
+        View view = LayoutInflater.from(this).inflate(R.layout.dialog_payment_terms, null);
+        ((WebView)view.findViewById(R.id.webView)).loadUrl(WebPageTypes.PAYMENT_TERMS.getUrl());
+        AlertDialog dialog = new AlertDialog.Builder(this, R.style.SimpleDialog)
+                .setView(view).setPositiveButton(R.string.buttonClose, null).create();
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        dialog.show();
     }
 
     @Override

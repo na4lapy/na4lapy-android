@@ -20,31 +20,27 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.AlertDialog;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.CheckBox;
 
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-
-import java.util.List;
-
 import butterknife.BindView;
-import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.presenter.payment.PaymentContract;
-import pl.kodujdlapolski.na4lapy.presenter.settings.WebPageTypes;
 import pl.kodujdlapolski.na4lapy.service.payments.model.Address;
 import pl.kodujdlapolski.na4lapy.service.payments.model.Customer;
+import pl.kodujdlapolski.na4lapy.utils.formvalidator.FormValidator;
+import pl.kodujdlapolski.na4lapy.utils.formvalidator.rule.CheckedRule;
+import pl.kodujdlapolski.na4lapy.utils.formvalidator.rule.NotEmptyRule;
 
+/**
+ * @author Marek Wojtuszkiewicz
+ */
 public class PaymentUserFormFragment extends PaymentFragment {
 
     @BindView(R.id.nameInputLayout)
@@ -80,11 +76,7 @@ public class PaymentUserFormFragment extends PaymentFragment {
     @BindView(R.id.acceptPaymentTerms)
     CheckBox acceptTerms;
 
-    @BindViews({ R.id.nameInputLayout, R.id.streetHouseInputLayout, R.id.zipCodeInputLayout, R.id.cityInputLayout, R.id.emailInputLayout })
-    List<TextInputLayout> notEmptyValidationGroupLayout;
-
-    @BindViews({ R.id.nameInput, R.id.streetHouseInput, R.id.zipCodeInput, R.id.cityInput, R.id.emailInput })
-    List<TextInputEditText> notEmptyValidationGroupInput;
+    private FormValidator validator;
 
     public static PaymentUserFormFragment newInstance(PaymentContract.UserActionListener listener, int pageNumber) {
         PaymentUserFormFragment fragment = new PaymentUserFormFragment();
@@ -104,25 +96,18 @@ public class PaymentUserFormFragment extends PaymentFragment {
         cityInput.addTextChangedListener(new NotEmptyTextWatcher(cityLayout));
         emailInput.addTextChangedListener(new NotEmptyTextWatcher(emailLayout));
         setSavedCustomerData(getListener().getCustomer());
+        validator = prepareFormValidator();
         return rootView;
     }
 
     @OnClick(R.id.submitUserForm)
-    public void chooseAmount() {
-        if (!validateForm()) {
-            return;
-        }
-
-        if (acceptTerms.isChecked()) {
-            getListener().saveCustomer(getPaymentUserData());
-        } else {
-            showAcceptRequirementDialog();
-        }
+    public void submitUserForm() {
+        getListener().validateAndSubmitUserForm(validator, getPaymentUserData());
     }
 
     @OnClick(R.id.showPaymentTerms)
     public void showPaymentTerms() {
-        showPaymentTermsDialog();
+        getListener().showPaymentTerms();
     }
 
     public void setSavedCustomerData(@Nullable Customer customer) {
@@ -148,32 +133,14 @@ public class PaymentUserFormFragment extends PaymentFragment {
         return customer;
     }
 
-    private void showAcceptRequirementDialog() {
-        new AlertDialog.Builder(getContext(), R.style.SimpleDialog)
-                .setMessage(R.string.paymentTermsNotAccepted).setPositiveButton(R.string.buttonClose, null).create().show();
-    }
-
-    private void showPaymentTermsDialog() {
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_payment_terms, null);
-        ((WebView)view.findViewById(R.id.webView)).loadUrl(WebPageTypes.PAYMENT_TERMS.getUrl());
-        AlertDialog dialog = new AlertDialog.Builder(getActivity(), R.style.SimpleDialog)
-                .setView(view).setPositiveButton(R.string.buttonClose, null).create();
-        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        dialog.show();
-    }
-
-    boolean validateForm() {
-        return Lists.newArrayList(Iterables.filter(notEmptyValidationGroupInput,
-                input -> checkIfEmpty(input, notEmptyValidationGroupLayout.get(notEmptyValidationGroupInput.indexOf(input))))).isEmpty();
-    }
-
-    boolean checkIfEmpty(TextInputEditText input, TextInputLayout layout) {
-        if (!TextUtils.isEmpty(input.getText().toString())) {
-            return false;
-        }
-
-        layout.setError(getString(R.string.validation_error_empty));
-        return true;
+    private FormValidator prepareFormValidator() {
+        return new FormValidator(getContext())
+                .addRule(new CheckedRule(acceptTerms, PaymentContract.FORM_VALIDATION_PAYMENT_TERMS))
+                .addRule(new NotEmptyRule(zipCodeInput, null, PaymentContract.FORM_VALIDATION_TEXT_INPUT))
+                .addRule(new NotEmptyRule(fullNameInput, nameInputLayout, PaymentContract.FORM_VALIDATION_TEXT_INPUT))
+                .addRule(new NotEmptyRule(streetHouseInput, streetHouseLayout, PaymentContract.FORM_VALIDATION_TEXT_INPUT))
+                .addRule(new NotEmptyRule(cityInput, cityLayout, PaymentContract.FORM_VALIDATION_TEXT_INPUT))
+                .addRule(new NotEmptyRule(emailInput, emailLayout, PaymentContract.FORM_VALIDATION_TEXT_INPUT));
     }
 
     public class NotEmptyTextWatcher implements TextWatcher {
