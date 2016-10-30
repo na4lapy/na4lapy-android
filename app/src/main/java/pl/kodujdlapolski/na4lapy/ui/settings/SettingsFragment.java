@@ -21,6 +21,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,9 +41,11 @@ public class SettingsFragment extends Fragment {
     @BindView(R.id.version_name)
     TextView versionName;
 
-    //todo - it should be deleted, because we resigned from login/logout feature
-/*    @BindView(R.id.logInLogout)
-    TextView logInLogoutText;*/
+    @BindView(R.id.app_website_link)
+    TextView appWebsiteLink;
+
+    @BindView(R.id.app_facebook_link)
+    TextView appFacebookLink;
 
     @Inject
     UserService userService;
@@ -72,6 +75,14 @@ public class SettingsFragment extends Fragment {
         } catch (PackageManager.NameNotFoundException e) {
             versionName.setVisibility(View.GONE);
         }
+        setLinksToWebsites();
+    }
+
+    private void setLinksToWebsites() {
+        appWebsiteLink.setMovementMethod(LinkMovementMethod.getInstance());
+        appWebsiteLink.setLinkTextColor(getResources().getColor(R.color.colorPrimaryDark));
+        appFacebookLink.setMovementMethod(LinkMovementMethod.getInstance());
+        appFacebookLink.setLinkTextColor(getResources().getColor(R.color.colorPrimaryDark));
     }
 
     @SuppressWarnings("unused")

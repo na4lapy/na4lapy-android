@@ -37,6 +37,36 @@
             android:background="@color/divider" />
 
         <TextView
+            android:id="@+id/app_website_link"
+            style="@style/Base.TextAppearance.Widget.AppCompat.ExpandedMenu.Item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:text="@string/app_website_link" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider" />
+
+        <TextView
+            android:id="@+id/app_facebook_link"
+            style="@style/Base.TextAppearance.Widget.AppCompat.ExpandedMenu.Item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:text="@string/app_facebook_link" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider" />
+
+        <TextView
             android:id="@+id/privacy_policy"
             style="@style/Base.TextAppearance.Widget.AppCompat.ExpandedMenu.Item"
             android:layout_width="match_parent"
