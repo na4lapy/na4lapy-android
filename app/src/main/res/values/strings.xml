@@ -1,12 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright 2017 Stowarzyszenie Na4Łapy
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="pl">
     <string name="privacy_policy_text">Polityka Prywatności</string>
     <string name="regulations_text">Regulamin</string>
     <string name="open_source_libs_text">Licencje typu open source</string>
-    <string name="about_text">Aplikacja mobilna dla Gdańskiego schroniska Promyk to rozwiązanie
-        pozwalające na przeglądanie zdjęć i opisów zwierząt znajdujących się obecnie pod ich
-        opieką.\n\nUżytkownik może w prosty sposób dodawać psy i koty do listy ulubionych oraz
-        przekazywać datki na zwierzęta w formie elektronicznych mikropłatności.
+    <string name="about_text">Aplikacja „Na 4 Łapy” to świetne narzędzie, które pomoże Ci wybrać odpowiedniego dla Ciebie pupila.
+        Chcesz dużego psa? A może szukasz kota? Ma to być zwierzę aktywne, czy chcesz typowego domowego pieszczocha?
+        Określ swoje preferencje, a „Na 4 Łapy” dopasuje dla Ciebie czworonoga, którego możesz adoptować ze schroniska „Promyk” znajdującego się w Gdańsku.
+        Nie ograniczasz się do jednego miasta i schroniska? Nie martw się, niebawem „Na 4 Łapy” współpracować będzie z większą liczbą schronisk.
+        \n\nTa aplikacja w 3 prostych krokach umożliwi Ci także wpłacenie drobnej kwoty na schronisko.
+        To dzięki takim datkom schronisko funkcjonuje, a mieszkające tam zwierzaki otrzymują jedzenie, leki i opiekę.
+        Wpłata może być jednorazowa, do niczego nie zobowiązuje, operatorzy zrzekli się prowizji i całość pieniędzy wpływa na konto schroniska.
+        \n\nNieustanie staramy się rozwijać, dodawać nowe funkcjonalności, zostań z nami na dłużej i pomagaj zwierzakom.
+        \n\nBądź aktywny, bądź wrażliwy, jeżeli nie Ty to kto?
     </string>
+    <string name="app_website_link"><a href="http://www.na4lapy.org">Strona www o aplikacji</a></string>
+    <string name="app_facebook_link"><a href="https://web.facebook.com/Na-4-Łapy-1759865620949415">Facebook Na 4 Łapy</a></string>
     <string name="version">Wersja: %1$s</string>
     <string name="about_shelter_page_title">O schronisku - %1$s</string>
     <string name="shelter_address_label">Adres:</string>
@@ -22,7 +45,7 @@
     <string name="lookupPreferences">Preferencje</string>
     <string name="aboutApplication">O aplikacji</string>
     <string name="aboutShelter">O schronisku</string>
-    <string name="donate_us">Wesprzyj nas</string>
+    <string name="donate_us">Pomóż nam</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="whatKindOfAnimalDoYouSeek">Jakiego zwierzaka szukasz?</string>
@@ -83,6 +106,7 @@
     <string name="size_large">Duża</string>
     <string name="size_medium">Średnia</string>
     <string name="size_small">Mała</string>
+    <string name="size_unknown">Nieznana</string>
     <string name="training_trainined">Podstawowe</string>
     <string name="training_untrainined">Zaawansowane</string>
     <string name="training_none">Brak</string>
@@ -141,6 +165,7 @@
     <string name="later">później</string>
 
     <!-- Forms -->
+    <string name="validation_error_checked">Zaznaczenie tej opcji jest wymagane</string>
     <string name="validation_error_empty">To pole nie może pozostać puste</string>
 
     <!-- Payments Activity -->

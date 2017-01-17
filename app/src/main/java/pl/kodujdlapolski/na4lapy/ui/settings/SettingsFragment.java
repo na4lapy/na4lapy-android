@@ -1,3 +1,19 @@
+/*
+ *	Copyright 2017 Stowarzyszenie Na4Łapy
+ *
+ *	Licensed under the Apache License, Version 2.0 (the "License");
+ *	you may not use this file except in compliance with the License.
+ *	You may obtain a copy of the License at
+ *
+ *	http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *	Unless required by applicable law or agreed to in writing, software
+ *	distributed under the License is distributed on an "AS IS" BASIS,
+ *	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *	See the License for the specific language governing permissions and
+ *	limitations under the License.
+ */
+
 package pl.kodujdlapolski.na4lapy.ui.settings;
 
 import android.content.Intent;
@@ -5,6 +21,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,27 +37,15 @@ import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.presenter.settings.WebPageTypes;
 import pl.kodujdlapolski.na4lapy.service.user.UserService;
 
-/**
- * Created by Natalia Wróblewska on 2016-03-01.
- * <p>
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * <p>
- * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 public class SettingsFragment extends Fragment {
     @BindView(R.id.version_name)
     TextView versionName;
 
-    @BindView(R.id.logInLogout)
-    TextView logInLogoutText;
+    @BindView(R.id.app_website_link)
+    TextView appWebsiteLink;
+
+    @BindView(R.id.app_facebook_link)
+    TextView appFacebookLink;
 
     @Inject
     UserService userService;
@@ -70,6 +75,14 @@ public class SettingsFragment extends Fragment {
         } catch (PackageManager.NameNotFoundException e) {
             versionName.setVisibility(View.GONE);
         }
+        setLinksToWebsites();
+    }
+
+    private void setLinksToWebsites() {
+        appWebsiteLink.setMovementMethod(LinkMovementMethod.getInstance());
+        appWebsiteLink.setLinkTextColor(getResources().getColor(R.color.colorPrimaryDark));
+        appFacebookLink.setMovementMethod(LinkMovementMethod.getInstance());
+        appFacebookLink.setLinkTextColor(getResources().getColor(R.color.colorPrimaryDark));
     }
 
     @SuppressWarnings("unused")

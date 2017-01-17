@@ -1,3 +1,19 @@
+/*
+ *	Copyright 2017 Stowarzyszenie Na4Łapy
+ *
+ *	Licensed under the Apache License, Version 2.0 (the "License");
+ *	you may not use this file except in compliance with the License.
+ *	You may obtain a copy of the License at
+ *
+ *	http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *	Unless required by applicable law or agreed to in writing, software
+ *	distributed under the License is distributed on an "AS IS" BASIS,
+ *	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *	See the License for the specific language governing permissions and
+ *	limitations under the License.
+ */
+
 package pl.kodujdlapolski.na4lapy.presenter.payment;
 
 import android.app.Activity;
@@ -5,6 +21,10 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.google.common.collect.Collections2;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -20,6 +40,8 @@ import pl.kodujdlapolski.na4lapy.service.payments.model.type.PaymentType;
 import pl.kodujdlapolski.na4lapy.service.preferences.PreferencesService;
 import pl.kodujdlapolski.na4lapy.service.repository.RepositoryService;
 import pl.kodujdlapolski.na4lapy.service.system.SystemService;
+import pl.kodujdlapolski.na4lapy.utils.formvalidator.FormValidator;
+import pl.kodujdlapolski.na4lapy.utils.formvalidator.ValidationError;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -52,8 +74,10 @@ public class PaymentPresenter implements PaymentContract.UserActionListener {
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(s -> {
                     setShelter(s);
-                    mView.setPage(PaymentContract.PAGE_AMOUNT_CHOOSER, this);
-                }, t -> parent.finish());
+                    view.setPage(PaymentContract.PAGE_AMOUNT_CHOOSER, this);
+                }, t -> {
+                    view.showConnectionErrorAndFinish();
+                });
     }
 
     @Override
@@ -69,7 +93,7 @@ public class PaymentPresenter implements PaymentContract.UserActionListener {
     }
 
     @Override
-    public void saveCustomer(@Nullable Customer customer) {
+    public void saveCustomerAndGoToNextPage(@Nullable Customer customer) {
         payment.setCustomer(customer);
         preferencesService.setCustomer(customer);
         mView.hideKeyboard();
@@ -130,6 +154,24 @@ public class PaymentPresenter implements PaymentContract.UserActionListener {
         return paymentResponse;
     }
 
+    @Override
+    public void validateAndSubmitUserForm(FormValidator validator, Customer customer) {
+        List<ValidationError> errors = validator.validateForm();
+
+        if (!checkUserAcceptedPaymentTerms(errors)) {
+            mView.showAcceptRequirementDialog();
+        }
+
+        if (errors.isEmpty()) {
+            saveCustomerAndGoToNextPage(customer);
+        }
+    }
+
+    @Override
+    public void showPaymentTerms() {
+        mView.showPaymentTermsDialog();
+    }
+
     private Payment create() {
         Payment payment = new Payment();
         payment.setSale(new Sale());
@@ -139,5 +181,11 @@ public class PaymentPresenter implements PaymentContract.UserActionListener {
 
     private void setShelter(Shelter s) {
         shelter = s;
+    }
+
+    private boolean checkUserAcceptedPaymentTerms(List<ValidationError> errors) {
+        return Collections2
+                .filter(errors, e -> e.getValidationCode() == PaymentContract.FORM_VALIDATION_PAYMENT_TERMS)
+                .isEmpty();
     }
 }

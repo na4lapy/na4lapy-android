@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright 2017 Stowarzyszenie Na4Łapy
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/single_row_container"
@@ -15,7 +30,7 @@
         android:layout_weight="1"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
-        tools:src="@drawable/vector_drawable_przegladanie_duzy" />
+        tools:src="@drawable/animal_size_big_100dp" />
 
     <ImageView
         android:id="@+id/image_2"
@@ -26,7 +41,7 @@
         android:layout_weight="1"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
-        tools:src="@drawable/vector_drawable_przegladanie_sredni" />
+        tools:src="@drawable/animal_size_medium_100dp" />
 
     <ImageView
         android:id="@+id/image_3"
@@ -35,6 +50,6 @@
         android:layout_weight="1"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
-        tools:src="@drawable/vector_drawable_przegladanie_maly" />
+        tools:src="@drawable/animal_size_small_100dp" />
 
 </LinearLayout>

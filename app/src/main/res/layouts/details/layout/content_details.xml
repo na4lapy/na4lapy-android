@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright 2017 Stowarzyszenie Na4Łapy
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -44,7 +59,7 @@
             android:layout_weight="1"
             android:adjustViewBounds="true"
             android:contentDescription="@string/content_desc_animal_size"
-            tools:src="@drawable/vector_drawable_przegladanie_sredni" />
+            tools:src="@drawable/animal_size_medium_100dp" />
 
         <ImageView
             android:id="@+id/animal_gender_image"
@@ -53,7 +68,7 @@
             android:layout_weight="1"
             android:adjustViewBounds="true"
             android:contentDescription="@string/content_desc_animal_gender"
-            tools:src="@drawable/vector_drawable_przegladanie_samiec" />
+            tools:src="@drawable/animal_gender_male_100dp" />
 
         <ImageView
             android:id="@+id/animal_activity_image"
@@ -62,7 +77,7 @@
             android:layout_weight="1"
             android:adjustViewBounds="true"
             android:contentDescription="@string/content_desc_animal_activity"
-            tools:src="@drawable/vector_drawable_przegladanie_domator" />
+            tools:src="@drawable/animal_activity_low_100dp" />
     </LinearLayout>
 
 
