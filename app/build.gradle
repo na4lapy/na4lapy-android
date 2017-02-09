@@ -3,13 +3,13 @@ apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'me.tatarka.retrolambda'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.1"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
 
     defaultConfig {
         applicationId "pl.kodujdlapolski.na4lapy"
         minSdkVersion 16
-        targetSdkVersion 24
+        targetSdkVersion 25
         versionCode 9
         versionName "1.0.3"
         manifestPlaceholders = [HOCKEYAPP_APP_ID: "1b336de533e0489b894c1b202a264a70"]
@@ -42,7 +42,7 @@ android {
             applicationIdSuffix = ".mock"
         }
         prod {
-            buildConfigField 'String', 'BASE_URL', System.getenv("N4L_API_URL") ?: '"http://na4lapy.kodujdlapolski.pl/api/"'
+            buildConfigField 'String', 'BASE_URL', System.getenv("N4L_API_URL") ?: '"https://api.na4lapy.org/v2/"'
         }
     }
 
@@ -92,7 +92,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    def supportLibraryVersion = "24.1.1"
+    def supportLibraryVersion = "25.1.1"
     def retrofitVersion = "2.1.0"
     dependencies {
         compile fileTree(dir: 'libs', include: ['*.jar'])
