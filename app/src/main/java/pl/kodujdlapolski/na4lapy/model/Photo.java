@@ -31,10 +31,13 @@ import lombok.NoArgsConstructor;
 public class Photo extends BaseEntity implements Serializable{
 
     @DatabaseField
-    private String url;
+    private String fileName;
 
     @DatabaseField
     private String author;
+
+    @DatabaseField
+    private Boolean profil;
 
     @DatabaseField(foreign = true)
     private Animal animal;

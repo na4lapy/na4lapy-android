@@ -81,13 +81,14 @@ public class RepositoryServiceImpl implements RepositoryService {
                 }
             }
         })
-        .concatWith(mApiService.getAnimalList().doOnNext(animals -> {
-            try {
-                mDatabaseRepository.saveAll(animals);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }));
+                .concatWith(mApiService.getAnimalList()
+                        .map((animalsPage -> animalsPage.data)).doOnNext(animals -> {
+                            try {
+                                mDatabaseRepository.saveAll(animals);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }));
     }
 
     @Override

@@ -59,8 +59,9 @@ public class SystemServiceImpl implements SystemService {
         Intent sharingIntent = new Intent(Intent.ACTION_SEND);
         sharingIntent.setType("text/plain");
         sharingIntent.putExtra(Intent.EXTRA_SUBJECT, animal.getName() + " " + animal.getChipId());
-        if (animal.getPhotos() != null && animal.getPhotos().iterator().hasNext()) {
-            sharingIntent.putExtra(Intent.EXTRA_TEXT, animal.getPhotos().iterator().next().getUrl());
+        String url = animal.getProfilePicUrl();
+        if (url != null) {
+            sharingIntent.putExtra(Intent.EXTRA_TEXT, url);
         }
         return sharingIntent;
     }

@@ -23,6 +23,8 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import pl.kodujdlapolski.na4lapy.BuildConfig;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -47,8 +49,15 @@ public class ApiModule {
     @Provides
     @Named("api")
     public Retrofit provideRetrofit(HttpUrl baseUrl, Gson gson) {
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(BuildConfig.DEBUG ?
+                HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE);
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+        httpClient.addInterceptor(logging);
+
         return new Retrofit.Builder()
                 .baseUrl(baseUrl)
+                .client(httpClient.build())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();

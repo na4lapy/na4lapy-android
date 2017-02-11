@@ -42,7 +42,7 @@ android {
             applicationIdSuffix = ".mock"
         }
         prod {
-            buildConfigField 'String', 'BASE_URL', System.getenv("N4L_API_URL") ?: '"https://api.na4lapy.org/v2/"'
+            buildConfigField 'String', 'BASE_URL', System.getenv("N4L_API_URL") ?: '"https://api.na4lapy.org/"'
         }
     }
 
@@ -119,6 +119,7 @@ android {
         provided "org.projectlombok:lombok:1.16.8"
         apt "org.projectlombok:lombok:1.16.8"
         compile 'com.github.lsjwzh.RecyclerViewPager:lib:v1.1.0'
+        compile 'com.squareup.okhttp3:logging-interceptor:3.6.0'
 
         testCompile 'junit:junit:4.12'
         testCompile 'org.mockito:mockito-core:1.10.19'

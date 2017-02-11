@@ -182,7 +182,7 @@ public class ContentDetailsView {
     private void initImageView(View parent, ArrayList<Photo> photos, int index, int res) {
         ImageView image1 = (ImageView) parent.findViewById(res);
         image1.getLayoutParams().height = getGalleryPicHeight();
-        Picasso.with(ctx).load(photos.get(index).getUrl()).memoryPolicy(MemoryPolicy.NO_STORE, MemoryPolicy.NO_CACHE).into(image1);
+        Picasso.with(ctx).load(photos.get(index).getFileName()).memoryPolicy(MemoryPolicy.NO_STORE, MemoryPolicy.NO_CACHE).into(image1);
         image1.setOnClickListener(v -> {
             Intent i = new Intent(ctx, AnimalGalleryActivity.class);
             i.putExtra(AnimalGalleryActivity.EXTRA_GALLERY, photos);

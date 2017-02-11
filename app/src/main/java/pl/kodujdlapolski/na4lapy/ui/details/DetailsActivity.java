@@ -49,6 +49,7 @@ import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 import pl.kodujdlapolski.na4lapy.Na4LapyApp;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Animal;
+import pl.kodujdlapolski.na4lapy.model.Photo;
 import pl.kodujdlapolski.na4lapy.service.repository.RepositoryService;
 import pl.kodujdlapolski.na4lapy.service.system.SystemService;
 import pl.kodujdlapolski.na4lapy.service.user.UserService;
@@ -140,17 +141,17 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     private void initToolbarImages() {
-        if (animal.getPhotos() != null && animal.getPhotos().iterator().hasNext()) {
-            String url = animal.getPhotos().iterator().next().getUrl();
+        String profilePicUrl = animal.getProfilePicUrl();
+        if (profilePicUrl != null) {
             Picasso.with(this)
-                    .load(url)
+                    .load(profilePicUrl)
                     .memoryPolicy(MemoryPolicy.NO_STORE, MemoryPolicy.NO_CACHE)
                     .transform(new BlurTransformation(this, 2))
                     .transform(new ColorFilterTransformation(ContextCompat.getColor(this, R.color.colorPrimaryDark50opacity)))
                     .into(background);
 
             Picasso.with(this)
-                    .load(url)
+                    .load(profilePicUrl)
                     .memoryPolicy(MemoryPolicy.NO_STORE, MemoryPolicy.NO_CACHE)
                     .transform(new CropCircleTransformation())
                     .into(profilePic);

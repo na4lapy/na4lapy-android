@@ -49,7 +49,7 @@ public class AnimalDeserializer implements JsonDeserializer {
         Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateDeserializer()).create();
         Animal animal = gson.fromJson(json, Animal.class);
         try {
-            ConnectionSource connectionSource = new AndroidConnectionSource(new DatabaseHelper(ctx));
+           ConnectionSource connectionSource = new AndroidConnectionSource(new DatabaseHelper(ctx));
             Dao<Animal, Long> dao = DaoManager.createDao(connectionSource, Animal.class);
             dao.assignEmptyForeignCollection(animal, "photos");
 

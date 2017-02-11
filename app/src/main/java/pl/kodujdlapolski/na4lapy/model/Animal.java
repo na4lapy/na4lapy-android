@@ -15,6 +15,8 @@
  */
 package pl.kodujdlapolski.na4lapy.model;
 
+import android.util.Log;
+
 import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.field.ForeignCollectionField;
@@ -23,6 +25,8 @@ import com.j256.ormlite.table.DatabaseTable;
 import org.joda.time.LocalDate;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -71,4 +75,19 @@ public class Animal extends BaseEntity implements Serializable {
 
     @DatabaseField(columnName = Animal.COLUMN_NAME_FAVOURITE)
     private Boolean favourite;
+
+    public String getProfilePicUrl() {
+        if (getPhotos() == null) return null;
+        Photo p = null;
+        for (Photo candidatePhoto : getPhotos()) {
+            if (candidatePhoto.getProfil()) {
+                p = candidatePhoto;
+            }
+        }
+        if (p == null && !getPhotos().isEmpty()) {
+            p = getPhotos().iterator().next();
+        }
+        if (p == null) return null;
+        return p.getFileName();
+    }
 }
