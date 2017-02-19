@@ -23,7 +23,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import pl.kodujdlapolski.na4lapy.service.api.ApiService;
 import pl.kodujdlapolski.na4lapy.service.preferences.PreferencesService;
-import pl.kodujdlapolski.na4lapy.service.repository.database.DatabaseRepository;
 import pl.kodujdlapolski.na4lapy.service.user.UserService;
 
 import static org.junit.Assert.assertNotNull;

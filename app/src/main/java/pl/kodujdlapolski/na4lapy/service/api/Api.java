@@ -20,11 +20,13 @@ import java.util.List;
 import pl.kodujdlapolski.na4lapy.model.Animal;
 import pl.kodujdlapolski.na4lapy.model.AnimalsPage;
 import pl.kodujdlapolski.na4lapy.model.Shelter;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 import rx.Observable;
 
-public interface Api {
+public interface    Api {
 
     @GET("shelters/1")
     Observable<Shelter> getShelter();
@@ -34,4 +36,7 @@ public interface Api {
 
     @GET("animals/{id}")
     Observable<Animal> getAnimal(@Path("id") Long id);
+
+    @POST("animals/getbyids")
+    Observable<Animal> getAnimals(@Body String body);
 }

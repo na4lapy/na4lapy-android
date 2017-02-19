@@ -15,6 +15,11 @@
  */
 package pl.kodujdlapolski.na4lapy.service.api;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
+import java.util.List;
+
 import javax.inject.Inject;
 
 import pl.kodujdlapolski.na4lapy.model.Animal;
@@ -44,5 +49,12 @@ public class ApiServiceImpl implements ApiService {
     @Override
     public Observable<Animal> getAnimal(Long id) {
         return mApi.getAnimal(id);
+    }
+
+    @Override
+    public Observable<Animal> getAnimals(List<Long> ids) {
+        JsonObject object = new JsonObject();
+        object.add("ids", new Gson().toJsonTree(ids));
+        return mApi.getAnimals(object.toString());
     }
 }

@@ -27,7 +27,6 @@ import pl.kodujdlapolski.na4lapy.model.type.Species;
 import pl.kodujdlapolski.na4lapy.model.type.Sterilization;
 import pl.kodujdlapolski.na4lapy.model.type.Training;
 import pl.kodujdlapolski.na4lapy.model.type.Vaccination;
-import pl.kodujdlapolski.na4lapy.service.repository.database.DatabaseHelper;
 import rx.Observable;
 
 public class FakeApiServiceImpl implements ApiService {

@@ -15,22 +15,13 @@
  */
 package pl.kodujdlapolski.na4lapy.model;
 
-import android.util.Log;
-
-import com.j256.ormlite.dao.ForeignCollection;
-import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.field.ForeignCollectionField;
-import com.j256.ormlite.table.DatabaseTable;
-
 import org.joda.time.LocalDate;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import pl.kodujdlapolski.na4lapy.model.type.ActivityAnimal;
 import pl.kodujdlapolski.na4lapy.model.type.Gender;
 import pl.kodujdlapolski.na4lapy.model.type.Size;
@@ -38,42 +29,29 @@ import pl.kodujdlapolski.na4lapy.model.type.Species;
 import pl.kodujdlapolski.na4lapy.model.type.Sterilization;
 import pl.kodujdlapolski.na4lapy.model.type.Training;
 import pl.kodujdlapolski.na4lapy.model.type.Vaccination;
-import pl.kodujdlapolski.na4lapy.service.repository.database.LocalDatePersister;
 
-@DatabaseTable(tableName = "animals")
-@Data
-@EqualsAndHashCode(callSuper = true)
-@NoArgsConstructor //for ormlite
-public class Animal extends BaseEntity implements Serializable {
+@Getter
+@Setter
+public class Animal implements Serializable {
 
-    public final static String COLUMN_NAME_FAVOURITE = "favourite";
-
-    @DatabaseField(foreign = true)
+    private Long id;
     private Shelter shelter;
-
-    @DatabaseField private String name;
-    @DatabaseField private String race;
-    @DatabaseField private String description;
-    @DatabaseField private String chipId;
-
-    @DatabaseField(persisterClass = LocalDatePersister.class)
+    private String name;
+    private String race;
+    private String description;
+    private String chipId;
     private LocalDate birthDate;
-
-    @DatabaseField(persisterClass = LocalDatePersister.class)
     private LocalDate admittanceDate;
+    private Sterilization sterilization;
+    private Species species;
+    private Gender gender;
+    private Size size;
+    private ActivityAnimal activity;
+    private Vaccination vaccination;
+    private Training training;
 
-    @DatabaseField private Sterilization sterilization;
-    @DatabaseField private Species species;
-    @DatabaseField private Gender gender;
-    @DatabaseField private Size size;
-    @DatabaseField private ActivityAnimal activity;
-    @DatabaseField private Vaccination vaccination;
-    @DatabaseField private Training training;
+    private ArrayList<Photo> photos;
 
-    @ForeignCollectionField(eager = false)
-    private transient ForeignCollection<Photo> photos;
-
-    @DatabaseField(columnName = Animal.COLUMN_NAME_FAVOURITE)
     private Boolean favourite;
 
     public String getProfilePicUrl() {

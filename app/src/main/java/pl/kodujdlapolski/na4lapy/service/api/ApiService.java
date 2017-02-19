@@ -15,6 +15,8 @@
  */
 package pl.kodujdlapolski.na4lapy.service.api;
 
+import java.util.List;
+
 import pl.kodujdlapolski.na4lapy.model.Animal;
 import pl.kodujdlapolski.na4lapy.model.AnimalsPage;
 import pl.kodujdlapolski.na4lapy.model.Shelter;
@@ -25,4 +27,5 @@ public interface ApiService {
     Observable<Shelter> getShelter();
     Observable<AnimalsPage> getAnimalList();
     Observable<Animal> getAnimal(Long id);
+    Observable<Animal> getAnimals(List<Long> ids);
 }

@@ -35,7 +35,6 @@ import pl.kodujdlapolski.na4lapy.model.Animal;
 import pl.kodujdlapolski.na4lapy.model.Shelter;
 import pl.kodujdlapolski.na4lapy.service.api.ApiService;
 import pl.kodujdlapolski.na4lapy.service.preferences.PreferencesService;
-import pl.kodujdlapolski.na4lapy.service.repository.database.DatabaseRepository;
 import pl.kodujdlapolski.na4lapy.service.user.UserService;
 import rx.Observable;
 import rx.observers.TestSubscriber;
@@ -43,7 +42,6 @@ import rx.observers.TestSubscriber;
 import static com.google.common.base.Verify.verifyNotNull;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
