@@ -23,6 +23,7 @@ import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import pl.kodujdlapolski.na4lapy.BuildConfig;
 
 @DatabaseTable(tableName = "photos")
 @Data
@@ -41,4 +42,8 @@ public class Photo extends BaseEntity implements Serializable{
 
     @DatabaseField(foreign = true)
     private Animal animal;
+
+    public String getFullFileName(){
+        return BuildConfig.BASE_FILES_URL + fileName;
+    }
 }

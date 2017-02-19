@@ -88,6 +88,6 @@ public class Animal extends BaseEntity implements Serializable {
             p = getPhotos().iterator().next();
         }
         if (p == null) return null;
-        return p.getFileName();
+        return p.getFullFileName();
     }
 }
