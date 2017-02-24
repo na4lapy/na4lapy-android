@@ -145,14 +145,14 @@ public class DetailsActivity extends AppCompatActivity {
         if (profilePicUrl != null) {
             Picasso.with(this)
                     .load(profilePicUrl)
-                    .memoryPolicy(MemoryPolicy.NO_STORE, MemoryPolicy.NO_CACHE)
+
                     .transform(new BlurTransformation(this, 2))
                     .transform(new ColorFilterTransformation(ContextCompat.getColor(this, R.color.colorPrimaryDark50opacity)))
                     .into(background);
 
             Picasso.with(this)
                     .load(profilePicUrl)
-                    .memoryPolicy(MemoryPolicy.NO_STORE, MemoryPolicy.NO_CACHE)
+
                     .transform(new CropCircleTransformation())
                     .into(profilePic);
         }

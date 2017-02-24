@@ -58,7 +58,6 @@ public abstract class AbstractBrowseViewHolder extends RecyclerView.ViewHolder {
         if (url != null) {
             Picasso.with(itemView.getContext())
                     .load(url)
-                    .memoryPolicy(MemoryPolicy.NO_STORE, MemoryPolicy.NO_CACHE)
                     .into(profilePic);
         }
         String nameText = animal.getBirthDate() != null ? mContext.getString(R.string.animal_details_title,
