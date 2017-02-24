@@ -20,6 +20,8 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import java.io.File;
+
 import pl.kodujdlapolski.na4lapy.model.Animal;
 import rx.subjects.PublishSubject;
 
@@ -53,6 +55,11 @@ public class SystemServiceImpl implements SystemService {
         }
 
         return null;
+    }
+
+    @Override
+    public File getCacheDir() {
+        return mContext.getCacheDir();
     }
 
     private Intent getAnimalShareIntent(Animal animal) {
