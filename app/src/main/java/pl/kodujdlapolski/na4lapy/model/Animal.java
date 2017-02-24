@@ -60,6 +60,7 @@ public class Animal implements Serializable {
         for (Photo candidatePhoto : getPhotos()) {
             if (candidatePhoto.getProfil()) {
                 p = candidatePhoto;
+                break;
             }
         }
         if (p == null && !getPhotos().isEmpty()) {

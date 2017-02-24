@@ -52,9 +52,9 @@ public class ApiServiceImpl implements ApiService {
     }
 
     @Override
-    public Observable<Animal> getAnimals(List<Long> ids) {
+    public Observable<AnimalsPage> getAnimals(List<Long> ids) {
         JsonObject object = new JsonObject();
         object.add("ids", new Gson().toJsonTree(ids));
-        return mApi.getAnimals(object.toString());
+        return mApi.getAnimals(object);
     }
 }

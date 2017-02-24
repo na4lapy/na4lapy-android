@@ -15,6 +15,8 @@
  */
 package pl.kodujdlapolski.na4lapy.service.api;
 
+import com.google.gson.JsonObject;
+
 import java.util.List;
 
 import pl.kodujdlapolski.na4lapy.model.Animal;
@@ -38,5 +40,5 @@ public interface    Api {
     Observable<Animal> getAnimal(@Path("id") Long id);
 
     @POST("animals/getbyids")
-    Observable<Animal> getAnimals(@Body String body);
+    Observable<AnimalsPage> getAnimals(@Body JsonObject body);
 }

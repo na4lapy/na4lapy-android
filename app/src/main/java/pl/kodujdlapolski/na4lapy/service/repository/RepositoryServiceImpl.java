@@ -17,11 +17,13 @@ package pl.kodujdlapolski.na4lapy.service.repository;
 
 import android.support.annotation.NonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import pl.kodujdlapolski.na4lapy.model.Animal;
+import pl.kodujdlapolski.na4lapy.model.AnimalsPage;
 import pl.kodujdlapolski.na4lapy.model.Shelter;
 import pl.kodujdlapolski.na4lapy.service.api.ApiService;
 import pl.kodujdlapolski.na4lapy.service.preferences.PreferencesService;
@@ -51,18 +53,20 @@ public class RepositoryServiceImpl implements RepositoryService {
 
     @Override
     public Observable<List<Animal>> getAnimals() {
-        return mApiService.getAnimalList().map((animalsPage -> animalsPage.data))
+        return mApiService.getAnimalList().map((AnimalsPage::getData))
                 .doOnNext((animals -> mUserService.sortByUserPreferences(animals)));
     }
 
     @Override
     public Observable<List<Animal>> getAnimalsByFavourite() {
         List<Long> favAnimalsIds = mPreferencesService.getFavouriteList();
-        if(favAnimalsIds.isEmpty()) return Observable.empty();
-        return mApiService.getAnimals(favAnimalsIds).map((animal) -> {
-            animal.setFavourite(true);
-            return animal;
-        }).toList();
+        if (favAnimalsIds.isEmpty()) return Observable.just(new ArrayList<Animal>());
+        return mApiService.getAnimals(favAnimalsIds).map((AnimalsPage::getData))
+                .doOnNext((animals) -> {
+                    for (Animal a : animals) {
+                        a.setFavourite(true);
+                    }
+                });
     }
 
     @Override  // TODO get shelter by id from API

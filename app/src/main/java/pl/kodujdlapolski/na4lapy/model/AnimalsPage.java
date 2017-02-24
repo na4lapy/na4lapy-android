@@ -18,8 +18,12 @@ package pl.kodujdlapolski.na4lapy.model;
 
 import java.util.List;
 
-public class AnimalsPage {
-    int totalPages;
+import lombok.Getter;
+import lombok.Setter;
 
-    public List<Animal> data;
+@Getter
+@Setter
+public class AnimalsPage {
+    private int totalPages;
+    private List<Animal> data;
 }

@@ -27,5 +27,5 @@ public interface ApiService {
     Observable<Shelter> getShelter();
     Observable<AnimalsPage> getAnimalList();
     Observable<Animal> getAnimal(Long id);
-    Observable<Animal> getAnimals(List<Long> ids);
+    Observable<AnimalsPage> getAnimals(List<Long> ids);
 }
