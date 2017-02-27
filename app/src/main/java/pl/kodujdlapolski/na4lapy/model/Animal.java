@@ -15,6 +15,9 @@
  */
 package pl.kodujdlapolski.na4lapy.model;
 
+import com.annimon.stream.Optional;
+import com.annimon.stream.Stream;
+
 import org.joda.time.LocalDate;
 
 import java.io.Serializable;
@@ -56,17 +59,12 @@ public class Animal implements Serializable {
 
     public String getProfilePicUrl() {
         if (getPhotos() == null) return null;
-        Photo p = null;
-        for (Photo candidatePhoto : getPhotos()) {
-            if (candidatePhoto.getProfil()) {
-                p = candidatePhoto;
-                break;
-            }
+        Optional<Photo> photo = Stream.of(getPhotos()).filter(Photo::getProfil).findFirst();
+        Photo ret = photo.isPresent() ? photo.get() : null;
+        if (ret == null && !getPhotos().isEmpty()) {
+            ret = getPhotos().get(0);
         }
-        if (p == null && !getPhotos().isEmpty()) {
-            p = getPhotos().iterator().next();
-        }
-        if (p == null) return null;
-        return p.getFullFileName();
+        if (ret == null) return null;
+        return ret.getFullFileName();
     }
 }
