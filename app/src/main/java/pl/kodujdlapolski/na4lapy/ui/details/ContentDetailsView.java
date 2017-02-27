@@ -38,7 +38,9 @@ import org.joda.time.LocalDate;
 import org.joda.time.Months;
 import org.joda.time.Years;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -143,46 +145,36 @@ public class ContentDetailsView {
     }
 
     private void initImagesContainer() {
-        ForeignCollection<Photo> photos = animal.getPhotos();
+        ArrayList<Photo> photos = animal.getPhotos();
         if (photos != null) {
-
-            ArrayList<Photo> listOfPhotos = getPhotosAsList(photos);
             LinearLayout.LayoutParams singleRowLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1);
             singleRowLayoutParams.setMargins(0, getDipFromInt(2), 0, getDipFromInt(2));
             int restOfImagesCount = photos.size() % IMAGES_IN_ROW;
             for (int i = 0; i < photos.size()-restOfImagesCount; i = i + IMAGES_IN_ROW) {
                 View singleRow = ctx.getLayoutInflater().inflate(R.layout.images_single_row, null);
                 singleRow.setLayoutParams(singleRowLayoutParams);
-                initImageView(singleRow, listOfPhotos, i, R.id.image_1);
-                initImageView(singleRow, listOfPhotos, i + 1, R.id.image_2);
-                initImageView(singleRow, listOfPhotos, i + 2, R.id.image_3);
+                initImageView(singleRow, photos, i, R.id.image_1);
+                initImageView(singleRow, photos, i + 1, R.id.image_2);
+                initImageView(singleRow, photos, i + 2, R.id.image_3);
                 imagesContainer.addView(singleRow);
             }
 
             if (restOfImagesCount >= 1) {
                 View singleRow = ctx.getLayoutInflater().inflate(R.layout.images_single_row, null);
                 singleRow.setLayoutParams(singleRowLayoutParams);
-                initImageView(singleRow, listOfPhotos, restOfImagesCount == 1 ? photos.size() - 1 : photos.size() - 2, R.id.image_1);
+                initImageView(singleRow, photos, restOfImagesCount == 1 ? photos.size() - 1 : photos.size() - 2, R.id.image_1);
                 if (restOfImagesCount == 2) {
-                    initImageView(singleRow, listOfPhotos, photos.size() - 1, R.id.image_2);
+                    initImageView(singleRow, photos, photos.size() - 1, R.id.image_2);
                 }
                 imagesContainer.addView(singleRow);
             }
         }
     }
 
-    private ArrayList<Photo> getPhotosAsList(ForeignCollection<Photo> photos) {
-        ArrayList<Photo> ret = new ArrayList<>();
-        for (Photo photo : photos) {
-            ret.add(photo);
-        }
-        return ret;
-    }
-
     private void initImageView(View parent, ArrayList<Photo> photos, int index, int res) {
         ImageView image1 = (ImageView) parent.findViewById(res);
         image1.getLayoutParams().height = getGalleryPicHeight();
-        Picasso.with(ctx).load(photos.get(index).getUrl()).memoryPolicy(MemoryPolicy.NO_STORE, MemoryPolicy.NO_CACHE).into(image1);
+        Picasso.with(ctx).load(photos.get(index).getFullFileName()).into(image1);
         image1.setOnClickListener(v -> {
             Intent i = new Intent(ctx, AnimalGalleryActivity.class);
             i.putExtra(AnimalGalleryActivity.EXTRA_GALLERY, photos);

@@ -54,11 +54,10 @@ public abstract class AbstractBrowseViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void init(Animal animal, OnBrowseElementClickedAction onBrowseElementClickedAction) {
-        if (animal.getPhotos() != null && animal.getPhotos().iterator().hasNext()) {
-            Photo pic = animal.getPhotos().iterator().next();
+        String url = animal.getProfilePicUrl();
+        if (url != null) {
             Picasso.with(itemView.getContext())
-                    .load(pic.getUrl())
-                    .memoryPolicy(MemoryPolicy.NO_STORE , MemoryPolicy.NO_CACHE)
+                    .load(url)
                     .into(profilePic);
         }
         String nameText = animal.getBirthDate() != null ? mContext.getString(R.string.animal_details_title,

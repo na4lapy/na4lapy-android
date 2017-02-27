@@ -13,30 +13,17 @@
  *	See the License for the specific language governing permissions and
  *	limitations under the License.
  */
-package pl.kodujdlapolski.na4lapy.service.api.model;
+
+package pl.kodujdlapolski.na4lapy.model;
 
 import java.util.List;
 
-import pl.kodujdlapolski.na4lapy.model.Animal;
+import lombok.Getter;
+import lombok.Setter;
 
-public class PagedAnimalListDto {
-
+@Getter
+@Setter
+public class AnimalsPage {
+    private int totalPages;
     private List<Animal> data;
-    private int total;
-
-    public List<Animal> getData() {
-        return data;
-    }
-
-    public void setData(List<Animal> data) {
-        this.data = data;
-    }
-
-    public int getTotal() {
-        return total;
-    }
-
-    public void setTotal(int total) {
-        this.total = total;
-    }
 }

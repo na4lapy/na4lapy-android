@@ -27,8 +27,6 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import pl.kodujdlapolski.na4lapy.model.Animal;
-import pl.kodujdlapolski.na4lapy.service.api.AnimalDeserializer;
 import pl.kodujdlapolski.na4lapy.service.api.LocalDateDeserializer;
 
 @Module
@@ -51,7 +49,6 @@ public class Na4LapyModule {
     public Gson provideGson() {
         return new GsonBuilder()
                 .registerTypeAdapter(LocalDate.class, new LocalDateDeserializer())
-                .registerTypeAdapter(Animal.class, new AnimalDeserializer(mApplication))
                 .create();
     }
 }

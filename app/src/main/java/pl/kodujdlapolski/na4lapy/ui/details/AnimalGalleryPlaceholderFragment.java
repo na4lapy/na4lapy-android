@@ -108,7 +108,7 @@ public class AnimalGalleryPlaceholderFragment extends Fragment implements Animal
 
     @Override
     public void loadPhotoIntoImageView(Bundle savedInstanceState) {
-        String selectedPicUrl = animalPic.getUrl();
+        String selectedPicUrl = animalPic.getFullFileName();
         if (TextUtils.isEmpty(selectedPicUrl)) {
             imageView.setImageDrawable(getResources().getDrawable(R.drawable.pic_error_dog_256dp));
             return;

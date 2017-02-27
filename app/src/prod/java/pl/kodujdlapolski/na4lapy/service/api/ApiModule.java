@@ -15,21 +15,41 @@
  */
 package pl.kodujdlapolski.na4lapy.service.api;
 
+
 import com.google.gson.Gson;
+
+import java.io.File;
+import java.io.IOException;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import okhttp3.Cache;
 import okhttp3.HttpUrl;
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Response;
+import okhttp3.logging.HttpLoggingInterceptor;
 import pl.kodujdlapolski.na4lapy.BuildConfig;
+import pl.kodujdlapolski.na4lapy.service.system.SystemService;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
 public class ApiModule {
+
+    private static final Interceptor REWRITE_CACHE_CONTROL_INTERCEPTOR = new Interceptor() {
+        @Override
+        public Response intercept(Chain chain) throws IOException {
+            Response originalResponse = chain.proceed(chain.request());
+            return originalResponse.newBuilder()
+                    .header("Cache-Control", String.format("max-age=%d, only-if-cached, max-stale=%d", 3600, 0))
+                    .build();
+        }
+    };
 
     @Singleton
     @Provides
@@ -43,12 +63,32 @@ public class ApiModule {
         return HttpUrl.parse(BuildConfig.BASE_URL);
     }
 
+
+    @Singleton
+    @Provides
+    public OkHttpClient provideOkHttpClient(SystemService systemService) {
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(BuildConfig.DEBUG ?
+                HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE);
+
+        int cacheSize = 10 * 1024 * 1024; // 10 MiB
+        File cacheDir = new File(systemService.getCacheDir(), "HttpCache");
+        Cache cache = new Cache(cacheDir, cacheSize);
+        OkHttpClient.Builder client = new OkHttpClient.Builder()
+                .cache(cache);
+        client.networkInterceptors().add(REWRITE_CACHE_CONTROL_INTERCEPTOR);
+        return client.addInterceptor(logging)
+                .build();
+
+    }
+
     @Singleton
     @Provides
     @Named("api")
-    public Retrofit provideRetrofit(HttpUrl baseUrl, Gson gson) {
+    public Retrofit provideRetrofit(HttpUrl baseUrl, Gson gson, OkHttpClient client) {
         return new Retrofit.Builder()
                 .baseUrl(baseUrl)
+                .client(client)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();

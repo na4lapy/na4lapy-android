@@ -25,7 +25,6 @@ import pl.kodujdlapolski.na4lapy.service.api.ApiModule;
 import pl.kodujdlapolski.na4lapy.service.payments.PaymentsModule;
 import pl.kodujdlapolski.na4lapy.service.preferences.PreferencesModule;
 import pl.kodujdlapolski.na4lapy.service.repository.RepositoryModule;
-import pl.kodujdlapolski.na4lapy.service.repository.database.DatabaseModule;
 import pl.kodujdlapolski.na4lapy.service.system.SystemModule;
 import pl.kodujdlapolski.na4lapy.service.user.UserModule;
 import pl.kodujdlapolski.na4lapy.ui.browse.BrowsePresenter;
@@ -40,7 +39,6 @@ import pl.kodujdlapolski.na4lapy.ui.splash.SplashActivity;
         Na4LapyModule.class,
         RepositoryModule.class,
         ApiModule.class,
-        DatabaseModule.class,
         PaymentsModule.class,
         PreferencesModule.class,
         SystemModule.class,

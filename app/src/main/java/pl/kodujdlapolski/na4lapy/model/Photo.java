@@ -15,27 +15,24 @@
  */
 package pl.kodujdlapolski.na4lapy.model;
 
-import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.table.DatabaseTable;
-
 import java.io.Serializable;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import pl.kodujdlapolski.na4lapy.BuildConfig;
 
-@DatabaseTable(tableName = "photos")
-@Data
-@EqualsAndHashCode(callSuper = true)
-@NoArgsConstructor //for ormlite
-public class Photo extends BaseEntity implements Serializable{
-
-    @DatabaseField
-    private String url;
-
-    @DatabaseField
+@Getter
+@Setter
+public class Photo implements Serializable {
+    private Long id;
+    private String fileName;
     private String author;
+    private Boolean profil;
 
-    @DatabaseField(foreign = true)
     private Animal animal;
+
+    public String getFullFileName(){
+        return BuildConfig.BASE_FILES_URL + fileName;
+    }
+
 }

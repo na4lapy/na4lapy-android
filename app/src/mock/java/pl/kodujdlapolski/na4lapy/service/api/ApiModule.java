@@ -4,7 +4,6 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import pl.kodujdlapolski.na4lapy.service.repository.database.DatabaseHelper;
 
 @Module
 public class ApiModule {

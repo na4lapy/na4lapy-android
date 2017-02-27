@@ -20,6 +20,8 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import java.io.File;
+
 import pl.kodujdlapolski.na4lapy.model.Animal;
 import rx.subjects.PublishSubject;
 
@@ -55,12 +57,18 @@ public class SystemServiceImpl implements SystemService {
         return null;
     }
 
+    @Override
+    public File getCacheDir() {
+        return mContext.getCacheDir();
+    }
+
     private Intent getAnimalShareIntent(Animal animal) {
         Intent sharingIntent = new Intent(Intent.ACTION_SEND);
         sharingIntent.setType("text/plain");
         sharingIntent.putExtra(Intent.EXTRA_SUBJECT, animal.getName() + " " + animal.getChipId());
-        if (animal.getPhotos() != null && animal.getPhotos().iterator().hasNext()) {
-            sharingIntent.putExtra(Intent.EXTRA_TEXT, animal.getPhotos().iterator().next().getUrl());
+        String url = animal.getProfilePicUrl();
+        if (url != null) {
+            sharingIntent.putExtra(Intent.EXTRA_TEXT, url);
         }
         return sharingIntent;
     }
