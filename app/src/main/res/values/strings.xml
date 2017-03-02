@@ -83,6 +83,7 @@ limitations under the License.
     <string name="content_desc_animal_size">rozmiar zwierzęcia</string>
     <string name="content_desc_animal_gender">płeć zwierzęcia</string>
     <string name="content_desc_animal_activity">aktywność zwierzęcia</string>
+    <string name="details_shelter">Schronisko:</string>
     <string name="details_race">Rasa:</string>
     <string name="details_size">Wielkość:</string>
     <string name="details_gender">Płeć:</string>
