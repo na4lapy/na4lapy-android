@@ -13,9 +13,9 @@
  *	See the License for the specific language governing permissions and
  *	limitations under the License.
  */
-package pl.kodujdlapolski.na4lapy.presenter.about_shelter;
+package pl.kodujdlapolski.na4lapy.presenter.shelters_list;
 
-import android.content.Intent;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -25,16 +25,13 @@ import pl.kodujdlapolski.na4lapy.service.repository.RepositoryService;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class AboutShelterPresenter {
-
+public class SheltersListPresenter {
     @Inject
     RepositoryService repositoryService;
-    private AboutShelterContract.View view;
-    private final Long shelterId;
+    private SheltersListContract.View view;
 
-    public AboutShelterPresenter(AboutShelterContract.View view) {
+    public SheltersListPresenter(SheltersListContract.View view) {
         this.view = view;
-        shelterId = view.getShelterId();
         ((Na4LapyApp) view.getActivity().getApplication()).getComponent().inject(this);
         startDownloadingData();
     }
@@ -43,28 +40,17 @@ public class AboutShelterPresenter {
         view.showStateWaitingForData();
         getData();
     }
-
-    private void onShelterAvailable(Shelter shelter) {
-        if (shelter != null) {
-            view.setShareIntent(getShareIntent());
-            view.populateView(shelter);
+    private void onDataAvailable(List<Shelter> shelters) {
+        if (shelters != null && !shelters.isEmpty()) {
+            view.populateView(shelters);
             view.showStateDataIsAvailable();
         } else {
             view.showStateDataIsEmpty();
         }
     }
-
-    private Intent getShareIntent() {
-        Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-        sharingIntent.setType("text/plain");
-        sharingIntent.putExtra(Intent.EXTRA_SUBJECT, view.getFormattedTitle());
-        sharingIntent.putExtra(Intent.EXTRA_TEXT, view.getFormattedInfoText());
-        return sharingIntent;
-    }
-
     private void getData() {
-        repositoryService.getShelter(shelterId)
+        repositoryService.getShelters()
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::onShelterAvailable, view::showStateError);
+                .subscribe(this::onDataAvailable, view::showStateError);
     }
 }
