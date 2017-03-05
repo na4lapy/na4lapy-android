@@ -21,6 +21,7 @@ import dagger.Component;
 import pl.kodujdlapolski.na4lapy.presenter.about_shelter.AboutShelterPresenter;
 import pl.kodujdlapolski.na4lapy.presenter.payment.PaymentPresenter;
 import pl.kodujdlapolski.na4lapy.presenter.preferences.PreferencesPresenter;
+import pl.kodujdlapolski.na4lapy.presenter.shelters_list.SheltersListPresenter;
 import pl.kodujdlapolski.na4lapy.service.api.ApiModule;
 import pl.kodujdlapolski.na4lapy.service.payments.PaymentsModule;
 import pl.kodujdlapolski.na4lapy.service.preferences.PreferencesModule;
@@ -47,6 +48,7 @@ import pl.kodujdlapolski.na4lapy.ui.splash.SplashActivity;
 public interface Na4LapyComponent {
 
     void inject(AboutShelterPresenter presenter);
+    void inject(SheltersListPresenter presenter);
     void inject(SplashActivity mainActivity);
     void inject(BrowsePresenter browsePresenter);
     void inject(PreferencesPresenter presenter);

@@ -35,6 +35,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Shelter;
+import pl.kodujdlapolski.na4lapy.presenter.about_shelter.AboutShelterContract;
 import pl.kodujdlapolski.na4lapy.presenter.about_shelter.AboutShelterPresenter;
 
 public class AboutShelterFragment extends Fragment implements AboutShelterContract.View {
@@ -172,8 +173,7 @@ public class AboutShelterFragment extends Fragment implements AboutShelterContra
 
     @Override
     public void showStateError(Throwable t) {
-        // Toast.makeText(getActivity(), R.string.error_data_cannot_be_loaded, Toast.LENGTH_LONG).show();
-        //todo 457  uncomment when new database is ready
+         Toast.makeText(getActivity(), R.string.error_data_cannot_be_loaded, Toast.LENGTH_LONG).show();
         if (t != null && t.getMessage() != null) {
             Log.d(this.getClass().toString(), t.getMessage());
         }

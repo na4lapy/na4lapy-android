@@ -14,7 +14,7 @@
  *	limitations under the License.
  */
 
-package pl.kodujdlapolski.na4lapy.ui.about_shelter;
+package pl.kodujdlapolski.na4lapy.presenter.about_shelter;
 
 import android.app.Activity;
 import android.content.Intent;

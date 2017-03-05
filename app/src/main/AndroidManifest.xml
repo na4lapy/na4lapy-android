@@ -62,6 +62,11 @@ limitations under the License.
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.WithActionBar" />
         <activity
+            android:name=".ui.shelters_list.SheltersListActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.WithActionBar" />
+        <activity
             android:name=".ui.browse.single.SingleBrowseActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
