@@ -90,6 +90,7 @@ limitations under the License.
         android:columnCount="2">
 
         <TextView
+            android:id="@+id/info_shelter_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/details_table_inner_margin"
@@ -103,6 +104,7 @@ limitations under the License.
             tools:text="Schronisko 1" />
 
         <TextView
+            android:id="@+id/info_race_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/details_table_inner_margin"
@@ -116,6 +118,7 @@ limitations under the License.
             tools:text="race" />
 
         <TextView
+            android:id="@+id/info_size_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/details_table_inner_margin"
@@ -129,6 +132,7 @@ limitations under the License.
             tools:text="size" />
 
         <TextView
+            android:id="@+id/info_gender_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/details_table_inner_margin"
@@ -142,6 +146,7 @@ limitations under the License.
             tools:text="gender" />
 
         <TextView
+            android:id="@+id/info_activity_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/details_table_inner_margin"
@@ -155,6 +160,7 @@ limitations under the License.
             tools:text="activity" />
 
         <TextView
+            android:id="@+id/info_training_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/details_table_inner_margin"
@@ -168,7 +174,7 @@ limitations under the License.
             tools:text="training" />
 
         <TextView
-            android:id="@+id/sterilization_or_castration"
+            android:id="@+id/info_sterilization_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/details_table_inner_margin"
@@ -196,6 +202,7 @@ limitations under the License.
             tools:text="chip" />
 
         <TextView
+            android:id="@+id/info_vaccination_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/details_table_inner_margin"
@@ -209,6 +216,7 @@ limitations under the License.
             tools:text="vaccination type" />
 
         <TextView
+            android:id="@+id/info_admittance_date_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/details_table_inner_margin"

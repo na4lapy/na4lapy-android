@@ -111,7 +111,7 @@ limitations under the License.
     <string name="training_trainined">Podstawowe</string>
     <string name="training_untrainined">Zaawansowane</string>
     <string name="training_none">Brak</string>
-    <string name="training_unknown">Nieznany</string>
+    <string name="training_unknown">Nieznane</string>
     <string name="sterilization_sterilized">Tak</string>
     <string name="sterilization_not_sterilized">Nie</string>
     <string name="sterilization_unknown">Nieznana</string>
