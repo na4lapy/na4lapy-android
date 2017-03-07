@@ -24,7 +24,7 @@ import rx.Observable;
 
 public interface ApiService {
 
-    Observable<Shelter> getShelter();
+    Observable<Shelter> getShelter(Long id);
     Observable<AnimalsPage> getAnimalList();
     Observable<Animal> getAnimal(Long id);
     Observable<AnimalsPage> getAnimals(List<Long> ids);

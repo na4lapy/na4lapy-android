@@ -37,8 +37,8 @@ public class ApiServiceImpl implements ApiService {
     }
 
     @Override
-    public Observable<Shelter> getShelter() {
-        return mApi.getShelter();
+    public Observable<Shelter> getShelter(Long id) {
+        return mApi.getShelter(id);
     }
 
     @Override

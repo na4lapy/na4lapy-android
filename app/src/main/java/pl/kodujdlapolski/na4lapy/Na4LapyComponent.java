@@ -29,6 +29,7 @@ import pl.kodujdlapolski.na4lapy.service.system.SystemModule;
 import pl.kodujdlapolski.na4lapy.service.user.UserModule;
 import pl.kodujdlapolski.na4lapy.ui.browse.BrowsePresenter;
 import pl.kodujdlapolski.na4lapy.ui.browse.list.ListBrowseFragment;
+import pl.kodujdlapolski.na4lapy.ui.details.ContentDetailsView;
 import pl.kodujdlapolski.na4lapy.ui.details.DetailsActivity;
 import pl.kodujdlapolski.na4lapy.ui.drawer.DrawerActivityHandler;
 import pl.kodujdlapolski.na4lapy.ui.settings.SettingsFragment;
@@ -55,4 +56,5 @@ public interface Na4LapyComponent {
     void inject(DrawerActivityHandler handler);
     void inject(SettingsFragment fragment);
     void inject(PaymentPresenter presenter);
+    void inject(ContentDetailsView contentDetailsView);
 }

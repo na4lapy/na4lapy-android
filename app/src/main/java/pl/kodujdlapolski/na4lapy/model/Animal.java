@@ -38,7 +38,7 @@ import pl.kodujdlapolski.na4lapy.model.type.Vaccination;
 public class Animal implements Serializable {
 
     private Long id;
-    private Shelter shelter;
+    private Long shelterid;
     private String name;
     private String race;
     private String description;

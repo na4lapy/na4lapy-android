@@ -30,24 +30,27 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.j256.ormlite.dao.ForeignCollection;
-import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 
 import org.joda.time.LocalDate;
 import org.joda.time.Months;
 import org.joda.time.Years;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import pl.kodujdlapolski.na4lapy.Na4LapyApp;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Animal;
 import pl.kodujdlapolski.na4lapy.model.Photo;
+import pl.kodujdlapolski.na4lapy.model.Shelter;
 import pl.kodujdlapolski.na4lapy.model.type.Gender;
+import pl.kodujdlapolski.na4lapy.service.repository.RepositoryService;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 //TODO utworzyć presentera dla widoku
 public class ContentDetailsView {
@@ -56,6 +59,9 @@ public class ContentDetailsView {
     private Animal animal;
     private static final int IMAGES_IN_ROW = 3;// defined in images_single_row.xml
     private static final int MAX_LINES_COLLAPSED = 5;
+
+    @Inject
+    RepositoryService repositoryService;
 
     @BindView(R.id.description)
     TextView description;
@@ -70,28 +76,49 @@ public class ContentDetailsView {
     @BindView(R.id.images_container)
     LinearLayout imagesContainer;
 
+    @BindView(R.id.info_shelter_text)
+    TextView infoShelterText;
+    @BindView(R.id.info_shelter)
+    TextView infoShelter;
+    @BindView(R.id.info_activity_text)
+    TextView infoActivityText;
     @BindView(R.id.info_activity)
     TextView infoActivity;
+    @BindView(R.id.info_admittance_date_text)
+    TextView infoAdmittanceDateText;
     @BindView(R.id.info_admittance_date)
     TextView infoAdmittanceDate;
+    @BindView(R.id.info_chip_text)
+    TextView infoChipText;
     @BindView(R.id.info_chip)
     TextView infoChip;
+    @BindView(R.id.info_race_text)
+    TextView infoRaceText;
     @BindView(R.id.info_race)
     TextView infoRace;
+    @BindView(R.id.info_size_text)
+    TextView infoSizeText;
     @BindView(R.id.info_size)
     TextView infoSize;
+    @BindView(R.id.info_gender_text)
+    TextView infoGenderText;
     @BindView(R.id.info_gender)
     TextView infoGender;
+    @BindView(R.id.info_training_text)
+    TextView infoTrainingText;
     @BindView(R.id.info_training)
     TextView infoTraining;
+    @BindView(R.id.info_sterilization_text)
+    TextView infoSterilizationText;
     @BindView(R.id.info_sterilization)
     TextView infoSterilization;
-    @BindView(R.id.sterilization_or_castration)
-    TextView sterilizationOrCastration;
+    @BindView(R.id.info_vaccination_text)
+    TextView infoVaccinationText;
     @BindView(R.id.info_vaccination)
     TextView infoVaccination;
 
     public ContentDetailsView(DetailsActivity activity, Animal animal) {
+        ((Na4LapyApp) activity.getApplication()).getComponent().inject(this);
         ctx = activity;
         this.animal = animal;
     }
@@ -107,28 +134,63 @@ public class ContentDetailsView {
     }
 
     private void initMoreInfoTable() {
+        if (animal.getShelterid() != null)
+            setShelterInfo(animal.getShelterid());
+
         if (animal.getAdmittanceDate() != null) {
             infoAdmittanceDate.setText(getShortDateTextFrom(animal.getAdmittanceDate()));
-        }
-        if (animal.getActivity() != null)
-            infoActivity.setText(ctx.getString(animal.getActivity().getLabelResId()));
+        } else { hideViewRow(infoAdmittanceDateText, infoAdmittanceDate); }
 
-        infoChip.setText(animal.getChipId());
-        infoRace.setText(animal.getRace());
-        if (animal.getSize() != null)
+        if (animal.getActivity() != null) {
+            infoActivity.setText(ctx.getString(animal.getActivity().getLabelResId()));
+        } else { hideViewRow(infoActivityText, infoActivity); }
+
+        if (animal.getChipId() != null) {
+            infoChip.setText(animal.getChipId());
+        } else { hideViewRow(infoChipText, infoChip); }
+
+        if (animal.getRace() != null) {
+            infoRace.setText(animal.getRace());
+        } else { hideViewRow(infoRaceText, infoRace); }
+
+        if (animal.getSize() != null) {
             infoSize.setText(ctx.getString(animal.getSize().getLabelResId()));
+        } else { hideViewRow(infoSizeText, infoSize); }
+
         if (animal.getGender() != null) {
-            if (animal.getGender().equals(Gender.FEMALE)) {
-                sterilizationOrCastration.setText(R.string.details_sterilization);
-            }
+            if (animal.getGender().equals(Gender.FEMALE))
+                infoSterilizationText.setText(R.string.details_sterilization);
             infoGender.setText(ctx.getString(animal.getGender().getLabelResId()));
-        }
-        if (animal.getTraining() != null)
+        } else { hideViewRow(infoGenderText, infoGender); }
+
+        if (animal.getTraining() != null) {
             infoTraining.setText(ctx.getString(animal.getTraining().getLabelResId()));
-        if (animal.getSterilization() != null)
+        } else { hideViewRow(infoTrainingText, infoTraining); }
+
+        if (animal.getSterilization() != null) {
             infoSterilization.setText(ctx.getString(animal.getSterilization().getLabelResId()));
-        if (animal.getVaccination() != null)
+        } else { hideViewRow(infoSterilizationText, infoSterilization); }
+
+        if (animal.getVaccination() != null) {
             infoVaccination.setText(ctx.getString(animal.getVaccination().getLabelResId()));
+        } else { hideViewRow(infoVaccinationText, infoVaccination); }
+    }
+
+    private void hideViewRow(TextView label, TextView labelValue) {
+        label.setVisibility(View.GONE);
+        labelValue.setVisibility(View.GONE);
+    }
+
+    private void setShelterInfo(Long id) {
+        repositoryService.getShelter(id).subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::onShelterAvailable);
+    }
+
+    private void onShelterAvailable(Shelter downloadedShelter) {
+        if (downloadedShelter != null) {
+            infoShelter.setText(downloadedShelter.getName() + " - " + downloadedShelter.getCity());
+        }
+        else { hideViewRow(infoShelterText, infoShelter); }
     }
 
     private void initBasicInfoImagesAndDescription() {
@@ -136,12 +198,21 @@ public class ContentDetailsView {
         description.setOnClickListener(v -> expandOrCollapseDescription());
         expandOrCollapseBtn.setText(R.string.more_info);
         expandOrCollapseBtn.setOnClickListener(v -> expandOrCollapseDescription());
-        if (animal.getSize() != null)
+        if (animal.getSize() != null) {
             sizeImage.setImageResource(animal.getSize().getDrawableResId());
-        if (animal.getActivity() != null)
+        } else {
+            sizeImage.setImageResource(R.drawable.animal_size_unknown_100dp);
+        }
+        if (animal.getActivity() != null) {
             activityImage.setImageResource(animal.getActivity().getDrawableResId());
-        if (animal.getGender() != null)
+        } else {
+            activityImage.setImageResource(R.drawable.animal_activity_unknown_100dp);
+        }
+        if (animal.getGender() != null) {
             genderImage.setImageResource(animal.getGender().getDrawableResId());
+        } else {
+            genderImage.setImageResource(R.drawable.animal_gender_unknown_100dp);
+        }
     }
 
     private void initImagesContainer() {
