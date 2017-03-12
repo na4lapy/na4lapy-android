@@ -72,7 +72,7 @@ public class RepositoryServiceImpl implements RepositoryService {
     @Override  // TODO get shelter by id from API
     public Observable<Shelter> getShelter(@NonNull Long id) {
         checkNotNull(id, "id cannot be null");
-        return mApiService.getShelter();
+        return mApiService.getShelter(id);
     }
 
     @Override // TODO get many shelters

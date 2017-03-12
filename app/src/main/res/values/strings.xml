@@ -83,6 +83,7 @@ limitations under the License.
     <string name="content_desc_animal_size">rozmiar zwierzęcia</string>
     <string name="content_desc_animal_gender">płeć zwierzęcia</string>
     <string name="content_desc_animal_activity">aktywność zwierzęcia</string>
+    <string name="details_shelter">Schronisko:</string>
     <string name="details_race">Rasa:</string>
     <string name="details_size">Wielkość:</string>
     <string name="details_gender">Płeć:</string>
@@ -110,7 +111,7 @@ limitations under the License.
     <string name="training_trainined">Podstawowe</string>
     <string name="training_untrainined">Zaawansowane</string>
     <string name="training_none">Brak</string>
-    <string name="training_unknown">Nieznany</string>
+    <string name="training_unknown">Nieznane</string>
     <string name="sterilization_sterilized">Tak</string>
     <string name="sterilization_not_sterilized">Nie</string>
     <string name="sterilization_unknown">Nieznana</string>

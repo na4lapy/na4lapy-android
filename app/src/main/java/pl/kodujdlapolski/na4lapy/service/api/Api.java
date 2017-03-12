@@ -17,8 +17,6 @@ package pl.kodujdlapolski.na4lapy.service.api;
 
 import com.google.gson.JsonObject;
 
-import java.util.List;
-
 import pl.kodujdlapolski.na4lapy.model.Animal;
 import pl.kodujdlapolski.na4lapy.model.AnimalsPage;
 import pl.kodujdlapolski.na4lapy.model.Shelter;
@@ -30,8 +28,8 @@ import rx.Observable;
 
 public interface    Api {
 
-    @GET("shelters/1")
-    Observable<Shelter> getShelter();
+    @GET("shelter/{id}")
+    Observable<Shelter> getShelter(@Path("id") Long id);
 
     @GET("animals")
     Observable<AnimalsPage> getAnimalList();
