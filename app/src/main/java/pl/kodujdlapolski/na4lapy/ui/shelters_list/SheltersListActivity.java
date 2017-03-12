@@ -16,7 +16,17 @@
 
 package pl.kodujdlapolski.na4lapy.ui.shelters_list;
 
+import android.os.Bundle;
+
+import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.ui.AbstractSingleActivity;
 
 public class SheltersListActivity extends AbstractSingleActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setTitle(R.string.aboutShelter);
+        setContentView(R.layout.activity_shelters_list);
+    }
 }

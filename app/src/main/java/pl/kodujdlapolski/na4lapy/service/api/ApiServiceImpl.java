@@ -42,6 +42,11 @@ public class ApiServiceImpl implements ApiService {
     }
 
     @Override
+    public Observable<List<Shelter>> getShelters() {
+        return mApi.getShelters();
+    }
+
+    @Override
     public Observable<AnimalsPage> getAnimalList() {
         return mApi.getAnimalList();
     }

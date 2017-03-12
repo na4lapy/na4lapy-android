@@ -69,15 +69,15 @@ public class RepositoryServiceImpl implements RepositoryService {
                 });
     }
 
-    @Override  // TODO get shelter by id from API
+    @Override
     public Observable<Shelter> getShelter(@NonNull Long id) {
         checkNotNull(id, "id cannot be null");
         return mApiService.getShelter(id);
     }
 
-    @Override // TODO get many shelters
+    @Override
     public Observable<List<Shelter>> getShelters() {
-        return null;
+        return mApiService.getShelters();
     }
 
     //TODO get animals by preferences
