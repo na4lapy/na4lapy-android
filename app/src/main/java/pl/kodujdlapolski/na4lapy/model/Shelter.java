@@ -35,4 +35,9 @@ public class Shelter implements Serializable {
     private String website;
     private String accountNumber;
     private String adoptionRules;
+
+    @Override
+    public String toString() {
+        return name + " - " + city;
+    }
 }

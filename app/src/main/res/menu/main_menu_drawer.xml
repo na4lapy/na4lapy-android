@@ -30,7 +30,7 @@ limitations under the License.
             android:icon="@drawable/ic_receipt_black_24dp"
             android:title="@string/lookupPreferences" />
         <item
-            android:id="@+id/aboutShelter"
+            android:id="@+id/aboutShelters"
             android:icon="@drawable/ic_shelter_black_24dp"
             android:title="@string/aboutShelter" />
         <item

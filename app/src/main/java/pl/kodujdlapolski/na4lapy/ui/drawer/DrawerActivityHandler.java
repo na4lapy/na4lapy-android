@@ -40,6 +40,7 @@ import pl.kodujdlapolski.na4lapy.ui.browse.single.SingleBrowseActivity;
 import pl.kodujdlapolski.na4lapy.ui.payment.PaymentActivity;
 import pl.kodujdlapolski.na4lapy.ui.preferences.PreferencesActivity;
 import pl.kodujdlapolski.na4lapy.ui.settings.SettingsActivity;
+import pl.kodujdlapolski.na4lapy.ui.shelters_list.SheltersListActivity;
 
 public class DrawerActivityHandler {
 
@@ -88,11 +89,8 @@ public class DrawerActivityHandler {
             intent = new Intent(context, ListBrowseActivity.class);
         } else if (id == R.id.preferences && !(clazz.equals(PreferencesActivity.class))) {
             intent = new Intent(context, PreferencesActivity.class);
-        } else if (id == R.id.aboutShelter && !(clazz.equals(AboutShelterActivity.class))) {
-            intent = new Intent(context, AboutShelterActivity.class);
-            Shelter shelter = new Shelter();
-            shelter.setId(1L);
-            intent.putExtra(AboutShelterActivity.EXTRA_SHELTER_ID, 1l);
+        } else if (id == R.id.aboutShelters && !(clazz.equals(SheltersListActivity.class))) {
+            intent = new Intent(context, SheltersListActivity.class);
         } else if (id == R.id.makePayment && !(clazz.equals(PaymentActivity.class))) {
             intent = new Intent(context, PaymentActivity.class);
             intent.putExtra(PaymentContract.KEY_SHELTER_ID, 1L);
