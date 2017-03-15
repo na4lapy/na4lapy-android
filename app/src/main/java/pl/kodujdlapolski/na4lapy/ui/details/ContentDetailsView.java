@@ -188,7 +188,7 @@ public class ContentDetailsView {
 
     private void onShelterAvailable(Shelter downloadedShelter) {
         if (downloadedShelter != null) {
-            infoShelter.setText(downloadedShelter.getName() + " - " + downloadedShelter.getCity());
+            infoShelter.setText(downloadedShelter.toString());
         }
         else { hideViewRow(infoShelterText, infoShelter); }
     }
