@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.View;
@@ -145,11 +146,11 @@ public class ContentDetailsView {
             infoActivity.setText(ctx.getString(animal.getActivity().getLabelResId()));
         } else { hideViewRow(infoActivityText, infoActivity); }
 
-        if (animal.getChipId() != null) {
+        if (!TextUtils.isEmpty(animal.getChipId())) {
             infoChip.setText(animal.getChipId());
         } else { hideViewRow(infoChipText, infoChip); }
 
-        if (animal.getRace() != null) {
+        if (!TextUtils.isEmpty(animal.getRace())) {
             infoRace.setText(animal.getRace());
         } else { hideViewRow(infoRaceText, infoRace); }
 
