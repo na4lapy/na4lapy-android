@@ -135,8 +135,8 @@ public class ContentDetailsView {
     }
 
     private void initMoreInfoTable() {
-        if (animal.getShelterid() != null)
-            setShelterInfo(animal.getShelterid());
+        if (animal.getShelterId() != null)
+            setShelterInfo(animal.getShelterId());
 
         if (animal.getAdmittanceDate() != null) {
             infoAdmittanceDate.setText(getShortDateTextFrom(animal.getAdmittanceDate()));

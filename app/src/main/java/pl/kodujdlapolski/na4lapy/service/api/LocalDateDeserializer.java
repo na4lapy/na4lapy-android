@@ -15,6 +15,9 @@
  */
 package pl.kodujdlapolski.na4lapy.service.api;
 
+import android.text.TextUtils;
+import android.util.Log;
+
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
@@ -28,6 +31,15 @@ import java.lang.reflect.Type;
 public class LocalDateDeserializer implements JsonDeserializer<LocalDate> {
     @Override
     public LocalDate deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-        return DateTimeFormat.forPattern("yyyy-MM-dd").parseLocalDate(json.getAsString());
+        try {
+            String value = json.getAsString();
+            if (TextUtils.isEmpty(value)) {
+                return null;
+            }
+            return DateTimeFormat.forPattern("yyyy-MM-dd").parseLocalDate(value);
+        } catch(Exception e) {
+            Log.e("LocalDateDeserializer", e.getMessage(), e);
+        }
+        return null;
     }
 }
