@@ -32,7 +32,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
-import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 
 import org.joda.time.LocalDate;
@@ -49,7 +48,6 @@ import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 import pl.kodujdlapolski.na4lapy.Na4LapyApp;
 import pl.kodujdlapolski.na4lapy.R;
 import pl.kodujdlapolski.na4lapy.model.Animal;
-import pl.kodujdlapolski.na4lapy.model.Photo;
 import pl.kodujdlapolski.na4lapy.service.repository.RepositoryService;
 import pl.kodujdlapolski.na4lapy.service.system.SystemService;
 import pl.kodujdlapolski.na4lapy.service.user.UserService;

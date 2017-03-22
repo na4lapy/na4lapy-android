@@ -17,6 +17,7 @@ package pl.kodujdlapolski.na4lapy.model;
 
 import com.annimon.stream.Optional;
 import com.annimon.stream.Stream;
+import com.google.gson.annotations.SerializedName;
 
 import org.joda.time.LocalDate;
 
@@ -38,12 +39,15 @@ import pl.kodujdlapolski.na4lapy.model.type.Vaccination;
 public class Animal implements Serializable {
 
     private Long id;
-    private Long shelterid;
+    @SerializedName("shelterid")
+    private Long shelterId;
     private String name;
     private String race;
     private String description;
     private String chipId;
+    @SerializedName("birthdate")
     private LocalDate birthDate;
+    @SerializedName("admittancedate")
     private LocalDate admittanceDate;
     private Sterilization sterilization;
     private Species species;
