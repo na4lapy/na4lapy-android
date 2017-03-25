@@ -50,6 +50,7 @@ import pl.kodujdlapolski.na4lapy.model.Photo;
 import pl.kodujdlapolski.na4lapy.model.Shelter;
 import pl.kodujdlapolski.na4lapy.model.type.Gender;
 import pl.kodujdlapolski.na4lapy.service.repository.RepositoryService;
+import pl.kodujdlapolski.na4lapy.ui.CommonUI;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -184,7 +185,7 @@ public class ContentDetailsView {
 
     private void setShelterInfo(Long id) {
         repositoryService.getShelter(id).subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::onShelterAvailable);
+                .subscribe(this::onShelterAvailable, throwable -> CommonUI.onServerError(throwable, ctx));
     }
 
     private void onShelterAvailable(Shelter downloadedShelter) {

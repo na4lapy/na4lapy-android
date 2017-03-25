@@ -51,6 +51,7 @@ import pl.kodujdlapolski.na4lapy.model.Animal;
 import pl.kodujdlapolski.na4lapy.service.repository.RepositoryService;
 import pl.kodujdlapolski.na4lapy.service.system.SystemService;
 import pl.kodujdlapolski.na4lapy.service.user.UserService;
+import pl.kodujdlapolski.na4lapy.ui.CommonUI;
 import pl.kodujdlapolski.na4lapy.ui.compliance_level.ComplianceLevelDialog;
 import pl.kodujdlapolski.na4lapy.utils.AnimalUtils;
 import rx.android.schedulers.AndroidSchedulers;
@@ -111,7 +112,7 @@ public class DetailsActivity extends AppCompatActivity {
 
     private void getAnimal() {
         repositoryService.getAnimal(id).subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::onAnimalAvailable);
+                .subscribe(this::onAnimalAvailable,  throwable -> CommonUI.onServerError(throwable, this));
     }
 
     private void onAnimalAvailable(Animal downloadedAnimal) {
