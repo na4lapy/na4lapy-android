@@ -105,7 +105,7 @@ public class AboutShelterFragment extends Fragment implements AboutShelterContra
         if (actionBar != null) {
             actionBar.setTitle(String.format(getString(R.string.about_shelter_page_title), shelter.getName()));
         }
-        shelterAccountNumber.setText(getFormattedAccount(shelter.getAccountNumber()));
+        shelterAccountNumber.setText(shelter.getAccountNumber());
         shelterWWW.setText(shelter.getWebsite());
         shelterEmailAddress.setText(shelter.getEmail());
         shelterPhoneNumber.setText(shelter.getPhoneNumber());
@@ -119,30 +119,6 @@ public class AboutShelterFragment extends Fragment implements AboutShelterContra
         adoptionRules.setText(shelter.getAdoptionRules());
     }
 
-    private String getFormattedAccount(String accountNumber) {
-        if (accountNumber != null) {
-            String accountPart1 = accountNumber.substring(0, 2);
-            String accountPart2 = accountNumber.substring(2);
-            String shelterFormatted = splitStringEvery(accountPart2, 4);
-            return accountPart1 + " " + shelterFormatted;
-        }
-        return "";
-    }
-
-    private String splitStringEvery(String s, int interval) {
-        StringBuilder result = new StringBuilder();
-        int arrayLength = (int) Math.ceil(((s.length() / (double) interval)));
-        int lastIndex = arrayLength - 1;
-
-        int j = 0;
-        for (int i = 0; i < lastIndex; i++) {
-            result.append(s.substring(j, j + interval));
-            result.append(" ");
-            j += interval;
-        }
-        result.append(s.substring(j));
-        return result.toString();
-    }
 
     @Override
     public void showStateWaitingForData() {
