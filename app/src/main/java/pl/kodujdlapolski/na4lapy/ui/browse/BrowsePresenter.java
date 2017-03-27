@@ -114,7 +114,7 @@ public class BrowsePresenter implements BrowseContract.Presenter {
                 .subscribe((changedAnimal) -> {
                     changedAnimal.setFavourite(userService.isFavourite(changedAnimal));
                     onChangedAnimalAvailable(changedAnimal);
-                });
+                }, view::showStateError);
     }
 
     public static int getIndexOfAnimalOnList(List<Animal> animals, Animal toFind) {
@@ -182,7 +182,7 @@ public class BrowsePresenter implements BrowseContract.Presenter {
         if (isFavList) {
             repositoryService.getAnimalsByFavourite()
                     .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(this::onAnimalsAvailable);
+                    .subscribe(this::onAnimalsAvailable, view::showStateError);
         } else {
             repositoryService.getAnimals()
                     .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
