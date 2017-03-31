@@ -18,10 +18,10 @@ limitations under the License.
     <string name="privacy_policy_text">Polityka Prywatności</string>
     <string name="regulations_text">Regulamin</string>
     <string name="open_source_libs_text">Licencje typu open source</string>
-    <string name="about_text">Aplikacja „Na 4 Łapy” to świetne narzędzie, które pomoże Ci wybrać odpowiedniego dla Ciebie pupila.
+    <string name="about_text">Aplikacja „Na4Łapy” to świetne narzędzie, które pomoże Ci wybrać odpowiedniego dla Ciebie pupila.
         Chcesz dużego psa? A może szukasz kota? Ma to być zwierzę aktywne, czy chcesz typowego domowego pieszczocha?
-        Określ swoje preferencje, a „Na 4 Łapy” dopasuje dla Ciebie czworonoga, którego możesz adoptować ze schroniska.
-        Nie ograniczasz się do jednego miasta i schroniska? Nie martw się, niebawem „Na 4 Łapy” współpracować będzie z większą liczbą schronisk.
+        Określ swoje preferencje, a „Na4Łapy” dopasuje dla Ciebie czworonoga, którego możesz adoptować ze schroniska.
+        Nie ograniczasz się do jednego miasta i schroniska? Nie martw się, niebawem „Na4Łapy” współpracować będzie z większą liczbą schronisk.
         \n\nTa aplikacja w 3 prostych krokach umożliwi Ci także wpłacenie drobnej kwoty na schronisko.
         To dzięki takim datkom schronisko funkcjonuje, a mieszkające tam zwierzaki otrzymują jedzenie, leki i opiekę.
         Wpłata może być jednorazowa, do niczego nie zobowiązuje, operatorzy zrzekli się prowizji i całość pieniędzy wpływa na konto schroniska.
@@ -33,6 +33,7 @@ limitations under the License.
     <string name="app_facebook_link"><a href="https://web.facebook.com/Na-4-Łapy-1759865620949415">Facebook Na 4 Łapy</a></string>
     <string name="version">Wersja: %1$s</string>
     <string name="about_shelter_page_title">O schronisku - %1$s</string>
+    <string name="shelter_name_label">Placówka:</string>
     <string name="shelter_address_label">Adres:</string>
     <string name="shelter_email_label">Adres e-mail:</string>
     <string name="shelter_phone_label">Numer telefonu:</string>
@@ -40,7 +41,7 @@ limitations under the License.
     <string name="shelter_account_label">Numer konta bankowego:</string>
     <string name="shelter_address_template">%1$s %2$s\n%3$s %4$s</string>
     <string name="shelter_adoption_rules_label">Zasady adopcji:</string>
-    <string name="app_name">Na 4 Łapy</string>
+    <string name="app_name">Na4Łapy</string>
     <string name="browsing">Przeglądaj</string>
     <string name="favouritiesList">Lista ulubionych</string>
     <string name="lookupPreferences">Preferencje</string>

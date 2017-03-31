@@ -42,6 +42,11 @@ public class AboutShelterFragment extends Fragment implements AboutShelterContra
 
     private ActionBar actionBar;
 
+    @BindView(R.id.shelter_name_label)
+    TextView shelterNameLabel;
+    @BindView(R.id.shelter_name)
+    TextView shelterName;
+
     @BindView(R.id.shelter_account_label)
     TextView shelterAccountLabel;
     @BindView(R.id.shelter_account_number)
@@ -105,6 +110,7 @@ public class AboutShelterFragment extends Fragment implements AboutShelterContra
         if (actionBar != null) {
             actionBar.setTitle(String.format(getString(R.string.about_shelter_page_title), shelter.getName()));
         }
+        shelterName.setText(shelter.getName());
         shelterAccountNumber.setText(shelter.getAccountNumber());
         shelterWWW.setText(shelter.getWebsite());
         shelterEmailAddress.setText(shelter.getEmail());
