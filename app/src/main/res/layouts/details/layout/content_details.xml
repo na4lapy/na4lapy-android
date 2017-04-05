@@ -99,6 +99,7 @@ limitations under the License.
 
         <TextView
             android:id="@+id/info_shelter"
+            android:maxWidth="@dimen/details_max_width"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="Schronisko 1" />
@@ -113,6 +114,7 @@ limitations under the License.
 
         <TextView
             android:id="@+id/info_race"
+            android:maxWidth="@dimen/details_max_width"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="race" />
