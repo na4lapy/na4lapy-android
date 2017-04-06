@@ -10,8 +10,8 @@ android {
         applicationId "pl.kodujdlapolski.na4lapy"
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 11
-        versionName "1.1.1"
+        versionCode 12
+        versionName "1.1.2"
         manifestPlaceholders = [HOCKEYAPP_APP_ID: "1b336de533e0489b894c1b202a264a70"]
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         buildConfigField 'String', 'PAYLANE_LOGIN', "\"$System.env.PROMYK_PAYLANE_API_KEY\""
