@@ -26,7 +26,6 @@ import pl.kodujdlapolski.na4lapy.BuildConfig;
 public class Photo implements Serializable {
     private Long id;
     private String fileName;
-    private String author;
     private Boolean profil;
 
     private Animal animal;

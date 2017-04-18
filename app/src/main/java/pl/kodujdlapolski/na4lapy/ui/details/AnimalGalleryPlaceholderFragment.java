@@ -48,8 +48,6 @@ public class AnimalGalleryPlaceholderFragment extends Fragment implements Animal
     private int galleryPosition;
     private int gallerySize;
 
-    @BindView(R.id.photo_author)
-    TextView photoAuthor;
     @BindView(R.id.photo_number)
     TextView photoFullNumber;
     @BindView(R.id.animal_pic_in_gallery)
@@ -114,16 +112,8 @@ public class AnimalGalleryPlaceholderFragment extends Fragment implements Animal
             return;
         }
         Picasso.with(getContext()).load(selectedPicUrl).into(imageView);
-        setPhotoAuthor();
         setDifferentLayoutParamsIfApiIsJellyBean();
         setPhotoNumber(savedInstanceState);
-    }
-
-    private void setPhotoAuthor() {
-        String aboutAuthor = animalPic.getAuthor();
-        if (!TextUtils.isEmpty(aboutAuthor)) {
-            photoAuthor.setText(getString(R.string.photo_by, aboutAuthor));
-        }
     }
 
     //todo delete this comment before next update of app
