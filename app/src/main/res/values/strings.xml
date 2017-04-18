@@ -131,7 +131,6 @@ limitations under the License.
     <string name="introduction_page_3">Przeszukaj listę zwierząt poszukujących człowieka</string>
     <string name="introduction_page_4">Zabierz szczęśliwca do domu…</string>
     <string name="introduction_page_5">…Albo daj mu się zaprowadzić</string>
-    <string name="photo_by">fot. %s</string>
     <string name="number_of_photo">%1$d / %2$d</string>
 
     <plurals name="years_from">
