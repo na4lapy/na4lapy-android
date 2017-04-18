@@ -76,10 +76,8 @@ public class RepositoryServiceImplTest {
 
     @Test
     public void testGetAnimal() throws Exception {
-        // when
         Observable<Animal> result = repositoryService.getAnimal(animalId);
 
-        // then
         verifyNotNull(result);
         TestSubscriber<Animal> testSubscriber = new TestSubscriber<>();
         result.subscribe(testSubscriber);
@@ -90,7 +88,7 @@ public class RepositoryServiceImplTest {
 
     @Test
     public void testGetAnimalsByShelterId() throws Exception {
-        // given
+
         List animals = Lists.newArrayList(animal);
 
 //        // when
