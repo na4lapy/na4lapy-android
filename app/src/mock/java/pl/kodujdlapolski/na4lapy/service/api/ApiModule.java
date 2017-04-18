@@ -10,7 +10,7 @@ public class ApiModule {
 
     @Singleton
     @Provides
-    public ApiService provideApiService(DatabaseHelper databaseHelper) {
-        return new FakeApiServiceImpl(databaseHelper);
+    public ApiService provideApiService() {
+        return new FakeApiServiceImpl();
     }
 }

@@ -51,32 +51,21 @@ public class UserServiceImplTest {
 
     @Test
     public void testSaveCurrentUserPreferences() throws Exception {
-        // given
         UserPreferences userPreferences = new UserPreferences();
-
-        // when
         userService.saveCurrentUserPreferences(userPreferences);
-
-        // then
         verify(preferencesService).setUserPreferences(userPreferences);
     }
 
     @Test
     public void testLoadCurrentUserPreferences() throws Exception {
-        // given
         UserPreferences userPreferences = new UserPreferences();
         when(preferencesService.getUserPreferences()).thenReturn(userPreferences);
-
-        // when
         UserPreferences result = userService.loadCurrentUserPreferences();
-
-        // then
         assertEquals(result, userPreferences);
     }
 
     @Test
     public void testGetPreferencesComplianceLevelShouldReturnFullCompliance() throws Exception {
-        // given
         Animal animal = new Animal();
         animal.setSpecies(Species.DOG);
         animal.setGender(Gender.MALE);
@@ -93,22 +82,14 @@ public class UserServiceImplTest {
         when(preferencesService.getUserPreferences()).thenReturn(userPreferences);
         userService = new UserServiceImpl(preferencesService);
 
-        // when
         int result = userService.getPreferencesComplianceLevel(animal);
-
-        // then
         assertEquals(5, result);
     }
 
     @Test
     public void testGetPreferencesComplianceLevelShouldReturnZero() throws Exception {
-        // given
         Animal animal = null;
-
-        // when
         int result = userService.getPreferencesComplianceLevel(animal);
-
-        // then
         assertEquals(0, result);
     }
 }

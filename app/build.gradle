@@ -6,7 +6,7 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
 
-    defaultConfig { 
+    defaultConfig {
         applicationId "pl.kodujdlapolski.na4lapy"
         minSdkVersion 16
         targetSdkVersion 25
@@ -39,6 +39,8 @@ android {
     productFlavors {
         mock {
             applicationIdSuffix = ".mock"
+            buildConfigField 'String', 'BASE_URL', System.getenv("N4L_API_URL") ?: '"https://api.na4lapy.org/"'
+            buildConfigField 'String', 'BASE_FILES_URL', System.getenv("N4L_FILES_URL") ?: '"https://api.na4lapy.org/files/"'
         }
         prod {
             buildConfigField 'String', 'BASE_URL', System.getenv("N4L_API_URL") ?: '"https://api.na4lapy.org/"'

@@ -51,9 +51,6 @@ public class RepositoryServiceImplTest {
     private ApiService apiService;
 
     @Mock
-    private DatabaseRepository databaseRepository;
-
-    @Mock
     private PreferencesService preferencesService;
 
     @Mock
@@ -68,7 +65,7 @@ public class RepositoryServiceImplTest {
 
     @Before
     public void setUp() throws Exception {
-        repositoryService = new RepositoryServiceImpl(apiService, databaseRepository, preferencesService, userService);
+        repositoryService = new RepositoryServiceImpl(apiService, preferencesService, userService);
 
         animal = new Animal();
         animal.setId(animalId);
@@ -79,9 +76,6 @@ public class RepositoryServiceImplTest {
 
     @Test
     public void testGetAnimal() throws Exception {
-        // given
-        when(databaseRepository.findOneById(animalId, Animal.class)).thenReturn(animal);
-
         // when
         Observable<Animal> result = repositoryService.getAnimal(animalId);
 
@@ -91,64 +85,42 @@ public class RepositoryServiceImplTest {
         result.subscribe(testSubscriber);
         testSubscriber.assertNoErrors();
         testSubscriber.assertReceivedOnNext(Arrays.asList(animal));
-        verify(databaseRepository).findOneById(animalId, Animal.class);
     }
 
-    @Test
-    public void testGetAnimalShouldReturnSqlException() throws Exception {
-        // given
-        when(databaseRepository.findOneById(animalId, Animal.class)).thenThrow(new SQLException());
-
-        // when
-        Observable<Animal> result = repositoryService.getAnimal(animalId);
-
-        // then
-        verifyNotNull(result);
-        TestSubscriber<Animal> testSubscriber = new TestSubscriber<>();
-        result.subscribe(testSubscriber);
-        testSubscriber.assertError(SQLException.class);
-        verify(databaseRepository).findOneById(animalId, Animal.class);
-    }
 
     @Test
     public void testGetAnimalsByShelterId() throws Exception {
         // given
         List animals = Lists.newArrayList(animal);
-        when(databaseRepository.findAllByForeignId(shelterId, Animal.class, Shelter.class)).thenReturn(animals);
 
-        // when
-        Observable<List<Animal>> result = repositoryService.getAnimalsByShelterId(shelterId);
-
-        // then
-        verifyNotNull(result);
-        TestSubscriber<List<Animal>> testSubscriber = new TestSubscriber<>();
-        result.subscribe(testSubscriber);
-        testSubscriber.assertNoErrors();
-        testSubscriber.assertReceivedOnNext(Arrays.asList(animals));
-        verify(databaseRepository).findAllByForeignId(shelterId, Animal.class, Shelter.class);
+//        // when
+//        Observable<List<Animal>> result = repositoryService.getAnimalsByShelterId(shelterId);
+//
+//        // then
+//        verifyNotNull(result);
+//        TestSubscriber<List<Animal>> testSubscriber = new TestSubscriber<>();
+//        result.subscribe(testSubscriber);
+//        testSubscriber.assertNoErrors();
+//        testSubscriber.assertReceivedOnNext(Arrays.asList(animals));
     }
 
     @Test
     public void testGetAnimalsByShelterIdShouldReturnSqlException() throws Exception {
-        // given
-        when(databaseRepository.findAllByForeignId(shelterId, Animal.class, Shelter.class)).thenThrow(new SQLException());
 
-        // when
-        Observable<List<Animal>> result = repositoryService.getAnimalsByShelterId(shelterId);
-
-        // then
-        verifyNotNull(result);
-        TestSubscriber<List<Animal>> testSubscriber = new TestSubscriber<>();
-        result.subscribe(testSubscriber);
-        testSubscriber.assertError(SQLException.class);
-        verify(databaseRepository).findAllByForeignId(shelterId, Animal.class, Shelter.class);
+//        // when
+//        Observable<List<Animal>> result = repositoryService.getAnimalsByShelterId(shelterId);
+//
+//        // then
+//        verifyNotNull(result);
+//        TestSubscriber<List<Animal>> testSubscriber = new TestSubscriber<>();
+//        result.subscribe(testSubscriber);
+//        testSubscriber.assertError(SQLException.class);
     }
 
     @Test
     public void testGetAnimals() throws Exception {
         // given
         ArrayList animals = Lists.newArrayList(animal);
-        when(databaseRepository.findAll(Animal.class)).thenReturn(animals);
         when(apiService.getAnimalList()).thenReturn(Observable.empty());
 
         // when
@@ -159,34 +131,13 @@ public class RepositoryServiceImplTest {
         TestSubscriber<List<Animal>> testSubscriber = new TestSubscriber<>();
         result.subscribe(testSubscriber);
         testSubscriber.assertNoErrors();
-        verify(databaseRepository).findAll(Animal.class);
     }
 
-
-    @Test
-    public void testGetAnimalsShouldReturnSqlException() throws Exception {
-        // given
-        when(databaseRepository.findAll(Animal.class)).thenThrow(new SQLException());
-        when(apiService.getAnimalList()).thenReturn(Observable.empty());
-
-        // when
-        Observable<List<Animal>> result = repositoryService.getAnimals();
-
-        // then
-        verifyNotNull(result);
-        TestSubscriber<List<Animal>> testSubscriber = new TestSubscriber<>();
-        result.subscribe(testSubscriber);
-        testSubscriber.assertError(SQLException.class);
-        verify(databaseRepository).findAll(Animal.class);
-    }
 
     @Test
     public void testGetAnimalsByFavourite() throws Exception {
         // given
-        Map<String, Object> favouriteField = Maps.newHashMap();
-        favouriteField.put(Animal.COLUMN_NAME_FAVOURITE, true);
         List animals = Lists.newArrayList(animal);
-        when(databaseRepository.findAllByFields(favouriteField, Animal.class)).thenReturn(animals);
 
         // when
         Observable<List<Animal>> result = repositoryService.getAnimalsByFavourite();
@@ -196,64 +147,26 @@ public class RepositoryServiceImplTest {
         TestSubscriber<List<Animal>> testSubscriber = new TestSubscriber<>();
         result.subscribe(testSubscriber);
         testSubscriber.assertNoErrors();
-    }
-
-    @Test
-    public void testGetAnimalsByFavouriteShouldReturnSqlException() throws Exception {
-        // given
-        Map<String, Object> favouriteField = Maps.newHashMap();
-        favouriteField.put(Animal.COLUMN_NAME_FAVOURITE, true);
-        when(databaseRepository.findAllByFields(favouriteField, Animal.class)).thenThrow(new SQLException());
-
-        // when
-        Observable<List<Animal>> result = repositoryService.getAnimalsByFavourite();
-
-        // then
-        verifyNotNull(result);
-        TestSubscriber<List<Animal>> testSubscriber = new TestSubscriber<>();
-        result.subscribe(testSubscriber);
     }
 
     @Test
     public void testSetFavourite() throws Exception {
-        // given
-        when(databaseRepository.findOneById(animalId, Animal.class)).thenReturn(animal);
-
-        // when
-        Observable<Long> result = repositoryService.setFavourite(animalId, true);
-
-        // then
-        verifyNotNull(result);
-        TestSubscriber<Long> testSubscriber = new TestSubscriber<>();
-        result.subscribe(testSubscriber);
-        testSubscriber.assertNoErrors();
-        testSubscriber.assertReceivedOnNext(Arrays.asList(animalId));
-        verify(databaseRepository).findOneById(animalId, Animal.class);
-        verify(databaseRepository).save(any(Animal.class));
+//        // when
+//        Observable<Long> result = repositoryService.setFavourite(animalId, true);
+//
+//        // then
+//        verifyNotNull(result);
+//        TestSubscriber<Long> testSubscriber = new TestSubscriber<>();
+//        result.subscribe(testSubscriber);
+//        testSubscriber.assertNoErrors();
+//        testSubscriber.assertReceivedOnNext(Arrays.asList(animalId));
     }
 
-    @Test
-    public void testSetFavouriteShouldReturnSqlException() throws Exception {
-        // given
-        when(databaseRepository.findOneById(animalId, Animal.class)).thenThrow(new SQLException());
-
-        // when
-        Observable<Long> result = repositoryService.setFavourite(animalId, true);
-
-        // then
-        verifyNotNull(result);
-        TestSubscriber<Long> testSubscriber = new TestSubscriber<>();
-        result.subscribe(testSubscriber);
-        testSubscriber.assertError(SQLException.class);
-        verify(databaseRepository).findOneById(animalId, Animal.class);
-        verifyNoMoreInteractions(databaseRepository);
-    }
 
     @Test
     public void testGetShelter() throws Exception {
         // given
-        when(databaseRepository.findOneById(shelterId, Shelter.class)).thenReturn(shelter);
-        when(apiService.getShelter()).thenReturn(Observable.just(shelter));
+        when(apiService.getShelter(1L)).thenReturn(Observable.just(shelter));
 
         // when
         Observable<Shelter> result = repositoryService.getShelter(shelterId);
@@ -264,14 +177,12 @@ public class RepositoryServiceImplTest {
         result.subscribe(testSubscriber);
         testSubscriber.assertNoErrors();
         testSubscriber.assertReceivedOnNext(Arrays.asList(shelter, shelter));
-        verify(databaseRepository).findOneById(shelterId, Shelter.class);
     }
 
     @Test
     public void testGetShelterShouldReturnSqlException() throws Exception {
         // given
-        when(databaseRepository.findOneById(shelterId, Shelter.class)).thenThrow(new SQLException());
-        when(apiService.getShelter()).thenReturn(Observable.just(shelter));
+        when(apiService.getShelter(1L)).thenReturn(Observable.just(shelter));
 
         // when
         Observable<Shelter> result = repositoryService.getShelter(shelterId);
@@ -281,14 +192,13 @@ public class RepositoryServiceImplTest {
         TestSubscriber<Shelter> testSubscriber = new TestSubscriber<>();
         result.subscribe(testSubscriber);
         testSubscriber.assertError(SQLException.class);
-        verify(databaseRepository).findOneById(shelterId, Shelter.class);
+
     }
 
     @Test
     public void testGetShelters() throws Exception {
         // given
         List shelters = Lists.newArrayList(shelter);
-        when(databaseRepository.findAll(Shelter.class)).thenReturn(shelters);
 
         // when
         Observable<List<Shelter>> result = repositoryService.getShelters();
@@ -299,22 +209,5 @@ public class RepositoryServiceImplTest {
         result.subscribe(testSubscriber);
         testSubscriber.assertNoErrors();
         testSubscriber.assertReceivedOnNext(Arrays.asList(shelters));
-        verify(databaseRepository).findAll(Shelter.class);
-    }
-
-    @Test
-    public void testGetSheltersShouldReturnSqlException() throws Exception {
-        // given
-        when(databaseRepository.findAll(Shelter.class)).thenThrow(new SQLException());
-
-        // when
-        Observable<List<Shelter>> result = repositoryService.getShelters();
-
-        // then
-        verifyNotNull(result);
-        TestSubscriber<List<Shelter>> testSubscriber = new TestSubscriber<>();
-        result.subscribe(testSubscriber);
-        testSubscriber.assertError(SQLException.class);
-        verify(databaseRepository).findAll(Shelter.class);
     }
 }

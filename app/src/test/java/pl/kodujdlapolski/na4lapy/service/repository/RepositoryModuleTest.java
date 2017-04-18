@@ -33,8 +33,7 @@ public class RepositoryModuleTest {
     @Mock
     private ApiService apiService;
 
-    @Mock
-    private DatabaseRepository databaseRepository;
+
 
     @Mock
     private UserService userService;
@@ -52,7 +51,7 @@ public class RepositoryModuleTest {
     @Test
     public void testProvideRepositoryService() throws Exception {
         // when
-        RepositoryService result = repositoryModule.provideRepositoryService(apiService, databaseRepository, preferencesService, userService);
+        RepositoryService result = repositoryModule.provideRepositoryService(apiService, preferencesService, userService);
 
         // then
         assertNotNull(result);

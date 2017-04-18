@@ -92,11 +92,4 @@ public class SettingsActivityTest {
         );
         Intents.release();
     }
-
-    //todo - it should be deleted, because we resigned from login/logout feature
-/*    @Test
-    public void isLoginLogoutButtonDisplayed() {
-        ViewInteraction viewInteraction = onView(withText(mActivityRule.getActivity().getString(R.string.login)));
-        viewInteraction.check(matches(isDisplayed()));
-    }*/
 }
