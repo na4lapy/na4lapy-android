@@ -19,6 +19,7 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 import pl.kodujdlapolski.na4lapy.presenter.about_shelter.AboutShelterPresenter;
+import pl.kodujdlapolski.na4lapy.presenter.details.AnimalDetailsPresenter;
 import pl.kodujdlapolski.na4lapy.presenter.payment.PaymentPresenter;
 import pl.kodujdlapolski.na4lapy.presenter.preferences.PreferencesPresenter;
 import pl.kodujdlapolski.na4lapy.presenter.shelters_list.SheltersListPresenter;
@@ -48,15 +49,15 @@ import pl.kodujdlapolski.na4lapy.ui.splash.SplashActivity;
 })
 public interface Na4LapyComponent {
 
-    void inject(AboutShelterPresenter presenter);
-    void inject(SheltersListPresenter presenter);
-    void inject(SplashActivity mainActivity);
-    void inject(BrowsePresenter browsePresenter);
-    void inject(PreferencesPresenter presenter);
-    void inject(DetailsActivity detailsActivity);
-    void inject(ListBrowseFragment fragment);
-    void inject(DrawerActivityHandler handler);
-    void inject(SettingsFragment fragment);
-    void inject(PaymentPresenter presenter);
-    void inject(ContentDetailsView contentDetailsView);
+    void inject(AboutShelterPresenter __);
+    void inject(SheltersListPresenter __);
+    void inject(SplashActivity __);
+    void inject(BrowsePresenter __);
+    void inject(PreferencesPresenter __);
+    void inject(DetailsActivity __);
+    void inject(ListBrowseFragment __);
+    void inject(DrawerActivityHandler __);
+    void inject(SettingsFragment __);
+    void inject(PaymentPresenter __);
+    void inject(ContentDetailsView __);
 }
