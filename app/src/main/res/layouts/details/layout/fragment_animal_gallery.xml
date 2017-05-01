@@ -40,14 +40,6 @@ limitations under the License.
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@null"
-        android:textColor="@color/white70opacity"
-        android:layout_alignRight="@id/animal_pic_in_gallery"
-        android:layout_alignBottom="@id/animal_pic_in_gallery" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@null"
         android:clickable="true"
         android:textColor="@color/white70opacity"
         android:layout_centerHorizontal="true"
