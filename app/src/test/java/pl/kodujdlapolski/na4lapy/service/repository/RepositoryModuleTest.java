@@ -51,7 +51,8 @@ public class RepositoryModuleTest {
     @Test
     public void testProvideRepositoryService() throws Exception {
         // when
-        RepositoryService result = repositoryModule.provideRepositoryService(apiService, preferencesService, userService);
+        RepositoryService result = repositoryModule
+                .provideRepositoryService(apiService, preferencesService, userService);
 
         // then
         assertNotNull(result);

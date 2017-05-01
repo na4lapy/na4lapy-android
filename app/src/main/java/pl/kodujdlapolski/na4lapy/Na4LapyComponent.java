@@ -27,7 +27,7 @@ import pl.kodujdlapolski.na4lapy.service.payments.PaymentsModule;
 import pl.kodujdlapolski.na4lapy.service.preferences.PreferencesModule;
 import pl.kodujdlapolski.na4lapy.service.repository.RepositoryModule;
 import pl.kodujdlapolski.na4lapy.service.system.SystemModule;
-import pl.kodujdlapolski.na4lapy.user.UserModule;
+import pl.kodujdlapolski.na4lapy.service.user.UserModule;
 import pl.kodujdlapolski.na4lapy.ui.browse.BrowsePresenter;
 import pl.kodujdlapolski.na4lapy.ui.browse.list.ListBrowseFragment;
 import pl.kodujdlapolski.na4lapy.ui.details.ContentDetailsView;

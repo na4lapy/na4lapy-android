@@ -131,7 +131,6 @@ public class FakeApiServiceImpl implements ApiService {
         if (animal.getPhotos() != null) {
             for (String aPicturesSample1 : gallery) {
                 Photo photo = new Photo();
-                photo.setAuthor(photoGalleryAuthor);
                 animal.getPhotos().add(photo);
             }
         }

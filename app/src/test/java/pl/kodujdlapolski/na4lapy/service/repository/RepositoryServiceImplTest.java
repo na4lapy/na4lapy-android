@@ -28,10 +28,12 @@ import org.mockito.runners.MockitoJUnitRunner;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 import pl.kodujdlapolski.na4lapy.model.Animal;
+import pl.kodujdlapolski.na4lapy.model.AnimalsPage;
 import pl.kodujdlapolski.na4lapy.model.Shelter;
 import pl.kodujdlapolski.na4lapy.service.api.ApiService;
 import pl.kodujdlapolski.na4lapy.service.preferences.PreferencesService;
@@ -62,9 +64,10 @@ public class RepositoryServiceImplTest {
     private Long animalId = 60L, shelterId = 61L;
     private Animal animal;
     private Shelter shelter;
+    private AnimalsPage page;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         repositoryService = new RepositoryServiceImpl(apiService, preferencesService, userService);
 
         animal = new Animal();
@@ -72,140 +75,80 @@ public class RepositoryServiceImplTest {
 
         shelter = new Shelter();
         shelter.setId(shelterId);
+
+        List animals = Lists.newArrayList(animal);
+        page = new AnimalsPage();
+        page.setData(animals);
     }
 
     @Test
-    public void testGetAnimal() throws Exception {
+    public void testGetAnimal() {
+        when(apiService.getAnimal(animalId)).thenReturn(Observable.just(animal));
         Observable<Animal> result = repositoryService.getAnimal(animalId);
 
         verifyNotNull(result);
         TestSubscriber<Animal> testSubscriber = new TestSubscriber<>();
         result.subscribe(testSubscriber);
         testSubscriber.assertNoErrors();
-        testSubscriber.assertReceivedOnNext(Arrays.asList(animal));
-    }
-
-
-    @Test
-    public void testGetAnimalsByShelterId() throws Exception {
-
-        List animals = Lists.newArrayList(animal);
-
-//        // when
-//        Observable<List<Animal>> result = repositoryService.getAnimalsByShelterId(shelterId);
-//
-//        // then
-//        verifyNotNull(result);
-//        TestSubscriber<List<Animal>> testSubscriber = new TestSubscriber<>();
-//        result.subscribe(testSubscriber);
-//        testSubscriber.assertNoErrors();
-//        testSubscriber.assertReceivedOnNext(Arrays.asList(animals));
+        testSubscriber.assertReceivedOnNext(Collections.singletonList(animal));
     }
 
     @Test
-    public void testGetAnimalsByShelterIdShouldReturnSqlException() throws Exception {
-
-//        // when
-//        Observable<List<Animal>> result = repositoryService.getAnimalsByShelterId(shelterId);
-//
-//        // then
-//        verifyNotNull(result);
-//        TestSubscriber<List<Animal>> testSubscriber = new TestSubscriber<>();
-//        result.subscribe(testSubscriber);
-//        testSubscriber.assertError(SQLException.class);
-    }
-
-    @Test
-    public void testGetAnimals() throws Exception {
+    public void testGetAnimals() {
         // given
-        ArrayList animals = Lists.newArrayList(animal);
-        when(apiService.getAnimalList()).thenReturn(Observable.empty());
+        when(apiService.getAnimalList()).thenReturn(Observable.just(page));
 
         // when
         Observable<List<Animal>> result = repositoryService.getAnimals();
 
         // then
-        verifyNotNull(result);
-        TestSubscriber<List<Animal>> testSubscriber = new TestSubscriber<>();
-        result.subscribe(testSubscriber);
-        testSubscriber.assertNoErrors();
+        performTestOnSubscriber(result, page.getData());
     }
 
 
     @Test
-    public void testGetAnimalsByFavourite() throws Exception {
+    public void testGetAnimalsByFavourite() {
         // given
-        List animals = Lists.newArrayList(animal);
-
+        List<Long> ids = Collections.singletonList(animalId);
+        when(preferencesService.getFavouriteList()).thenReturn(ids);
+        when(apiService.getAnimals(ids)).thenReturn(Observable.just(page));
         // when
         Observable<List<Animal>> result = repositoryService.getAnimalsByFavourite();
 
         // then
-        verifyNotNull(result);
-        TestSubscriber<List<Animal>> testSubscriber = new TestSubscriber<>();
-        result.subscribe(testSubscriber);
-        testSubscriber.assertNoErrors();
+        performTestOnSubscriber(result, page.getData());
     }
 
     @Test
-    public void testSetFavourite() throws Exception {
-//        // when
-//        Observable<Long> result = repositoryService.setFavourite(animalId, true);
-//
-//        // then
-//        verifyNotNull(result);
-//        TestSubscriber<Long> testSubscriber = new TestSubscriber<>();
-//        result.subscribe(testSubscriber);
-//        testSubscriber.assertNoErrors();
-//        testSubscriber.assertReceivedOnNext(Arrays.asList(animalId));
-    }
-
-
-    @Test
-    public void testGetShelter() throws Exception {
+    public void testGetShelter() {
         // given
-        when(apiService.getShelter(1L)).thenReturn(Observable.just(shelter));
+        when(apiService.getShelter(shelterId)).thenReturn(Observable.just(shelter));
 
         // when
         Observable<Shelter> result = repositoryService.getShelter(shelterId);
 
         // then
-        verifyNotNull(result);
-        TestSubscriber<Shelter> testSubscriber = new TestSubscriber<>();
-        result.subscribe(testSubscriber);
-        testSubscriber.assertNoErrors();
-        testSubscriber.assertReceivedOnNext(Arrays.asList(shelter, shelter));
-    }
-
-    @Test
-    public void testGetShelterShouldReturnSqlException() throws Exception {
-        // given
-        when(apiService.getShelter(1L)).thenReturn(Observable.just(shelter));
-
-        // when
-        Observable<Shelter> result = repositoryService.getShelter(shelterId);
-
-        // then
-        verifyNotNull(result);
-        TestSubscriber<Shelter> testSubscriber = new TestSubscriber<>();
-        result.subscribe(testSubscriber);
-        testSubscriber.assertError(SQLException.class);
-
+        performTestOnSubscriber(result, shelter);
     }
 
     @Test
     public void testGetShelters() throws Exception {
         // given
         List shelters = Lists.newArrayList(shelter);
+        when(apiService.getShelters()).thenReturn(Observable.just(shelters));
 
         // when
         Observable<List<Shelter>> result = repositoryService.getShelters();
 
         // then
+        performTestOnSubscriber(result, shelters);
+    }
+
+    public <T> void performTestOnSubscriber(Observable<T> result, T expected) {
         verifyNotNull(result);
-        TestSubscriber<List<Shelter>> testSubscriber = new TestSubscriber<>();
+        TestSubscriber<T> testSubscriber = new TestSubscriber<>();
         result.subscribe(testSubscriber);
         testSubscriber.assertNoErrors();
-        testSubscriber.assertReceivedOnNext(Arrays.asList(shelters));
+        testSubscriber.assertReceivedOnNext(Collections.singletonList(expected));
     }
 }

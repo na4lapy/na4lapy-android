@@ -22,7 +22,6 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import pl.kodujdlapolski.na4lapy.service.preferences.PreferencesService;
-import pl.kodujdlapolski.na4lapy.user.UserModule;
 
 import static org.junit.Assert.assertNotNull;
 
