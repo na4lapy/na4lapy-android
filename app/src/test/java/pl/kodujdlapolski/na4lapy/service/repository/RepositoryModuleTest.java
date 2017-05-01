@@ -33,8 +33,6 @@ public class RepositoryModuleTest {
     @Mock
     private ApiService apiService;
 
-
-
     @Mock
     private UserService userService;
 

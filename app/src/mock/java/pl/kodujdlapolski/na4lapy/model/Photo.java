@@ -20,6 +20,7 @@ import java.io.Serializable;
 import lombok.Getter;
 import lombok.Setter;
 import pl.kodujdlapolski.na4lapy.BuildConfig;
+import pl.kodujdlapolski.na4lapy.model.Animal;
 
 @Getter
 @Setter
@@ -31,7 +32,7 @@ public class Photo implements Serializable {
     private Animal animal;
 
     public String getFullFileName(){
-        return BuildConfig.BASE_FILES_URL + fileName;
+        return "http://schroniskopromyk.pl/wp-content/uploads/2016/02/Morus-5-150x150.jpg";
     }
 
 }
