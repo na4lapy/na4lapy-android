@@ -41,8 +41,8 @@ android {
             applicationIdSuffix = ".mock"
         }
         prod {
-            buildConfigField 'String', 'BASE_URL', System.getenv("N4L_API_URL") ?: '"https://api.na4lapy.org/"'
-            buildConfigField 'String', 'BASE_FILES_URL', System.getenv("N4L_FILES_URL") ?: '"https://api.na4lapy.org/files/"'
+            buildConfigField 'String', 'BASE_URL', System.getenv("N4L_API_URL") ?: '"http://api.na4lapy.org/"'
+            buildConfigField 'String', 'BASE_FILES_URL', System.getenv("N4L_FILES_URL") ?: '"http://api.na4lapy.org/files/"'
         }
     }
 
