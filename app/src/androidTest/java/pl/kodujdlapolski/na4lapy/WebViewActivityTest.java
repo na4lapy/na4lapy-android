@@ -33,8 +33,8 @@ import java.io.InputStreamReader;
 import pl.kodujdlapolski.na4lapy.presenter.settings.WebPageTypes;
 import pl.kodujdlapolski.na4lapy.ui.settings.WebViewActivity;
 
-import static android.support.test.espresso.web.sugar.Web.onWebView;
 import static android.support.test.espresso.web.assertion.WebViewAssertions.webMatches;
+import static android.support.test.espresso.web.sugar.Web.onWebView;
 import static android.support.test.espresso.web.webdriver.DriverAtoms.findElement;
 import static android.support.test.espresso.web.webdriver.DriverAtoms.getText;
 import static org.hamcrest.Matchers.containsString;

@@ -72,16 +72,12 @@ public class AnimalGalleryActivityTest {
 
     private static void createPhotoGallery(ArrayList<Photo> gallery) {
         Photo photo = new Photo();
-        photo.setUrl("http://cdn23.se.smcloud.net/t/photos/t/389279/labrador-retriever-pies_23597760.jpg");
         gallery.add(photo);
         photo = new Photo();
-        photo.setUrl("http://www.dobrylekarz.info/files/images/pies-sennik-sen-tlumaczenie-interpretacja-snu-pies.jpg");
         gallery.add(photo);
         photo = new Photo();
-        photo.setUrl("http://bi.gazeta.pl/im/48/ec/f7/z16247880Q,Pies-byl-pierwszym-zwierzeciem-idomowionym-przez-c.jpg");
         gallery.add(photo);
         photo = new Photo();
-        photo.setUrl("http://schroniskopromyk.pl/wp-content/uploads/2016/02/Morus-5-150x150.jpg");
         gallery.add(photo);
     }
 

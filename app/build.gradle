@@ -15,7 +15,7 @@ android {
         manifestPlaceholders = [HOCKEYAPP_APP_ID: "1b336de533e0489b894c1b202a264a70"]
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         buildConfigField 'String', 'PAYLANE_LOGIN', "\"$System.env.PROMYK_PAYLANE_API_KEY\""
-            buildConfigField 'String', 'PAYLANE_PASSWORD', "\"$System.env.PROMYK_PAYLANE_PASSWORD\""
+        buildConfigField 'String', 'PAYLANE_PASSWORD', "\"$System.env.PROMYK_PAYLANE_PASSWORD\""
     }
 
     sourceSets {
@@ -39,6 +39,8 @@ android {
     productFlavors {
         mock {
             applicationIdSuffix = ".mock"
+            buildConfigField 'String', 'BASE_URL', System.getenv("N4L_API_URL") ?: '"https://api.na4lapy.org/"'
+            buildConfigField 'String', 'BASE_FILES_URL', System.getenv("N4L_FILES_URL") ?: '"https://api.na4lapy.org/files/"'
         }
         prod {
             buildConfigField 'String', 'BASE_URL', System.getenv("N4L_API_URL") ?: '"http://api.na4lapy.org/"'
@@ -92,7 +94,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    def supportLibraryVersion = "25.2.0"
+    def supportLibraryVersion = "25.3.1"
     def retrofitVersion = "2.1.0"
     dependencies {
         compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -101,7 +103,7 @@ android {
         compile "com.android.support:design:$supportLibraryVersion"
         compile "com.android.support:support-annotations:$supportLibraryVersion"
         compile "com.android.support:support-v4:$supportLibraryVersion"
-        compile 'com.google.guava:guava:19.0'
+        compile 'com.google.guava:guava:20.0'
         compile 'com.google.dagger:dagger:2.5'
         apt 'com.google.dagger:dagger-compiler:2.5'
         compile 'com.jakewharton:butterknife:8.2.1'
@@ -127,10 +129,10 @@ android {
         testCompile "org.powermock:powermock-module-junit4:1.6.2"
         testCompile "org.powermock:powermock-api-mockito:1.6.2"
 
-        androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.1'
-        androidTestCompile 'com.android.support.test:runner:0.4.1'
+        androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
+        androidTestCompile 'com.android.support.test:runner:0.5'
         androidTestCompile "com.android.support:support-annotations:$supportLibraryVersion"
-        androidTestCompile 'com.android.support.test.espresso:espresso-intents:2.2'
-        androidTestCompile 'com.android.support.test.espresso:espresso-web:2.2.1'
+        androidTestCompile 'com.android.support.test.espresso:espresso-intents:2.2.2'
+        androidTestCompile 'com.android.support.test.espresso:espresso-web:2.2.2'
     }
 }

@@ -51,7 +51,6 @@ public class PaymentsServiceImplTest {
 
     @Test
     public void testInitBankTransfer() throws Exception {
-        // given
         Address address = new Address();
         Customer customer = new Customer();
         customer.setAddress(address);
@@ -61,10 +60,7 @@ public class PaymentsServiceImplTest {
         payment.setCustomer(customer);
         when(payLaneApi.bankTransfer(payment)).thenReturn(observable);
 
-        // when
         Observable<PaymentResponse> result = paymentsService.initBankTransfer(payment);
-
-        // then
         verify(payLaneApi).bankTransfer(payment);
     }
 }

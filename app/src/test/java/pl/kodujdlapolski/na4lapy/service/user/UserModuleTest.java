@@ -40,10 +40,7 @@ public class UserModuleTest {
 
     @Test
     public void testProvideRepositoryService() throws Exception {
-        // when
         UserService result = userModule.provideUserService(preferencesService);
-
-        // then
         assertNotNull(result);
     }
 }
